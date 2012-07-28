@@ -1,0 +1,25 @@
+---
+layout: post
+title: "Aligning an HTML DIV Inside Another One"
+date: 2011-11-13
+comments: false
+categories:
+ - html
+ - css
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">Across different projects, I have found people taking CSS shortcuts for translating the Photoshopped design templates into HTML. Back in the days, layout used to be all Table based and it was kind of straight forward to fit everything into grid cells. However, with CSS styling the extra flexibility to put elements in any arbitrary layout came extra responsibility - to make sure things still align nicely while being fluid to accommodate different screen resolutions and form factors.<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-21-12O0-QHA/TsBacV3pq_I/AAAAAAAAAXM/aUOql7Yjy8k/s1600/Screen+shot+2011-11-13+at+5.01.16+PM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="34" src="http://3.bp.blogspot.com/-21-12O0-QHA/TsBacV3pq_I/AAAAAAAAAXM/aUOql7Yjy8k/s320/Screen+shot+2011-11-13+at+5.01.16+PM.png" width="320" /></a></div><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://3.bp.blogspot.com/-AEiJnBUw8wA/TsBackj_N-I/AAAAAAAAAXQ/nGFX0AnYL-I/s1600/Screen+shot+2011-11-13+at+5.01.27+PM.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="43" src="http://3.bp.blogspot.com/-AEiJnBUw8wA/TsBackj_N-I/AAAAAAAAAXQ/nGFX0AnYL-I/s320/Screen+shot+2011-11-13+at+5.01.27+PM.png" width="320" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Aligning the child div in red inside a parent div in green using CSS</td></tr></tbody></table><br />Here's a quick and dead simple example to create CSS alignment for a div inside another one!<br /><br /><blockquote class="tr_bq">Pro Tip: Use position:relative for the parent div and position:absolute for the child div.</blockquote><br /><script src="https://gist.github.com/1362939.js">  </script>This will make sure the parent is positioned relatively to other elements in the page. However, the absolutely positioned child can be positioned anywhere inside the parent without making the whole layout fixed.<br /><br /><br /></div></div></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks Scott! Almost invariably the most &quot;hacky&quot; part of any web app can be found in its stylesheet. Hope it changes someday, at least for the apps that I will work on!</div>
+</div>
+<div class='comment'>
+<div class='author'>Scott Muc</div>
+<div class='content'>
+Nice, I too learned about the wonderfulness of parent divs being postion:relative and child divs being postion:absolute when I worked at Radio 3. After the eureka moment positioning didn&#39;t seem that hard anymore.</div>
+</div>
+</div>

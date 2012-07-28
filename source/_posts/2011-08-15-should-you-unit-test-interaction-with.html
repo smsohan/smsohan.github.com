@@ -1,0 +1,13 @@
+---
+layout: post
+title: "Should You Unit Test Interaction with Static Methods?"
+date: 2011-08-15
+comments: false
+categories:
+ - TDD
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">No. You should not. Here's an example:</div><br /><script src="https://gist.github.com/1147225.js">
+  
+ </script></div><br />If you are somehow mocking this static method, you are potentially making it dangerous for other places where this static method is used. Eventually, this will create red test results that are hard to find and make your tests dependent on each other.<br /></div>

@@ -1,0 +1,24 @@
+---
+layout: post
+title: "Should you unit test methods with a lot of mocking?"
+date: 2011-08-09
+comments: false
+categories:
+ - Unit test
+ - TDD
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Well, anytime you have a lot of mocking, it is probably a smell. Particularly, a first smell is violation of the <a href="http://en.wikipedia.org/wiki/Law_of_Demeter">law of demeter</a>. However, we were having discussion about whether or not we should write unit test for something like the following example:<br /><br /><script src="https://gist.github.com/1136189.js">
+  
+ </script><br /><br />As you can see, this method actually does a quite important task. It invokes the search method with specific parameters that will determine your search results. Now, we were debating whether or not the example unit test actually brings any value.<br /><br />Here's what we have discussed:<br /><b>Pros:</b><br />It confirms that you are actually calling the third party method with the right parameter.<br /><b>Cons:</b><br />The test is too tightly coupled with the implementation, so it will break if something changes inside the method irrespective of its actual output.<br /><br />But we failed to come to an unanimous decision on its usefulness. We all agreed on the point that it definitely needed some integration tests to make sure the search had actually worked.<br /><br />Here are two questions for you:<br /><br /><ol style="text-align: left;"><li>Would you skip the unit test altogether for this method and rely completely on an integration test? Why/Why not?</li>
+ <li>If you are to rewrite this code, how would you write this using TDD?</li>
+ </ol><br />Looking forward to see your input on this!<br /><br /></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Isa Goksu</div>
+<div class='content'>
+The first question actually has two aspects. It has a design part, and an implementation part. You have to judge which part we are doing here since you know the actual work there. If it is a design side, you write an integration or a functional test to find out whether wiring is done correctly or not. If it is on the implementation side, you have to write a unit test that verifies the behaviour.<br /><br />What I see from just a little code snippet here is basically you are creating a wrapper/facade for the library, or a delegate or even an anti-corruption layer kinda something. And your wrapper object is basically created in such a way that it looks like a Humble Object (http://xunitpatterns.com/Humble%20Object.html). Therefore I&#39;d go for integration test. If the team you are working on is a distributed team, then you might have some trust and/or communication issues, therefore writing an additional unit test wouldn&#39;t hurt. Then again that&#39;s not necessary.<br /><br />Main thing here is to understand that TDD won&#39;t tell you that you have write unit tests all the time. What TDD say is have a coverage before you operate, and drive your design with this mentality. One thing I like in Ruby community is that they do focus on Specs rather than focusing on unit/integration/functional tests differences. A tool like RSpec or Cucumber is even designed in such a way that they give you tagging support which you can easily mark your test with #requiresDB, #requiresFileAccess, #opensBrowser, etc.. And then you can create multiple builds by using these tags to have prioritized test suites.<br /><br />Second question is probably an obvious one. If I were to re-write using TDD, I&#39;d probably end up having an anti-corruption layer to the library which is designed 1:1 from the actual library, hence not need to be unit tested.</div>
+</div>
+</div>

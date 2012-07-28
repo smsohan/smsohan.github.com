@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Avoid Duplication in Config Files"
+date: 2011-07-11
+comments: false
+categories:
+ - other
+---
+
+<div class='post'>
+Any kind of configuration file, be it an ugly xml file or a prettier yml or properties file, its been a source of frustration to me. Here's a list of few such pain points:<br /><br /><ol><li>There are two config keys that point to the same value. e.g. db_username=master, data_source_user=master</li><li>There are two config keys for urls that point to the same domain, but different paths. e.g. market.com/cameras and market.com/undies</li><li>Config entries with placeholders. e.g. weather_url= weather.com/%s or weather_url= weather.com/%s/hourly</li><li>Config entries with default values that should not default to anything.</li><li>Config entries that are required but don't fail the application deployment when not set.</li></ol><br />Are you having to deal with similar pain points? Some more?</div>

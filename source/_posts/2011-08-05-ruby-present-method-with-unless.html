@@ -1,0 +1,44 @@
+---
+layout: post
+title: "Ruby present? Method"
+date: 2011-08-05
+comments: false
+categories:
+ - Ruby
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Ruby has a nice little keyword called unless, that checks the opposite of if. So, you are probably used to a code like this:<br /><br /><pre lang="ruby">return customer.first_name unless customer.nil?<br /></pre><br />If you haven't used present? before, you can in fact turn the above unless into a more familiar and easy to understand if statement:<br /><br /><pre lang="ruby">return customer.first_name if customer.present?<br /></pre><br />So, in most cases when you are using unless with a negative condition, you can use present? and if instead. I find it way easier to read.<br /><br />present? does the opposite of blank?. So, you will get the following:<br /><br /><pre lang="ruby">nil.present? #=&gt; false<br />[].present? #=&gt; false<br />"hello".present? =&gt; true<br />["a"].present? #=&gt; true<br /></pre>Hope it helps!</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, you are right.</div>
+</div>
+<div class='comment'>
+<div class='author'>michaelkoper</div>
+<div class='content'>
+So far as i know is present? not a Ruby method but a Ruby on Rails method. http://api.rubyonrails.org/classes/Object.html#method-i-present-3F<br /><br />.zero? is indeed a ruby method.</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yap, you can do my_integer.zero? instead of my_integer == 0<br /><br />or my_integer.nonzero?</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+Is there an equivalent for zero? ?<br />Except for != 0 of course...</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks Ashif!</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Yes, I often halt at whether I am doing it wright anytime I use &#39;unless&#39; in any condition. Its much more easier to read if I use &#39;if&#39;. Thanks for this short but useful post...</div>
+</div>
+</div>

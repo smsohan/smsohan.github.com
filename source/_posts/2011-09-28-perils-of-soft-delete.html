@@ -1,0 +1,12 @@
+---
+layout: post
+title: "The Perils of Soft Delete"
+date: 2011-09-28
+comments: false
+categories:
+ - Architecture
+ - Database
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Often times, applications cannot get rid of the database records for business rules. For example, if you are a cable TV provider, you might have a customer calling you to stop the National Geographic Channel subscription from next month.&nbsp;Ideally you would like to delete this record, but you can't do it until the effective date:( If you delete it, the next invoice will not be able to charge for this channel, although it's still being used.<br /><br />In such scenarios, its common to fall back to a soft delete model. As an example, here's a little code:<br /><br /><script src="https://gist.github.com/1249283.js">  </script><br />This code looks simple and harmless at a first sight. But, as you develop your app, you'll run into a lot of issues from this. Here's a short list:<br /><ol style="text-align: left;"><li>You need to take care of cascading soft delete, for example, cancelling a customer's subscription needs to cascade down to all channels and other objects under it.</li><li>Whenever, you are listing the current subscriptions of a customer, you need to filter out the ended ones.</li><li>You need to figure out a strategy to periodically clean the ended subscriptions so that your database is not filled with outdated data.</li><li>If you have a business key used as a primary key as well, you will be in trouble if an ended subscription is restarted.</li><li>Your code will eventually have a lot of if-else blocks to apply changes to only on active objects.</li></ol>So, what is the solution? Its best to avoid them as much as possible. Richard Dingwall has <a href="http://richarddingwall.name/2009/11/20/the-trouble-with-soft-delete/">a detailed blog post</a> on some alternative techniques to avoid soft-delete. But if you have to have soft delete, as shown in the example, its worth remembering the aforementioned points.<br /><div><br /></div></div></div>

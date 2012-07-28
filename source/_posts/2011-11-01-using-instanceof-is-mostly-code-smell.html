@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Using instanceof is mostly a Code Smell"
+date: 2011-11-01
+comments: false
+categories:
+ - Object Oriented Design
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">When using static programming languages such as Java, often time I have seen people writing methods that accept Object as a parameter. These methods typically don't really work on any Object, but works with multiple types of classes that don't have any common base class. Here's an example of such a method:<br /><br /></div><script src="https://gist.github.com/1332622.js"></script>As you can see in this example, the <code>process</code> method actually expects one of <code>CleanFloor</code> or <code>LaunchRocket</code> instances. However, since the two don't have a common subclass, it falls back to an Object type. And that results in the smelly code as you see in the example.<br /><br />An ideal solution would be to change the design of the classes so that you can either use a common base class or a generic method. But if you can't just do that<br /><br /><blockquote class="tr_bq">Get rid of the instanceof anyway!</blockquote><br />However, this doesn't need to be smelly. Turning to basics of OO programming concepts, you will recall that there's this thing called method overloading that is specifically there to solve this very problem.<br /><br /><script src="https://gist.github.com/1332647.js">  </script>It seems so obvious in this example that you might question, why someone would use the former code? Well, I have seen quite a few of them and if you search for instanceof in your Java project, I won't be surprised if you see a few code fragments that match the former example. </div></div>

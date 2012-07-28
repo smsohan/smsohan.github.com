@@ -1,0 +1,70 @@
+---
+layout: post
+title: "My Article at CodeProject: MvcMailer"
+date: 2011-01-13
+comments: false
+categories:
+ - C#
+ - .Net
+---
+
+<div class='post'>
+I just released a .Net NuGet package called MvcMailer and to get people super easily started, put an article at CodeProject.com. You are most welcome to the article at&nbsp;<a href="http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx">http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx</a><br />I welcome your comments and suggestions!</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Just released 0.8 and it should work. But please let me know if it doesn&#39;t.<br />I also added multi-part emails in version 0.8. You may check that out as well.<br />One important change:<br />mail.Body = PopulateBody(mail, &quot;welcome&quot;) needs to be replaced with PopulateBody(mail, &quot;Welcome&quot;), it gets rid of the duplication</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+This comment has been removed by the author.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Brilliant! Can&#39;t wait. Could you post a comment here or send me a line to jkonecki [at] gmail.com when the new release is out so I can test it as well?</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks for your reply. I will test this out before I push a new release. The new release will also add multi-part emails so that you can easily send html and plain text emails.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+My route is defined as:<br /><br />routes.Add(&quot;Account&quot;, new Route(&quot;{account}/{controller}/{action}/{id}&quot;,<br />new RouteValueDictionary(new { account = &quot;&quot;, controller = &quot;Home&quot;, action = &quot;Index&quot;, id = &quot;&quot; }), new AccountMvcRouteHandler()));<br /><br />I&#39;m trying to render a link:<br />href=&quot;@Url.Abs(Url.Action(&quot;About&quot;, &quot;Home&quot;))&quot;<br /><br />The url that is generated looks like:<br /><br />http://mysite/Home/About<br /><br />instead of<br /><br />http://mysite/myaccount/Home/About</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Can you please share your specific route and ActionLink in mailer view that breaks for the route data?<br /><br />I know a solution to your problem now. But I would like to make sure I know the problem in detail.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Great! I&#39;m waiting impatiently... ;-)<br /><br />PS. Congratulations on joining ThoughtWorks</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, a new version is overdue now:)</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Awesome!<br /><br />Will you release a new version through NuGet? I will be able to upgrade easily and test it for you.<br /><br />Cheers!<br />Jakub</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks for your suggestion. I will fix this issue this weekend.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Hi!<br /><br />Thirst of all, thank you for a brilliant package! It&#39;s simple and easy to use!<br /><br />I&#39;ve just found one little issue - I&#39;ve notices that the ControllerContext for Notifier doesn&#39;t have the RouteData dictionary populated with the same values as the RouteData for main controller. This causes UrlHelper to generate invalid Urls. My app is a multi-tenant one and all my routes have format: /{account}/{controller}/{action}/ I&#39;ve managed to &#39;fix&#39; it by adding following code in the WelcomeMessage.cshtml<br /><br />@{<br />    this.Url.RequestContext.RouteData = (this.Context.CurrentHandler as MvcHandler).RequestContext.RouteData;<br />}<br /><br />I wonder if you could fix it properly, then MvcMailer will be just perfect! ;-)<br /><br />Thank you,<br />Jakub</div>
+</div>
+</div>

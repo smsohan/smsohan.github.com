@@ -1,0 +1,11 @@
+---
+layout: post
+title: "C# Named Parameters Can be Very Useful"
+date: 2011-01-07
+comments: false
+categories:
+ - C#
+---
+
+<div class='post'>
+Think about the following code example:<br /><span class="Apple-style-span" style="color: blue; font-family: 'Courier New', Courier, monospace;">htmlHelper.InputHelper(InputType.CheckBox, name, "true", true /* useViewData */, false /* isChecked */, true /* setId */, false /* isExplicitValue */, htmlAttributes);</span><br />This line is taken from the source code of ASP.NET MVC, or to be more specific its a line from the InputExtension class. I think the intent of the original developer is clear:<br />Add comment next to arguments so that one can easily read the method call without getting lost in a who's who since there are quite some arguments to pass.<br />To learn more about named parameters using C#, you can visit <a href="http://weblogs.asp.net/scottgu/archive/2010/04/02/optional-parameters-and-named-arguments-in-c-4-and-a-cool-scenario-w-asp-net-mvc-2.aspx">this post</a> by ScottGu.</div>

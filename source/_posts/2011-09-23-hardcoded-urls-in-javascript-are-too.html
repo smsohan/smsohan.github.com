@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Hardcoded URLs in Javascript are too Slippery"
+date: 2011-09-23
+comments: false
+categories:
+ - Javascript
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://farm3.static.flickr.com/2728/4182189627_ba036b02c8.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="448" src="http://farm3.static.flickr.com/2728/4182189627_ba036b02c8.jpg" width="500" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Photo credits to&nbsp;<span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;"><a href="http://www.flickr.com/photos/36179943@N00/" style="color: #0063dc; text-decoration: none;">Esteban Cavrico</a></span></td></tr></tbody></table><br /><br /><div dir="ltr" style="text-align: left;" trbidi="on">I was working on a web project that lets you delete some records using Ajax. The following is just an example, but you might be familiar with a similar code already:<br /><br /><script src="https://gist.github.com/1237981.js">  </script><br />This code used to work when the DELETE endpoint was indeed under '/blog/posts'. However, at some point a developer wants to remove the '/blog' from all the endpoints to put them directly under '/posts'! You can see, in such cases it is very hard to catch the bug that would be caused by the faulty JS code.<br /><br />Here's a quick recommendation:<br /><blockquote>Don't hardcode the URLs (or anything that is actually a server configuration) inside your JS.&nbsp;</blockquote>This is a code smell, as its duplicating code. But its also dangerous, because its hard to catch/fix these defects since they can be buried deep under an untested Javascript file. Instead feed this data from your server side code and you'll mitigate risk that way.<br /><br /></div></div></div>

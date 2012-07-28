@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Are You Still Parsing HTML Element Ids?"
+date: 2012-01-22
+comments: false
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">To render a list, often times we use repeated HTML elements with a similar template. For example, the search results in ebay.com is a list of divs, each containing different data in the same template. In a server side, this rendering code is somewhat similar to this:<br /><div><br /></div><script src="https://gist.github.com/1660430.js"></script><br />If you noticed, a product with it's database id = 123 will be rendered inside a div with id="product_123", and similarly div id="product_456" will contain the product with id = 456.<br /><br />With such ids, we can write JavaScript code that can extract the database id of a selected product to do interesting things, for example:<br /><br /><script src="https://gist.github.com/1660456.js">  </script><br />This is a useful and a common technique. However, in this era of <a href="http://dev.w3.org/html5/spec/Overview.html#embedding-custom-non-visible-data-with-the-data-attributes">HTML5</a>, we can make use of its custom attributes feature to write a clean JavaScript event handler without the help of parsing. Here's an example:<br /><br /><script src="https://gist.github.com/1660524.js">  </script><br />I will never parse my HTML element Id again. What about you?</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Cronos</div>
+<div class='content'>
+nice!, I didt know this function, tks for sharing!</div>
+</div>
+<div class='comment'>
+<div class='author'>honeyclarck</div>
+<div class='content'>
+In my point of view You sure did put a new twist on something that Ive heard so much about <b><a href="http://www.actualexams.me/" rel="nofollow">ActualExams</a></b>. And How did you manage to make a blog that as smart as it is sleek?</div>
+</div>
+</div>

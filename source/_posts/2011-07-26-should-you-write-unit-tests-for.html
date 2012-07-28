@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Constructors Are Methods, too!"
+date: 2011-07-26
+comments: false
+categories:
+ - TDD
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br />Yes, if your constructor does something meaningful. This is just like another method and should be treated equally for unit testsing purpose. Here's an example that should need unit test:<br /><script src="https://gist.github.com/1107355.js">  </script><br />It looks simple, so testing it should be simple, too. I would only skip the default constuctors, as long as they don't do anything interesting.</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Alexander Beletsky</div>
+<div class='content'>
+Sure, the constructors are methods too.. but they should not do anything more except internal initialization.<br /><br />I had a little habbit to put additional logic inside constructor, to be possible to write something like<br /><br />= new DoSomethingClass(x, y);<br /><br />I&#39;m getting rid of that also because of bad testability. Instead of that I write now:<br /><br />var smth = new DoSomethingClass(x, y);<br />smth.DoIt();</div>
+</div>
+</div>

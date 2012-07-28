@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Service API and Exceptions"
+date: 2011-06-22
+comments: false
+categories:
+ - Architecture
+---
+
+<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br />Too often I see I am using a REST/SOAP API to talk to a third party system that frustrates me because of poor error messaging. Here's an example to illustrate a typical frustration:<br /><br />Call: city_service.update_residence_address(city_dueler, new_address)<br />Response: &lt;status&gt;Failed&lt;/status&gt;&lt;error&gt;Invalid address&lt;/error&gt;<br /><br />But the address just seems right to me. So, I need to know specific reason about why the address is wrong. The error message leaves this critical detail. What happens next is, I look for the log files created by the city_service, conceptually supposed to be a third party hosted service. To do this, I SSH to the server, then cd to the logs folder and get lost in many of the cryptic log files. Then eventually I find a log and if I am lucky, I find something like the following:<br /><br />InvalidAddressException at:...<br />...<br />Street number is not listed..<br />...<br /><br />Now, I know I had an issue with the streer number. But I can see this only after I looked into the log of the thirdparty server. In an ideal case, I don't have an access to their server. Even if I have it, I cannot easily understand their logs and stack traces! In most API calls to third party applications I have had this&nbsp;frustration&nbsp;to varying degrees.<br /><br /><b>Here's a lesson learned:</b><br />Next time you expose an API for another app, expose error messages as specific as possible - so that, no details is left buried into your log files.</div></div>
