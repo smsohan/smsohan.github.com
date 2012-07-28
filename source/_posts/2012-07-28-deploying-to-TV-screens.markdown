@@ -26,7 +26,7 @@ The app itself uses JSON API calls to render the live data. Each screen is somew
 
 {% gist 3194417 %}
 
-If you have noticed here, there's an extra check inside the success callback. To begin with, the page remembers the server token on reload. So, whenever there's a new token, it refreshes the page. Since all API calls are funneled through this module, this become a no-brainer to support new screens/API calls.
+If you have noticed here, there's an extra check inside the success callback. To begin with, the page remembers the server token on reload. So, whenever there's a new token, it refreshes the page. Since all API calls are funneled through this module, this becomes a no-brainer to support new screens/API calls.
 
 Our API's respond with a server token, which is guaranteed to:
 
@@ -41,9 +41,11 @@ Every Ruby on Rails app also comes with a little method, Rails.root that returns
 
 Rails.root #==&gt; /app/realtime/releases/20120729083021
 
-Since every deployment will be a new timestamp, this method ensures a unique token for each deployment. That's all we need for the api module to be aware of new deployments and auto refreshes. Here's an example controller/action (again, simplified for brevity): I liked the organic nature of this technique. It is harvesting on the available tools. Although the examples in this post show Ruby/Rails as an example, I am sure the same techniques can be applied to other technologies with the same simplicity.
+Since every deployment will be a new timestamp, this method ensures a unique token for each deployment. That's all we need for the api module to be aware of new deployments and auto refreshes. Here's an example controller/action (again, simplified for brevity): 
 
 {% gist 3194430 %}
+
+I liked the organic nature of this technique. It is harvesting on the available tools. Although the examples in this post show Ruby/Rails as an example, I am sure the same techniques can be applied to other technologies with the same simplicity.
 
 Before I conclude, I would share one limitation of this technique here. Since the page reload happens on a shared api module, the reload needs to be generic, without requiring any special knowledge about the pages to reload. This pretty much means, a page needs to be able to reconstruct itself entirely from it's URL. Requiring any Javascript state beyond the URL, would probably require API specific handling to reload, killing the advantage of this technique. But the good news is, its always a good practice to rely solely on the URL to construct a page.
 
