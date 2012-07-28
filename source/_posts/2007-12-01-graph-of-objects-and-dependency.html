@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Object Graphs and Dependency Injection"
+date: 2007-12-01
+comments: false
+---
+
+<div class='post'>
+An application is supposed to have a graph of objects as a result of the following-<br /><br />1. Objects are designed to be interacting with each other following two rules of thumb "Highest Cohesion" and "Lowest coupling". So, a class instead of taking all the responsibilities only takes care of some high cohesive ones and depends on other partner classes  for the rest of the services. This dependency creates a graph like structure with objects as the nodes and dependencies as the edges.<br /><br />2. We expect our classes to "take only single responsibility" and "encapsulate anything that varies" to make sure we have good compact manageable classes. But this at the same time means a lot of new dependencies resulting in a complex graph of objects. The more one class is used and reused we have even more complex graph..<br /><br /><br />This dependency graph stands in a cut-point of the two conflicting interests. A class with less dependency makes it easy to "test", but a class with less dependency "looses re-usability". Because, once a class has a lot of dependencies, its hard to isolate an independent part of the class and test. On the other hand, if a class has only a few dependencies, its likely that the class is doing a lot of stuffs itself and so, has many reasons to change.<br /><br />Now to break the trade-off, I consider the key points again. If a class is high cohesive, it must depend on other classes for some non-cohesive services. This will also break down the classes into smaller classes which are more likely to be reusable than the longer ones. So, I have the feeling that dependencies are not that bad.<br /><br />Now, the problem boils down to testing a class with all the dependencies on other classes. Well, we cannot actually delete the dependencies, still, we can inject them!<br /><br />I hope to follow up on my understanding on dependency injection soon in my future posts.</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>hellosaru</div>
+<div class='content'>
+<I>hi</I></div>
+</div>
+<div class='comment'>
+<div class='author'>lijiale</div>
+<div class='content'>
+The story is about a very small (<A HREF="http://www.powerleveling-wowgold.com/" REL="nofollow">wow gold</A>)because the (<A HREF="http://www.wow-powerleveling-wow.com/" REL="nofollow">wow gold</A>)reasons for the (<A HREF="http://www.cheapestwowgold.org/" REL="nofollow">wow gold</A>) expulsion Chushi doors have been forced to(<A HREF="http://www.powerleveling-wowgold.com/" REL="nofollow">wow power leveling</A>) living on the United Kingdom, (<A HREF="http://www.wow-powerleveling-wow.com/" REL="nofollow">wow power leveling</A>)in abroad alone the people(<A HREF="http://www.cheapestwowgold.org/" REL="nofollow">wow power leveling</A>) struggling for survival. A naturally do not (<A HREF="http://www.wow-powerleveling-wow.com/wow-powerleveling.asp" REL="nofollow">wow power leveling</A>) agree with the ethical person. A war many of the cracks in the middle of the(<A HREF="http://www.cheapestwowgold.org/wowgold.asp" REL="nofollow">wow gold</A>) pursuit of hard power of (<A HREF="http://www.wowpowerleveling-wow.com/" REL="nofollow">World of Warcraft gold</A>) extreme people. A look at(<A HREF="http://www.cheapestwowgold.org/wowpowerleveling.asp" REL="nofollow">wow power leveling</A>) the friendship will be more important than the lives of people. The best of life, the best of the best stories or Long Road. Like Xiuzhen's friends must-see (<A HREF="http://www.watchrolexshop.com/" REL="nofollow">Rolex</A>)category.</div>
+</div>
+</div>

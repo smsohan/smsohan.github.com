@@ -1,0 +1,12 @@
+---
+layout: post
+title: "The Easiest and the Hardest Methods to write unit test for"
+date: 2007-12-02
+comments: false
+categories:
+ - Unit test
+ - TDD
+---
+
+<div class='post'>
+I was wondering to find out the easiest methods to write unit tests for. I came up with a few results as the following ones...<br /><br />a. A method that takes no parameter, perform calculations on only local data and always returns a constant value is the easiest to test. But the question is, is this at all important to have such methods?<br /><br />b. A method that takes some parameters, and limits its operations only on the supplied parameters and local variables and returns some value or throws exception is also very easy to write a test for.<br /><br />Now, we want all our methods to be easily unit testable. But the reality is, we cannot always have the most convenient forms for unit testing with real life methods.<br /><br />And things start to go wrong as we have deviations from the ideal. Some of the most commonly found deviations are -<br />1. void methods that optionally throws exception<br />2. void methods without exceptions<br />3. Methods without parameters.<br />4. Methods having multilevel nesting and complex flow.<br />5. Methods that depends on other methods or classes or modules.<br />6. Methods having dependency on static methods.<br />7. Methods with a risk of runtime exception.<br /><br />I will be posting rescue scenarios with appropriate reasoning to get around to the discomforts of the above listed deviations from ideal unit testing perspectives.<br /><br />Stay tuned to get more on this...:-)</div>
