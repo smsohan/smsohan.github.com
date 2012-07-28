@@ -3,7 +3,7 @@ layout: post
 title: "Deploying to TV Screens"
 date: 2012-07-28 15:28
 comments: true
-categories: Javascript, Ruby, Rails
+categories: [Javascript, Ruby, Rails]
 ---
 
 Off late, I am working on a project to render real time business data with interesting visualizations, so people can feel the pulse of the business. For the last couple of months, I have been planning to write a detailed post about it. But after a few false starts, I am finally settling on smaller posts, telling a small part of the story each time.
