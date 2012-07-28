@@ -1,0 +1,45 @@
+---
+layout: post
+title: "flash.now - did you know?"
+date: 2010-03-31
+comments: false
+categories:
+ - Ruby
+ - Rails
+---
+
+<div class='post'>
+Well, I didn't know this until late. If you are like me, you have often wondered when you saw those unwanted flash messages appearing after a request, sometimes after ajax requests when you do a redirect, all on a sudden that flash shows up!<br />Well, as you have thought, the Ruby on Rails people have solved this problem way before now. The solution is to wisely use flash.now[] and flash[]. Here are a few tips:<br /><br /><b>Use flash.now[] when you are flashing:</b><br /><br /><ul><li>on ajax requests</li><li>before a call to render :action =&gt; :my_action, as often found in failure cases of create and update actions</li></ul><b>Use flash[] when you are flashing:</b><br /><br /><ul><li>before a redirect_to, often found in the success cases of create and update actions</li></ul><div>In general, use flash.now[] when you don't want to carry over the flash to the next http request and flash[] otherwise. The FlashHash class has more detail on this<a href="http://api.rubyonrails.org/classes/ActionController/Flash/FlashHash.html"> at the ruby on rails API page</a>. Hope this helps you to get rid of those annoying and often embarrassing out-of-context flash messages!</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks Severin for your comment and pointing the typo.</div>
+</div>
+<div class='comment'>
+<div class='author'>Severin</div>
+<div class='content'>
+Helpful explanation, thanks!<br /><br />But there&#39;s a little typo: &quot;Use flash.NEW[]...&quot; should be &quot;Use flash.NOW[]...&quot;</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Hi Arif, you are welcome. Happy to help :-)</div>
+</div>
+<div class='comment'>
+<div class='author'>Arif</div>
+<div class='content'>
+Nice tips. i think we can utilize it in our project to get rid of some mysterious flash messages :) Thank you.</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+You are welcome Ashif.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Thanks for this nice little useful post...</div>
+</div>
+</div>

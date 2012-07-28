@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Using Authlogic and single access token for API access"
+date: 2010-04-26
+comments: false
+categories:
+ - Ruby
+ - Rails
+---
+
+<div class='post'>
+<a href="http://github.com/binarylogic/authlogic">Bynarylogic's authlogic</a> has gained much popularity for its out of the box solution to ruby on rails authentication. Yesterday, I was working on giving API access to my ruby on rails application so that other apps can use my RESTful services. The authenticated API access usually involves the following steps:<br /><ol><li>API_KEY or a token to identify/authenticate an API call.</li><li>Authentication of an API caller using the API_KEY.</li></ol><div>Authlogic comes with in-built support for this. The following steps will do it for you:</div><div><script src="http://gist.github.com/379478.js"></script></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>jlfenaux</div>
+<div class='content'>
+Thanks the clear explanation about single_access_token, I was looking for.</div>
+</div>
+</div>
