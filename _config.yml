@@ -85,11 +85,11 @@ pinboard_user:
 pinboard_count: 3
 
 # Delicious
-delicious_user: smsohan
+delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: sohan
+disqus_short_name: smsohan
 disqus_show_comment_count: true
 
 # Google Analytics
