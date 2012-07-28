@@ -20,7 +20,7 @@ A regular web app is interactive. So, when we re-deploy the app, the users typic
 
 ![Airport displays](http://farm1.staticflickr.com/65/212623519_eae543d64c.jpg)
 
-Photo credits to Photo credits to  5mal5
+Photo credits to  5mal5
 
 The app itself uses JSON API calls to render the live data. Each screen is somewhat like a single page app, using multiple AJAX calls to render different parts of the screen, showing different data. The API calls are all funneled through a single Javascript module. The module looks like the following (showing a simplified version for brevity):
 
