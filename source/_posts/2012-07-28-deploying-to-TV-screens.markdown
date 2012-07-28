@@ -19,6 +19,7 @@ This introduces an interesting deployment challenge:
 A regular web app is interactive. So, when we re-deploy the app, the users typically get the latest version as soon as they reload the page or navigate through the app. However, in an airport like setting, where information is displayed across many screens, and typically no-one is clicking it, the app needs to be aware of updates and reload itself to achieve the same. This is essential, for example, if there's an API change on the server side, the HTML/Javascript/CSS must be in sync to be able render it.
 
 ![Airport displays](http://farm1.staticflickr.com/65/212623519_eae543d64c.jpg)
+
 Photo credits to Photo credits to  5mal5
 
 The app itself uses JSON API calls to render the live data. Each screen is somewhat like a single page app, using multiple AJAX calls to render different parts of the screen, showing different data. The API calls are all funneled through a single Javascript module. The module looks like the following (showing a simplified version for brevity):
