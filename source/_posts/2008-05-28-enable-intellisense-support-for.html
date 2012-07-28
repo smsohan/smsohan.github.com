@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Enable IntelliSense support for Spring.Net objects xml definition"
+date: 2008-05-28
+comments: false
+categories:
+ - .Net
+---
+
+<div class='post'>
+<p>Spring.Net has integration support with VS 2005 and VS 2008 (also supports older versions). To achieve this, just perform a simple copy-paste and define an XML namespace on the objects node. This will enable you to get IntelliSense and validation support while editing the objects node of the xml configuration file.</p>  <p>Two steps:</p>  <p>Step 1: Copy the &lt;Spring.Net Installed location&gt;\doc\schema\spring-objects-1.1.xsd to &lt;Visual Studio installed location&gt;/Xml/Schemas</p>  <p>Step 2: Make sure your objects node looks like this </p>  <p>&lt;objects xmlns="http://www.springframework.net"&gt; <br />...  <br />&lt;/objects&gt;</p>  <p>With this IntelliSense support you will surely feel happy while editing the xml file!</p></div>

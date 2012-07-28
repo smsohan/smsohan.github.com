@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Page_ClientValidate - Use this Method from Javascript for ASP.Net Client Side Validation"
+date: 2008-05-11
+comments: false
+categories:
+ - ASP.Net
+---
+
+<div class='post'>
+<p>In a typical ASP.Net web form, we have a few controls and also validators associated with the controls. The most common validators are used for Required Field validation, Type validation, Regular Expression validation and so on.</p>  <p>When we want to logically group the validators in a web form, we apply the same value for ValidationGroup property on the controls of a group and in this way, we create a logical division among our controls and the validation. This may be important, if we want to validate only a subset of all the controls on a form when a button is clicked and do not want to validate all the controls on that form.</p>  <p>If we choose to use the client side validation, then the validation takes place before the post back occurs. This works fine unless you want to validate two distinct groups on a single button click, because a button can only specify a single value for ValidationGroup.</p>  <p>So, on a situation like this or when you actually want to invoke the client side validation using Javascript, you can make use of the following code to invoke the validation on controls belonging to a particular validation group -</p>  <p><span style="font-family:Courier New;color:#0000ff;">Page_ClientValidate('&lt;your validation group name here&gt;');</span></p>  <p>If, the result of validation of the controls in the ValidationGroup turns out to be valid, this method will return a 'true' or otherwise a 'false'.</p>  <p>So, with this method, you will be able to invoke the client side ASP.Net validation using Javascript.</p></div>

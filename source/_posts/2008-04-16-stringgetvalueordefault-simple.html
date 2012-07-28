@@ -1,0 +1,12 @@
+---
+layout: post
+title: "string.GetValueOrDefault() - A Simple Extension Method"
+date: 2008-04-16
+comments: false
+categories:
+ - C#
+ - .Net
+---
+
+<div class='post'>
+<p>I have found that, I have written codes like the following one in my projects before now at some places.</p>  <p><span style="font-family:Courier New;color:#000080;">string myString = someString == null ? string.Empty : someString;</span></p>  <p>However, with the advent of extension methods in C# 3.0 (.Net 3.5), I have a better way of achieving this goal in my projects. So, I just wrote an extension method as the following one-</p>  <p><span style="font-family:Courier New;color:#000080;">public static class StringExtensions   <br />   {    <br />       public static string GetValueOrDefault(this string instance)    <br />       {    <br />           return instance == null ? string.Empty : instance;    <br />       }    <br />   }</span></p>  <p><span style="font-family:verd;color:#3c3c3c;">Well, I have just borrowed the name of the method from the Nullable type and think this name means its purpose to the fullest!</span></p>  <p>However, with this addition, I can now rewrite my code example as the following one-</p>  <p><span style="font-family:Courier New;color:#000080;">string myString = someString.GetValueOrDefault();</span></p>  <p><span style="font-family:Courier New;color:#000080;">Happy coding!</span></p></div>

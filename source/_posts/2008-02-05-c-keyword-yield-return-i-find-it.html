@@ -1,0 +1,12 @@
+---
+layout: post
+title: "C# keyword 'yield return' - I find it interesting"
+date: 2008-02-05
+comments: false
+categories:
+ - C#
+ - .Net
+---
+
+<div class='post'>
+I have been using yield return in some of my codes and would like to share its interesting aspects. The following code example shows one dummy use of 'yield return'-<br /><br /><pre lang="cs"><br /><span style="font-family:courier new;">public class YieldExample</span><br /><span style="font-family:courier new;">{</span><br /><br /><span style="font-family:courier new;">    public void Run()</span><br /><span style="font-family:courier new;">    {</span><br /><span style="font-family:courier new;">              IEnumerator</span><int style="font-family: courier new;"> numbers = getNumbers().GetEnumerator();<br />          while (numbers.MoveNext())<br />          {     <br />                  Console.Write("x{0} ", numbers.Current);<br />          }<br />}<br /><br />private IEnumerable<int> getNumbers()<br />     {<br />         for (int i = 0; i <></int></int></pre><br />Now, a code like new YieldExample().Run() would produce a output similar to this - <pre lang="cs"> "x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 x8 y8 x9 y9"  </pre>This output is certainly a little unusual but this is what 'yield return' is used for.<br /><br />In a line, whenever you place a yield return statement, the control goes back to its caller. However, on the next call, program execution starts from the line immediate to the 'yield return' line. This can be used to avoid initializing/memorizing a collection of data if it makes sense to use them one after another and requires to move to control back and forth the iterator. <div id="answer" style="display: none;"><br />x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 x8 y8 x9 y9<br /></div></div>

@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Mock Internal Interface with NMock2 - Use InternalsVisibleToAttribute"
+date: 2008-03-16
+comments: false
+categories:
+ - C#
+ - .Net
+ - TDD
+ - Object Oriented Design
+---
+
+<div class='post'>
+Yesterday I badly needed to create mocks for my internal interfaces. I am using NMock2 as a Mocking framework and found it really difficult to produce Mocks for internal interfaces. After some 'google time' and investigation I found that you need the following two lines in your AssemblyInfo.cs to achieve this purpose-<br /><br /><span style="font-family:courier new;">[<span style="color: rgb(51, 51, 255);">assembly<span style="color: rgb(0, 0, 0);">:</span></span> <span style="color: rgb(0, 204, 204);">InternalsVisibleTo</span>(<span style="color: rgb(153, 0, 0);">"Mocks"</span>)]</span><br /><span style="font-family:courier new;">[<span style="color: rgb(51, 51, 255);">assembly<span style="color: rgb(0, 0, 0);">:</span></span> <span style="color: rgb(0, 204, 204);">InternalsVisibleTo</span>(<span style="color: rgb(153, 0, 0);">"MockObjects"</span>)]<br /><br /><span style="font-family:verdana;">Where are the two assemblies? I found that these two assemblies are dynamically created by NMock2 for mocking your interfaces.</span><br /><br /><span style="font-family:verdana;">To find out the truth yourself, just put a breakpoint and watch the value of the following line-<br /><br /></span><span style="color: rgb(0, 204, 204);">AppDomain</span>.CurrentDomain.GetAssemblies()<br /><br /><span style="font-family:verdana;">You should see the two assemblies in the list of the assemblies in the current application domain.</span><br /><br /><span style="font-family:verdana;">I found it interesting. I wish someone of you might find it useful too!</span><br /><br /><span style="font-family:verdana;">Note: You may still need to add InternalsVisibleTo attribute for your test assembly with the above two declarations.</span><br /></span></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Urs</div>
+<div class='content'>
+I'll add this information to the documentation I'm currently writing for NMock2 (http://sourceforge.net/projects/nmock2/)<BR/><BR/>Happy mocking<BR/>Urs</div>
+</div>
+</div>

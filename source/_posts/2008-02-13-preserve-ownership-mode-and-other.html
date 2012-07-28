@@ -1,0 +1,11 @@
+---
+layout: post
+title: "Preserve Ownership, mode and other attributes while copying in Linux"
+date: 2008-02-13
+comments: false
+categories:
+ - other
+---
+
+<div class='post'>
+I dare not say, I am savvy at Linux :-)<br /><br />Recently, I ran into a problem where I found that upon executing a copy command, my source and destination files had different permissions and attributes (i-nodes), but I badly needed the permissions to be preserved in the destination files/folders. The following command will preserve the attributes -<br /><br /><span style="font-weight: bold; color: rgb(0, 0, 153);font-family:courier new;">cp -p source destination</span><source><span style="font-weight: bold; color: rgb(0, 0, 153);font-family:courier new;"> </span><destination><br /><br />here, the switch p (-p) does the trick, it preserves the permissions, modes and other attributes to resemble the source.<br /><br />Hope this helps some of you with similar needs!</destination></div>

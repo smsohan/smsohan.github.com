@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Iterative and Incremental implementation of Code Reviews"
+date: 2008-11-03
+comments: false
+categories:
+ - agile
+---
+
+<div class='post'>
+<p>Extreme Programming (XP) advocates for a pair-programming, taking the code review to its extreme. I have also found that pair programming generates a lot of speed and also helps producing better quality product in the first time. But, at the same time it's difficult to impress the management or prove return on investment  associated with pair programming to the business people. So, what is the best possible solution? I believe, we can implement frequent peer code reviews to mimic the pair programming to some extent and get the benefit out of it.</p>  <p>In our team, we started implementing code reviews as we now recognize that there is no way to live without it. As usual, our approach is an iterative and incremental approach. So, we are taking small steps and eventually embracing the best practices in the team. I would like to share our plan here in this blog. The review process goes on the following work flow-</p>  <p><em><span style="color:#8080ff;">"When I am done with my work on task, I commit the code with the reviewer's name on the svn comment. CCNet automatically builds and sends a mail to the reviewer. The reviewer gets the review email through a filter and reviews the code and sends his feedback to me via IM/email."</span></em></p>  <p><span style="color:#0000ff;"><strong>Sprint #1:</strong></span> Review all the names or classes, files, methods, variables and so on. So, the reviewer emphasizes on the names and provides feedback on the following things-</p>  <blockquote>   <p>1. Is the naming standard correctly followed?</p>    <p>2. Is this a meaningful identifier?</p>    <p>3. Does the name conform to the conventions used elsewhere in the code?</p> </blockquote>  <p><span style="color:#0000ff;"><strong>Sprint#2:</strong></span> Review the use of private methods and code structure. The to-do list is -</p>  <blockquote>   <p>1. Would it make more sense to put some code into the private method for readability and/or reusability?</p>    <p>2. Is there any hard-coded constant directly used without referring to a const/readonly data type?</p>    <p>3. For all the methods, is it possible to reduce the dependency by using a simple parameter instead of a whole object?</p>    <p>4. Learn from sprint#1 and use the common learning.</p> </blockquote>  <p><span style="color:#0000ff;"><strong>Sprint#3:</strong></span> Review the use of loops, if-else blocks. At this iteration, the to-do is-</p>  <blockquote>   <p>1. Is it possible to eliminate a loop?</p>    <p>2. Is it possible to avoid the nested loops?</p>    <p>3. Is there a large if-else-if-else block? Why is it required? Is this large conditional block a possible candidate for future change?</p>    <p>4. Learn from sprint#2 and use the common learning.</p> </blockquote>  <p>Well, this is pretty much it. The idea is, we feel its not practical to go with an overnight policy for implementing peer code reviews. But, its very much possible that we do it in small increments and at each sprint's retrospective we bring this point. So, we are all informed that we need to do reviews, which, eventually should sustain as a best practice!</p>  <p>If you think you have some ideas regarding this, please share it with me/my readers.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Gregg Sporar</div>
+<div class='content'>
+Agreed, an incremental approach can work well.<br /><br />FYI, we&#39;re offering a special for one week only on our lightweight code review tool: Code Reviewer. $5 for 5 licenses - 5 days only (July 13-17).  Full details here: http://smartbear.com/code-review-5-for-5.php</div>
+</div>
+</div>

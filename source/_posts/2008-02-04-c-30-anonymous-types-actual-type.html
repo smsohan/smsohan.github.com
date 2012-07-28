@@ -1,0 +1,9 @@
+---
+layout: post
+title: "C# 3.0 Anonymous types - actual type depends on the order of the property assignnments"
+date: 2008-02-04
+comments: false
+---
+
+<div class='post'>
+I learned that the anonymous types in C# 3.0 has got a good feature that, if you have two anonymous declarations with the same signature, then you create only one anonymous type and have two instances of the type.<br /><br />So, a code fragment like the following is perfectly valid and passes all compiler warnings/errors-<br /><br />            var anon    = new { FirstName = "first", Age = 21 };<br />            var anon2   = new { FirstName = "first", Age = 26 };<br />           <br />            //this is OK<br />            anon = anon2;<br /><br />Now, lets take a look into the following code fragment-<br /><br />            var anon    = new { FirstName = "first", Age = 21 };<br />            var anon3   = new { Age=16, FirstName = "first2"};<br />           <br />            //this doesn't compile<br />            anon = anon3;<br /><br />So, its evident that the anonymous types are created on the order of the assignments of the properties. However, from my little experience and understanding, I think if this dependency on the exact order wasn't there, then it would make more sense.</div>

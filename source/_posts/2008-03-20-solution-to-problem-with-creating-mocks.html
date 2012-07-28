@@ -1,0 +1,13 @@
+---
+layout: post
+title: "A solution to the problem with creating mocks for interfaces with Generic Methods with NMock"
+date: 2008-03-20
+comments: false
+categories:
+ - C#
+ - .Net
+ - TDD
+---
+
+<div class='post'>
+I was so happy with NMock to see how it can dynamically generate mocks of interfaces and also gives me a fluent interface to write expectations and everything it does to help me in unit testing!<br /><br />However, I could not generate dynamic mocks for interfaces with Generic methods and it kept showing me the 'TypeLoadException' on and on. My interface looks like the following -<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">interface </span>IObjectFactory</span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    T    GetObject</span><t><span style="font-family:courier new;">(<span style="color: rgb(51, 51, 255);">string </span>id);</span><br /><span style="font-family:courier new;">}</span><br /><br />As I failed to create a mock implementation of this interface using NMock, I just wrote a mock implementation myself, which looks like the following<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">class </span><span style="color: rgb(51, 204, 255);">MockObjectFactory</span>: <span style="color: rgb(51, 204, 255);">IObjectFactory</span></span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span><span style="color: rgb(51, 204, 255);">Type </span>RequestedObjectType;</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span>string RequestedObjectId;</span><br /><span style="font-family:courier new;">    public T    GetObject</span><t><span style="font-family:courier new;">(string id)</span><br /><span style="font-family:courier new;">        {</span><br /><span style="font-family:courier new;">                RequestedObjectType = typeof(T);</span><br /><span style="font-family:courier new;">        RequestedObjectId = id;</span><br /><span style="font-family:courier new;">        return new Mockery().NewMock</span><t><span style="font-family:courier new;">();</span><br /><span style="font-family:courier new;">    }</span><br /><span style="font-family:courier new;">}</span><br /><br /><br />And in my test code, just injected the above mock implementation of the IObjectFactory where needed. So, although NMock cannot handle mocking of this type of an interface now, you can actually create a mock implementation and use NMock inside the implementation to help you.</t></t></t></div>

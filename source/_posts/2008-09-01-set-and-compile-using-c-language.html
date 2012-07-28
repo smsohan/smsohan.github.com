@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Set and Compile using C# Language Version 2.0 in Visual Studio 2008"
+date: 2008-09-01
+comments: false
+categories:
+ - C#
+ - .Net
+---
+
+<div class='post'>
+<p>I know, while most of you are very happy with the new features in Visual Studio 2008, its sad that not all your deployment environments are upgraded to .Net framework 3.5. I had a similar situation as well on one of my projects.</p>  <p>Its great that you can just navigate to a VS 2008 project file properties and from the Application Tab select the Target .Net Framework version to use one of .Net 2.0, 3.0 and 3.5. But this doesn't solve all the problems. You will soon discover that, your application doesn't show an error when you write C# 3.0 code with the target framework set to 2.0. This is because, the IDE by default uses the latest language version by default.</p>  <p>To solve this problem, Navigate to <span style="color:#8080ff;"><strong>project properties &gt; Build &gt; Advanced &gt; Language Version and choose ISO-2 (or ISO-1).</strong></span> Now with this information, the VS 2008 will start showing compiler errors for features that don't comply to the version specification!</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Jeff Sinclair</div>
+<div class='content'>
+The important thing to remember is that if you compile using c# 3.0 features, this does not mean that the compiled output won't run on 2.0 Most of the c# 3 features are compile time only. <BR/>Be clear on if you want to be restricted at compile time, or if your goal is to have the output work on 2.0 at runtime.</div>
+</div>
+</div>

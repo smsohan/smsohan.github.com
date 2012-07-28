@@ -1,0 +1,9 @@
+---
+layout: post
+title: "Delving into client side capabilities of ASP.Net Ajax"
+date: 2008-11-18
+comments: false
+---
+
+<div class='post'>
+<p>I believe the client side scripting capabilities of ASP.Net Ajax is not utilized by many ASP.Net developers. This is most probably due to the fact that, not many people are aware of it at the first place. Also, since most of the javascripts are rendered secretly (read, not blatantly, which is good), most developers don't even feel the existence of the underlying javascript at all.</p>  <p>Two very simple examples of the client side library are given here as examples -</p>  <p>1. Did you know, if you have the following javascript method, it will be automatically called when your page's DOM is finished loading?</p>  <pre>function pageLoad(sender, args) {<br />}</pre><br /><br /><p>2. Do you know the following javascript code will add an event handler to catch whenever an asynchronous post back is completed?</p><br /><br /><pre>Sys.WebForms.PageRequestManager.instance.add_endRequest(endRequestHandler)</pre><br /><br /><p>These are just very little glimpses of the big scenario. To uncover more, visit the official MSDN documentation at <a title="http://msdn.microsoft.com/en-au/library/bb398822.aspx" href="http://msdn.microsoft.com/en-au/library/bb398822.aspx">http://msdn.microsoft.com/en-au/library/bb398822.aspx</a> <br /><br />  <br />If you are new to this, I assure, you will have a much better knowledge about ASP.Net Ajax scripting than ever before and can produce better quality javascript for your ASP.Net websites. <br /><br />  <br />Happy digging!</p>  </div>
