@@ -1,0 +1,12 @@
+---
+layout: post
+title: "How to strip html tags, truncate and highlight texts in ruby on rails"
+date: 2009-12-22
+comments: false
+categories:
+ - Ruby
+ - Rails
+---
+
+<div class='post'>
+Recently, I had the following requirements as I was working on CampZero.com - the going to be service marketplace of Bangladesh.<div><ol><li>Remove all html tags other than hyperlinks and new lines from a html fragment</li><li>Truncate the text to show only first 200 characters of the text and append ellipsis (...) in case the text was truncated.</li><li>Highlight an array of words in the text to show the search query worlds that matched</li></ol><div>The first one, getting rid of all but hyperlinks and new lines was achieved by the following code:</div><pre class="brush: rails"><br />&lt;%= sanitize my_html_text, :tags => %w(br a) %&gt;<br /></pre><div>Next, to truncate the text, I simply used the following:</div><div><pre class="brush: rails"><br />&lt;%= truncate my_sanitized_text, :length => 200 %&gt;<br /></pre></div><div>Lastly, to highlight my search query words, I did the following</div><pre class="brush: rails"><br />#in the controller<br />@query_words = params[:query] ? params[:query].split(/\W/) : ''<br />#in the view</pre></div><div><div>In reality, I chained the above thee methods as shown below:</div><div><pre class="brush: rails">&lt;%= highlight(truncate(sanitize(my_html_text, :tags => %w(br a)), :length => 200), @query_words) %&gt;</pre></div><div>These methods and their siblings are great as time savers. Rails makes the web development fun by including this as built in methods. For reference, you can check the link at <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/SanitizeHelper.html#M001620">SanitizeHelper</a> and <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html">TextHelper</a></div><div>Happy railing!</div></div></div>

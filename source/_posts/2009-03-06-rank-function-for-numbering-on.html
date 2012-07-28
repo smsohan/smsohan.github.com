@@ -1,0 +1,11 @@
+---
+layout: post
+title: "The RANK() Function for Numbering on Groups/Partitions in SQL Server"
+date: 2009-03-06
+comments: false
+categories:
+ - SQL
+---
+
+<div class='post'>
+<p>Previously, I used the ROW_NUMBER() function to get the monotonically increasing row number of a result set from a SQL query. But, this time the requirement was a bit different as follows.</p> <p>I have many combinations of Year, Make, Model and Trim of vehicles in my database. I also have potential profit on sale of each of the combinations. I need to produce, the top 5 trims for a Year, Make, Model combination that yields maximum profits.</p> <p>So, to solve this problem, I cannot simply use ROW_NUMBER(). Basically, I need to find the row numbers starting from 1 for each group of Year, Make and Model. Then, take only those rows having a rank &lt;= 5. Ranking based on such groups/partitions can be easily done by using the RANK() function. I am quoting the syntax <a href="http://msdn.microsoft.com/en-us/library/ms176102.aspx" target="_blank">from MSDN</a> here-</p><pre>RANK ( )    OVER ( [ &lt; partition_by_clause &gt; ] &lt; order_by_clause &gt; )</pre><br /><p>So, in my case the query is something like the following-</p><br /><p>RANK ( )    OVER ( <strong>PARTITION BY</strong> Year, MAKE, MODEL <strong>ORDER BY</strong> Profit DESC, Trim )</p><br /><p>So, the RANK() is similar to ROW_NUMBER() in the context of the PARTITION. As if, the RANK() restarts counting from 1 for each partition. I think, like me, many of you may find it new and useful in similar requirements.</p><br /><p>Without using this function, it will be much difficult to produce the desired result set. However, if you have a nicer/alternative solution, please teach me!</p></div>

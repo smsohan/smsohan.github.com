@@ -1,0 +1,22 @@
+---
+layout: post
+title: "Unit Test eager loading in Rails ActiveRecord association"
+date: 2009-04-21
+comments: false
+categories:
+ - Ruby
+ - Unit test
+ - TDD
+ - Rails
+---
+
+<div class='post'>
+<p>To avoid the n+1 problem, you need to use eager loading in ActiveRecord object associations. An easy implementation of eager loading can be done using named scope in the following way.</p> <pre class="brush: rails">class User &lt; ActiveRecord::Base<br /> has_many :friends<br /> named_scope :eager_load_friends, :include =&gt; :fiends<br />end<br />User.find(user_id).eager_load_friends</pre>To unit test the named scope, you can use this following helper method (keep it in test_helper.rb, if you like) that I wrote for <a href="http://www.scrumpad.com/" target="_blank">ScrumPad</a><br /><pre class="brush: rails">def test_eager_loaded(model, association)<br /> assert !model.instance_variable_get("@#{association.to_s}").nil?<br />end</pre>You can then test your eager loading in the following way<br /><pre class="brush: rails">def test_eager_load_friends<br /> test_eager_loaded(User.find(1), :friends)<br />end</pre>You can also use the <a href="http://tammersaleh.com/posts/testing-named_scope" target="_blank">shoulda plug-in</a> if you like. For me, I think we should test the values returned by our named scope as opposed to shoulda approach, which tests if the code is written as expected.<br /><p>Got another solution? I will appreciate if you share.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+Really useful.<br />And a clean way to reuse query.<br />Thanks for shearing</div>
+</div>
+</div>

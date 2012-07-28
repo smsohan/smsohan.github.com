@@ -1,0 +1,26 @@
+---
+layout: post
+title: "assert_equal_float : assert_equal between two float objects with precision"
+date: 2009-04-07
+comments: false
+categories:
+ - Ruby
+ - Unit test
+ - Rails
+---
+
+<div class='post'>
+<p>In doing rails unit testing, sometime you need to assert the equality between two float objects in the following fashion</p>  <div class="code_div">   <p><strong><span style="font-size:100%;"><span style="font-family:Courier New;"><span style="color:#000080;">assert_equal</span> 32.8, object_under_test.method_returning_float</span></span></strong></p> </div>  <p>The internal storage of float objects sometimes will contain 32.8 with additional lower precision decimal points and hence the assert may fail although the significant digits may be same. For example, the value of <strong>object_under_test.method_returning_float</strong> may be stored as 32.80000001 in memory and the above call may fail.</p>  <p>To solve this problem, you may wish to use the <a href="http://www.ruby-doc.org/core-1.9/classes/Float.html" target="_blank">round method of Float class</a> in the following way</p>  <div class="code_div">   <p><strong><span style="font-size:100%;"><span style="font-family:Courier New;"><span style="color:#000080;">assert_equal</span> 32.8, object_under_test.method_returning_float<span style="color:#008000;">.round(1)</span></span></span></strong></p> </div>  <p>The above line will evaluate true since it will round up to one decimal points. However, be careful about cases where you may have a value greater than 5 in the second decimal place! because (32.86).to_f.round(1) will become 32.9!</p>  <p>However, when you are talking about insignificant digits, this rounding should work fine for you.</p>  <p>Next step is to define a new assert_equal_float method that takes the precision as an argument. Adding this method will save you from code duplication and will improve readability.</p>  <div class="code_div">   <p><span style="font-family:Courier New;"><strong><span style="font-size:100%;"><span style="color:#000080;">def</span> <span style="color:#800080;">assert_equal_float</span>(expected, actual, precision)            <br />    <span style="color:#008080;">assert_equal</span> expected.to_f.round(precision), actual.to_f.round(precision)            <br /><span style="color:#000080;">end</span></span></strong><span style="color:#000080;"> </span>   </span></p>    <p><span style="font-family:Courier New;"></span></p> </div>  <p>Happy float asserting!</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>tommy</div>
+<div class='content'>
+correction: round(precision) is available in ruby 1.9 but not in ruby 1.87 :(</div>
+</div>
+<div class='comment'>
+<div class='author'>Tommy</div>
+<div class='content'>
+note:<br />(32.86).to_f.round(1) only works in Rails test environment because of active support<br /><br />.round(precision) isn&#39;t available in regular ruby code.</div>
+</div>
+</div>

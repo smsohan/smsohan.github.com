@@ -1,0 +1,13 @@
+---
+layout: post
+title: "Rails modeling guide#1: right structure of a ruby on rails model"
+date: 2009-07-16
+comments: false
+categories:
+ - Ruby
+ - Architecture
+ - Rails
+---
+
+<div class='post'>
+<p> </p> <p><a href="http://lh6.ggpht.com/_Gr1ozXzBWpM/Sl8_GY9tjZI/AAAAAAAAAF4/mXyyvZf0TqE/s1600-h/30MAR4U%5B3%5D.jpg"><img style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="273" alt="30MAR4U" src="http://lh4.ggpht.com/_Gr1ozXzBWpM/Sl8_KZGni7I/AAAAAAAAAF8/iPeKlLA9_j8/30MAR4U_thumb%5B1%5D.jpg?imgmax=800" width="105" border="0" /></a> </p> <p>Rails models are no exception compared to the super models! You are in the business if and only if you got a good physical structure and can stick to it for years...</p> <p>At <a href="http://www.code71.com/" target="_blank">Code71</a>, we are keeping our rails models attractive following a few guidelines. I will be posting these guidelines in a series and here goes the first one - about the physical structure of the ruby on rails models.</p> <p>We keep the following order consistent in our models:- </p><ol> <li>CONSTANTS</li> <li>has_one, has_many, belongs_to, has_and_belongs_to relations in dependency order</li> <li>plug-ins initialization (acts_as_tree, acts_as_state_machine etc.)</li> <li>validates_presence_of</li> <li>validates_uniqueness_of </li> <li>validates_numericality_of</li> <li>validates_format_of</li> <li>custom_validations</li> <li>named_scopes grouped by related purposes</li> <li>active record hooks (after_initialize, before_create, after_create, ...) in execution order in the format (after_initialize [:assign_default_state, :sanitize_content] )</li> <li><strong>protected</strong></li> <li>hook method implementations according to execution order</li> <li><strong>public</strong></li> <li>constructor</li> <li>class methods in alphabetic order</li> <li>other methods alphabetically or grouped if related</li> <li><strong>protected</strong></li> <li>methods alphabetically or grouped if related</li> <li><strong>private</strong></li> <li>self methods in alphabetic order or similar methods in a group<br />other methods in alphabetic order or similar methods in a group<br /></li></ol> <p><strong><span style="color:#004000;">Rule</span></strong></p> <p>No method gets code real estate over 20 lines. If needed, one/more private methods are used.</p> <p><strong><span style="color:#004000;">How is this helping us?</span></strong></p> <ol> <li>We are absolutely sure where to look for a method or where to write a new method.</li> <li>The code base is really consistent.</li> <li>The unit test methods also follow the same order, which makes managing the test suite easy.</li></ol> <p>More to come later this week. Stay tuned!</p></div>

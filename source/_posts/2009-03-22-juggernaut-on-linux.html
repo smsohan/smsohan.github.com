@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Juggernaut on Linux"
+date: 2009-03-22
+comments: false
+categories:
+ - Ruby
+ - Rails
+---
+
+<div class='post'>
+<p>I just installed Juggernaut on my linux box. The installation is simpler than windows. At least it gave me less pain.</p>  <p>Just run the following commands-</p>  <ol>   <li>gem install json</li>    <li>gem install activemachine</li>    <li>gem install juggernaut</li>    <li>juggernaut –g juggernaut.yml</li>    <li>juggernaut –c juggernaut.yml</li> </ol>  <p>I got a little pain regarding the g++ compiler that is required to build the <strong>activemachine</strong>. I did not have it installed in my Amazon EC2 instance and after some searches, I could install it using the following-</p>  <p><strong>apt-get install g++</strong></p>  <p><strong><span style="color:#ff0000;">IMPORTANT!!</span></strong></p>  <p>Well, it was fine if I could end here! However, I found that this installation stopped my MySQL service and changed the <strong>/etc/mysql/my.cnf</strong> file. So, an attempt to start the MySQL was successful only after I removed the # comment from the line log_bin = blah blah blah…</p>  <p>So, if you are using Redhat Enterprise 5.0, you may find it useful. If you are using Amazon EC2, you will find it useful too. I do not know about other distros, but may be something similar will be there (at least hopefully)!</p></div>

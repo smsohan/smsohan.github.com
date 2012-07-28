@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Forget Me Not! Object Oriented Design in Custom Exception"
+date: 2009-04-26
+comments: false
+categories:
+ - Ruby
+ - Rails
+ - Object Oriented Design
+---
+
+<div class='post'>
+<p>When designing custom exceptions, you may forget about old school OO fundamentals. As a reminder, lets take a look into the following custom exception classes.</p> <pre class="brush: rails"><br />StorySaveError<br />StoryDescopeNotAllowedError<br />StoryCompleteError<br />StoryNotFoundError<br />StoryDeleteError<br />StoryDeleteNotAllowedError</pre><p>These exceptions are really useful in my application. But the bad thing is, they all derive from StandardError class, whereas there should be a base class, may be StoryError, which is more meaningful and useful. So, we can have the following-</p><pre class="brush: rails"><br />class StoryError < StandardError<br />end<br />StorySaveError < StoryError<br />StoryDescopeNotAllowedError < StoryError<br />StoryCompleteError < StoryError<br />StoryNotFoundError < StoryError<br />StoryDeleteError < StoryError<br />StoryDeleteNotAllowedError < StoryError</pre><p>With the addition of a base class for all Story related exceptions, I can write cleaner/better code.</p><ul><li>When I am not interested about the specific error, I can just use <code>rescue StoryError</code> to catch 'em all</li><li>I can place a common error handling routine for all Story related exceptions</li><li>I can add new exception types without altering the codes where the specific type of StoryError is insignificant</li></ul><p>From my experience, I found that most people are not cautious about OO when desiging custom exceptions. (because they are exceptions!). Nonetheless, if you follow the OO guides, it will pay off for sure.</p>  </div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, that is another way. Usually, people use ErrorCode to designate such cases. For example, WebException has many error codes in .Net. One code denotes timeout, another denotes network failure and so on.<br />One quick point, I saw you added attr_accessor :message. message is already an attribute of the Exception class, the base class of all Exceptions. So, you need not define a message property again. Its there and you can use it for free!</div>
+</div>
+<div class='comment'>
+<div class='author'>Samiron Paul</div>
+<div class='content'>
+Just sharing a little experience. A situation where user may be failed to delete a task for any of two type of restrictions. But in both case &quot;TaskDeleteNotAllowed&quot; type exception will be raising. Hence it will not be possible to show the exact reason to user. Now instead of being so conservative by creating a new class, we came out in the following way<br /><br />Added a attribute in TaskDeleteNotAllowed:<br />Class TaskDeleteNotAllowed &lt; StandardError<br />    attr_accessor :message<br />end<br /><br />Create an instance of the class while before raising:<br />exception = TaskDeleteNotAllowed.new<br /><br />Setting custom message based on the error occurred and raise that:<br />exception.message = &quot;Task is completed&quot; #or any other message<br />raise exception<br /><br />Of course rescuing the error as following:<br />...<br />rescue TaskDeleteNotAllowed =&gt; error<br />   #show {error.message} in flash or write in log<br />...<br />That makes a proper sense to user whenever she fails to delete a task.<br /><br />Anyway, being concerned with OO fundamentals in  designing custom exception handlers is realized again.<br /><br />Thanks for the post</div>
+</div>
+</div>

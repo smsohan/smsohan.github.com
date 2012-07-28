@@ -1,0 +1,25 @@
+---
+layout: post
+title: "A good example of C# Regular Expression: Implementing InitCap or Titleize/TitleCase using C# and Regular Expression"
+date: 2009-01-21
+comments: false
+categories:
+ - C#
+ - .Net
+---
+
+<div class='post'>
+<p>Ever since I first learned about the regular expressions, I have always been fascinated by its magical capability. When I first learned about DFA/NFA, I figured out how it is possible to evaluate a regular expression and eventually, during my Undergrad at BUET, I implemented a regular expression evaluator for the Compiler Lab.</p> <p>Now, given this history, here is a simple code that I wrote today. Let me know if you liked it-</p> <div style="background: white none repeat scroll 0% 0%; font-size: 10pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; font-family: courier new;"> <p style="margin: 0px;">        Program()</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(Titleize(<span style="color: rgb(163, 21, 21);">"hello! This is a sample string for titleize!"</span>));</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.Read();</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> Titleize(<span style="color:blue;">string</span> input)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color: rgb(43, 145, 175);">Regex</span>.Replace(input.ToLower(), <span style="color: rgb(163, 21, 21);">@"(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)"</span>, <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MatchEvaluator</span>(OnMatch));</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> OnMatch(<span style="color: rgb(43, 145, 175);">Match</span> match)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">"{0}{1}{2}"</span>, match.Groups[<span style="color: rgb(163, 21, 21);">"space"</span>].Value, match.Groups[<span style="color: rgb(163, 21, 21);">"first"</span>].Value.ToUpper(), match.Groups[<span style="color: rgb(163, 21, 21);">"rest"</span>].Value);</p> <p style="margin: 0px;">        }</p></div> <p style="margin: 0px;">For a little explanation, the pattern <span style="color: rgb(163, 21, 21);">@"(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)"</span> matches to a series of space followed by a word. The word is further divided into two parts, the first one is just the first character and the rest understandably captures the "rest" part of the word.</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Next the OnMatch method takes each occurrence of a match of the above pattern and as shown, simply regroups the word as previous but just takes the Upper case of the first letter!</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Simple? You got another good example of Regular Expression? Share with me.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+The pattern could be much easier:<br />=======================================<br />public string Titleize(string input)<br />{ return Regex.Replace(input.ToLower(), <br />@&quot;(?&lt;first&gt;\b\w),new MatchEvaluator(OnMatch));<br />}<br />public string OnMatch(Match match)<br />{ return match.Groups[&quot;first&quot;].Value.ToUpper(); }</div>
+</div>
+<div class='comment'>
+<div class='author'>Sadique</div>
+<div class='content'>
+Yes, this is a nice example of power of regular expression. <A HREF="http://support.microsoft.com/kb/308252" REL="nofollow">Here</A> is a nice article to learn quickly the grouping of match &amp; several useful links of regular expression.</div>
+</div>
+</div>

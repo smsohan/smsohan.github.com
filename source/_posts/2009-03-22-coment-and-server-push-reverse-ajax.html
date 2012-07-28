@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Comet and Server Push (Reverse Ajax) technology"
+date: 2009-03-22
+comments: false
+categories:
+ - Ruby
+ - Rails
+---
+
+<div class='post'>
+<p>I am re-implementing an ajax based chat system. Presently an ajax request is polled continuously to look for any updates/messages from the user’s browser. However, the plan is to use the server to push the messages to the clients to off-load the server from a huge number of useless ajax calls.</p>  <p>I learned about Comet and found it interesting. You may read about comet <a href="http://en.wikipedia.org/wiki/Comet_%28programming%29" target="_blank">here</a> at WIKI.</p>  <p><a href="http://juggernaut.rubyforge.org/" target="_blank">Juggernaut</a> is a rails plug-in that uses Flash to implement the server push technology. It is simple and it produces RJS script for the client. So, it can be used many other scenarios where a live update is required. of course, chat system is a good place for this.</p>  <p>The installation required a few tweaks as follows:-</p>  <ol>   <li>1. Installed <strong>json_pure</strong> gem instead of json. (gem install json_pure)</li>    <li>2. Installed <strong>EventMachine</strong> gem (gem install eventmachine)</li>    <li>3. Installed juggernaut gem (gem install juggernaut <strong>–-ignore-dependencies</strong>)</li>    <li>4. Modified the C:\ruby\lib\ruby\gems\1.8\specifications\juggernaut-0.5.7.gemspec in places to the following</li> </ol>  <p><span style="font-family:Courier New;"><strong>s.add_runtime_dependency(%q&lt;json_pure&gt;, ["&gt;= 1.1.1"])      <br />s.add_development_dependency(%q&lt;hoe&gt;, ["&gt;= 1.3.1"])</strong></span></p>  <p><span style="font-family:Courier New;"><strong>s.add_dependency(%q&lt;json_pure&gt;, ["&gt;= 1.1.1"])      <br />s.add_dependency(%q&lt;hoe&gt;, ["&gt;= 1.3.1"])</strong></span></p>  <p><span style="font-family:Courier New;"><strong>s.add_dependency(%q&lt;json_pure&gt;, ["&gt;= 1.1.1"])      <br />s.add_dependency(%q&lt;hoe&gt;, ["&gt;= 1.3.1"])</strong></span></p>  <p>since, you do not find the required versions of all the gems, you need to change this checks to get a way.</p>  <p>Then, <a href="http://github.com/maccman/juggernaut_plugin/blob/c3e07a812341f93bb1f90c00b7a125524b07b80a/README" target="_blank">this readme</a> helped me to get started.</p>  <p>Will follow up this post as I work more on this. Have a good day!</p></div>

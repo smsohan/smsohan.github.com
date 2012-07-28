@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Rails modeling guide#2: naming convention for ruby on rails model methods"
+date: 2009-07-16
+comments: false
+categories:
+ - Ruby
+ - Architecture
+ - Rails
+---
+
+<div class='post'>
+<p>Naming conventions play an important role to the software's overall architecture. It is not a rocket science, still, it may lead to unhappy consequences if not taken care of at the early stage of a project. This small best practices can make a code base significantly improved.</p> <p>Rails does a good job by using the dynamic power of ruby and providing with a handful of dynamic methods with the models. ActiveRecord::Base and its included modules follow a consistent naming, which clearly represent the intended purpose of the methods. At <a href="http://www.code71.com/" target="_blank">Code71</a>, we are working on <a href="http://www.scrumpad.com/" target="_blank">ScrumPad</a>, a 2nd generation agile scrum tool using ruby on rails and our model methods are named according to the following rules-</p> <p>1. All boolean returning methods end with '?'</p><pre class="brush: rails">company.billable?, sprint.current?, story.in_progress?</pre><p>2. Boolean methods do not start with is_ or has_ or did_ (as you might see in other popular languages)</p><pre class="brush: rails">company.is_billable? -&gt; company.billable?<br />sprint.is_current? -&gt; sprint.current?</pre><p>3. find_ and find_all are used only for class (self.find or self.find_all) methods and should return a single/array of object of the class respectively.</p><p>find_* methods may return a single object of the class/nil</p><p>find_all_* methods return an array of objects of the class or [], but never a nil</p><p>4. No methods start with a get_ as other languages.</p><p>5. A method ends with ! if it alters the object itself.</p><pre class="brush: rails">sprint.close!()<br />story.progress!()</pre><p>6. Methods that persists an object/may throw exception, should always end with ! (implied from rule 5)</p><pre class="brush: rails">invoice.update_status!(:paid)</pre><p>7. Always use parentheses '()' in method names. Future versions of ruby is deprecating the support for method names without parentheses.</p><p>Following these 7 simple rules we have consistent and intuitive model method names across the whole <a href="http://www.scrumpad.com/" target="_blank">ScrumPad</a>. Let me know if you have any suggestion to these names to make it even better.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Ashif, thanks!</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Thanks for these great tips. Sometimes only following the naming convention can save us a lot of time and effort to understand codes written by others. Keep posting such tips and tricks of beautiful coding.</div>
+</div>
+</div>

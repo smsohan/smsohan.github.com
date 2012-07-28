@@ -1,0 +1,25 @@
+---
+layout: post
+title: "Implementing breadcrumb in rails projects – a clean approach"
+date: 2009-07-07
+comments: false
+categories:
+ - Ruby
+ - Rails
+---
+
+<div class='post'>
+<p><a href="http://lh5.ggpht.com/_Gr1ozXzBWpM/SlQtUMgYMWI/AAAAAAAAAFw/T6ETdg1_psY/s1600-h/breadcrumb%5B3%5D.png"><img title="breadcrumb" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="132" alt="breadcrumb" src="http://lh3.ggpht.com/_Gr1ozXzBWpM/SlQtVVnNvKI/AAAAAAAAAF0/WGq_a6xKgTk/breadcrumb_thumb%5B1%5D.png?imgmax=800" width="571" border="0" /></a> </p>  <p>In most web applications, breadcrumbs offer a nice way to trace back to previously visited pages. However, generating the breadcrumbs and showing them on dynamic pages sometimes need special care for the following reasons-</p>  <ol>   <li>The links of the breadcrumb may contain dynamic links. </li>    <li>It is used in all the pages. So, changing the breadcrumb may trigger a series of changes. </li> </ol>  <p>In <a href="http://scrumpad.com/" target="_blank">ScrumPad</a>, we are using ruby on rails. There are a few plugins to help rails projects in managing breadcrumbs, but none seemed to satisfy our need. In fact, most projects come up with some distinctive ways to generate the breadcrumbs. However, we kept the breadcrumb clean in the following way in <a href="http://scrumpad.com/" target="_blank">ScrumPad</a>.</p>  <p>Step#1:</p>  <p>Encapsulated the breadcrumb generation logic into a single class and used it from all places.</p>  <pre class="brush: rails">class Breadcrumb<br />include ActionView::Helpers::UrlHelper<br />include ActionView::Helpers::TagHelper<br />include ApplicationHelper<br /><br />attr_accessor :parts, :separator, :prefix<br /><br />def initialize(separator = nil, parts = [])<br />  self.separator = separator || "&lt;img src="\"/images/stub_arrow_right.gif\"" /&gt;"<br />  self.parts = parts<br />end<br /><br />def add(title, url = nil)<br />  self.parts &lt;&lt; {:title =&gt; title, :url =&gt; url}<br />end<br /><br />def set_prefix(title, url)<br />  self.prefix = {:title =&gt; title, :url =&gt; url}<br />end<br /><br />def to_s<br />  if(!self.parts.nil? and !self.parts.empty?)<br />    if(self.prefix.nil?)<br />      parts_with_prefix = self.parts<br />    else<br />      parts_with_prefix = [self.prefix] + self.parts<br />    end<br />  <br />    breadcrumb_html = []<br />    parts_with_prefix.each do |part|<br />      if(part[:url].nil? or part[:url].empty?)<br />        breadcrumb_html &lt;&lt; "<span>#{part[:title]}</span>"<br />      else<br />        breadcrumb_html &lt;&lt; link_to(part[:title], part[:url])<br />      end<br />    end<br />    return breadcrumb_html.join(" #{self.separator} ")<br />  end<br />  return ''<br />end<br />end</pre><p>Step#2:</p><p>A before_filter in the ActionController initializes the breadcrumb in the following way:-</p><pre class="brush: rails">def initialize_breadcrumb()<br />  @breadcrumb = Breadcrumb.new<br />  if(project_selected?)<br />    @breadcrumb.prefix = {:title =&gt; "Dashboard", :url =&gt; dashboard_project_path(selected_project())}<br />  end<br />end</pre><p>Step#3:</p><p>Now, @breadcrumb is available to all actions. However, if the RESTful resource definition is right, the rest of the breadcrumb generation becomes really simple. We have methods like the following in our controllers-</p><pre class="brush: rails">def generate_breadcrumb(sprint, story = nil)<br />  @breadcrumb.add(sprint.name, project_sprint_path(project.id, sprint.id))<br />  if(!story.nil?)<br />    @breadcrumb.add(story.display_title, story_path(story))<br />  elsif(self.action_name != 'index')<br />    @breadcrumb.add('Stories', stories_path())<br />  end<br /><br />  current_page = self.action_name == 'index' ? 'Stories' : self.action_name.humanize<br />  @breadcrumb.add(current_page)<br />end</pre><p>Step#4:</p><p>Finally, in my view layout, I just use this instance variable as shown here:-</p><pre class="brush: rails">&lt;%= @breadcrumb %&gt;</pre><p>So, the whole breadcrumb generation is encapsulated and the implementation is clean. Let me know if you liked it. I am in the process of creating a plugin so that anyone can just drop it in any rails app and start using straight away!</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Jesse Cai (蔡望勤)</div>
+<div class='content'>
+very cool, will be a nice plugin.</div>
+</div>
+<div class='comment'>
+<div class='author'>Samiron Paul</div>
+<div class='content'>
+This was really a cool way to implement breadcrumb in Rails. Looking forward for the plugin... as it really seems lifesaver for developers :)</div>
+</div>
+</div>

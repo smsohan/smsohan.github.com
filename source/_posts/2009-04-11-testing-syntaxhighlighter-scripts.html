@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Testing the SyntaxHighlighter Scripts"
+date: 2009-04-11
+comments: false
+categories:
+ - other
+---
+
+<div class='post'>
+<p>For the last few months, I am on the lookout for a really good syntax highlighter that helps me to post blogs on all the programming languages in a pretty html with syntax coloring/highlighting. This one is taken from <a title="http://alexgorbatchev.com/wiki/SyntaxHighlighter" href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">http://alexgorbatchev.com/wiki/SyntaxHighlighter</a></p> <strong><span style="color:#008000;">Ruby/Rails</span></strong>   <pre class="brush: rails;">class TestHighlighter<br />def my_highlighter<br />  return "SyntaxHighlighter"<br />end<br />end</pre><br /><strong><span style="color:#008000;">CSharp</span></strong><br /><br /><pre class="brush: csharp;">public class TestHighlighter<br />{<br />public string MyHighlighter<br />{<br />  get {return "SyntaxHighlighter";}<br />}<br />}</pre><br /><br /><p><strong><span style="color:#008000;">W</span></strong><strong><span style="color:#008000;">hat did I add to my blog?</span></strong> </p><br /><br /><p>Open Edit Html and add this just before in the blog's template </p><br /><br /><pre class="brush :html;">&lt;link href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" type="text/css" rel="stylesheet" /&gt;<br />&lt;link href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css" type="text/css" rel="stylesheet" /&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushRuby.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushSql.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCSharp.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js' type='text/javascript'/&gt;<br />&lt;script type='text/javascript'&gt;<br />    SyntaxHighlighter.config.bloggerMode = true;<br />    SyntaxHighlighter.all();<br />&lt;/script&gt;</pre><br /><br /><p>Thanks to <a href="http://jitu-blog.blogspot.com/" target="_blank">Ashraf</a> for informing me about the <a href="http://www.codeplex.com/wlwSyntaxHighlighter" target="_blank">Windows Live Writer Plugin</a>! It will be useful for sure.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Thank you for posting such a helpful post. The code snippet posting has been much easier with this.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+This is a nice plugin too<br />http://sourcecodeplugin.codeplex.com/</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+Here is an alternate plugin for live writer.<br />http://precode.codeplex.com/<br />Hope you like it :)</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Ashraf, thanks! Good to know that it helps you.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+This is really a nice post. I was finding difficulties implementing it in blogger. But the post helped a lot. Thanks.</div>
+</div>
+</div>
