@@ -10,7 +10,7 @@ Off late, I am working on a project to render real time business data with inter
 
 >So, have you ever worked on a web application that is primarily viewed through 55"+ 1080p TV screens?
 
-We are showing real time business data, aggregated from multiple data sources as they are happening. The screens are gonna be mounted on the wall, like as you'd see in the airports. And it needs to be running 24x74
+We are showing real time business data, aggregated from multiple data sources as they are happening. The screens are gonna be mounted on the wall, like as you'd see in the airports. And it needs to be running 24x7
 
 This introduces an interesting deployment challenge:
 
