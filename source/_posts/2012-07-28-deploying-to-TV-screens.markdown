@@ -33,7 +33,7 @@ Our API's respond with a server token, which is guaranteed to:
 1. Remain same for each server deployment, and
 2. Change whenever there's a new deployment.
 
-However, we still need to make sure the server token indeed ensures these two essential properties. With a little trick, this becomes trivial. For our app, we are using Capistrano to deploy our Ruby on Rails project. For those new to Capistrano, it uses a timestamped directory for each deploy, symlinking it to the current. So, it looks somewhat like the following: 
+However, we still need to make sure the server token indeed ensures these two essential properties. With a little trick, this becomes trivial. For our app, we are using Capistrano to deploy our Ruby on Rails project. For those new to Capistrano, it uses a timestamped directory for each deploy, symlinking it to the current. So, it looks somewhat like the following:
 
 {% gist 3194484 %}
 
@@ -41,7 +41,7 @@ Every Ruby on Rails app also comes with a little method, Rails.root that returns
 
 Rails.root #==&gt; /app/realtime/releases/20120729083021
 
-Since every deployment will be a new timestamp, this method ensures a unique token for each deployment. That's all we need for the api module to be aware of new deployments and auto refreshes. Here's an example controller/action (again, simplified for brevity): 
+Since every deployment will be a new timestamp, this method ensures a unique token for each deployment. That's all we need for the api module to be aware of new deployments and auto refreshes. Here's an example controller/action (again, simplified for brevity):
 
 {% gist 3194430 %}
 
