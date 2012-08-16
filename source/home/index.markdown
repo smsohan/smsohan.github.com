@@ -9,7 +9,7 @@ footer: true
 
 ## Welcome
 
-![Airport displays](images/photo.jpeg)
+![Airport displays](/images/photo.jpeg)
 
 ### A Not So Brief Biography
 
