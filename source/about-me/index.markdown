@@ -30,7 +30,7 @@ Off late, I am spending much of my free time on reading books, blogs and watchin
 
 ### Contact Me
 
-Senior Consultant (Software Engineer), ThoughtWorks Canada.<br/>
+Senior Consultant Software Engineer, ThoughtWorks Canada.<br/>
 Phone: (+1) 403 714 2673<br/>
 Email: sohan39 [@] gmail.com<br/>
 Twitter: @smsohan<br/>
