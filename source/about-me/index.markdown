@@ -2,14 +2,14 @@
 layout: page
 title: "home"
 date: 2012-08-16 08:53
-comments: true
+comments: false
 sharing: true
 footer: true
 ---
 
 ## Welcome
 
-![Airport displays](about-me/photo.jpeg)
+![Airport displays](images/photo.jpeg)
 
 ### A Not So Brief Biography
 
