@@ -8,13 +8,13 @@ categories: [Javascript]
 
 I paired with [@TylerMercier](http://codecuriosity.com) as we did a little [hands-on demo on writing testable and OO JavaScript](http://www.meetup.com/Calgary-Agile-Methods-User-Group/events/79722562/).
 
-![Presenting with Tyler](images/LoveJS.jpg)
+![Presenting with Tyler](/images/LoveJS.jpg)
 
 This was mostly based on our pairing experience on the current project, but also had things that we learned from our previous web projects. I wanted to share some of the highlights of this session with my readers on this blog:
 
 From experience, I have seen a few charactersitics that make JavaScript coding a real fun. Here's a few that stand out:
 
->Good Javascript is Testable and Object Oriented
+>Good JavaScript is Testable and Object Oriented
 
 Really simple stuff, but it took me quite a few years to actually start writing OO JavaScript, and more so, to write automated tests that run on CI server. As I often say, the shittiest part of most web projects is its CSS, with its hacks, and the inherent nature of it. And JavaScript is often just as smelly. But if you just start writing OO JavaScript with tests, your code will drive you to a cleaner path simply because bad code makes testing really tough. And with Jasmine, testing JavaScript is super fun. So, we suggested the following toolset:
 
