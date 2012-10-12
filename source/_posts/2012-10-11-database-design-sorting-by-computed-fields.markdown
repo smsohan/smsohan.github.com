@@ -8,7 +8,7 @@ categories: Database, Architecture
 
 In a recent project, we had this requirement to sort a list of items by a concept that is absent in the database schema, but can be derived from other fields. To make it easy to understand, let's build an example, simple enough to isolate the topic of interest.
 
-Let's say we have a list of tasks, stored in a database table as follows:
+Let's say we have a list of locations, stored in a database table as follows:
 
 
     Locations (location_id (primary key), province_id (NULL), city_id (NOT NULL))
