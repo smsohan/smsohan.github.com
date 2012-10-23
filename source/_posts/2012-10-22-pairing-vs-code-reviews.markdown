@@ -10,7 +10,7 @@ categories: [Agile, XP]
 
 Pair programming is like synchronized swimming. You do it together, you win it together. You try to improve your chances by helping your partner, and vice verca. Even if you lose, its highly likely you've improved simply by being together sharing a united goal.
 
-Code review can be fun and really useful too. But deep deep care needs to be taken to ensure it remains same in spirit, that is, the unified shared goal. In practice I have seen it to be super hard to achive consistently.
+Code review can be fun and really useful too. But deep deep care needs to be taken to ensure it remains same in spirit, that is, the unified shared goal. In practice I have seen it to be super hard to achieve consistently.
 
 Are you pair programming? Are you doing code reviews only? Why/why not? Would you change?
 
