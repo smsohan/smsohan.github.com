@@ -31,11 +31,11 @@ This starts getting even more complicated as you start adding external project d
 
 To tackle these problems, teams often use Chef/Puppet/Powershell/Vagrant etc. infrastructure automation tools. In practice, I'm yet to find a project where these tools would just work in a single pass. For example, it would miss one package or the other, sometimes it would fail at halfway, sometimes it would get you pretty close but almost never I have seen it to work on a single pass. I find this to be a recurring problem, faced by almost all dev teams.
 
-One solution I think may work is as follows:
+##One solution I think may work is as follows:##
 
-1. Teams from each project writes their own bootstrap scripts, so others can just use it
-2. The bootstrap script runs on a CI server and fails a commit if it breaks the bootstrap
-3. Nobody runs a manual command ever for bootstrapping the dev machines
+	1. Teams from each project writes their own bootstrap scripts, so others can just use it
+	2. The bootstrap script runs on a CI server and fails a commit if it breaks the bootstrap
+	3. Nobody runs a manual command ever for bootstrapping the dev machines
 
 I'm yet to try this approach in practice. But too many times I've seen there's only one/couple people writing the bootstrapping scripts for all projects. Also, nobody really finds the issues until a new dev box needs bootstrapping. A CI server would be a big push to keep it green all the time. And finally, everytime a one-off command is run for bootstrapping, a little part of automation opportunity is missed.
 
