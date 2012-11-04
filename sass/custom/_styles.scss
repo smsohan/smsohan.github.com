@@ -1,2 +1,20 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+html {
+  background-image: none;
+}
+
+body{
+  font-size: 1.313em;
+  line-height: 1.524em;
+
+  &> header h1 {
+    a, a:visited{
+      color: #222;
+    }
+  }
+  &>nav{
+    border-bottom: none;
+  }
+
+}
