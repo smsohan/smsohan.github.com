@@ -15,7 +15,7 @@ I think you have 2 choices to pick from.
 1. db/seeds.rb
 2. db/migrate/2342423424_some_migration.rb
 
-I prefer having it in the seeds.rb whenever possible since is the obvious place for it. But I've often put them in migrations as well. There are trade-offs associated with both.
+I prefer having it in the seeds.rb whenever possible since this is the obvious place for it. But I've often put them in migrations as well. There are trade-offs associated with both.
 
 Migrations only run once. This means, "double/miltiple seeding" is not a concern at all. So, you can write a migration with some seeding command as follows:
 
