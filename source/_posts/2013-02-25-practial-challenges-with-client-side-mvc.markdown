@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Practial API Design Challenges for Client Side MVC"
+title: "Practical API Design Challenges for Client Side MVC"
 date: 2013-02-25 22:40
 comments: true
 categories: [Architecture]
@@ -17,7 +17,7 @@ As a user I want to see the **emails** using a saved **custom filter**
 In this case, we would want the UI to show the description of the selected filter, and also the emails matching the filter. Conceptually, <code>CustomFilter</code> and <code>Email</code> are two resources or models, having distinct properties and behaviors. It'd make sense to have two separate API's as follows:
 
 **Filter API:**
-GET http://fancy_domain.com/filters?name=emails_from_boss_about_release
+GET http://fancy_domain.com/filters/emails_from_boss_about_release
 
 ```json
 {
@@ -29,7 +29,7 @@ GET http://fancy_domain.com/filters?name=emails_from_boss_about_release
 ```
 
 **Email API:**
-GET http://fancy_domain.com/emails?filter_id=10
+GET http://fancy_domain.com/filters/10/emails
 
 ```json
 [
@@ -50,7 +50,7 @@ Although this granularity makes good sense as an API, it starts causing issues f
 In a real world use, I've seen it's more common for the UI to require multiple resources than not. Since, we want our users to get faster response, we try to create API's that suit the UI's need. So, APIs start getting bloated payloads to match the UI's need. This typically results into something like the following:
 
 **Filter Email API:**
-GET http://fancy_domain.com/filters?name=emails_from_boss_about_release&include_emails=true
+GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_emails=true
 
 ```json
 {
