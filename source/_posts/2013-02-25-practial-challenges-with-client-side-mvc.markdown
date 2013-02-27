@@ -55,17 +55,17 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
 ```json
 {
   id: 10,
-  filter_name: emails_from_boss_about_release,
+  filter_name: 'emails_from_boss_about_release',
   subject_including: 'release',
   from: 'boss@the_company.com',
   emails:
   [
     {
       subject: 'Release note',
-      from: "boss@the_company.com",
-      to: "sohan@the_company.com",
-      body: "<html>.. </html>",
-      sent_at: "20130102040511"
+      from: 'boss@the_company.com',
+      to: 'sohan@the_company.com',
+      body: '<html>.. </html>',
+      sent_at: 20130102040511
     }
   ]
 }
