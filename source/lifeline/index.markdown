@@ -8,7 +8,7 @@ footer: true
 ---
 
 ## Interesting Milestones of my life!
-
+* Started working at Cisco, November 2013
 * __Became a dad__, Shopoth was born, April 2013
 * Started working at [Sourcefire](http://sourcefire.com), October 2012
 * Became a Permanent Resident in Canada, October 2012
