@@ -12,7 +12,7 @@ Just worked on my first AngularJS project at [http://loveyyc.info](http://loveyy
 
 A great technology only becomes so because people feel happy about it. The happiness for people like me comes from the fact that not only I understand the technology well, but also find it to be easy to use. I think AngularJS is an amazing framework for building JavaScript apps. But oh boy, the barrier to entry is brutal to say the least. Their terminology makes it frustrating and very hard to compose a mental model of the framework.
 
-But instead of just complaining and ranting, I wanted to suggest a few concrete refactorings. I think these refactorings would make my way easier next time I'm about to introduce someone new to AngularJS:
+But instead of just complaining and ranting, I wanted to suggest a few concrete refactorings. I think these refactorings would make my life way easier next time I'm about to introduce someone new to AngularJS:
 
 ```js
 //rename rootScope to pageState
@@ -67,7 +67,7 @@ customTagState: {
 }
 
 //BAD transclude -> really?
-tranclude: true
+transclude: true
 
 //GOOD
 //always transclude, if the user has put content inside a custom tag. why not?
