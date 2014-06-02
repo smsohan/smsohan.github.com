@@ -14,7 +14,7 @@ Thanks [Terence](http://www.meetup.com/Calgary-Agile-Methods-User-Group/members/
 
 ## Scheduling Breaks
 
-Because this was a 3 hour session, and I believe my attention span cannot be stretched beyond 40 mins, the 3 hour session was chuncked as follows:
+Because this was a 3 hour session, and I believe my attention span cannot be stretched beyond 40 mins, the 3 hour session was chunked as follows:
 
 1. Chunk 1
   __08:45 - 09:00:__ __Played a techno music__ to set the tone as people are entering the room,
