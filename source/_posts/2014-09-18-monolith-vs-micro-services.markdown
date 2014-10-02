@@ -9,7 +9,7 @@ categories: 'Architecture'
 Microservices are talk of the town these days. I wanted to share my thoughts on microservices based on some experiments that we are running into at our current project.
 
 
-![minons](images/minions.jpg)
+![minons](/images/minions.jpg)
 
 SOURCE: [https://www.flickr.com/photos/31366276@N03/9327275207/in/photostream/](https://www.flickr.com/photos/31366276@N03/9327275207/in/photostream/)
 
@@ -27,4 +27,4 @@ Since it has been deployed, we didn't ship changes as often to this service comp
 
 However, when things go wrong, our debug efforts are harder since more infrastructural pieces are involved. Considering the additional work required and the value gain, I'm really not sure if microservices provide any real ROI.
 
-The additional complexity of dealing with many servers as opposed to a larger APP may or may not be worth it. I agree with Martin Fowler on the [prerequisites of microservices](http://martinfowler.com/bliki/MicroservicePrerequisites.html). Unless, you have streamlined an automated way to provision new servers with all required parts, it may actually be best for you to keep working on the monolith. It's not the end of the world, and you'll have more time to spend with the family!
+The additional complexity of dealing with many servers as opposed to a larger app may or may not be worth it. I agree with Martin Fowler on the [prerequisites of microservices](http://martinfowler.com/bliki/MicroservicePrerequisites.html). Unless, you have streamlined an automated way to provision new servers with all required parts, it may actually be best for you to keep working on the monolith. It's not the end of the world, and you'll have more time to spend with the family!
