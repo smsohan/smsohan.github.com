@@ -44,4 +44,4 @@ We spent the first month of 2016 in Bangladesh with family. It was my first time
 3. Ended up spending too much time on social media for little gain.
 4. While made some progress towards my PhD thesis, didn't submit any paper.
 
-There's a 2nd post coming about the new year's resolution. This annual
+There's a 2nd post coming about the new year's resolution. Come back in a few days.
