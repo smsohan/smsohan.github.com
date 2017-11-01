@@ -1,0 +1,98 @@
+---
+layout: post
+title: "The PhD Project"
+date: 2017-10-31 23:37
+comments: true
+categories: PhD
+---
+
+Finally, I defended my PhD thesis yesterday. Family, friends, and
+colleagues are all sending their wishes, and it feels great to have
+crossed this milestone.
+
+To be honest, deep inside, I carry a sad and guilty feeling, which at
+times overshadows the feeling of acomplishment. This phenomenon is hard
+to write about, but I wanted to give it a try anyway.
+
+So, it was 2012. Life was good. I got promoted to Senior Consultant at
+ThoughtWorks and Shahana got a job almost immediately following the
+completion of her grad school. We spent an amazing vacation to end the
+year 2011, and the summer of 2012 was full of weekend trips to all the
+beautiful touristy places. That summer we also found that we were gonna
+be first time parents. It was an exciting time.
+
+Along came fall. It started getting cold and wintery in Calgary. Both of
+us would be home by 5:30 PM, and would look for things to do to keep
+busy till bed time, which is about midnight. With slippery and often
+icy sidewalk, going for walks oudoors would mean a serious risk for the
+soon-to-be mom. So, we mostly stayed indoors. We were naive, and didn't
+quite learn to enjoy the serenity of the "nothing to do" time. So, in
+one of such evenings, out of sheer boredom, I decided to shoot an email
+to my then ex-supervisor asking if he could meet to discuss potentially
+a part-time PhD admission for me.
+
+He wrote back and we meet next week. He was quick to accept that request
+and also ensured that he'd be able to pay my tuition and expences as a
+scholarship, if required, for the full four years. I discussed this with
+Shahana and we decided to take this opportunity. Officially, the program
+would start in Fall 2013, about 5 months after the due date of our
+first born.
+
+This is going to be a long read. But I'm writing it while it's fresh in
+my memory from this overwhelmingly emotional time that I'm going through
+since the exam yesterday. This write up is an attempt to dump the
+different incidents that are showing up like storms in my mind at this
+time. I think it's written for myself, more than anything. But I
+appologize if you're reading this, since it's a long format story, the
+format that most people don't like to read online.
+
+Back to the story, even though the program officially started in Fall 2013, I actually
+started working on my research right after we had our meeting. The first
+sub-project was to run a literature review on the area of interest for
+the PhD. This would give me a head-start in terms of positioning my
+research a whole year before enrolling officially. And I thought, I'd
+also get a feeling about enrolling into a PhD that'd help to "fail fast",
+essentially I could call it a "quit" if I didn't like the work before
+enrolling. Also, I switeched my job to join SourceFire, now part of
+Cisco, because the traveling projects with ThoughtWorks weren't working
+for me anymore. I wanted to be with my wife, and international travels
+were screwing up with my Canadian immigration and citizenship
+requirements.
+
+Life was still quite easy till the April of 2013. Then, we had our first
+born and it changed upside down. I think like most other first time
+parents, we had little idea about how much work it is to raise a little
+child on your own without substantial family support. To make things a
+little more challenging, the deadline for the first paper I wrote was
+about two weeks after Shopoth was born. In that two week, we barely got
+any sleep. But Shahana was adament, and let me take the time away to
+complete the paper on time. It felt good to be able to submit the paper.
+We both felt that it was doable.
+
+Fast forward about a month. So, Shopoth is about 7 weeks old. My mother
+had left after helping us with the first few weeks of Shopoth's life. We
+, the three of us, went for a walk for the first time around the beautiful tree-laden neighborhood of the
+varsity community in Calgary. I recall precisely, it was a beautiful
+early summer day. We just crossed a playground and turned left on a
+corner. My phone beeped signaling an email notification about the paper
+I submitted. It had this:
+
+>  We regret to inform you that your submission titled ...has not been accepted...
+
+I felt sweaty, and wanted to keep it to myself. I could only do so for a
+few hours, and then shared this with Shahana. She was still recovering
+from the c-section, and was under a lot of stress due to the sudden
+changes in her life. I remember, she was saying only positive things
+about it and tried to encourage me to carry on.
+
+As it happens, I moved on and decided to get into the PhD program
+anyway. During this year, I also got quite a bit engaged with things at
+the new job and started taking more responsibilities from a leadership
+perspective. To complete the course requirements, I'd have to complete
+at least three graduate courses, and transfer the credits from one of
+the courses I did while doing my MBA before coming to Canada.
+
+
+
+
+
