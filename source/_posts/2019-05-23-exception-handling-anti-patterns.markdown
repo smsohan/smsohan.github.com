@@ -114,7 +114,7 @@ def create
   pdf = Pdf.new(file)
   post_text = pdf.text
   post = Post.new(text: pdf)
-  post.save! #May fail due to database issues
+  post.save! #The exception handler only triggers on this line
 rescue SaveError => error
   #...
 end
