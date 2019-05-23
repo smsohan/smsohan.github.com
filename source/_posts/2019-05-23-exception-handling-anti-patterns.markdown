@@ -33,7 +33,10 @@ end
 Introduces `goto/jump` like control-flow instead of a logical flow.
 ```ruby
 def create
+  post.created_at = Time.now
   post.validate # It's a likely that some posts will be invalid
+  post.save!
+  post.notify_users
 rescue => ValidationError
 end
 ```
