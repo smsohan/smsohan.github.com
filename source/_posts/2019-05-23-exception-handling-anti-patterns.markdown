@@ -11,7 +11,7 @@ and related anti-patterns. I wanted to show code examples for the ones I
 found interesting so that impatient developers can take a quick
 glance at the code instead of having to read long form text.
 
-## Under-handled / Ignored exceptions
+## Under-handled / Ignored
 Produces bad user experience when an exception happens.
 ```ruby
 def create
