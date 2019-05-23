@@ -58,7 +58,7 @@ log level.
 def create
   post.save! #May fail due to database issues
 rescue SaveError => error
-log.debug "failed to save post #{error.message} #{error.backtrace.join}"
+  log.debug "failed to save post #{error.message} #{error.backtrace.join}"
 end
 ```
 
@@ -78,7 +78,7 @@ Lacks critical context such as files and line numbers that can help debugging.
 def create
   post.save! #May fail due to database issues
 rescue SaveError => error
-log.warn "failed to save post #{error.message}"
+  log.warn "failed to save post #{error.message}"
 end
 ```
 
@@ -89,8 +89,8 @@ fails in subsequent steps.
 def create
   post.save! #May fail due to database issues
 rescue SaveError => error
-log.warn "failed to save post #{error.message} #{error.backtrace.join}"
-return null
+  log.warn "failed to save post #{error.message} #{error.backtrace.join}"
+  return null
 end
 ```
 
@@ -101,7 +101,7 @@ making it difficult to locate the root cause.
 def create
   post.save! #May fail due to database issues
 rescue SaveError => error
-raise CustomSaveError.new('Failed to save the post')
+  raise CustomSaveError.new('Failed to save the post')
 end
 ```
 ## Wide handler
