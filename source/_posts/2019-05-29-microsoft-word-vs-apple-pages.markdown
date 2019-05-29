@@ -9,7 +9,7 @@ categories: "Design"
 ![MsWordVsApplePages](/images/WordsVsPages.png)
 Showing a Screenshot of Microsoft Word for Mac and Apple Pages
 
-This is what you get by default when you open a Blank document on both editors.
+This is what you get by default when you open a blank document on both editors.
 I love that Apple Pages puts a deep focus on the content. If you haven't used it, I'd
 recommend trying it out. I know Microsoft Word has a known face, so
 you're likely used to all the distractions that sorrounds the content.
