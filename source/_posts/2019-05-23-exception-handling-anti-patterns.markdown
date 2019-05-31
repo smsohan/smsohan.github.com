@@ -38,7 +38,7 @@ rescue => error
 end
 ```
 
-**Exceptions as if-else.** A line that causes exception introduces a sudden change in the control
+**Exceptions as if-else.** A line that causes an exception introduces a sudden change in the control
 flow of the code. As such, when exceptions are used as a logical
 operator, it can lead to confusions about the effect of an offending
 line.
