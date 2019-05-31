@@ -38,25 +38,23 @@ rescue => error
 end
 ```
 
-**Exceptions as if-else.** A line that causes an exception introduces a sudden change in the control
-flow of the code. As such, when exceptions are used as a logical
-operator, it can lead to confusions about the effect of an offending
-line.
+**Exceptions as if-else.** Exceptions mean something unexpected took
+place. If-else is used for logical known code paths. For example, when
+accepting an API request, invalid input data is often a known logical
+path. Using exceptions for it will trigger false alarms.
 
 ```ruby
 def create
-  post.created_at = Time.now
-  post.validate # It's a likely that some posts will be invalid
+  post = Post.new(params)
   post.save!
-  post.notify_users
-rescue => ValidationError
-  show_validation_error
+rescue ValidationError => error
+  log_exception(error)
 end
 ```
 
 **Destructive Wrapping.** A new exception is raised hiding the original exception. In such cases,
-if the exception is handled by the caller, critical context information
-is lost since the orignal stacktrace is no longer available.
+if the exception is handled by the caller, **critical context information
+is lost** since the orignal stacktrace is no longer available.
 ```ruby
 def create
   post.save! #May fail due to database issues
@@ -71,7 +69,7 @@ fine.
 def create(text:)
   if text == nil
     #Could just use pre-defined ArgumentError
-    raise EmptyTextException.new('Text can't be empty')   end
+    raise EmptyTextException.new("Text can't be empty")   end
   #...
 end
 ```
