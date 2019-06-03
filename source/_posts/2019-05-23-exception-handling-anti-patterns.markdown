@@ -6,11 +6,17 @@ comments: true
 categories: [Coding]
 ---
 
+![confusing road sign](/images/confusing_road_sign.jpg)
+
+<sub>
+Source: [Henry Burrows](https://www.flickr.com/photos/foilman/2803261256/in/photolist-5gHrUC-5YEVYt-ocZHz7-2bDb3w8-aCGGSo-cB9opW-dUUDRS-6qbnVw-ppkgWu-cYsKjw-4HSS8t-aAJCk5-XBWQ5q-cYsKDA-NNefT4-p8HF-bfJwPB-6SibT9-ubSQL-mvaYX-7uNS7V-473w41-HABo5-5SL6FL-2f4rrkN-SazHLx-2eaMrNW-2eaMsbQ-24J1WkB-24CQREz-24CQR5g-bvyvt7-RvjAiK-6asxLk-9zRJ1e-6zLy6Z-9yuCpf-24FpgMX-95dVq3-hERZkd-4JKe8s-hESYoP-hESYnX-4oPtJ8-6gvogb-5skgvk-4Pu7Hp-8AmdYp-2t55t-24FpgYt)
+</sub>
+
 Whenever faced with a production issue, I find exceptions to be an extremely useful
 information source. A careful look at an
 exeption has often led to quick discovery
 of the source of a trouble. On the flip side, I have also
-faced a lot of horror debugging sessions because of poor exception handling.
+faced a lot of chaotic debugging sessions because of poor exception handling.
 Here, I present the common anti-patterns that I recommend fixing while
 reviewing pull-requests. Most programmers are already familiar with the mechanics of exception
 handling. Yet, I see these anti-patterns everyday.
@@ -38,7 +44,7 @@ rescue => error
 end
 ```
 
-**Exceptions as if-else.** Exceptions mean something unexpected took
+**If-else Exceptions.** Exceptions mean something unexpected took
 place. If-else is used for logical known code paths. For example, when
 accepting an API request, invalid input data is often a known logical
 path. Using exceptions for it will trigger false alarms.
@@ -52,7 +58,7 @@ rescue ValidationError => error
 end
 ```
 
-**Destructive Wrapping.** A new exception is raised hiding the original exception. In such cases,
+**Wrapped Exception.** A new exception is raised hiding the original exception. In such cases,
 if the exception is handled by the caller, **critical context information
 is lost** since the orignal stacktrace is no longer available.
 ```ruby
@@ -63,7 +69,7 @@ rescue SaveError => error
 end
 ```
 
-**Unncessary Custom Exception.** Introducing custom exception when a pre-defined exception suits just
+**Useless Custom Exception.** Introducing a new exception type when a pre-defined exception suits just
 fine.
 ```ruby
 def create(text:)
@@ -74,7 +80,7 @@ def create(text:)
 end
 ```
 
-**Missing Cleanup.** Handling an error without cleaning system resources such as file
+**Leaky Handler.** Handling an error without cleaning system resources such as file
 handles, open network connections, can cause cascading system outage.
 
 ```ruby
@@ -99,7 +105,7 @@ rescue
 end
 ```
 
-**Handler Uses Inappropriate Log Level.** Similar to silent handler since most production apps run in non-debug
+**Debug-only Handler.** Similar to silent handler since most production apps run in non-debug
 log level.
 
 ```ruby
@@ -110,7 +116,10 @@ rescue SaveError => error
 end
 ```
 
-**Handler Logs Without Actual Exception Info.** Lacks critical error info that can help debugging.
+**Custom Message-only Handler.** Some exception handlers only log a custom
+message leaving the details of the exceptions. As a result, critical
+information is lost that can be very useful for debugging.
+
 ```ruby
 def create
   post.save! #May fail due to database issues
@@ -119,7 +128,7 @@ rescue SaveError
 end
 ```
 
-**Handler Logs Without Exception Stacktrace.** Without Stacktrace, it gets very difficult to trace the root of a
+**Message-only Handler.** Without Stacktrace, it gets very difficult to trace the root of a
 problem since often times exception handlers wrap a few lines of code.
 ```ruby
 def create
@@ -131,7 +140,8 @@ rescue NotFoundError => error # Could happen in line 2 or 4
 end
 ```
 
-**Handler Returns Nil or a Value.** Often the caller can't distinguish a successful vs. exception case and
+**Sneaky Handler.** Some exception handlers return nil or a value.
+The caller can't distinguish between a successful vs. exception case and
 fails in subsequent steps.
 ```ruby
 def create
@@ -143,8 +153,9 @@ end
 ```
 
 There are times when you intentionally have to use some of these
-anti-patterns. But those are rare. The most important concept with
-exceptions is to internalize the belief that good exception handling
-will lead your debugging adventure on a smooth path.
+anti-patterns. But those are rare. It's critical for the developers to
+think about the information that'd help in swiftly debugging a production problem. As such,
+developers must avoid the noise and provide all context information for
+errors to help diagnose potential system problems.
 
 Happy coding.
