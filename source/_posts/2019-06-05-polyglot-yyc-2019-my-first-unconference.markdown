@@ -47,7 +47,7 @@ just choose the technical topics without thinking twice. This is also a
 pattern in my recent blog posts or reading list.
 
 In the hiring session, I saw a positive attitude towards hiring remotes
-and treating them as equals. This is major mindset shift among the
+and treating them as equals. This is a major mindset shift among the
 community.
 
 In the individual contributor vs. management career path session, the
@@ -58,6 +58,6 @@ switch roles. And if things don't work out, it's totally possible
 to revert later.
 
 I'm looking forward to the 2020 edition of this event and may even prepare to
-come up with a good idea for the unconference. If you can join, please
+come up with a good idea for the unconference. If you can, please
 join us for the next round.
 
