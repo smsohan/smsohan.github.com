@@ -18,7 +18,7 @@ It was the first unconference style meetup I went to and this post
 is a summary of my day.
 
 About the attendees, I don't have the official count, but I imagine there were
-close to a hundred participants. Among us, quite a few
+close to a hundred people. Quite a few
 people represented the sponsor companies. The sponsors
 advertised for hiring new employees, mostly software engineers. On the
 other hand, I met a few people who joined this venue to talk to prospective employers.
@@ -40,10 +40,10 @@ Are You Not Innovating?". I did an internal presentation on this topic
 at Cisco and it was generally praised by my colleagues.
 
 My other observation is, between technical and soft-skill related
-topics, I liked the soft-skills ones better. For example, I found the topics on hiring,
-choosing a technical vs. managerial career path more interesting than
-the topics such as GraphQL and ReactJS. A few years ago, I would
-march along the technical topics without thinking twice. This is also a
+topics, I liked the soft-skill ones better. For example, I found the topics on hiring,
+choosing a technical vs. managerial career path to be more interesting than
+the topics such as GraphQL and ReactJS. A few years ago, I'd
+just choose the technical topics without thinking twice. This is also a
 pattern in my recent blog posts or reading list.
 
 In the hiring session, I saw a positive attitude towards hiring remotes
@@ -57,7 +57,7 @@ confused with career choice, individual contributors and managers should take th
 switch roles. And if things don't work out, it's totally possible
 to revert later.
 
-I'm looking forward to the 2020 edition of this event and may be even prepare to
+I'm looking forward to the 2020 edition of this event and may even prepare to
 come up with a good idea for the unconference. If you can join, please
 join us for the next round.
 
