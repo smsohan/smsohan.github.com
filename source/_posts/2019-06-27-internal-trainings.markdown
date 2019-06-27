@@ -14,7 +14,7 @@ Design Thinking course, Cisco Calgary Office, AB, 2019
 
 One benefit of working at Cisco is access to the many learning and development resources. Our learning and development org arranges hundreds of courses throughout the year. Moreover, we have a reimbursement program for external courses, conferences, books, and subscriptions to online learning programs and publications.
 
-In past 6 years, I have immensely benefitted from these resources. Here's a list of the learning resources I've used.
+In the past 6 years, I have immensely benefitted from these resources. Here's a list of the learning resources I've used.
 
 1. [Safari books online](https://learning.oreilly.com), aka O'Reilly learning: In the past 3 years, have taken 3 online trainings and 7 books on this platform so far.
 2. Design thinking, 2019: A two-day course taught by consultants about how to apply the principles of design thinking to communicate and derive solutions to complex problems.
