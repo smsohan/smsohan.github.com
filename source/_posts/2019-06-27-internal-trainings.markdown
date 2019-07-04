@@ -18,7 +18,7 @@ In the past 6 years, I have immensely benefitted from these resources. Here's a 
 
 1. [Safari books online](https://learning.oreilly.com), aka O'Reilly learning: In the past 3 years, have taken 3 online trainings and 7 books on this platform so far.
 2. Design thinking, 2019: A two-day course taught by consultants about how to apply the principles of design thinking to communicate and derive solutions to complex problems.
-3. Mindfulness, 2019: A 5-week program taught by consultants, with one hour in each week, where I learned about staying mindful and effective at work amid all the chaos that surrounds it.
+3. Mindfulness, 2019: A 5-week program taught by consultants, with one hour per week, where I learned about staying mindful and effective at work amid all the chaos that surrounds it.
 4. [Tufte one-day course](http://tufte.com), 2019: Attended a course taught by Edward Tufte on data visualization and learned about the principles that make compelling data visualization.
 5. [SANS incident response](https://www.sans.org/course/hacker-techniques-exploits-incident-handling), 2018: A packed week-long program where I learned to think like a hacker by learning about and then hacking some interesting vulnerabilities in systems.
 6. [Cisco R00tcamp](https://dcloud-cms.cisco.com/demo_news/cisco-r00tcamp-lab-v1), 2017: A packed week-long program where I learned hands-on pen-testing techniques to build more secure software.
