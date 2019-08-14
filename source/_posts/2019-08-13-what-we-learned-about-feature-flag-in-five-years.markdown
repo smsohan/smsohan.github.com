@@ -16,7 +16,7 @@ Photo credits to [Michael Newton](https://flic.kr/p/9yJU3j)
 
 Back in 2014, we were growing as a team, but wanted to keep working on a single shared code. We perceived  that the productivity gain of multiple teams working on a shared code would outweigh cross-team dependency issues. As we started working on multiple features in parallel, mostly independent with different release dates, we saw unfinished work on one feature was blocking the release of a completed one. After some research, we decided to introduce feature flags in our code. 
 
-First, we read [Martin Fowler's](https://martinfowler.com/bliki/FeatureToggle.html) article on this topic as a guideline. Today, we have 195 feature flags in production. Over time, we have extended the use of feature flags with new concepts and I wanted to document it here for everyone.
+First, we read [Martin Fowler's](https://martinfowler.com/bliki/FeatureToggle.html) article on this topic as a guideline. Today, **we have 195 feature flags in production**. Over time, we have extended the use of feature flags with new concepts and I wanted to document it here for everyone.
 
 1. **Database stored**: We store the feature flag in the main database so that the features can be toggled without needing a code deployment.
 2. **Cached**: Feature flag lookups are cached for performance.
