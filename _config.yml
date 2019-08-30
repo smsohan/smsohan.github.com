@@ -4,7 +4,7 @@
 
 url: http://smsohan.com
 title: "Sohan's Blog"
-subtitle: "Living the Developer's Life"
+subtitle: "Things I'm Learning"
 author: SM Sohan
 simple_search: http://google.com/search
 description: "Blog about Software and Technology"
@@ -16,7 +16,6 @@ description: "Blog about Software and Technology"
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
@@ -59,41 +58,7 @@ sidebar: collapse
 
 # Github repositories
 github_user: smsohan
-github_repo_count: 0
 github_show_profile_link: true
-github_skip_forks: true
-
-# Twitter
-twitter_user: smsohan
-twitter_tweet_count: 4
-twitter_show_replies: false
-twitter_follow_button: true
-twitter_show_follower_count: false
-twitter_tweet_button: true
-
-# Google +1
-google_plus_one: true
-google_plus_one_size: medium
-
-# Google Plus Profile
-# Hidden: No visible button, just add author information to search results
-googleplus_user: sohan39@gmail.com
-googleplus_hidden: false
-
-# Pinboard
-pinboard_user:
-pinboard_count: 3
-
-# Delicious
-delicious_user:
-delicious_count: 3
-
-# Disqus Comments
-disqus_short_name: smsohan
-disqus_show_comment_count: false
 
 # Google Analytics
 google_analytics_tracking_id: 'UA-37549931-1'
-
-# Facebook Like
-facebook_like: false

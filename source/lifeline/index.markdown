@@ -8,7 +8,10 @@ footer: true
 ---
 
 ## Interesting Milestones of my life!
+* PhD defence, October 2017
+* __Became a dad again__, Shera was born, May 2016
 * Started working at Cisco, November 2013
+* PhD enrolment, September 2013
 * __Became a dad__, Shopoth was born, April 2013
 * Started working at [Sourcefire](http://sourcefire.com), October 2012
 * Became a Permanent Resident in Canada, October 2012
