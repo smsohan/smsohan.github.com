@@ -14,7 +14,7 @@ Source: [Audrey on Flickr](https://flic.kr/p/pUW8f9)
 
 I think nobody knows how to stitch together an app with full-stack micro-services. I have the following open-questions if you disagree. Of course, if we could send people to moon, we could solve these problems. But the question is, is it worth and should your team  solve these problems? Especially, for small teams?
 
-1. How to render th UI from tens of independent micro-services into the same web page?
+1. How to render the UI from tens of independent micro-services into the same web page?
 2. How to ensure the JS and CSS libraries are compatible within all of the independent services?
 3. How to aggregate logs from the services to be able to trace a user / request / transaction?
 5. How to measure and reduce overall latency and spinner-fatigue?
