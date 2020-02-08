@@ -12,7 +12,7 @@ __Trust__ is only earned when it's mutual. Let's work with this shared belief.
 
 __Context__ is everything. Most importantly, show me __why__ we need to work on something. If the answer isn't clear in your mind, we can work together to build a crisp context.
 
-__Solutions__ for problems you're raising to help me respect your commitment. Ideally, you have thought about a few solutions with some measure of feasibility for each, and you come with an open mind to accept different ideas.
+__Solutions__ for problems you're raising to help me respect your commitment. Ideally, you've thought about a few solutions with some measure of feasibility for each, and you come with an open mind to accept different ideas.
 
 __Clarity__ in your evidence or explicitly calling out your assumptions. Assumptions are often essential to move ahead, but treating assumptions as evidence can be harmful.
 
