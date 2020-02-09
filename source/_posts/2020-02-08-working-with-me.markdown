@@ -12,12 +12,14 @@ __Trust__ is only earned when it's mutual. Let's work with this shared belief.
 
 __Context__ is everything. Most importantly, show me __why__ we need to work on something. If the answer isn't clear in your mind, we can work together to build a crisp context.
 
-__Solutions__ for problems you're raising to help me respect your commitment. Ideally, you've thought about a few solutions with some measure of feasibility for each, and you come with an open mind to accept different ideas.
+__Solutions__ for problems you're raising. Ideally, you've already thought about a few solutions with some measure of feasibility for each, and you come with an open mind. I know you care about the problem only if you spent some time thinking about a few solutions.
 
-__Clarity__ in your evidence or explicitly calling out your assumptions. Assumptions are often essential to move ahead, but treating assumptions as evidence can be harmful.
+__Clarity__ between your evidence and assumptions. Assumptions are often essential to move ahead, but treating assumptions as evidence can be harmful.
 
-__Output__ is the focus, our egos are not. That said, let's be mutually respectful.
+__Output__ is the focus, our egos aren't. That said, let's be mutually respectful.
 
-__Time__ is managed. Let's find a way so that our expectations and time management are aligned instead of blaming the shortage of time.
+__Time__ is managed. Let's manage our expectations given the time we have. Blaming the shortage of time shows a lack of skill.
 
-__Writing__ is a great thought exercise and good write-up scales infinitely. Let's write and rewrite our thoughts, specially when we feel unsure about those.
+__Writing__ is a great thought exercise and good write-up scales infinitely. Let's write and rewrite our thoughts, specially when we're unclear about those.
+
+If you have a similar list, I'd be happy to read and respect it. Please send along.
