@@ -22,4 +22,6 @@ __Time__ is managed. Let's manage our expectations given the time we have. Blami
 
 __Writing__ is a great thought exercise and good write-up scales infinitely. Let's write and rewrite our thoughts, specially when we're unclear about those.
 
+__Standup comedies, biography, soccer, politics, investment, tech, leadership, Netflix, movies, and similar topics__ are cool. Sorry, not much of a Hockey or Basket Ball fan. Mostly a passive music listener and happy to listen whatever is on radio or a YouTube playlist.
+
 If you have a similar list, I'd be happy to read and respect it. Please send along.
