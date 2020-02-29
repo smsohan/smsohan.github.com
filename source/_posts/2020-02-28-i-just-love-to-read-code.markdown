@@ -9,7 +9,7 @@ This week I took a couple of days to focus on my mid-thirties. It got me thinkin
 
 Thinking about how I spend my idle time, I realized that I missed two things that I actually love and spend a fair amount of time on: stock markets and reading open-source code.
 
-Ruby on Rails got me into the habit of reading code. Back in the day before bundler, the whole Ruby on Rails framework was in the plugins directory of our code. It had little documentation. A lot of methods accepted options as arguments, and looking at the source code was often the only way to find what options were available. However, that necessity soon turned into a hobby for me, and I keep reading source code of open-source projects just to have fun. GitHub mobile UI helps a lot.
+Ruby on Rails got me into the habit of reading code. Back in the day before bundler, the whole Ruby on Rails framework was in the plugins directory of our code. It had little documentation. A lot of methods accepted options as arguments, and looking at the source code was often the only way to find what options were available. However, that necessity soon turned into a hobby for me, and I keep reading source code of open-source projects just for fun. GitHub mobile UI helps a lot.
 
 To name a few, I read some part of the source code of Ruby on Rails, Ruby, RSpec, BackboneJS, ASP.NET MVC, Golang, UnderscoreJS, VueJS, ReactJS, Terraform, Chef, Jenkins, Lucene, ElasticSearch, Docker, and many other popular tools and libraries.
 
