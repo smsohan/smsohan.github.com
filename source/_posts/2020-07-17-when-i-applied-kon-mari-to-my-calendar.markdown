@@ -29,11 +29,11 @@ Second, I have shuffled my week such that I can have each day of the week organi
 
 Today, here’s how my weeks look like:
 
-1. Monday is planning day - web team planning.
-2. Tuesday is product day - to work on engineering problems related to our product roadmap.
-3. Wednesday is people day - one:one.
-4. Thursday is maker day - hands-on R&D.
-5. Friday is planning day - data team planning.
+1. **Monday is planning day** - web team.
+2. **Tuesday is product day** - to work on engineering problems related to our product roadmap.
+3. **Wednesday is people day** - one:one.
+4. **Thursday is maker day** - hands-on R&D.
+5. **Friday is planning day** - data team.
 
 Because our teams plan for two-week cycles, I have a decent amount of free spots on Monday and Friday every other week. This allows me to help the team, mostly with pair programming or discussing potential solutions to imminent problems. Also, it frees up space for ad-hoc meetings and hiring activities.
 
