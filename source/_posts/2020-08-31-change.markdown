@@ -32,7 +32,7 @@ At this stage, both the manager and the team are in a deadlock, each party   fai
 
 ## The Checklist
 
-Here's a checklist that I'm following myself as a manager as I'm trying to orient my teams from technology driven teams to more full-stack product mission oriented teams:
+Here's a checklist I'm following myself as a manager as I'm trying to orient my teams from technology driven teams to more full-stack product mission oriented teams:
 
 1. Motivate the team with a why. *e.g. Go from tech-oriented teams to product mission teams so that all of you can deliver products to customers...*
 2. Listen to the team. Multiple one on one sessions if needed. *e.g. Let's discuss about your concerns regarding tech debt with this change...*
