@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="I was so happy with NMock to see how it can dynamically generate mocks of interfaces and also gives me a fluent interface to write expectations and &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/page/22/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/20/solution-to-problem-with-creating-mocks/">A Solution to the Problem With Creating Mocks for Interfaces With Generic Methods With NMock</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-20T00:00:00-06:00" pubdate data-updated="true">Mar 20<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I was so happy with NMock to see how it can dynamically generate mocks of interfaces and also gives me a fluent interface to write expectations and everything it does to help me in unit testing!<br /><br />However, I could not generate dynamic mocks for interfaces with Generic methods and it kept showing me the &#8216;TypeLoadException&#8217; on and on. My interface looks like the following -<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">interface </span>IObjectFactory</span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    T    GetObject</span><t><span style="font-family:courier new;">(<span style="color: rgb(51, 51, 255);">string </span>id);</span><br /><span style="font-family:courier new;">}</span><br /><br />As I failed to create a mock implementation of this interface using NMock, I just wrote a mock implementation myself, which looks like the following<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">class </span><span style="color: rgb(51, 204, 255);">MockObjectFactory</span>: <span style="color: rgb(51, 204, 255);">IObjectFactory</span></span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span><span style="color: rgb(51, 204, 255);">Type </span>RequestedObjectType;</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span>string RequestedObjectId;</span><br /><span style="font-family:courier new;">    public T    GetObject</span><t><span style="font-family:courier new;">(string id)</span><br /><span style="font-family:courier new;">        {</span><br /><span style="font-family:courier new;">                RequestedObjectType = typeof(T);</span><br /><span style="font-family:courier new;">        RequestedObjectId = id;</span><br /><span style="font-family:courier new;">        return new Mockery().NewMock</span><t><span style="font-family:courier new;">();</span><br /><span style="font-family:courier new;">    }</span><br /><span style="font-family:courier new;">}</span><br /><br /><br />And in my test code, just injected the above mock implementation of the IObjectFactory where needed. So, although NMock cannot handle mocking of this type of an interface now, you can actually create a mock implementation and use NMock inside the implementation to help you.</t></t></t></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/18/verify-correct-datetime-data-in-method/">Verify Correct DateTime Data in Method Call Using NMock</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-18T00:00:00-06:00" pubdate data-updated="true">Mar 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Recently I was writing unit test for a method of the following signature<br /><br /><span style="color: rgb(0, 0, 255);font-family:Courier New;">interface <span style="color: rgb(61, 133, 198);">ICache</span><br /><span style="color: rgb(0, 0, 0);">{</span><br /> void </span><span style="font-family:Courier New;">Insert(</span><span style="color: rgb(0, 0, 255);font-family:Courier New;">string </span><span style="font-family:Courier New;">key, </span><span style="color: rgb(0, 0, 255);font-family:Courier New;">object </span><span style="font-family:Courier New;">value, </span><span style="color: rgb(61, 133, 198);font-family:Courier New;">DateTime</span><span style="font-family:Courier New;"> absoluteExpiration, </span><span style="color: rgb(111, 168, 220);font-family:Courier New;">TimeSpan</span><span style="font-family:Courier New;"> slidingExpiration);<br />}<br /><br /><span style="font-family:Verdana;">and I wanted to verify the following call -</span><br /><br />Insert(<span style="color: rgb(102, 0, 0);">&#8220;key&#8221;</span>, <span style="color: rgb(102, 0, 0);">&#8220;value&#8221;</span>, <span style="color: rgb(61, 133, 198);">DateTime</span>.Now.AddMinutes(30), <span style="color: rgb(111, 168, 220);">TimeSpan</span>.Zero);<br /><br /><br /><span style="font-family:Verdana;">However, you readily see the problem in verifying with the above call for the presence of </span></span><span style="font-family:Courier New;"><span style="color: rgb(61, 133, 198);font-family:Verdana;">DateTime</span><span style="font-family:Verdana;">.Now.AddMinutes(30) in the argument. So, a test method like the following won&#8217;t work for obvious reason.</span><br /><span style="color: rgb(61, 133, 198);">ICache </span>cache = _mocks.NewMock&lt;<span style="color: rgb(61, 133, 198);">ICache</span>&gt;();<br /><span style="color: rgb(61, 133, 198);">Expect</span>.Once.On(cache).Method(&#8220;Insert&#8221;).With(<span style="color: rgb(204, 0, 0);">&#8220;key&#8221;</span>, <span style="color: rgb(204, 0, 0);">&#8220;value&#8221;</span>, DateTime.Now.AddMinutes(30), TimeSpan.Zero);<br /></span><br /><br /><span style="font-family:Verdana;">The reason that the above sample code wont work is, my test code called DateTime.Now.AddMinutes(30) before the production code actually did it. So, it is highly probable that the two version of DateTime.Now.AddMinutes(30) in the test code and production code are not same.<br /><br />To find a work around to this problem, I changed my assumption a little. I set my assumption that the value for the &#8217;</span><span style="font-family:Courier New;"><span style="font-family:Verdana;">absoluteExpiration&#8217; parameter must lie in between 29 and 31 minutes from now. So, I modified my test method like the following call-</span><br /><br /><span style="color: rgb(11, 83, 148);">Expect</span>.Once.On(cache).Method(<span style="color: rgb(204, 0, 0);">&#8220;Insert&#8221;</span>).With(<span style="color: rgb(204, 0, 0);">&#8220;key&#8221;</span>, <span style="color: rgb(204, 0, 0);">&#8220;value&#8221;</span>, Is.NotNull &amp; Is.AtLeast(DateTime.Now.AddMinutes(29)) &amp; Is.AtMost(DateTime.Now.AddMinutes(31)), TimeSpan.Zero);<br /><br /><span style="font-family:Verdana;">This advanced level of NMock usage may show you a way in similar needs. For more insight to this solution, you may wish to visit </span><a style="font-family: Verdana;" title="http://nmock.org/advanced.html" target="_blank" href="http://nmock.org/advanced.html" id="bo.8">http://nmock.org/advanced.html</a><br /><br /><br /></span><span style="font-family:Courier New;"><br /></span></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/16/mock-internal-interface-with-nmock2-use/">Mock Internal Interface With NMock2 - Use InternalsVisibleToAttribute</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-16T00:00:00-06:00" pubdate data-updated="true">Mar 16<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Yesterday I badly needed to create mocks for my internal interfaces. I am using NMock2 as a Mocking framework and found it really difficult to produce Mocks for internal interfaces. After some &#8216;google time&#8217; and investigation I found that you need the following two lines in your AssemblyInfo.cs to achieve this purpose-<br /><br /><span style="font-family:courier new;">[<span style="color: rgb(51, 51, 255);">assembly<span style="color: rgb(0, 0, 0);">:</span></span> <span style="color: rgb(0, 204, 204);">InternalsVisibleTo</span>(<span style="color: rgb(153, 0, 0);">&#8220;Mocks&#8221;</span>)]</span><br /><span style="font-family:courier new;">[<span style="color: rgb(51, 51, 255);">assembly<span style="color: rgb(0, 0, 0);">:</span></span> <span style="color: rgb(0, 204, 204);">InternalsVisibleTo</span>(<span style="color: rgb(153, 0, 0);">&#8220;MockObjects&#8221;</span>)]<br /><br /><span style="font-family:verdana;">Where are the two assemblies? I found that these two assemblies are dynamically created by NMock2 for mocking your interfaces.</span><br /><br /><span style="font-family:verdana;">To find out the truth yourself, just put a breakpoint and watch the value of the following line-<br /><br /></span><span style="color: rgb(0, 204, 204);">AppDomain</span>.CurrentDomain.GetAssemblies()<br /><br /><span style="font-family:verdana;">You should see the two assemblies in the list of the assemblies in the current application domain.</span><br /><br /><span style="font-family:verdana;">I found it interesting. I wish someone of you might find it useful too!</span><br /><br /><span style="font-family:verdana;">Note: You may still need to add InternalsVisibleTo attribute for your test assembly with the above two declarations.</span><br /></span></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Urs</div>
+<div class='content'>
+I&#8217;ll add this information to the documentation I&#8217;m currently writing for NMock2 (http://sourceforge.net/projects/nmock2/)<BR/><BR/>Happy mocking<BR/>Urs</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/15/unity-dependency-injection-framework/">Unity - a Dependency Injection Framework From Microsoft Patterns and Practices</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-15T00:00:00-06:00" pubdate data-updated="true">Mar 15<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I have been using Spring.Net for implementing Dependency Injection in my .Net projects. Spring is already one of the most known providers of DI in the Java world and a port to .Net actually eased the lives of people like me who are willing to develop unit-testable software.<br /><br />However, with all the happiness enjoyed through Spring.Net, I guess its time to take a look into Unity. I have only started using this and I found it interesting in the sense that its more of .Net flavored with a few attributes and fluent interfaces.<br /><br />I hope to post a few concrete examples on Unity implementation soon. However, you may wish to take a look at <a href="http://www.codeplex.com/unity">http://www.codeplex.com/unity</a> in the meanwhile and let me know your comments on this new application block by Microsoft Patterns and Practices group.</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/11/testing-internal-class-in-net-c/">Testing Internal Class in .Net C#</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-11T00:00:00-06:00" pubdate data-updated="true">Mar 11<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I have been to a situation where only a small number of classes had been declared as <span style="color: rgb(0, 0, 102);font-family:courier new;">public</span> classes in an assembly. And most of the classes are declared as<span style="color: rgb(0, 0, 153);font-family:courier new;"> internal</span>, because I wanted to expose only the public classes to the consumers of my assembly.<br /><br />However, doing so creates another challenge in testing the <span style="color: rgb(0, 0, 153);font-family:courier new;">internal</span> classes. As we most commonly want our test codes to reside on a separate assembly so that we can leave that assembly out when we are releasing the end product. And the internal access control would makes it difficult to write unit tests for these classes.<br /><br />One workaround to this problem is to keep the test classes in the same assembly so that the test class has access to the internal class. However, to leave out these test classes from release configurations, we need to apply a <span style="font-weight: bold;">conditional compilation</span> for these files.<br /><br />However, this is a pessimistic or short cut solution to the real problem. We actually want to test an internal class from another assembly (the test assembly) and don&#8217;t want to go through reflection or other less intuitive paths.<br /><br />I just found that, adding the following assembly attribute in the AssemblyInfo.cs may do the trick.<br /><span style="font-weight: bold;"><br /><span style="color: rgb(255, 0, 0);font-family:courier new;">[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(&#8220;TestAssemblyName&#8221;)]</span></span><br /><br />Adding this attribute will make the assembly&#8217;s internals visible to the assembly thats specified in the argument.<br /><br />So, once this attribute is added to an assembly, the test assembly treats the internal classes just as other public ones and need not worry about access protection problems.</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Its good to see such an old post still helps people!</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+Thanks a great deal!</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks @romitch!</div>
+</div>
+<div class='comment'>
+<div class='author'>romitch</div>
+<div class='content'>
+Very helpful. Thanks for the hint</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+excellent tip!</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+You are welcome!</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+Thanks worked great in my projects!</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/08/what-does-scrum-master-do/">What Does a Scrum Master Really Do?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-08T00:00:00-07:00" pubdate data-updated="true">Mar 8<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Hmm! I am now a CSM (Certified Scrum Master) after two days of training with CST Pette Deemer.<br /><br />You want to congratulate me! Lets congratulate me first-<br /><span style="font-weight: bold;">You: </span>Congratulations! It&#8217;s really a great news! How does it feel to be a CSM?<br /><span style="font-weight: bold;">Me:</span> Greaaaaaaaat! You know, its so cool that my profile gets a CSM on it!<br /><span style="font-weight: bold;">You:</span> Oh Sohan! I am so sure that you will contribute more at the company?<br /><span style="font-weight: bold;">Me: </span>Yeah, I surely will. I just need a product owner and a team with me to contribute!<br /><br /><span style="color: rgb(51, 51, 51);">(Now that I am so good with the certificate let me be your teacher on &#8216;Scrum Master&#8217;ing)</span><br /><br />Well, I have been following SCRUM for almost two years in my team and we had a lot of questions in our minds regarding the process. Some of the questions are answered and some are not. But to be very positive, the outcome of the training is good. It clears the philosophy behind SCRUM and also creates a clear vision on why one should follow SCRUM. I will be going on a question answer mode that closely resembles my learning at the training.<br /><br /><span style="font-weight: bold;">Q:</span> <span style="color: rgb(255, 102, 0);">Is scrum master a part of the daily scrum meeting?</span><br /><span style="font-weight: bold;">A: </span>Yes, he is involved, but stays outside the team&#8217;s SCRUM cycle and takes note whenever someone points out to anything that is a hurdle before the team in meeting sprint commitment.<br /><br /><span style="font-weight: bold;">Q:</span><span style="color: rgb(255, 102, 0);"> So, is Scrum Master is a lead role?</span><br /><span style="font-weight: bold;">A:</span> No. Its rather a helper role to the team.<br /><br /><span style="font-weight: bold;">Q:</span><span style="color: rgb(255, 102, 0);"> Is it possible that Scrum Master is not co-located with the team?</span><br /><span style="font-weight: bold;">A:</span> Generally its bad. It seems unlikely that she can remove blocks from heaven (the distant is always a heaven!).<br /><br /><span style="font-weight: bold;">Q:</span> <span style="color: rgb(255, 102, 0);">What are the core responsibilities of the Scrum Master?</span><br /><span style="font-weight: bold;">A:<br /></span><span>Help team to follow SCRUM.</span><span style="font-weight: bold;"><br /></span>Do anything to remove blocks reported by the team.<br />Do nothing to create any block for the team.<br />Update the Burn Down charts, the &#8216;Not Started, Started, Completed&#8217; board and other progress indicator &#8216;things&#8217;.<br />Facilitate the team in meetings - avoid unnecessary time loss meetings, manage meeting place and things like laptop, projector, mic and sound systems&#8230; all that it takes for the team to have a potentially meaningful and quick meeting.<br /><br /><span style="font-weight: bold;">Q:</span> <span style="color: rgb(255, 102, 0);">Is Scrum Master part of the team?</span><br /><span style="font-weight: bold;">A:</span> Well, it depends. If the team is small and doesn&#8217;t need/cannot afford a full time scrum master, someone from the team may take on this responsibility. But, a dedicated one is most likely to be effective.<br /><br /><span style="font-weight: bold;">Q: </span><span style="color: rgb(255, 102, 0);">What should be the bullet points of the Scrum Master&#8217;s characteristics?</span><br /><span style="font-weight: bold;">A:</span> Helping, self-motivated and feels comfortable to help people on any sort of problem.<br /><br /><span style="font-weight: bold;">Q:</span> <span style="color: rgb(255, 102, 0);">Enough is Enough. What else do you know about Scrum Master?</span><br /><span style="font-weight: bold;">A:</span> Hmm&#8230; Scrum Master is not executed if the team does not meet their commitment (unless  its  because of the fact that the Scrum Master wasn&#8217;t able to remove blocks). Scrum Master always guards the team from product owner&#8217;s pressure and change requests in the middle of sprints.<br /><br />I could have a longer list of Q &amp; A that I have actually learned at the training. But I am not going to do that partly because, I have only a few readers (namely I, me, myself and Sohan) in my blog and partly because I do not see comments on my posts too often.<br /><br />So, if you have read this and really think you want to know more, energize me with your comments and questions :-). I will be really glad to share my learnings with you.</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>hasan</div>
+<div class='content'>
+hi sohan bhai,<BR/>nice to see you on blog, you have a lot of nice posts.<BR/>anyway, keep your thought flooding over the blog.<BR/><BR/>best of luck</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/02/13/preserve-ownership-mode-and-other/">Preserve Ownership, Mode and Other Attributes While Copying in Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-13T00:00:00-07:00" pubdate data-updated="true">Feb 13<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I dare not say, I am savvy at Linux :-)<br /><br />Recently, I ran into a problem where I found that upon executing a copy command, my source and destination files had different permissions and attributes (i-nodes), but I badly needed the permissions to be preserved in the destination files/folders. The following command will preserve the attributes -<br /><br /><span style="font-weight: bold; color: rgb(0, 0, 153);font-family:courier new;">cp -p source destination</span><source><span style="font-weight: bold; color: rgb(0, 0, 153);font-family:courier new;"> </span><destination><br /><br />here, the switch p (-p) does the trick, it preserves the permissions, modes and other attributes to resemble the source.<br /><br />Hope this helps some of you with similar needs!</destination></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/02/05/c-keyword-yield-return-i-find-it/">C# Keyword &#8216;Yield Return&#8217; - I Find It Interesting</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-05T00:00:00-07:00" pubdate data-updated="true">Feb 5<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I have been using yield return in some of my codes and would like to share its interesting aspects. The following code example shows one dummy use of &#8216;yield return&#8217;-<br /><br /><pre lang="cs"><br /><span style="font-family:courier new;">public class YieldExample</span><br /><span style="font-family:courier new;">{</span><br /><br /><span style="font-family:courier new;">    public void Run()</span><br /><span style="font-family:courier new;">    {</span><br /><span style="font-family:courier new;">              IEnumerator</span><int style="font-family: courier new;"> numbers = getNumbers().GetEnumerator();<br />          while (numbers.MoveNext())<br />          {     <br />                  Console.Write("x{0} ", numbers.Current);<br />          }<br />}<br /><br />private IEnumerable<int> getNumbers()<br />     {<br />         for (int i = 0; i <></int></int></pre><br />Now, a code like new YieldExample().Run() would produce a output similar to this - <pre lang="cs"> "x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 x8 y8 x9 y9"  </pre>This output is certainly a little unusual but this is what &#8216;yield return&#8217; is used for.<br /><br />In a line, whenever you place a yield return statement, the control goes back to its caller. However, on the next call, program execution starts from the line immediate to the &#8216;yield return&#8217; line. This can be used to avoid initializing/memorizing a collection of data if it makes sense to use them one after another and requires to move to control back and forth the iterator. <div id="answer" style="display: none;"><br />x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 x8 y8 x9 y9<br /></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/02/04/c-30-anonymous-types-actual-type/">C# 3.0 Anonymous Types - Actual Type Depends on the Order of the Property Assignnments</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-04T00:00:00-07:00" pubdate data-updated="true">Feb 4<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I learned that the anonymous types in C# 3.0 has got a good feature that, if you have two anonymous declarations with the same signature, then you create only one anonymous type and have two instances of the type.<br /><br />So, a code fragment like the following is perfectly valid and passes all compiler warnings/errors-<br /><br />            var anon    = new { FirstName = &#8220;first&#8221;, Age = 21 };<br />            var anon2   = new { FirstName = &#8220;first&#8221;, Age = 26 };<br />           <br />            //this is OK<br />            anon = anon2;<br /><br />Now, lets take a look into the following code fragment-<br /><br />            var anon    = new { FirstName = &#8220;first&#8221;, Age = 21 };<br />            var anon3   = new { Age=16, FirstName = &#8220;first2&#8221;};<br />           <br />            //this doesn&#8217;t compile<br />            anon = anon3;<br /><br />So, its evident that the anonymous types are created on the order of the assignments of the properties. However, from my little experience and understanding, I think if this dependency on the exact order wasn&#8217;t there, then it would make more sense.</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/12/02/unit-testing-void-methods-part-2/">Unit Testing Void Methods - Part 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-02T00:00:00-07:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">             </p> <p class="western" style="margin-bottom: 0.14in;" lang="">        Dissection of <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#0000ff;">void</span></span></span></span> Methods with parameters<br /><br />Methods with void return types incur complexities in writing unit tests. So, we need to characterize the void methods to make sure we have guards against the odds for testability.<br />For example, the following is a void method with parameters<br /></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">        <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> DoSomething(SomeType obj, SomeOtherType objOther)</span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">         <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">{</span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //1.modifies some member variables</span></span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#0000ff;">    this</span>.someMemberVariable = 10;</span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //2.Calls methods of the same class or other classes</span></span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">             <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">    someOtherClass.SomeOtherMethod(someArg);</span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //3.Sometimes throws exception</span></span></span></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">             <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">   <br /></span></span></p>  <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //4.Modifies call by reference type argument objects</span></span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">       <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">obj.SomeProperty = objOther.GetResultOfSomeAction();</span></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="font-family:Courier New, monospace;"><span style="font-size:85%;">    objOther.DeleteSomething();</span></span><br /></p><p class="western" style="margin-bottom: 0.14in;" lang=""><span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">}</span></span></span></span></p><br /><p class="western" style="margin-bottom: 0.14in;" lang="">Unit test examples for all the scenarios other than 4 are discussed in Part -1 of this article.<br /></p>d. In such cases, the unit test assertions are made to test against the expected value of the supplied argument objects after the method is invoked.<br /><p class="western" style="margin-bottom: 0.14in;" lang=""><br /></p><p class="western" style="margin-bottom: 0.14in;" lang=""><br /></p><p class="western" style="margin-bottom: 0.14in;" lang=""><br /></p></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/23/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/21/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

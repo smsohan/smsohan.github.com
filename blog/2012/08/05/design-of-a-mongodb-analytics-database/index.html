@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Design of a MongoDB Analytics Database - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="We built a MongoDB based realtime analytics solution and learned a few things in the process. I would like to share some of our learnings in this &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2012/08/05/design-of-a-mongodb-analytics-database/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Design of a MongoDB Analytics Database</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T17:38:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>We built a MongoDB based realtime analytics solution and learned a few things in the process. I would like to share some of our learnings in this post.</p>
+
+<p>When tasked to find a good database for holding realtime analytics data, I was searching through the wisdom of internet to come up with a good choice. At a high level, the database needed to deliver the following:</p>
+
+<ol>
+<li>Atomic counters so that events could be counted fast. For example, count up the Total Sales metric for each sale event.</li>
+<li>Unique sets. For example, unique set of buyers who bought anything today.</li>
+<li>Simple lookups. For example, when a sale happens, it needs to lookup the original price to calculate the profit on the fly.</li>
+<li>Indexing on multiple fields. For example, a product lookup may be by its ID as well as by a combination of other fields.</li>
+<li>Fast at doing 1-4, so it can keep up with the event stream in realtime.</li>
+</ol>
+
+
+<p>It became pretty clear that, the internet was favoring either Redis or MongoDB for such requirements. I did a little spike using both, and settled down on MongoDB. This was becauase, MongoDB had better support for performing lookups and indexing. Also, the document oriented nature of MongoDB suited well with the Object Oriented models, leaning towards a more direct match between the two worlds. Redis is awesome for doing increments and set operations, but it would require some application level handling of OO -> DB interfacing as well as intelligent lookups. So, MongoDB was the winner for the job.</p>
+
+<p>If you&#8217;ve watched the video at <a href="http://www.10gen.com/events/analytics-with-mongodb">the mongodb blog</a> you know it&#8217;s quite straight forward to design a document for holding realtime analytics data.</p>
+
+<blockquote><p>The key design goal is: precopute the metrics in the required aggregation levels.</p></blockquote>
+
+<p>This design goal is applicable to pretty much all reporting/dashboarding projects. Since it&#8217;s common to aggregate different types of data on a dashboard, without precomputing the results, it would test anyone&#8217;s patience before the report is ready. In our case, the dashboard mostly displays data for the day in realtime. So, a simplified text only view would display the following:</p>
+
+<pre>
+###Sunday, August 5, 2012
+
+* Total Sold: 2,500
+* Total Profit: $ 1,345,427
+* Proft Margin: 5.09%
+* Buyers: 311
+* Sellers: 126
+
+####Online
+
+* Total Sold: 400
+* Total Profit: $ 98,762
+* Proft Margin: 7.1%
+* Buyers: 114
+* Sellers: 28
+
+####In Stores
+
+* Total Sold: 2,100
+* Total Profit: $ 124,666,5
+* Proft Margin: 4.91%
+* Buyers: 257
+* Sellers: 110
+</pre>
+
+
+<p>As discussed above, for a faster (and sane!) response time, the data better be precomputed in the database. So, to hold this precomputed data, we have designed a document like the following example:</p>
+
+<pre>
+metric: {
+  event_date: '2010/08/05',
+  channel: 'online',
+  total_sold: 2100,
+  total_buying_price: 112,567,432,
+  total_selling_price: 123,875,127,
+  buyers: ['buyer 1', 'buyer 2'],
+  sellers: ['seller 1', 'seller 2']
+}
+</pre>
+
+
+<p>And there is a document like this for each channel, for each day. This simple document is suitable for producing the desired report. Of course, in the real project, we need more data points in the report as well as aggregation levels beyond just a day and a channel. And you guessed it right, we have a document like this example one for each required aggregation level.</p>
+
+<p>This design has held pretty well for our project. This is simple, there&#8217;s a direct match between what is shown and what is stored. The data is already grouped, so queries simply fetch the documents without needing to perform any major computation on the fly. This model makes it trivial to add a new data point, as well as a new reporting aggregation level.</p>
+
+<p>But the challenge is to make sure we can in fact keep a document like this up-to-date as events happen in realtime without falling behind. Let&#8217;s talk about it in the upcoming post.</p>
+
+<p>If you haven&#8217;t had a chance to read the previous post in this series, here&#8217;s a link to <a href="http://blog.smsohan.com/blog/2012/07/28/deploying-to-TV-screens/">Deploying to TV Screens</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T17:38:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/architecture/'>Architecture</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/28/deploying-to-TV-screens/" title="Previous Post: Deploying to TV Screens">&laquo; Deploying to TV Screens</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/08/07/deploying-a-java-application-using-capistrano/" title="Next Post: Deploying a Java Application Using Capistrano">Deploying a Java Application Using Capistrano &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

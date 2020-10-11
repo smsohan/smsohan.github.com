@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Development Environments and Dependency Hell - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="It used to be pretty straight forward to get up and running with a Rails app. You&#8217;d expect something like the following: 1
+2
+3
+4
+5
+git clone &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2012/10/25/development-environments-and-dependencies-hell/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Development Environments and Dependency Hell</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-25T21:51:00-06:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>It used to be pretty straight forward to get up and running with a Rails app. You&#8217;d expect something like the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git@blah/blah.git
+</span><span class='line'><span class="nb">cd </span>blah
+</span><span class='line'>bundle
+</span><span class='line'>rake db:migrate
+</span><span class='line'>rails s
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the project is using rvm and bundler, the ruby versions and gem depdendencies are all taken care of. So far life is good this way.</p>
+
+<p>But it starts getting complicated. For example, your project probably uses MySQL and no matter what, I can&#8217;t remeber all the c libraries that are pre-requisites for the mysql2 gem to actually install successfully. If it uses Nokogiri, get another hit of all the who-knows-what libxml2* libraries that need to be there. Another gem quite commonly used is rmagick with similar c depdencies. Every time I hit these road blocks, I feel so helpless for:</p>
+
+<ul>
+<li>I have no idea what is required</li>
+<li>Someone on StackOverflow has a magical solution</li>
+<li>The solution will work on one unix distro but won&#8217;t on others</li>
+</ul>
+
+
+<p>This starts getting even more complicated as you start adding external project depdendencies. For example, your project will probably need some Queueing, Caching, Emailing, SOA integration etc. And even if you have very good tests, it&#8217;s likely that you&#8217;d want to manually test to see if your project holds up when integrated to other projects. It&#8217;s best to have all these third-party products in your dev box for obvious reasons. But its also super hard to keep everything in sync, because</p>
+
+<ul>
+<li>You&#8217;d have to automate the installation of all the third-party products in your dev box</li>
+<li>Find a mechanism to update the third-party projects as they change</li>
+</ul>
+
+
+<p>To tackle these problems, teams often use Chef/Puppet/Powershell/Vagrant etc. infrastructure automation tools. In practice, I&#8217;m yet to find a project where these tools would just work in a single pass. For example, it would miss one package or the other, sometimes it would fail at halfway, sometimes it would get you pretty close but almost never I have seen it to work on a single pass. I find this to be a recurring problem, faced by almost all dev teams.</p>
+
+<h2>One solution I think may work is as follows:</h2>
+
+<pre><code>1. Teams from each project writes their own bootstrap scripts, so others can just use it
+2. The bootstrap script runs on a CI server and fails a commit if it breaks the bootstrap
+3. Nobody runs a manual command ever for bootstrapping the dev machines
+</code></pre>
+
+<p>I&#8217;m yet to try this approach in practice. But too many times I&#8217;ve seen there&#8217;s only one/couple people writing the bootstrapping scripts for all projects. Also, nobody really finds the issues until a new dev box needs bootstrapping. A CI server would be a big push to keep it green all the time. And finally, everytime a one-off command is run for bootstrapping, a little part of automation opportunity is missed.</p>
+
+<p>If you&#8217;ve had success with these problems, please share. I&#8217;d really like to learn from you and hopefully implement some of your proven practices/principles.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-25T21:51:00-06:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/software/'>Software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/22/pairing-vs-code-reviews/" title="Previous Post: Pair Programming vs. Code Reviews">&laquo; Pair Programming vs. Code Reviews</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/11/06/orm-or-not/" title="Next Post: ORM or Not?">ORM or Not? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

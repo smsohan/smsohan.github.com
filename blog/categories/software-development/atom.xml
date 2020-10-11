@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Software Development | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/software-development/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[“Ah, how good it is to be among people who are reading.”]]></title>
+    <link href="http://smsohan.com/blog/2019/04/11/ah/"/>
+    <updated>2019-04-11T15:29:00-06:00</updated>
+    <id>http://smsohan.com/blog/2019/04/11/ah</id>
+    <content type="html"><![CDATA[<blockquote><p>Rainer Maria Rilke</p></blockquote>
+
+<p>All creators take a deep interest in the creations of others. All
+filmmakers watch a lot of movies, all good writers are also the most
+prolific readers, all artists can talk at length about the smallest
+pieces of art they have seen.</p>
+
+<p>We, software developers, if we want to claim ourselves as the artists of
+this craft, we must be prolific readers of code. There's been no better
+time as today. We have immediate access to millions of lines of carefully
+written code out there in the internet. Just like artists of any craft,
+I've had so much fun spending time with my fellow developers that read
+code for the pure joy of learning something new.</p>
+
+<p>Just had so much fun reading <a href="https://github.com/rails/rails/blob/master/activesupport/lib/active_support/core_ext/array/inquiry.rb">this ruby</a>
+code today from the Ruby on Rails project:</p>
+
+<p>```ruby
+class Array
+  # Wraps the array in an +ArrayInquirer+ object, which gives a friendlier way
+  # to check its string-like contents.
+  #
+  #   pets = [:cat, :dog].inquiry
+  #
+  #   pets.cat?     # => true
+  #   pets.ferret?  # => false
+  #
+  #   pets.any?(:cat, :ferret)  # => true
+  #   pets.any?(:ferret, :alligator)  # => false
+  def inquiry</p>
+
+<pre><code>ActiveSupport::ArrayInquirer.new(self)
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>The beautify of this rich API is an art. I love it. You may have
+different opinions. But I hope you find your love of art in code.
+There's plenty of art in code out there for everyone to enjoy.</p>
+]]></content>
+  </entry>
+  
+</feed>

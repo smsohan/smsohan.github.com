@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ASP.Net | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/asp-net/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Social Helpers in ASP.Net MVC3 (Facebook, Twitter, Gravatar etc.)]]></title>
+    <link href="http://smsohan.com/blog/2011/01/14/social-helpers-in-aspnet-mvc3-facebook/"/>
+    <updated>2011-01-14T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2011/01/14/social-helpers-in-aspnet-mvc3-facebook</id>
+    <content type="html"><![CDATA[<div class='post'>
+This site shows the examples!<br /><a href="http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site">http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site</a><br /><br />Now, the social links and buttons are no longer from a third-party source, its straight from Microsoft. I don't know if this is first-party or second-party :p</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DRY - Total 161 Duplicate ArgumentNullException calls in ASP.Net MVC Source Code]]></title>
+    <link href="http://smsohan.com/blog/2010/12/13/dry-total-161-duplicate/"/>
+    <updated>2010-12-13T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2010/12/13/dry-total-161-duplicate</id>
+    <content type="html"><![CDATA[<div class='post'>
+There are 161 occurrences of the following code pattern inside the ASP.Net MVC source code: See details of which class and which line at&nbsp;<a href="https://gist.github.com/739523">https://gist.github.com/739523</a><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">method(type argument)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">{</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp;if(argument == null){</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp; &nbsp;throw new ArgumentNullException("argument")</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp;}</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;"><br /></span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">...</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">}</span></span><br />So, in total this pattern introduces 312 lines of duplicate code without whitespaces and 644 lines of duplicate code including whitespaces. And the pattern is simple, just check a condition and throw exception if its true. Not to mention, there are numerous other duplications where <span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">string.IsNullOrEmpty</span></span> is used to check for string arguments.<br />This observation is interesting to me. Since, I think it adds a lot of noise to the code. In fact, if you randomly look at any of the methods - you have a good chance of seeing the first few lines doing this exactly similar thing. And this adds noise to me. Not to mention that, the developer needs to write the code, write tests for this code and if one needs to use this method, somehow should know this in advance that passing a null will result in an exception. But of course, this is not explicit from the method signature unless the developer also takes the pain to put a documentation styled comment and mention about this ArgumentNullException.<br />To remove this clutter, I think C# can introduce a few language keywords such as the follows:<br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">public void Authenticate(<b>required</b> User user)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">public void AddNewUser(<b>nonblank</b> string userName)</span></span><br />A compiler can very easily compile the code and put the exception throwing logic based on these keywords. Call it a syntactic sugar or a language keyword, this is the kind of translation that seems to be perfect for the compilers. And I can foresee it being used in almost all methods we write, since if the methods require an argument they do it for a purpose and most of the time null is not expected anyway!<br />I don't know if this will reach the people responsible for developing C#, but if it does, I think the community will really love this new language feature.<br />I know about workarounds using AOP or other hyped-but-seldom-used tricks to solve this problem. But these tricks often make life harder by introducing a learning curve and then punishing the learning by slowing down the application. So, its best to put in as a core language feature. What do you think?</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Looking at ASP.NET MVC]]></title>
+    <link href="http://smsohan.com/blog/2009/04/05/looking-at-aspnet-mvc/"/>
+    <updated>2009-04-05T00:00:00-06:00</updated>
+    <id>http://smsohan.com/blog/2009/04/05/looking-at-aspnet-mvc</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>Being over-burdened by all the blog posts on MVC from the ASP.Net for the last few months, I am now looking to ASP.Net MVC. Still seeing the tutorials on <a href="http://asp.net/mvc" target="_blank">asp.net/mvc</a> site.</p>  <p>I have worked on a few rails projects and the ASP.Net MVC implementation is very much like Rails. Anyway, still early for me to comment!</p></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Tanvir,<BR/>Yes, I read the first chapter. My finding is ASP.Net MVC is still far from being real! The implementation of AJAX does not seem to be smart yet.<BR/>I would like to wait and see if the community really takes this framework in the coming days.</div>
+</div>
+<div class='comment'>
+<div class='author'>Tanvir Anowar</div>
+<div class='content'>
+There is also a short book by ScottGu's on MVC. You may find the download link from his blog.</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Solution to JavaScript File Include Problem From ASP.Net MasterPage]]></title>
+    <link href="http://smsohan.com/blog/2008/12/23/solution-to-javascript-file-include/"/>
+    <updated>2008-12-23T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2008/12/23/solution-to-javascript-file-include</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>You can include javascript files using a simple script tag. However, you will soon discover that, when you are using this master page from content pages that are at different levels in folder hierarchy then the script files will be missing at some cases. This is due to the fact that, script file paths are referenced relative to the content page and NOT to the master page. As a result, despite having the correct include wrt the master page, your content pages may still miss the scripts!</p>  <p>The solution is simple. Add this following line (of course, replacing the sample values with your own ones) to your master page's page load method to add the script tag through code instead of through markup.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red163\green21\blue21;}??\fs20 \cf1 this\cf0 .Page.ClientScript.RegisterClientScriptInclude(\cf4 "YourKey"\cf0 , ResolveUrl(\cf4 "~/Scripts/myscript.js"\cf0 );} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color:blue;">this</span>.Page.ClientScript.RegisterClientScriptInclude(<span style="color: rgb(163, 21, 21);">"YourKey"</span>, ResolveUrl(<span style="color: rgb(163, 21, 21);">"~/Scripts/myscript.js"</span>);</p>    <p style="margin: 0px;"> </p>    <p style="margin: 0px;">Hope it saves you from the pain of adding a common js file into each of your content pages.</p> </div></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thank you Yoann for your comment. I will check your solution.</div>
+</div>
+<div class='comment'>
+<div class='author'>Yoann</div>
+<div class='content'>
+You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Place Holder which is runat="server" so relative url works.</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Asp.Net Membership: How to change a user's password from an admin account without knowing the current password?]]></title>
+    <link href="http://smsohan.com/blog/2008/12/23/aspnet-membership-how-to-change-user/"/>
+    <updated>2008-12-23T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2008/12/23/aspnet-membership-how-to-change-user</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>Like mine, you may also need to change a user's password from an admin account. By default, when you are using ASP.Net authentication and storing the password in the hashed format, you will not be able to see the existing password in its decrypted form. Also, to change a password using the Membership API, you will need to know the existing password. However, here is a simple solution to the problem -</p>  <p><a href="http://lh4.ggpht.com/_Gr1ozXzBWpM/SVHO80nP0PI/AAAAAAAAAEg/dwiTndV7ajM/s1600-h/AspNetChangePassword%5B4%5D.png"><img style="border: 0px none ;" alt="AspNetChangePassword" src="http://lh5.ggpht.com/_Gr1ozXzBWpM/SVHO-soxcqI/AAAAAAAAAEk/f7_FTsN04wU/AspNetChangePassword_thumb%5B2%5D.png?imgmax=800" width="692" border="0" height="87" /></a> </p>  <p>The idea is, you can reset the password of a user using the following code-</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}??\fs20 \cf1 string\cf0  tempPass = \cf4 Membership\cf0 .Provider.ResetPassword(\cf5 "username"\cf0 , \cf1 string\cf0 .Empty)} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color:blue;">string</span> tempPass = <span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ResetPassword(<span style="color: rgb(163, 21, 21);">"username"</span>, <span style="color:blue;">string</span>.Empty)</p> </div>  <p>Make sure you have the config that allows you to change password without an answer to the security question. Now, you can invoke the ChangePassword method using this tempPass as the existing pass and your custom password as the new password. Refer to the following line for a compact implementation-</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red43\green145\blue175;\red255\green255\blue255;\red0\green0\blue0;\red163\green21\blue21;\red0\green0\blue255;}??\fs20 \cf1 Membership\cf0 .Provider.ChangePassword(\cf4 "username"\cf0 , \cf1 Membership\cf0 .Provider.ResetPassword(\cf4 "username"\cf0 , \cf5 string\cf0 .Empty), \cf4 "custompass"\cf0 )} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ChangePassword(<span style="color: rgb(163, 21, 21);">"username"</span>, <span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ResetPassword(<span style="color: rgb(163, 21, 21);">"username"</span>, <span style="color:blue;">string</span>.Empty), <span style="color: rgb(163, 21, 21);">"custompass"</span>)</p> </div>  <p>I believe this will save your time with a similar need.</p></div>
+
+]]></content>
+  </entry>
+  
+</feed>

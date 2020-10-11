@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Others | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/others/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[When I Applied KonMari to My Calendar]]></title>
+    <link href="http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/"/>
+    <updated>2020-07-17T15:26:00-06:00</updated>
+    <id>http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar</id>
+    <content type="html"><![CDATA[<p><img src="/images/marie_kondo.jpg" alt="Marie Kondo" /></p>
+
+<blockquote><p>“I'd like to tidy up the entire planet. I would go anywhere if there were something that needs tidying.” - Marie Kondo</p></blockquote>
+
+<p>Well, she came to my work calendar in spirit. Let’s start with some backstory.</p>
+
+<p>When I was developer, my typical day looked like this: one standup meeting and then pretty much the rest of the day in coding. Sometimes I paired up or jumped on a whiteboard session with my coworkers to hash things out. Apart from this, we had bi-weekly meetings for demo, retrospective and planning. All in all, less than 3 hours of meeting on a 40 hour work week.</p>
+
+<p>I’ll admit, the 3 hours of meeting each week felt like a “waste of time”.</p>
+
+<p>In my current role, I’m leading a total of 8 small teams organized as follows:
+1. Web (6) - Production engineering, UI/UX, identity and access management, and 3 feature teams
+2. Data (2) - Stream and search teams</p>
+
+<p>I’m very blessed to have capable leaders for these teams. To ensure I support my leaders and provide the teams with necessarily context, my typical days in my current role are very different from my developer days. Honestly, when we grew too fast, I was feeling lost in so many meetings. It felt like my job turned into just going to meetings and even if I had an open slot, I was often too mentally overwhelmed to make a good use of it.</p>
+
+<p>Thanks to the mindfulness training that Cisco offered to our whole group. It inspired me to rethink my work hours. After a few trial attempts, I have now finally settled into a routine.</p>
+
+<p>First, I have reduced my meeting obligations. I only attend meetings where I need to take part in decision making. I follow the Amazon way of producing a written document if I host the meeting. This applies to my one:one meetings as well.</p>
+
+<p>Second, I have shuffled my week such that I can have each day of the week organized around a theme. It’s not perfect, but for each day of the week, I clearly know the main theme of the day. It transformed my mental state from “feeling lost” into “looking forward” to the day. It also reduced the wild levels of context “swing”.</p>
+
+<p>Today, here’s how my weeks look like:</p>
+
+<ol>
+<li><strong>Monday is planning day</strong> - web team.</li>
+<li><strong>Tuesday is product day</strong> - to work on engineering problems related to our product roadmap.</li>
+<li><strong>Wednesday is people day</strong> - one:one.</li>
+<li><strong>Thursday is maker day</strong> - hands-on R&amp;D.</li>
+<li><strong>Friday is planning day</strong> - data team.</li>
+</ol>
+
+
+<p>Because our teams plan for two-week cycles, I have a decent amount of free spots on Monday and Friday every other week. This allows me to help the team, mostly with pair programming or discussing potential solutions to imminent problems. Also, it frees up space for ad-hoc meetings and hiring activities.</p>
+
+<p>The transition from a developer to a manager and then to a manager of managers can be jarring for the “makers” among us. I hope shaping your week in themes like the ones I shared here will help calm things down for you.</p>
+
+<p>Happy leading.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails: Please include a JS test runner]]></title>
+    <link href="http://smsohan.com/blog/2015/03/23/rails-please-include-a-js-test-runner/"/>
+    <updated>2015-03-23T15:34:00-06:00</updated>
+    <id>http://smsohan.com/blog/2015/03/23/rails-please-include-a-js-test-runner</id>
+    <content type="html"><![CDATA[<p>For an opinionated framework like Ruby on Rails, I expect it to come pre-bundled with a CoffeeScript based test framework and test runner. Here's why:</p>
+
+<ul>
+<li><p>Teams don't need to waste time deciding which one to use among the mess of Jasmine, Mocha, Expect, Sinon, Chai, Bower, Grunt, Teaspoon, Npm... you name it.</p></li>
+<li><p>It'd work better than what's out there since the Rails team will focus on clean integration with Rails and will have a much larger user base to collect contribution from.</p></li>
+</ul>
+
+
+<p>I'd prefer <a href="http://jasmine.github.io/">Jasmine</a> to be the test framework and a runner similar to <a href="https://github.com/modeset/teaspoon">teaspoon</a> that can run the specs both on the command line and on the browser, with asset pipelines enabled.</p>
+
+<p>Rails made a huge promise to test automation by shipping with a nicely structured way to test the ruby code and doing the same for JS would make life better for so many people like me, I believe.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[2015]]></title>
+    <link href="http://smsohan.com/blog/2015/01/02/2015/"/>
+    <updated>2015-01-02T23:36:00-07:00</updated>
+    <id>http://smsohan.com/blog/2015/01/02/2015</id>
+    <content type="html"><![CDATA[<p>This is a much shorter new year post. 2014 was the year of focusing on health, soft-skills, Haskell, social contribution and PhD in addition to typical everyday stuff. Hoping 2015 will be the year of:</p>
+
+<blockquote><p>reconnecting with friends and relatives</p>
+
+<p>perfection</p></blockquote>
+
+<p>While Facebook and Twitter make it easy to browse through my friends' photos and status updates, I feel quite reluctant to interact on these media. Also, this passive mode of keeping in touch sucks, since my friends are largely unaware of the fact that I still care. So, 2015 will be the year when I regularly call people, and talk to them on the phone/skype/in person.</p>
+
+<p>Perfection. On most occasions I'm happy if something I tried yielded just enough. 2015, I'll strive for perfection beyond just enough.</p>
+
+<p>Wishing everyone a joyful 2015, Happy new year.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What's wrong with the default alert rendered by the browser?]]></title>
+    <link href="http://smsohan.com/blog/2014/11/20/whats-wrong-with-the-default-alert-rendered-by-the-browser/"/>
+    <updated>2014-11-20T22:49:00-07:00</updated>
+    <id>http://smsohan.com/blog/2014/11/20/whats-wrong-with-the-default-alert-rendered-by-the-browser</id>
+    <content type="html"><![CDATA[<p>Browsers have carefully crafted the alert and confirm dialogs for everyone under really simple APIs as follows:</p>
+
+<p><code>
+alert('Failed to send the email. Check your network connection.');
+confirm('Are you sure you want to delete this email?');
+</code></p>
+
+<p>While writing cross-browser JavaScript is not as painful today, custom implementation of these natively supported dialogs seem to be a <strong>complete waste</strong> of money and time to me. With all the different browsers that we have to support today, including the mobile browsers, it seems a lot of wasted effort in trying to render a custom alert and confirm dialog under any circumstance. I've never implemented one, but if you ever attempted, you probably know how much work it is to get it right and consistent. Here's a short list of requirements if you want to build one:</p>
+
+<ol>
+<li>Should work on all browsers.</li>
+<li>Needs to disable all other controls on the website.</li>
+<li>Needs to be on the view port so the user can take an action immediately.</li>
+<li>Should not leak any memory if used repeatedly on a single screen.</li>
+<li>Should be fast.</li>
+</ol>
+
+
+<p>While I've seen some magicians to make these requirements look silly and do a decent job of implementing a custom version of the alert and confirm dialogs, I'm yet to see one that satisfies all the above essential requirements, and does a better job than the browser's native implementations. If you haven't looked recently, see the current rendering of the confirm dialogs across different browsers:</p>
+
+<p><img src="/images/safari_confirm.png" alt="Safari" />
+<img src="/images/chrome_confirm.png" alt="Chrome" />
+<img src="/images/firefox_confirm.png" alt="FireFox" />
+<img src="/images/iphone_confirm.png" alt="iPhone" /></p>
+
+<p>If you look carefully, you'll see subtle things. For example, did you notice the <strong>nice shadows</strong> around the confirm dialogs rendered on Chrome and Safari? There are live effects on the cancel and ok buttons as well, where you'll see a little <strong>shining effect</strong> on the ok button. These are carefully crafted buttons. The Cancel and OK button are perfectly sized for <strong>fat fingers</strong> on the iOS safari. Also, these are <strong>familiar</strong> to the users, so they immediately know what they are clicking on. <strong>Keyboard navigation</strong> works as expected. And lastly. the buttons will change labels based on your <strong>preferred language</strong> settings. All for <strong>free</strong>. Now, try to replicate that on your custom control, across all these browsers and show me how it does any better.</p>
+
+<p>If your sole business is indeed building these custom dialogs, you can probably invest the time and money here. But as far as I'm concerned, I'd not put a single $ from my pocket if I was funding a project to either build such custom implementations or using your custom implementation. I'm aware of the fact that, even if it's free and open source, it still requires additional maintenance dollars.</p>
+
+<p>As a user of web, I've never been bothered by the websites that show me these familiar browser rendered alerts and confirms. Were you?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[50 Miles!]]></title>
+    <link href="http://smsohan.com/blog/2014/10/01/50-miles/"/>
+    <updated>2014-10-01T16:10:00-06:00</updated>
+    <id>http://smsohan.com/blog/2014/10/01/50-miles</id>
+    <content type="html"><![CDATA[<p>In my previous post about the <a href="/blog/2014/09/12/100-miles-in-50-days-challenge/">100 Miles Challenge</a>, I shared my goal to complete a 100 mile run in 50 days. And I'm happy to reach the 50 Miles milestone on day 24, happened this Saturday! 46 Miles to go now, but the target sure looks reachable from here.</p>
+
+<p>I changed a few things on my end. After running for the first couple of weeks, I found my legs weren't feeling great. So, I decided to swap 700 metres of swimming as a replacement for 2 miles of running on some days. It takes me about 20 minutes to complete the 700 metres swim, and as a bonus, I get to take Shopoth for a swim lesson. So far, I've been going to <a href="http://www.ymcacalgary.org/blog/category/crowfoot-ymca/">Crowfoot YMCA</a> for swimming, which is a nice 15 min walk from my home, or just a 3 minute drive. And they have open lanes pretty much any time of the day, making it quite convenient.</p>
+
+<p>About running, I'm following a stepped pattern of speed on the trademill as shown in the following graph:</p>
+
+<iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1MNwHXYJ5KREduERT-sNYrUn4FyEMnofH8kgW_vsb3II/pubchart?oid=131170761&amp;format=interactive"></iframe>
+
+
+<p>This pattern helps me since I can slow down to catch a breathe and then get back to speed, allowing the whole 2M run to finish under 20 minutes.</p>
+
+<p>So far the act of running and swimming without a partner is not feeling weird anymore. Still early to declare victory, but I' m genuinely feeling really excited internally. Will report back once I'm done with my 100 miles, hopefully in the next 3 weeks time.</p>
+
+<p>A few people showed some interest in participating in the 100 miles challenge, including <a href="http://www.mokhan.ca/">Mo Khan</a>, and I'm hoping to see some adoption in the near future. Even if that doesn't happen, thank you for wishing me good luck. Insipiration matters, both intrinsic and extrinsic.</p>
+]]></content>
+  </entry>
+  
+</feed>

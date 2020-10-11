@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Software | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/software/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What We Learned About Feature Flags in Five Years]]></title>
+    <link href="http://smsohan.com/blog/2019/08/13/what-we-learned-about-feature-flag-in-five-years/"/>
+    <updated>2019-08-13T21:56:00-06:00</updated>
+    <id>http://smsohan.com/blog/2019/08/13/what-we-learned-about-feature-flag-in-five-years</id>
+    <content type="html"><![CDATA[<p>Looking at our git logs from <a href="https://www.cisco.com/c/en/us/products/security/amp-for-endpoints/index.html">Cisco AMP for Endpoints</a> Console, I see that we introduced feature flags back in January, 2014. The reason I got interested in it is because even after all these years of use, today I had to build a new concept on our feature flag code. If you're already using feature flags or thinking about adding feature flags to your project, this experience report may be helpful.</p>
+
+<p><img src="/images/switchboard.jpg" alt="switchboard" /></p>
+
+<p><small>
+Photo credits to <a href="https://flic.kr/p/9yJU3j">Michael Newton</a>
+</small></p>
+
+<p>Back in 2014, we were growing as a team, but wanted to keep working on a single shared code. We perceived  that the productivity gain of multiple teams working on a shared code would outweigh cross-team dependency issues. As we started working on multiple features in parallel, mostly independent with different release dates, we saw unfinished work on one feature was blocking the release of a completed one. After some research, we decided to introduce feature flags in our code.</p>
+
+<p>First, we read <a href="https://martinfowler.com/bliki/FeatureToggle.html">Martin Fowler's</a> article on this topic as a guideline. Today, <strong>we have 195 feature flags in production</strong>. Over time, we have extended the use of feature flags with new concepts and I wanted to document it here for everyone. Fowler's blog also published a more <a href="https://martinfowler.com/articles/feature-toggles.html">detailed and updated post</a> later. The taxomony used here is different from Fowler's because I find the following to be more relevant for our product.</p>
+
+<ol>
+<li><strong>Database stored</strong>: We store the feature flags in the main database so that the features can be toggled without needing a code deployment.</li>
+<li><strong>Cached</strong>: Feature flag lookups are cached for performance.</li>
+<li><strong>Temporary vs. permanent</strong>: We mark some feature flags as temporary when the primary goal is to incrementally release code to production. Temporary feature flags are regularly cleaned once the feature is complete. 13/195 currently used feature flags are marked temporary.</li>
+<li><strong>Self-serve</strong>: We tag some feature flags as self-serve where users need to opt-in to use the feature.</li>
+<li><strong>Limited availability</strong>: For self-serve feature flags, we tag some features as limited availability. It allows us to release self-serve features to selected customers.</li>
+<li><strong>Globally enabled</strong>: We have a mechanism to globally enable or disable a feature flag. 131/195 feature flags are currently marked globally enabled. This number varies by deployed environments.</li>
+<li><strong>Enabled for all, but</strong>: We have a mechanism for enabling a feature flag for all but some specific targets.</li>
+<li><strong>Multi-target</strong>: Sometimes we attach a single feature flag to multiple domain objects such as tenant, user, subscription tier, etc.</li>
+<li><strong>Hierarchical</strong>: We use a fallback mechanism for feature check. For example, the check if a user have file upload permission, we check it for the specific user, then fall back to the tenant it belongs to, and finally fall back to the feature itself being globally enabled.</li>
+<li><strong>Code generator</strong>: We use a single-command code generator to introduce a new feature flag to our code. It takes care of the database migration, seed entry, and code references.</li>
+<li><strong>Circuit-breaker</strong>: For integration with external services, we've used feature flags as a circuit-breaker to gracefully handle third-party downtime.</li>
+<li><strong>Environment-flags</strong>. We deploy the product to multiple geographic environments, including a private cloud model. Certain features behave differently based on the deployment. Using feature flags make it easy to develop and test such differences before deploying to each target environment.</li>
+</ol>
+
+
+<p>There are reusable libraries and services such as <a href="https://launchdarestkly.com">LaunchDarkly</a> that provide rich APIs and user interfaces for feature flags. At this point, even with all the aforementioned concepts, our custom implementation of feature flag is quite straight-forward and easy to evolve. It has been a key ingredient for our frequent iterative deployments with 6 teams working on diverse features in parallel on the same product.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configure Me Not]]></title>
+    <link href="http://smsohan.com/blog/2013/11/03/configure-me-not/"/>
+    <updated>2013-11-03T21:29:00-07:00</updated>
+    <id>http://smsohan.com/blog/2013/11/03/configure-me-not</id>
+    <content type="html"><![CDATA[<p>Configuration in software provides a method to build systems that can
+adapt to different configurations. For example, if a website's language and
+date/currency formats are configurable, then it can be configured to
+support multiple languages and regional formats. Configuration makes it
+possible to deliver such features without needing a log of change in the
+application source code.</p>
+
+<p>However, this notion of flexibility that configuration provides can be a trap at times. I've a definition of configurable as follows:</p>
+
+<blockquote><p>A configurable must have at least two configurations.</p></blockquote>
+
+<p>This is another way of saying YAGNI. But I find this to be more specific
+than YAGNI, as it quantifies and makes it apparent.</p>
+
+<p>Here are a few examples to illustrate my definition.</p>
+
+<ol>
+<li><p> <strong>Custom interfaces with a single implementation.</strong></p>
+
+<p> Interfaces are often times thought as a configurable component, as a new
+ implementation can be used in place of an old one without changing the
+ code that uses it.</p>
+
+<p> Except, if your interface only ever have one implementation, this
+ provides a false notion of flexibility. In practice, I've seen for most
+ custom interfaces, a new implementation almost always needs a change in
+ the original interface which doesn't really make it configurable
+ anymore.</p></li>
+<li><p><strong>Default arguments in methods that are never passed a non-default
+value.</strong></p>
+
+<p> Default arguments are great, as they often times simplify the common
+ case. However, if a method with a default argument is never called
+ with a non-default value, it's simply not worth using a default argument. Use a local variable instead.</p></li>
+<li><p><strong>Configuration key value pairs where there's only one value.</strong></p>
+
+<p> Since magic numbers and hardcoded strings are bad, it's tempting to use
+ the configuration file to hold such values. However, if there's only one
+ such value, it's probably a constant and not a configurable object.</p></li>
+<li><p><strong>Exhaustively validating method parameters against all possible but unused values.</strong></p>
+
+<p> If you're writing a method that's only gonna be called from another
+ method in your project, you probably know what you're passing to the
+ method. Validating for different negative inputs to such methods provide
+ a sense of robustness without really adding any value to it.</p></li>
+</ol>
+
+
+<p>Hoping, the definition makes sense. Would love to hear your
+opinion and examples of configure me not.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Development Environments and Dependency Hell]]></title>
+    <link href="http://smsohan.com/blog/2012/10/25/development-environments-and-dependencies-hell/"/>
+    <updated>2012-10-25T21:51:00-06:00</updated>
+    <id>http://smsohan.com/blog/2012/10/25/development-environments-and-dependencies-hell</id>
+    <content type="html"><![CDATA[<p>It used to be pretty straight forward to get up and running with a Rails app. You'd expect something like the following:</p>
+
+<p>``` bash</p>
+
+<pre><code>git clone git@blah/blah.git
+cd blah
+bundle
+rake db:migrate
+rails s
+</code></pre>
+
+<p>```</p>
+
+<p>If the project is using rvm and bundler, the ruby versions and gem depdendencies are all taken care of. So far life is good this way.</p>
+
+<p>But it starts getting complicated. For example, your project probably uses MySQL and no matter what, I can't remeber all the c libraries that are pre-requisites for the mysql2 gem to actually install successfully. If it uses Nokogiri, get another hit of all the who-knows-what libxml2* libraries that need to be there. Another gem quite commonly used is rmagick with similar c depdencies. Every time I hit these road blocks, I feel so helpless for:</p>
+
+<ul>
+<li>I have no idea what is required</li>
+<li>Someone on StackOverflow has a magical solution</li>
+<li>The solution will work on one unix distro but won't on others</li>
+</ul>
+
+
+<p>This starts getting even more complicated as you start adding external project depdendencies. For example, your project will probably need some Queueing, Caching, Emailing, SOA integration etc. And even if you have very good tests, it's likely that you'd want to manually test to see if your project holds up when integrated to other projects. It's best to have all these third-party products in your dev box for obvious reasons. But its also super hard to keep everything in sync, because</p>
+
+<ul>
+<li>You'd have to automate the installation of all the third-party products in your dev box</li>
+<li>Find a mechanism to update the third-party projects as they change</li>
+</ul>
+
+
+<p>To tackle these problems, teams often use Chef/Puppet/Powershell/Vagrant etc. infrastructure automation tools. In practice, I'm yet to find a project where these tools would just work in a single pass. For example, it would miss one package or the other, sometimes it would fail at halfway, sometimes it would get you pretty close but almost never I have seen it to work on a single pass. I find this to be a recurring problem, faced by almost all dev teams.</p>
+
+<h2>One solution I think may work is as follows:</h2>
+
+<pre><code>1. Teams from each project writes their own bootstrap scripts, so others can just use it
+2. The bootstrap script runs on a CI server and fails a commit if it breaks the bootstrap
+3. Nobody runs a manual command ever for bootstrapping the dev machines
+</code></pre>
+
+<p>I'm yet to try this approach in practice. But too many times I've seen there's only one/couple people writing the bootstrapping scripts for all projects. Also, nobody really finds the issues until a new dev box needs bootstrapping. A CI server would be a big push to keep it green all the time. And finally, everytime a one-off command is run for bootstrapping, a little part of automation opportunity is missed.</p>
+
+<p>If you've had success with these problems, please share. I'd really like to learn from you and hopefully implement some of your proven practices/principles.</p>
+]]></content>
+  </entry>
+  
+</feed>

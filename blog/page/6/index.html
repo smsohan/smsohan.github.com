@@ -1,0 +1,957 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="After spending about 6 months on this new project using BackboneJS, and spending some hours learning AngularJS and EmberJS, my realization at this &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/page/6/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/07/simplicity-and-client-side-mvc/">Simplicity and Client-Side MVC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T08:56:00-06:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After spending about 6 months on this new project using BackboneJS, and spending some hours learning AngularJS and EmberJS, my realization at this point is:</p>
+
+<blockquote><p>Use Client-Side MVC very Selectively.</p></blockquote>
+
+<p>Sometimes on a single page of your app, you need to offer a lot of interactions, each scoped to a small part of the page only. In such cases Client-Side MVC offers some neat features. I&#8217;ll try to share my perspective with some concrete examples where I&#8217;d say yes/no to Client-Side MVC.</p>
+
+<ol>
+<li>Build a Calendar page - Yes.</li>
+<li>Build a Master/Detail view - No.</li>
+<li>Build a Credit Card Payment Form - No.</li>
+<li>Build a Story Wall like Trello - Yes.</li>
+<li>Build an Airport Departures/Arrivals display - No.</li>
+<li>Build a Search form - No.</li>
+</ol>
+
+
+<p>As you see here, I suggest using it only when a lot of Client-Side interactions can happen, with little server side data requests.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/30/microoptimization-trap/">MicroOptimization Trap</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-30T11:24:00-06:00" pubdate data-updated="true">Apr 30<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday, couple of my friends and I were discussing about a CoffeeScript topic. In short, given the following code in CoffeeScript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">class</span> <span class="nx">Cat</span>
+</span><span class='line'>  <span class="nv">type: </span><span class="o">-&gt;</span> <span class="s">&#39;cat&#39;</span>
+</span><span class='line'>  <span class="nv">meow: </span><span class="o">-&gt;</span> <span class="s">&#39;meow meow mee..ow&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The compiler produces this in JavaScript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Cat</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;cat&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">meow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;meow meow mee..ow&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">})();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see here, the prototype method definitions use the prefix <code>Cat.prototype</code> repeatedly. Which could be compressed using closure as follows:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Cat</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">p</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;cat&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">p</span><span class="p">.</span><span class="nx">meow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;meow meow mee..ow&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">})();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This closure form is for sure less bloated than the one produced by CoffeeScript. And on IE7, each <code>Cat.prototype</code> lookup takes about a microsecond, so, the closure form quite literally yields a micro-second-optimization! When one zooms into such micro-optimizations, other bigger fishes are easily missed.</p>
+
+<p>For example, even though the output is a little bloated from the CoffeeScript compiler, the CS source code is rediculously simpler/shorter even for this tiny example. But that&#8217;s not the only reason why one would use CS. If for nothing else, CS produces lint JavaScript for free. I&#8217;m not saying one has to use CoffeeScript, but this serves as an example scenario. When making a decision, a tunnel-vision into the micro-optimization may as well be a trap.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/19/unconventional-conventions/">Unconventional Conventions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-19T09:33:00-06:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>JavaScript has been reborn, thanks to <a href="http://jquery.com">jQuery</a> to begin this epic and wonderful march. These days, we have a huge influx of micro to macro frameworks, all providing some well curated set of features. Every now and then I try to get a glimpse of the new and hot stuff so when time comes, I can make an informed decision on what to use and why.</p>
+
+<p>This post is about my recent attempt at learning <a href="http://angularjs.org/">AngularJS</a> and <a href="http://emberjs.com/">EmberJS</a>. Client-side MVC and/or single page apps need some core features as follows:</p>
+
+<ol>
+<li>URL routing</li>
+<li>Rendering views</li>
+<li>Read/write data from/to the backend server</li>
+</ol>
+
+
+<p>Both AngularJS and EmberJS offer these and some additional features, most notably, <a href="http://emberjs.com/guides/object-model/bindings/">two-way data binding</a>, so a change in the JavaScript object reflects on the rendered view and vice versa. But, to be honest, I think they overstretched the framework N miles to the north of where it should be. Let me explain with an example:</p>
+
+<p>Conventions are good when they offer an easy mental model. For example using the following router mapping:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;favorites&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>it would match <code>favorites</code> with a <code>App.FavoritesRoute</code> based on the names. It&#8217;s an easy enough pattern to recognize and remember. However, I find it&#8217;s too far fetched in the following example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">FavoritesRoute</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Route</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">model</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// the model is an Array of all of the posts</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Post</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>My mental model is challenged in a few ways here:</p>
+
+<ol>
+<li>Route has a <code>model</code> hook - which, by conventional usage, I can&#8217;t seem to recognize as a pattern.</li>
+<li><code>App.Post.find()</code> entails an <code>Ember.ArrayController</code>, one provided by the framework. Here, a router is producing a <code>Controller</code> in disguise from the <code>model</code> hook.</li>
+</ol>
+
+
+<p>I&#8217;m sure with repeated usage, I&#8217;d be able to use these conventions without much of a problem. But on a pure API design/Architecture perspective, I think it&#8217;d make more sense to remove such unconventional conventions.</p>
+
+<p>To be honest, I&#8217;ve attempted the EmberJS guides for the 3rd time now, in less than a month, and I feel lost in so many conventions. I have had similar experience with learning AngularJS as well.</p>
+
+<p>With AngularJS, I was first a bit skeptical about all the custom tags that you&#8217;d introduce when using AngularJS. But after giving it a go, it sort of made sense as a trade-off between less code and manageable clutters. But I got really uncomfortable with the likes of the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;phones&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;phone in phones | filter:query&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While it offers a snappy filtering experience and some declarative code, it feels too far stretched again. The convention around <code>$scope</code>, and a few other oddities as you&#8217;ll see in this <a href="http://www.egghead.io/video/NnB2NBtoeAY">EggHead.io $scope vs scope tutorial</a> can be quite a stress on the brain.</p>
+
+<p>To conclude, I personally like both frameworks and think they offer some great features over their counterparts, but it&#8217;d make sense in a later version to pick conventions where it&#8217;s truly conventional over an imposed one with lots of foreign concepts.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call Me Sohan and Ask-Me-Not About S M</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T09:48:00-06:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have heard this question n times, where n tends to the number of days since June 2006, as I started working with the people from North America:</p>
+
+<blockquote><p>Should I call you S M?</p></blockquote>
+
+<p>Well, I&#8217;m from Bangladesh and even today, we don&#8217;t really have a first and last name, instead what we have is, a full name and a nick name. My <strong>full name</strong> is, S M Sohan, and my <strong>nick name</strong> is Sohan. So, call me Sohan.</p>
+
+<p>I don&#8217;t have a first or last name like many people in Bangladesh. But since almost everywhere, from the online forms to the call center agents, they ask me about these info, I tell them, my first name is, S M, and last name is, Sohan. At times I get funny reactions to this, for example:</p>
+
+<blockquote><p>S M? Just S M?</p></blockquote>
+
+<p>Better yet, some offer me spelling suggestions:</p>
+
+<blockquote><p>You can spell it ESEM, because SM is hard to pronounce!</p></blockquote>
+
+<p>You people are funny! Well, S M is actually a short form for <strong>Sheikh Mohammed</strong>. But it&#8217;s so common in Bangladesh that, almost nobody uses the full version in their official documents. As a bonus, you save all those inks and bytes required to spell these extra characters. Honestly, of all these years, this is probably just the 4th time I&#8217;ve written the full form, the other 3 times were for US visa applications. Also, it&#8217;d be equally weird to me, had I used Sheikh as my first name and people called me by that!</p>
+
+<p>This first/last name convention also causes funny consequences to my friends. For example, two of my friends have names differing only in their middle names and they were rommies at a shared residence in Calgary. Guess what, their credit reports got all confused about who&#8217;s who and mixed up the scores!</p>
+
+<p>Lot of my muslim friends go by &#8220;Md Xxxx Yyyy&#8221;, where Md is a short form for Mohammed. People that aren&#8217;t too familiar with it, at times think of them as doctors, which can be quite funny, and dangerous!</p>
+
+<p>If you aren&#8217;t convinced yet, take these ones for example. <a href="http://en.wikipedia.org/wiki/AAMS_Arefin_Siddique">AAMS Arefin Siddique</a> current VC of the University of Dhaka, <a href="http://en.wikipedia.org/wiki/A._K._Fazlul_Huq">A. K. Fazlul Huq</a> a renowned leader in the history, <a href="http://en.wikipedia.org/wiki/A._P._J._Abdul_Kalam">A P J Abdul Kalam</a> an ex-president and a nuclear scientist from India.</p>
+
+<p>I hope this makes you comfortable in calling me by the name Sohan :)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/04/implementation-challenges-with-with-a-saas-database/">Implementation Challenges With a Multi-Tenant/SaaS Database</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-04T10:29:00-06:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="right" src="http://farm1.staticflickr.com/21/26445881_7c69777b7b.jpg" width="500" height="353" title="Photo credits to corydalus" alt="climbing"></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/aa479086.aspx">This 2006 MSDN article</a> points out some key aspects of designing a multi-tenant database for SaaS applications. As you can read in the article, SaaS databases need to pick one of the following three configurations:</p>
+
+<ol>
+<li>separate databases</li>
+<li>shared database, separate schema and</li>
+<li>shared database, shared schema.</li>
+</ol>
+
+
+<p>A number of factors including economic, security, skillset, etc. contribute to the selection of the best suitable configuration. In this post, from my experience, I&#8217;m sharing the following practical requirements that introduce additional implementation challenges:</p>
+
+<ol>
+<li>Each account needs to have a <strong>maximum allowed space</strong> on the database (economic).</li>
+<li>Data from one account should never be accessible to other accounts (security).</li>
+<li>However, for backend usage, we need the ability to run queries across all accounts.</li>
+</ol>
+
+
+<p><strong>Size limiting is quite hard</strong>. It almost forces the use of separate database/schema per account. Even then,  most databases of today don&#8217;t have a clean mechanism to exert such a hard limit.</p>
+
+<p><strong>Separate databases reduce the chance of cross-account data leaks</strong>. But backend tasks suffer for this. For example, your monthly billing processor needs to generate bill for all accounts. With one database/account, it cannot do one simple query to a single database anymore.</p>
+
+<p>Also, <strong>most ORM libraries don&#8217;t support separate databases</strong> for a single type. For example, to fetch the orders from the database, the ORM library needs to connect to database A for account X, but to database B for account Y and so on. At this point, if possible, you&#8217;ll need to tweak the ORMs a lot or fall back to your own ORM, which as <a href="/blog/2012/11/06/orm-or-not/">I wrote in the past</a>, is almost never a good idea.</p>
+
+<p><strong>Connection pooling is another challenge</strong>. It&#8217;s generally a good practice to use connection pooling, to save the overhead of establishing a connection before every query. With separate databases, and hundreds, if not thousands, of accounts being served from an app server, the connection pool would either have too many or too few connections in it to be useful.</p>
+
+<p>I don&#8217;t know about a clean architecture that&#8217;d address these requirements while not introducing the dev challenges. Please comment if you&#8217;ve any suggestion.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/02/interesting-user-interaction-data-on-dashboard-widgets/">Interesting User Interaction Data on Dashboard Widgets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-02T13:03:00-06:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At <a href="http://sourcefire.com">SourceFire</a>, among other things, we build a cloud based Advanced Malware Protection software. As security products go, we collect a huge amount of data about events that happen on the user devices so we can identify and potentially quarantine malicuous events. Security in itself is a big specialized domain, but this post is about a dashboard that we serve as the main point of entry into the big data that we collect from enterprises and consumers.</p>
+
+<p>We were debating about what data to put on the dashboard. The target is to offer a very high level, but an actionable view of the whole enterprise data. In the end we settled down with a list of 7 types of data and decided to use a layout similar to the following.</p>
+
+<p><img src="/images/dashboard_layout.png" alt="Layout" /></p>
+
+<p>I was looking at the metrics this morning to see if our prioritization of the layout tiles made sense to the users and found that</p>
+
+<blockquote><p>the number of clicks on each widget is highly correlated to its relative order in the layout.</p></blockquote>
+
+<p>I am not sure how to interpret this result. It may mean one of:</p>
+
+<ol>
+<li>The ordering of the tiles matches the actual priority of our users.</li>
+<li>Irrespective of the contents, users are more likely to click on data in this order.</li>
+<li>The results are totally random and it&#8217;s more of a coincidence over a correlation.</li>
+</ol>
+
+
+<p>At this point, I feel we need to shuffle the tiles to see if the position has a strong bias on the results. When I get a chance to do this, will post again with my findings.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/18/mvcmailer-and-open-source-happiness/">MvcMailer and Open Source Happiness</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-18T09:17:00-06:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>MvcMailer makes me happy as a developer.</p>
+
+<p>I find an immense amount of happiness everytime I check the <a href="https://nuget.org/packages/MvcMailer/">Nuget page of MvcMailer</a>. It&#8217;s so refreshing to see the download count going up (42,427 total downloads as I write), receiving feedback, praises and even the complains.</p>
+
+<p><img src="/images/mvcmailer_tweets.png" alt="MvcMailer Tweets" /></p>
+
+<p>The idea of MvcMailer came from trying to bring some of the amazing <a href="http://guides.rubyonrails.org/action_mailer_basics.html">Ruby on Rails ActionMailer</a> features to ASP.NET MVC developers. It was well accepted since the very beginning and I hope is still helping people. As a side-effect, MvcMailer gives me an opportunity to keep in touch with the developments in ASP.NET MVC, C#, the .NET framework and the community around these. During our Sunday coffee and code seessions, I usually pair up with <a href="http://codecuriosity.com/">Tyler Mercier</a>, and MvcMailer is often the project we&#8217;d work on, or at least talk about. It also gives me a code to share on my <a href="https://github.com/smsohan/MvcMailer">github profile</a>, which I expect a good future employer to care about :)</p>
+
+<p>Yesterday, we met for Coffee and Code and released a new version to better work with .NET 4.5. This has been the most requested feature in the last couple months and required a small code change. After we released it, I drove home in about 20 minutes. Checked the counts, and it had already seen 4 downloads. This felt just amazing. Now after about 20 hours, it feels even better to see 100+ downloads of the new release. It feels so good.</p>
+
+<p>Open source is truly rewarding, both to its contributors and to its consumers.</p>
+
+<p>Happy open sourcing.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/07/solution-architecting/">Solution Architecting Using Queues?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T14:44:00-07:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When building a bunch of applications that need to interact with each other, Queues or <a href="http://en.wikipedia.org/wiki/Message-oriented_middleware">Message Oriented Middleware</a> services offer some very useful features. To name a few, you get features like a) <strong>Guaranteed message delivery</strong>, b) <strong>routing</strong>, c) <strong>throttling</strong>, etc., for free. Tools like ActiveMQ, RabbitMQ, MSMQ, JMS servers are tuned and time tested to handle such requirements robustly. I&#8217;ve had good experience with these tools for the happy paths. However, when dealing with unhappy paths, irrespective of the tools you use, it can be quite challenging to design the failovers.</p>
+
+<p>Here&#8217;s a list of the things to consider when designing a solution using Queues:</p>
+
+<h3>Speed of Consumption</h3>
+
+<p>Queues are essentially a producer/consumer or pub/sub system. This means a slower consumption rate results into a pileup of messages. In a high transaction system, millions of records can pile up in the matter of hours - forcing the producer to slow down or messaages being dropped. While architecting a solution, the rates should be measured and tested. Load tests are very useful to avoid such production issues. These issues are generally hard to fix once rolled out.</p>
+
+<h3>Error Paths</h3>
+
+<p>Even when a consumer is keeping up with the producer, chances are some messages cannnot be processed due to errors. If it&#8217;s a network error or some other error external to the system, a simple redelivery from the queue may fix it. But in real life, chances are, this is an application defect. So, a simple retry won&#8217;t make any difference. The application defect needs to be fixed and then, the message needs to be replayed. The solution needs to be designed considering the effect/resolution of the error paths.</p>
+
+<h3>Automated Monitoring</h3>
+
+<p>Automated monitoring is crucial to any Queue in the production system. Without monitoring, the queue may be flooded with unconsumed messages.</p>
+
+<h3>Human Intervention</h3>
+
+<p>When a message cannot be processed by a consumer, chances are, a human intervention will be required to complete/undo the intended operation. For example, if your payment processing application sends out a message on complete, and the shipping processor fails to process it - a human interaction may be required to fulfill the shipping or undo the order. When designing a solution, such edge cases should be identified.</p>
+
+<h3>Deployments</h3>
+
+<p>Typically queues are good in terms of holding the unconsumed messages for disconnected consumers. However, if a consumer has significant downtime between deployments, this can stretch the limits of the queue.</p>
+
+<p>I&#8217;m sure this is not all. These are from my real-life experience only. If you have experiences to share, please use the comments below.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/27/random-data-in-tests/">Random Data in Tests</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-27T15:24:00-07:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>&#8230; are evil if you expect the randomizer to give you unique values on each call.</p>
+
+<p>Here&#8217;s an example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="vi">@user_1</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s2">&quot;email-</span><span class="si">#{</span><span class="no">Random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">@example.com&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># the following will fail intermittently if you have a unique validation on User#email</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="vi">@user_2</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s2">&quot;email-</span><span class="si">#{</span><span class="no">Random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">@example.com&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&#8217;s a timebomb, use it, it will haunt you later. Be sane, stop using random numbers in tests like this.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/25/practial-challenges-with-client-side-mvc/">Practical API Design Challenges for Client Side MVC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-25T22:40:00-07:00" pubdate data-updated="true">Feb 25<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This following list is probably a subset of a bigger one, but I&#8217;ve composed it based on my experience using BackboneJS + Rails on the current project at work. So, here goes the list:</p>
+
+<h3>Designing Granularity of the API</h3>
+
+<p>Using RESTful API, it makes sense to have separate API methods to repesent each type of resource. However, to construct a meaninful UI for the end user, often time we need to represent multiple resources on the same screen. Let&#8217;s explain this with an example requirement:</p>
+
+<p>As a user I want to see the <strong>emails</strong> using a saved <strong>custom filter</strong></p>
+
+<p>In this case, we would want the UI to show the description of the selected filter, and also the emails matching the filter. Conceptually, <code>CustomFilter</code> and <code>Email</code> are two resources or models, having distinct properties and behaviors. It&#8217;d make sense to have two separate API&#8217;s as follows:</p>
+
+<p><strong>Filter API:</strong>
+GET http://fancy_domain.com/filters/emails_from_boss_about_release</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="err">id:</span> <span class="err">10,</span>
+</span><span class='line'>  <span class="err">filter_name:</span> <span class="err">emails_from_boss_about_release,</span>
+</span><span class='line'>  <span class="err">subject_including:</span> <span class="err">&#39;release&#39;,</span>
+</span><span class='line'>  <span class="err">from:</span> <span class="err">&#39;boss@the_company.com&#39;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Email API:</strong>
+GET http://fancy_domain.com/filters/10/emails</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">[</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="err">subject:</span> <span class="err">&#39;Release</span> <span class="err">note&#39;,</span>
+</span><span class='line'>    <span class="err">from:</span> <span class="nt">&quot;boss@the_company.com&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="err">to:</span> <span class="nt">&quot;sohan@the_company.com&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="err">body:</span> <span class="nt">&quot;&lt;html&gt;.. &lt;/html&gt;&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="err">sent_at:</span> <span class="nt">&quot;20130102040511&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Although this granularity makes good sense as an API, it starts causing issues for typical client side MVC use case.</p>
+
+<blockquote><p>Unless the data from these two API methods are combined on the server side, the client must make two requests.</p></blockquote>
+
+<p>In a real world use, I&#8217;ve seen it&#8217;s more common for the UI to require multiple resources than not. Since, we want our users to get faster response, we try to create API&#8217;s that suit the UI&#8217;s need. So, APIs start getting bloated payloads to match the UI&#8217;s need. This typically results into something like the following:</p>
+
+<p><strong>Filter Email API:</strong>
+GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_emails=true</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="err">id:</span> <span class="err">10,</span>
+</span><span class='line'>  <span class="err">filter_name:</span> <span class="err">&#39;emails_from_boss_about_release&#39;,</span>
+</span><span class='line'>  <span class="err">subject_including:</span> <span class="err">&#39;release&#39;,</span>
+</span><span class='line'>  <span class="err">from:</span> <span class="err">&#39;boss@the_company.com&#39;,</span>
+</span><span class='line'>  <span class="err">emails:</span>
+</span><span class='line'>  <span class="err">[</span>
+</span><span class='line'>    <span class="err">{</span>
+</span><span class='line'>      <span class="err">subject:</span> <span class="err">&#39;Release</span> <span class="err">note&#39;,</span>
+</span><span class='line'>      <span class="err">from:</span> <span class="err">&#39;boss@the_company.com&#39;,</span>
+</span><span class='line'>      <span class="err">to:</span> <span class="err">&#39;sohan@the_company.com&#39;,</span>
+</span><span class='line'>      <span class="err">body:</span> <span class="err">&#39;&lt;html&gt;..</span> <span class="err">&lt;/html&gt;&#39;,</span>
+</span><span class='line'>      <span class="err">sent_at:</span> <span class="err">20130102040511</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="err">]</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is an example with just two resources. I&#8217;ve seen UI&#8217;s that need more than two resources, and its quite common as well.</p>
+
+<h3>Short/Medium/Long form of Models/Resources</h3>
+
+<p>The view usually renders a subset of all possible attributes associated with a model.</p>
+
+<p>For example, when rendering the <code>WeatherForecast</code> model, in the list view only the minimum and maximum temperature for the day with a short summary of Sunny/Cloudy/Rainy/Snowy are shown. However, when you want to see more, you&#8217;d want to show the hourly variation of the weather with additional data of interest.</p>
+
+<p>This requires the RESTful API to prepare multiple respresentations of a resource to suit the specific UI needs. This can complicate the logic on both the server and client sides, since the code must accommodate different representations for the same model.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/7/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/5/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

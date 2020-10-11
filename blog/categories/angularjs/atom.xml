@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: AngularJS | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/angularjs/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS: Refresh or Die]]></title>
+    <link href="http://smsohan.com/blog/2014/04/03/angularjs-refresh-or-die/"/>
+    <updated>2014-04-03T08:27:00-06:00</updated>
+    <id>http://smsohan.com/blog/2014/04/03/angularjs-refresh-or-die</id>
+    <content type="html"><![CDATA[<p>Just worked on my first AngularJS project at <a href="http://loveyyc.info">http://loveyyc.info</a> (<a href="https://github.com/smsohan/analytics">source code</a>) and wanted to share my thoughts about it while the memory is still fresh. My impression in a one-liner:</p>
+
+<blockquote><p>AngularJS needs to rename a lot of things and introduce higher level abstraction</p></blockquote>
+
+<p>A great technology only becomes so because people feel happy about it. The happiness for people like me comes from the fact that not only I understand the technology well, but also find it to be easy to use. I think AngularJS is an amazing framework for building JavaScript apps. But oh boy, the barrier to entry is brutal to say the least. Their terminology makes it frustrating and very hard to compose a mental model of the framework.</p>
+
+<p>But instead of just complaining and ranting, I wanted to suggest a few concrete refactorings. I think these refactorings would make my life way easier next time I'm about to introduce someone new to AngularJS:</p>
+
+<p>```js
+//rename rootScope to pageState
+//BAD
+var matchController = function($rootScope)...</p>
+
+<p>//GOOD
+var matchController = function($pageState)...</p>
+
+<p>//rename controller$scope to controllerState
+//BAD
+var matchController = function($scope)</p>
+
+<p>//GOOD
+var matchController = function($controllerState)</p>
+
+<p>//introduce customTag, customAttribute as an abstraction over lower level directive</p>
+
+<p>//example template <searchResult highligted></searchResult></p>
+
+<p>//BAD
+app.directive('searchResult', function(){
+  return {restrict: 'E'}
+});</p>
+
+<p>//GOOD
+app.customTag('searchResult')
+app.customAttribute('highligted')</p>
+
+<p>//Use intention revealing name instead of symbols, uglifiers have a different job than humans</p>
+
+<p>//directive#require</p>
+
+<p>//BAD
+require: '<sup>searchResult'</sup></p>
+
+<p>//GOOD
+nestedInController: 'searchResult'</p>
+
+<p>//BAD
+scope: {
+  count: "&amp;",
+  count: "=",
+  count: "@",
+}</p>
+
+<p>//GOOD
+customTagState: {
+  count: expression("count")
+  count: twoWayBound("count")
+  count: stringValue("count")
+}</p>
+
+<p>//BAD transclude -> really?
+transclude: true</p>
+
+<p>//GOOD
+//always transclude, if the user has put content inside a custom tag. why not?</p>
+
+<p>//NOT SO GOOD
+worksAsLayout: true</p>
+
+<p>//linking is a low level concept. abstract using a higher level name</p>
+
+<p>//BAD
+directive.link</p>
+
+<p>//GOOD
+directive.init</p>
+
+<p>//why need a controller in directive</p>
+
+<p>//BAD
+directive.controller</p>
+
+<p>//GOOD
+no controller required</p>
+
+<p>//BAD -> $compile what?
+$compile</p>
+
+<p>//GOOD
+$compileTemplate</p>
+
+<p>//BAD -> $apply what?
+$apply</p>
+
+<p>//GOOD
+$compileTemplateAfter</p>
+
+<p>//BAD filter -> means take a list and produce a sublist. It has little to do with most AngularJS filters
+$filter.filter('currency')
+$filter.filter('number')</p>
+
+<p>//GOOD
+helper</p>
+
+<p>//BAD factory -> WTH
+app.factory('myData')</p>
+
+<p>//GOOD
+app.model('myData')
+```</p>
+
+<p>I just wanted to share my 2 cents about it. I love this framework and I think it's really good and productive once you understand the core concepts. But I strongly suggest the AngularJS team to take some time to simplify things. A refresh will save it and make it hugely successful or it'll die like a champion fighter, who had all the right weapons but the wrong uniform.</p>
+
+<p>Thoughts?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AngularJS is Very Productive, and Cool too!]]></title>
+    <link href="http://smsohan.com/blog/2013/06/14/angularjs-is-very-productive-and-cool/"/>
+    <updated>2013-06-14T13:10:00-06:00</updated>
+    <id>http://smsohan.com/blog/2013/06/14/angularjs-is-very-productive-and-cool</id>
+    <content type="html"><![CDATA[<p>It has a very steep learning curve, but yields a superb productivity boost once you've learned it. Check out <a href="http://smsohan.com/angular_wizard/">my demo of the wizard</a> that we'll discuss next.</p>
+
+<p>AngularJS works by extending HTML to produce declarative UI code and eliminating the need for a lot of boilerplate code. For example, the mental model of a wizard can be expressed using the following HTML:</p>
+
+<p>```
+<wizard title="Flight Search"></p>
+
+<p>  <step title="Search"></p>
+
+<p>  </step></p>
+
+<p>  <step title="Select a flight"></p>
+
+<p>  </step></p>
+
+<p>  <step title="Select a return flight"></p>
+
+<p>  </step></p>
+
+<p>  <step title="Checkout"></p>
+
+<p>  </step></p>
+
+<p>  <step title="Confirm purchase"></p>
+
+<p>  </step></p>
+
+<p>  <step title="Receipt"></p>
+
+<p>  </step></p>
+
+<p></wizard></p>
+
+<p>```</p>
+
+<p>With AngularJS, one can write exactly this markup with the help of two custom directives, <code>widget</code> and <code>step</code>. This declarative UI code makes it very easy to read. In addition to this, the two way data binding capabilities of AngularJS makes it very productive as we don't need to write a bunch of references to the DOM nodes and render the nodes as the data changes. For a working example, check the source code of the demo and if you are like me, you'll love to see how simple it is.</p>
+]]></content>
+  </entry>
+  
+</feed>

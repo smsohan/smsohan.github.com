@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>What's wrong with the default alert rendered by the browser? - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="Browsers have carefully crafted the alert and confirm dialogs for everyone under really simple APIs as follows: 1
+2
+alert('Failed to send the email. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2014/11/20/whats-wrong-with-the-default-alert-rendered-by-the-browser/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">What's Wrong With the Default Alert Rendered by the Browser?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-20T22:49:00-07:00" pubdate data-updated="true">Nov 20<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Browsers have carefully crafted the alert and confirm dialogs for everyone under really simple APIs as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alert('Failed to send the email. Check your network connection.');
+</span><span class='line'>confirm('Are you sure you want to delete this email?');</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While writing cross-browser JavaScript is not as painful today, custom implementation of these natively supported dialogs seem to be a <strong>complete waste</strong> of money and time to me. With all the different browsers that we have to support today, including the mobile browsers, it seems a lot of wasted effort in trying to render a custom alert and confirm dialog under any circumstance. I&#8217;ve never implemented one, but if you ever attempted, you probably know how much work it is to get it right and consistent. Here&#8217;s a short list of requirements if you want to build one:</p>
+
+<ol>
+<li>Should work on all browsers.</li>
+<li>Needs to disable all other controls on the website.</li>
+<li>Needs to be on the view port so the user can take an action immediately.</li>
+<li>Should not leak any memory if used repeatedly on a single screen.</li>
+<li>Should be fast.</li>
+</ol>
+
+
+<p>While I&#8217;ve seen some magicians to make these requirements look silly and do a decent job of implementing a custom version of the alert and confirm dialogs, I&#8217;m yet to see one that satisfies all the above essential requirements, and does a better job than the browser&#8217;s native implementations. If you haven&#8217;t looked recently, see the current rendering of the confirm dialogs across different browsers:</p>
+
+<p><img src="/images/safari_confirm.png" alt="Safari" />
+<img src="/images/chrome_confirm.png" alt="Chrome" />
+<img src="/images/firefox_confirm.png" alt="FireFox" />
+<img src="/images/iphone_confirm.png" alt="iPhone" /></p>
+
+<p>If you look carefully, you&#8217;ll see subtle things. For example, did you notice the <strong>nice shadows</strong> around the confirm dialogs rendered on Chrome and Safari? There are live effects on the cancel and ok buttons as well, where you&#8217;ll see a little <strong>shining effect</strong> on the ok button. These are carefully crafted buttons. The Cancel and OK button are perfectly sized for <strong>fat fingers</strong> on the iOS safari. Also, these are <strong>familiar</strong> to the users, so they immediately know what they are clicking on. <strong>Keyboard navigation</strong> works as expected. And lastly. the buttons will change labels based on your <strong>preferred language</strong> settings. All for <strong>free</strong>. Now, try to replicate that on your custom control, across all these browsers and show me how it does any better.</p>
+
+<p>If your sole business is indeed building these custom dialogs, you can probably invest the time and money here. But as far as I&#8217;m concerned, I&#8217;d not put a single $ from my pocket if I was funding a project to either build such custom implementations or using your custom implementation. I&#8217;m aware of the fact that, even if it&#8217;s free and open source, it still requires additional maintenance dollars.</p>
+
+<p>As a user of web, I&#8217;ve never been bothered by the websites that show me these familiar browser rendered alerts and confirms. Were you?</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-20T22:49:00-07:00" pubdate data-updated="true">Nov 20<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/others/'>Others</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/31/100-miles/" title="Previous Post: 100 Miles, a 100 Miles...">&laquo; 100 Miles, a 100 Miles...</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/12/09/lessons-learned-entrepreneurship-and-innovation-course/" title="Next Post: Lessons Learned: Entrepreneurship and Innovation Course">Lessons Learned: Entrepreneurship and Innovation Course &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

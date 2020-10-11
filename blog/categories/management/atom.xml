@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Management | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/management/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Change]]></title>
+    <link href="http://smsohan.com/blog/2020/08/31/change/"/>
+    <updated>2020-08-31T14:02:00-06:00</updated>
+    <id>http://smsohan.com/blog/2020/08/31/change</id>
+    <content type="html"><![CDATA[<h2>Manager's Mind</h2>
+
+<p>As managers, we have the benefit of view because we have our eyes on  longer term goals. To achieve those goals, we often have to introduce a change. For example, we may want to change how a team is formed or what product a team works on based on new business needs or opportunities. So, we put a lot of thought into it and propose our plan to the team hoping the following reaction:</p>
+
+<p><code>javascript
+$(team).on("change", excitement)
+</code></p>
+
+<p>Before proposing such a change, we've analyzed various options, including the option of keeping everything as-is. We're fully convinced that indeed the change we're going to propose is the best option. We are excited with this new way that'll make our teams more productive. As caring managers, we are thrilled because we believe this will make the team happier.</p>
+
+<h2>Team's Mind</h2>
+
+<p>However, most of the team's reaction is as follows:</p>
+
+<p><code>javascript
+$(team).on("change", panic)
+</code></p>
+
+<p>Honestly, the team has a great chemistry going on, they have fun and work well together, they are already so productive shipping products using technology they use today. So, at best a change seems random, but more commonly perceived as a mindless act of "management BS".</p>
+
+<h2>The Deadlock</h2>
+
+<p>At this stage, both the manager and the team are in a deadlock, each party   fairly confident in their judgement, failing to appreciate the concerns of the other. At this point, it's the manager's job to not only break the deadlock but also to make sure s/he carefully listens to the team and motivates them. Ideally, we can data-drive these conversations while being mindful of individual emotions.</p>
+
+<h2>The Checklist</h2>
+
+<p>Here's a checklist I'm following myself as a manager as I'm trying to orient my teams from technology driven teams to more full-stack product mission oriented teams:</p>
+
+<ol>
+<li>Motivate the team with a why. <em>e.g. Go from tech-oriented teams to product mission teams so that all of you can deliver products to customers...</em></li>
+<li>Listen to the team. Multiple one on one sessions if needed. <em>e.g. Let's discuss about your concerns regarding tech debt with this change...</em></li>
+<li>Discuss changes to your plan based on the team's feedback. <em>e.g. You'll have full ownership of the technology to serve your mission...</em></li>
+<li>Layout your evidence. <em>e.g. We built an improved search feature that we couldn't ship to customers for months because the UI team was busy...</em></li>
+<li>Discuss pros and cons of alternatives you thought about. <em>e.g. Another option is to keep as-is, but that'd mean we must improve cross-team project management to reduce hand-off related delays...</em></li>
+<li>Present your metrics to achieve. <em>e.g. Time from dev to customer, performance metrics,...</em></li>
+<li>Present an iterative and incremental plan with the option to change course based on metrics. <em>e.g. Let's do this with one team for one month...</em></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[When I Applied KonMari to My Calendar]]></title>
+    <link href="http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/"/>
+    <updated>2020-07-17T15:26:00-06:00</updated>
+    <id>http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar</id>
+    <content type="html"><![CDATA[<p><img src="/images/marie_kondo.jpg" alt="Marie Kondo" /></p>
+
+<blockquote><p>“I'd like to tidy up the entire planet. I would go anywhere if there were something that needs tidying.” - Marie Kondo</p></blockquote>
+
+<p>Well, she came to my work calendar in spirit. Let’s start with some backstory.</p>
+
+<p>When I was developer, my typical day looked like this: one standup meeting and then pretty much the rest of the day in coding. Sometimes I paired up or jumped on a whiteboard session with my coworkers to hash things out. Apart from this, we had bi-weekly meetings for demo, retrospective and planning. All in all, less than 3 hours of meeting on a 40 hour work week.</p>
+
+<p>I’ll admit, the 3 hours of meeting each week felt like a “waste of time”.</p>
+
+<p>In my current role, I’m leading a total of 8 small teams organized as follows:
+1. Web (6) - Production engineering, UI/UX, identity and access management, and 3 feature teams
+2. Data (2) - Stream and search teams</p>
+
+<p>I’m very blessed to have capable leaders for these teams. To ensure I support my leaders and provide the teams with necessarily context, my typical days in my current role are very different from my developer days. Honestly, when we grew too fast, I was feeling lost in so many meetings. It felt like my job turned into just going to meetings and even if I had an open slot, I was often too mentally overwhelmed to make a good use of it.</p>
+
+<p>Thanks to the mindfulness training that Cisco offered to our whole group. It inspired me to rethink my work hours. After a few trial attempts, I have now finally settled into a routine.</p>
+
+<p>First, I have reduced my meeting obligations. I only attend meetings where I need to take part in decision making. I follow the Amazon way of producing a written document if I host the meeting. This applies to my one:one meetings as well.</p>
+
+<p>Second, I have shuffled my week such that I can have each day of the week organized around a theme. It’s not perfect, but for each day of the week, I clearly know the main theme of the day. It transformed my mental state from “feeling lost” into “looking forward” to the day. It also reduced the wild levels of context “swing”.</p>
+
+<p>Today, here’s how my weeks look like:</p>
+
+<ol>
+<li><strong>Monday is planning day</strong> - web team.</li>
+<li><strong>Tuesday is product day</strong> - to work on engineering problems related to our product roadmap.</li>
+<li><strong>Wednesday is people day</strong> - one:one.</li>
+<li><strong>Thursday is maker day</strong> - hands-on R&amp;D.</li>
+<li><strong>Friday is planning day</strong> - data team.</li>
+</ol>
+
+
+<p>Because our teams plan for two-week cycles, I have a decent amount of free spots on Monday and Friday every other week. This allows me to help the team, mostly with pair programming or discussing potential solutions to imminent problems. Also, it frees up space for ad-hoc meetings and hiring activities.</p>
+
+<p>The transition from a developer to a manager and then to a manager of managers can be jarring for the “makers” among us. I hope shaping your week in themes like the ones I shared here will help calm things down for you.</p>
+
+<p>Happy leading.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[People Management and Diagnosing Low Performance]]></title>
+    <link href="http://smsohan.com/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/"/>
+    <updated>2020-05-18T18:54:00-06:00</updated>
+    <id>http://smsohan.com/blog/2020/05/18/engineering-management-and-diagnosing-low-performance</id>
+    <content type="html"><![CDATA[<p>Beginning with a story here. Back in 2008, I was a couple of years out of college and working for a software company in Dhaka, Bangladesh. Like many of my classmates from my college, I was studying GRE alongside my job for a PhD admission in a reputable US university. That process being long and uncertain, I also applied for an MBA program at the University of Dhaka as a backup plan. The GRE preparation came in very handy and I qualified for the evening MBA program. I started MBA classes in January 2009 before the universities in USA and Canada made their decision on my application. There, I took a course on Management. I was too naive and still too much an engineer to pay attention.</p>
+
+<p>But this image that our teacher drew on the board got stuck in my head to this day.</p>
+
+<p><img src="/images/perf.jpg" alt="Performance" /></p>
+
+<p>Fast forward ten years and I still like how cleanly it captures the essence of high performance of an employee as a combination of the employee's ability and motivation in a suitable environment.</p>
+
+<p>Given this is how high-performers are, it's possible to plot a similar graph for low performers as a diagnostic report. If such a diagnosis is right, it can provide a valuable strategy for managers and employees to work towards improving employee performance. For example, if an employee lacks skill and motivation but fits very well within the work environment, a manager can focus on skills training and suggesting therapies to increase motivation. Similarly, if an employee is unable to acquire the skills for a particular job, focusing on motivation or changing the environment for that employee may not fix the low performance issue.</p>
+
+<p>Based on the past 14 years of my time in the industry, I've shared some symptoms of low performance that I've seen. You can use this as an exercise sheet to plot your diagnosis of the low performer's chart.</p>
+
+<ol>
+<li><p><strong>New hire too slow to ramp up:</strong> You were impressed by a candidate during the interview. The same interview process was used to find many high performers in the past. But this employee is struggling to ramp up.</p></li>
+<li><p><strong>Knowledge vs. application:</strong> You have an employee who's always studying job related skills and shows a great deal of interest in training, but can't translate the knowledge into application.</p></li>
+<li><p><strong>Complains about the lack of time</strong>: You have an employee struggling to produce the best outcome. In your one:one meeting, the employee always complains about lack of time even after you give him/her the time.</p></li>
+<li><p><strong>Frequently runs into conflicts:</strong> Your dream employee is causing too many conflicts within the team.</p></li>
+<li><p><strong>Can't write thoughts down:</strong> You have an employee who's unhappy about things. When you want them to write it down, they are unable to produce a crisp writeup about the problems and potential solutions.</p></li>
+<li><p><strong>Doesn't make hard decisions timely:</strong> You have a leader that stays away from making hard decisions. In their mind, they want someone else to make them take the hard decision.</p></li>
+<li><p><strong>Isn't aware of better ways to solve old problems:</strong> You have an employee who's expert in certain ways of delivering work but lacks awareness of newer and more efficient ways.</p></li>
+<li><p><strong>Doesn't take initiative:</strong> You encourage and reward employees to take initiatives that help the business. Yet, you see an employee is not taking part.</p></li>
+</ol>
+
+
+<p>The good news is, once a diagnosis is accurate for such symptoms of low performance, you can move ahead and implement a concrete improvement strategy for your employee. The clarity of this simple method helped me in many situations.</p>
+
+<p>I hope this helps you, too.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: XP | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/xp/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Pair Programming vs. Code Reviews]]></title>
+    <link href="http://smsohan.com/blog/2012/10/22/pairing-vs-code-reviews/"/>
+    <updated>2012-10-22T20:43:00-06:00</updated>
+    <id>http://smsohan.com/blog/2012/10/22/pairing-vs-code-reviews</id>
+    <content type="html"><![CDATA[<p><img src="/images/sync_dive.jpeg" alt="Sync Dive" /> Photo credits to http://womendiving.blogspot.ca/2012/08/2012-olympic-games-10m-synchronized.html</p>
+
+<p>Pair programming is like synchronized swimming. You do it together, you win it together. You try to improve your chances by helping your partner, and vice verca. Even if you lose, its highly likely you've improved simply by being together sharing a united goal.</p>
+
+<p>Code review can be fun and really useful too. But deep deep care needs to be taken to ensure it remains same in spirit, that is, the unified shared goal. In practice I have seen it to be super hard to achieve consistently.</p>
+
+<p>Are you pair programming? Are you doing code reviews only? Why/why not? Would you change?</p>
+
+<p>Comments are welcome.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Generating and Streaming Potentially Large CSV files using Ruby on Rails - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="Most applications I&#8217;ve worked on at some point required that &#8216;Export&#8217; feature so people would be able to play with the data using &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Generating and Streaming Potentially Large CSV Files Using Ruby on Rails</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T14:38:00-06:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Most applications I&#8217;ve worked on at some point required that &#8216;Export&#8217; feature so people would be able to play with the data using the familiar Excel interface. I&#8217;m sharing some code here from a recent work that did the following:</p>
+
+<p>Generate a CSV file for download with up to 100,000 rows in it. Since the contents of the file depends on some dynamic parameters, and the underlying data is changing all the time, the file must be generated live. Generating a large file takes time and the load balancer will drop the connection if it takes more than 1 minute. In fact, as a consumer I myself would be frustrated had it took even 1 minute to see something happening. This problem natually requires a streaming solution.</p>
+
+<p>For a familiar example, let&#8217;s say we are downloading a CSV file containing transactions on an online store for the accounting folks. Lets say the URL is as follows:</p>
+
+<p>http://transactions.com/transactions.csv?start=2013-01-01&amp;end=2013-04-30&amp;type=CreditCard&amp;min_amount=400</p>
+
+<p>So, this would download a file containing the transactions from January to April of 2013, where a CreditCard was used for a purchase over $400. Here goes the code example with inline comments describing interesting parts.</p>
+
+<figure class='code'><figcaption><span>app/models/transaction.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Transaction</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:store</span>
+</span><span class='line'>  <span class="n">attr_accessible</span> <span class="ss">:time</span><span class="p">,</span> <span class="ss">:amount</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">csv_header</span>
+</span><span class='line'>    <span class="c1">#Using ruby&#39;s built-in CSV::Row class</span>
+</span><span class='line'>    <span class="c1">#true - means its a header</span>
+</span><span class='line'>    <span class="no">CSV</span><span class="o">::</span><span class="no">Row</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">[</span><span class="ss">:time</span><span class="p">,</span> <span class="ss">:store</span><span class="p">,</span> <span class="ss">:amount</span><span class="o">]</span><span class="p">,</span> <span class="o">[</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Store&#39;</span><span class="p">,</span> <span class="s1">&#39;Amount&#39;</span><span class="o">]</span><span class="p">,</span> <span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_csv_row</span>
+</span><span class='line'>    <span class="no">CSV</span><span class="o">::</span><span class="no">Row</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span> <span class="n">store</span><span class="p">:</span> <span class="n">store</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="n">amount</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">find_in_batches</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1">#find_each will batch the results instead of getting all in one go</span>
+</span><span class='line'>    <span class="n">where</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span><span class="o">.</span><span class="n">find_each</span><span class="p">(</span><span class="n">batch_size</span><span class="p">:</span> <span class="n">batch_size</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">transaction</span><span class="o">|</span>
+</span><span class='line'>      <span class="k">yield</span> <span class="n">transaction</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Given this Transaction model, the controller can call the methods and set appropriate http headers to stream the rows as they are generated instead of waiting for the whole file to be generated. Here&#8217;s the example controller code:</p>
+
+<figure class='code'><figcaption><span>app/controllers/transactions_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TransactionsController</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">csv</span> <span class="n">render_csv</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">render_csv</span>
+</span><span class='line'>    <span class="n">set_file_headers</span>
+</span><span class='line'>    <span class="n">set_streaming_headers</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="mi">200</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1">#setting the body to an enumerator, rails will iterate this enumerator</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">response_body</span> <span class="o">=</span> <span class="n">csv_lines</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">set_file_headers</span>
+</span><span class='line'>    <span class="n">file_name</span> <span class="o">=</span> <span class="s2">&quot;transactions.csv&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;text/csv&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-disposition&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">file_name</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">set_streaming_headers</span>
+</span><span class='line'>    <span class="c1">#nginx doc: Setting this to &quot;no&quot; will allow unbuffered responses suitable for Comet and HTTP streaming applications</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;X-Accel-Buffering&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;no&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Cache-Control&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s2">&quot;no-cache&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">csv_lines</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">Enumerator</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">y</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="no">Transaction</span><span class="o">.</span><span class="n">csv_header</span><span class="o">.</span><span class="n">to_s</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">#ideally you&#39;d validate the params, skipping here for brevity</span>
+</span><span class='line'>      <span class="no">Transaction</span><span class="o">.</span><span class="n">find_in_batches</span><span class="p">(</span><span class="n">params</span><span class="p">){</span> <span class="o">|</span><span class="n">transaction</span><span class="o">|</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">transaction</span><span class="o">.</span><span class="n">to_csv_row</span><span class="o">.</span><span class="n">to_s</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see in this example, it&#8217;s pretty straight forward once you put the pieces together. These streaming headers work under most servers including Passenger, Unicorn, etc. but webrick doesn&#8217;t support streaming responses. It took me some time to figure out the headers and the enumerator thing, but since then it&#8217;s working beautifully for us. Hope it will help someone with a similar need.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T14:38:00-06:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/07/simplicity-and-client-side-mvc/" title="Previous Post: Simplicity and Client-Side MVC">&laquo; Simplicity and Client-Side MVC</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/10/released-streamy-csv-gem/" title="Next Post: Released streamy_csv gem">Released streamy_csv gem &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

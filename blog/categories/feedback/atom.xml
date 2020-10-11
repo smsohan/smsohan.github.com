@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Feedback | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/feedback/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Communication Hacks I Learned From Job Interview Feedback]]></title>
+    <link href="http://smsohan.com/blog/2020/10/11/communication-hacks-from-interview-feedback/"/>
+    <updated>2020-10-11T17:07:00-06:00</updated>
+    <id>http://smsohan.com/blog/2020/10/11/communication-hacks-from-interview-feedback</id>
+    <content type="html"><![CDATA[<p><img src="/images/gift.jpg" alt="Gift" /></p>
+
+<p><small>Photo credits to <a href="https://www.flickr.com/photos/threar/">UnknownNet Photography</a></small></p>
+
+<p>I’ve been in search of a new job for the past few months. Thanks to my recruiters and interviewers, I’ve received some useful feedback. Many thanks to them for this gift.</p>
+
+<p>The most memorable feedback I got was from the VP of a company, ``<strong>needs more energy</strong>''. My interview with him was the last of the five on the same day. My day went well until then. But I was also drained from 4 hours of back to back video interviews on the same day before meeting him. Honestly, when I received this feedback, I felt heartbroken and defensive. It took me some time to digest it and take actions based on this feedback. But eventually I developed some communication hacks to remain energetic. I’m now mindful about staying energetic, often taking body breaks and keeping a water bottle or coffee on my desk. I am taking handwritten notes while listening on video calls. Also, when I’m on video for hours, I proactively tell people about being camera fatigued.</p>
+
+<p>Another feedback I received was, ``<strong>some answers could be more direct and crisp</strong>''. With remote communication, sometimes I find it hard to read audience reaction. Based on this feedback, I’ve adopted a communication hack where I do a short and direct answer first and then ask if I should elaborate further.</p>
+
+<p>I was somewhat surprised with one feedback from a system design interview. The feedback was ``<strong>needs to discuss design trade-offs</strong>''. After some time had passed, I realized what happened there. While I mentioned some design trade-offs, I didn’t put a lot of emphasis on discussing design trade-offs. Moreover, apart from designing the system, I did’t ask about any secondary design topics that were of interest to the interviewer. I’m now more mindful about eliciting these secondary goals.</p>
+
+<p>When I interviewed for an individual contributor (IC) role at a company I deeply admire, the feedback I got was ``<strong>needs to clearly know if he wants to be an IC or a manager</strong>''. This was bang on. I was attracted to the company a lot but they only had IC roles open at that time. I consider myself a capable enough engineer and technical contributor still. But during that interview, I fumbled to honestly answer how my career aspirations at this time would be fulfilled by going from management into an IC role. Thinking about this feedback gave me the clarity that I indeed want to remain a people leader at this stage in my career.</p>
+
+<p>A few interviewers asked me to talk about my management philosophy. Even the very best leaders differ in their philosophy. So, after I answered this question, I asked one of my interviewers immediately if he had any feedback about my philosophy. He shared this: “Thanks for your answer. Creating accountability is a big part of my leadership philosophy...”.  <strong>This is one feedback where I decided not to take any action</strong>. I like what he said and I value accountability. But my leadership philosophy is what I truly and strongly believe in, and at present, I find accountability to be a by-product instead of a key philosophy.</p>
+
+<p>There were many positive feedback shared as well. I find that positive feedback has the same effect as that of a good massage; it feels nice to receive one from time to time, but the feeling tappers down soon after. On the other hand an actionable feedback where I can improve is a gift that keeps giving. Whenever an interviewer gave me the opportunity to ask questions, I always asked if they had any feedback for me. Most didn’t share any actionable feedback citing company policy as a reason. But the ones that did, I’ll be forever grateful to them.</p>
+
+<p>When I interview candidates as an interviewer, I ask them to share feedback about the interview. I have deep respect for candidates who are brave enough to suggest specific changes. If they get hired, they become value multiplier employees. However, as an interviewee, <strong>I didn’t have a single interviewer who asked me to provide feedback :-(</strong> I’m sure company policies don’t limit it.</p>
+
+<p>So, when you get a chance, share some feedback. It’s a gift. Give generously. Also, seek feedback and appreciate when you get it. If you have feedback about this post or any, I’m @smsohan on Twitter.</p>
+]]></content>
+  </entry>
+  
+</feed>

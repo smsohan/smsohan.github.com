@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Part 1: How am I IMPACTing following Scrum? - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="In a previous post in this blog, I introduced the nice little acronym IMPACT for agile. To recap, here is what IMPACT stands for - &#8220;Iterative &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2008/11/26/part-1-how-am-i-impacting/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Part 1: How Am I IMPACTing Following Scrum?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-26T00:00:00-07:00" pubdate data-updated="true">Nov 26<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>In a previous post in this blog, I introduced the nice little acronym <a href="http://smsohan.blogspot.com/2008/11/impact-of-agile-software-development.html">IMPACT for agile</a>. To recap, here is what <strong>IMPACT</strong> stands f<em>or -</em></p>  <blockquote style="background-color: rgb(0, 128, 192);">   <p><span style="color: rgb(253, 253, 253);"><em><strong>&#8220;I</strong>terative and Incremental development of a software by means of <strong>M</strong>erciless refactoring, <strong>P</strong>eer reviews, <strong>A</strong>utomated acceptance testing, <strong>C</strong>ontinuous integration and of course, <strong>T</strong>est driven development&#8221;</em></span></p> </blockquote>  <p>To give you a little background around my story, let me tell you about a project that I am working since June 2006. The project is a micro-finance loan application automation server for the US financial industry. It acts as a mediator between a loan seeking customer and one of over 50 lenders in an attempt to get a loan for the customer. So, the server adds value by taking a single application to 50 odd lenders from a single submission unless no lender is left untried or some lender says &#8216;yes&#8217; to it. This is done in real time, the processing time in average is less than 3 minutes.</p>  <p>Now that you have the background, let me introduce the the challenges associated with this project. The bullet points are-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Since this involves real dollars, there is nearly no margin for an error. </li>    <li>It processes more than a thousand loan applications per hour, so a high availability is a must. </li>    <li>This is done following agile Scrum and each two week one/two new lending partners need to be integrated. </li>    <li>The lending partners change their integration API from time to time and we need to accommodate the changes ASAP. </li> </ul>  <p>To address these challenges this is how we are responding-</p>  <p><strong>Iterative and Incremental development (IID)</strong></p>  <p>We are following Scrum and using <a href="http://www.scrumpad.com/">ScrumPad</a> to manage the IID. Basically, our clients/product owners put new requirements in terms of user stories in the product backlog at ScrumPad. So, with the prioritized product backlog we, the team, pick items to a sprint&#8217;s backlog. Then as usual, we break it down to tasks and do everything that it takes to meet the deadline of two weeks. Within a sprint the following are the milestones-</p>  <table style="color: rgb(255, 255, 255); background-color: rgb(0, 128, 192);" width="612" border="1" cellpadding="2" cellspacing="0"><tbody>     <tr>       <td valign="top" width="66">Day 1</td>        <td valign="top" width="57">Day 2</td>        <td valign="top" width="57">Day 3</td>        <td valign="top" width="57">Day 4</td>        <td valign="top" width="57">Day 5</td>        <td valign="top" width="57">Day 6</td>        <td valign="top" width="57">Day 7</td>        <td valign="top" width="57">Day 8</td>        <td valign="top" width="63">Day 9</td>        <td valign="top" width="82">Day 10</td>     </tr>      <tr>       <td style="font-weight: bold;" valign="top" width="68">Sprint Planning</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td style="font-weight: bold;" valign="top" width="66">Test Release</td>        <td style="font-weight: bold;" valign="top" width="82">Production Release</td>     </tr>   </tbody></table>  <ul style="background-color: rgb(211, 249, 118);">   <li>8th day - Sprint works are completed. </li>    <li>9th day - Test delivery at a near production environment and feedback gathering from product owner. </li>    <li>10th day - Incorporate feedbacks and release in production. </li> </ul>  <p>Note that, we generally produce a number of test releases within the first 8 days. That gives us an earlier chance to gather client feedbacks.</p>  <p>The beauty if this approach is, with this model in place we can release as early as in 8 working days, if not earlier. So, this helps us meeting the last two challenges as mentioned above.</p>  <p><strong>Merciless refactoring</strong></p>  <p>Developing incrementally offers much challenge in attaining the longevity of the product. Because, naturally as new features come in, we need to make room for that in the existing implementation.To ensure the quality and life of the product, we do merciless refactoring as we go. We have over 90% unit test coverage, which helps us in doing this continuous refactoring. So, the idea is-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Writing unit test and acceptance test. </li>    <li>Refactoring our code/design and validating against automated tests. </li> </ul>  <p><strong>Peer reviews</strong></p>  <p>This is probably the most important practice that I recommend. Because, as we had new members in the team, we found that the quality was somewhat degrading. Once, we started peer reviews, it was very helpful to the new comers as well as the veterans to keep the code quality up to the mark. We review the following things-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Naming of variables, methods, classes, files, namespaces etc. </li>    <li>Use of private methods for increased readability. </li>    <li>Hard coded string literals or constants. </li>    <li>Long/nested loops and long running if-else blocks. </li>    <li>Code commenting. </li>    <li>Quality of coding. </li> </ul>  <p>I would suggest you to try Microsoft&#8217;s Stylecop, it will give you a great head start to ensure the first level code quality by enforcing the common rules. This practice is allowing us to continue the good quality over time.</p>  <p>I have always been shy of reading extra large text in the web. So, I thought I could better post this in two parts! I assure, next post will contain more images than texts, So, you better stay tuned for the next one&#8230;</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Hasan,<BR/>Thanks for the complement!<BR/>Yes, I am promoting the acronym. I believe this acronym somehow unites the best practices all in a single word. Just like how we need to unite these to make the most of our efforts!</div>
+</div>
+<div class='comment'>
+<div class='author'>hasan</div>
+<div class='content'>
+nice acronym sohan bhai, lets spread the agile IMPACT!!</div>
+</div>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-26T00:00:00-07:00" pubdate data-updated="true">Nov 26<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tdd/'>TDD</a>, <a class='category' href='/blog/categories/agile/'>agile</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/11/18/impact-of-agile-software-development/" title="Previous Post: IMPACTing for agile software development">&laquo; IMPACTing for agile software development</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/12/23/aspnet-membership-how-to-change-user/" title="Next Post: Asp.Net Membership: How to change a user's password from an admin account without knowing the current password?">Asp.Net Membership: How to change a user's password from an admin account without knowing the current password? &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

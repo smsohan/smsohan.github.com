@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails: Database Migration and Downtime]]></title>
+    <link href="http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime/"/>
+    <updated>2019-03-18T10:20:00-06:00</updated>
+    <id>http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime</id>
+    <content type="html"><![CDATA[<p>Recently, we had a production outage for a few minutes due a database
+migration on one of our Ruby on Rails apps. The deployment went fine
+through a few
+stages, but the problem only showed up at the last and the largest
+stage. This is exactly what happened during the deploy process.</p>
+
+<ol>
+<li>New code was deployed. Restart was pending, so the server was still
+running old code.</li>
+<li>Migrations ran.</li>
+<li>One migration removed a column that was used in the old code, but no
+longer used in the new code.</li>
+<li>The next migration was a data migration that inserted one row / user
+to a table. This was a very slow migration, taking 5+ minutes.</li>
+<li>The old code failed because it tried to use a column in the database
+that was no longer there. To make things worse, the column was
+referenced at all page loads within the app.</li>
+<li>The long running migration didn't finish because it ran into a
+timeout.</li>
+<li>The servers weren't restarted because the migration had failed. So,
+the new code wasn't served at all.</li>
+<li>There was no automatic database rollback to restore the system into a good
+state with the old code.</li>
+</ol>
+
+
+<p>The team was able to resolve the issues within the next 5 minutes, but
+it was the worst system outage we've seen in years. For anyone dealing
+with a large Ruby on Rails app, you can use the following
+safeguards to avoid such problems:</p>
+
+<ol>
+<li><strong>Do not remove a column from the database while the current code is
+still using it. Do it at a later release.</strong></li>
+<li>When a deployment fails at the migration step, ensure you have a
+rollback policy so that the system can be automatically restored to a
+known good state.</li>
+<li>Consider data migrations to be a performance problem and always test
+the migrations with relaistic load before production release.</li>
+<li>If possible, run your data migrations seprately from schema
+migrations so that you don't incur deployment delays for optional new
+data.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Asset Pipeline to Older Apps?]]></title>
+    <link href="http://smsohan.com/blog/2013/10/08/how-to-introduce-asset-pipeline-for-older-apps/"/>
+    <updated>2013-10-08T10:12:00-06:00</updated>
+    <id>http://smsohan.com/blog/2013/10/08/how-to-introduce-asset-pipeline-for-older-apps</id>
+    <content type="html"><![CDATA[<p>Introducing Asset Pipeline to an old project is quite hard. Most pre-asset pipeline projects used small JavaScript/CSS files that are often scoped to a single page or a part of the application. A typical example is as follows:</p>
+
+<p>```javascript login.js</p>
+
+<p>$(function(){</p>
+
+<p>  $('#login').on('click', function(){</p>
+
+<pre><code>var isLoginValid = hasValue($('#user_name')) &amp;&amp; hasValue($('#user_password'));
+
+if(isLoginValid){
+  $('#login_errors').hide();
+  $('#login_form').submit();
+} else {
+  $('#login_errors').show();
+  return false;
+}
+</code></pre>
+
+<p>  });</p>
+
+<p>});</p>
+
+<p>```</p>
+
+<p>Now, within the scope of the login page this code executes just fine. However, with asset pipeline, if this file is included in the application manifest, then all pages that include the manifest will execute this code on load. This is wasteful and more importantly, may result in unexpected behaviors and conflicts.</p>
+
+<p>To work around this problem, when introducing asset pipeline, the code needs to be wrapped in some method that can be called to initialize it only from the login page. Here's an example of the wrapper method:</p>
+
+<p>```javascript login.js</p>
+
+<p>  App.validateLogin = function(){</p>
+
+<pre><code>$('#login').on('click', function(){
+  var isLoginValid = hasValue($('#user_name')) &amp;&amp; hasValue($('#user_password'));
+
+  if(isLoginValid){
+    $('#login_errors').hide();
+    $('#login_form').submit();
+  } else {
+    $('#login_errors').show();
+    return false;
+  }
+});
+</code></pre>
+
+<p>  };</p>
+
+<p>```</p>
+
+<p>Now that the logic is wrapped inside a method, it can be included in all the pages without causing any wasteful execution and risking unexpected outcomes or conflicts. This method can be called from within the login page as shown in the following example:</p>
+
+<p>```html login.html.erb</p>
+
+<script type="text/javascript">
+  $(function(){
+    App.validateLogin();
+  });
+</script>
+
+
+<p>```</p>
+
+<p>This is of course only a minimum change approach that'll get asset pipelines working for an existing app. I'd recommend refactoring the code to make it testable and adding unit tests as you go.</p>
+
+<p>We have a 4 year old Ruby on Rails project, and now running 3.2 with asset pipelines. It has only one manifest file. We used this simple approach to convert all existing js code and it worked great. Hope it helps when you start upgrading your assets to use the pipelines.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Released streamy_csv gem]]></title>
+    <link href="http://smsohan.com/blog/2013/05/10/released-streamy-csv-gem/"/>
+    <updated>2013-05-10T08:38:00-06:00</updated>
+    <id>http://smsohan.com/blog/2013/05/10/released-streamy-csv-gem</id>
+    <content type="html"><![CDATA[<p>Following the <a href="/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails/">previous post</a>, I decided to spin off a little ruby gem for you folks. Get streamy_csv, and write only your application code while it'll do the boilerplate work for you.</p>
+
+<p>In a nutshell, with this gem in your application, all you need to do is this:</p>
+
+<p>```ruby
+Class ExportsController</p>
+
+<p>  def index</p>
+
+<pre><code>stream_csv('data.csv', MyModel.header_row) do |rows|
+  MyModel.find_each do |my_model|
+    rows &lt;&lt; my_model.to_csv_row
+  end
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>Find more at <a href="https://github.com/smsohan/streamy_csv">https://github.com/smsohan/streamy_csv</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Generating and Streaming Potentially Large CSV files using Ruby on Rails]]></title>
+    <link href="http://smsohan.com/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails/"/>
+    <updated>2013-05-09T14:38:00-06:00</updated>
+    <id>http://smsohan.com/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails</id>
+    <content type="html"><![CDATA[<p>Most applications I've worked on at some point required that 'Export' feature so people would be able to play with the data using the familiar Excel interface. I'm sharing some code here from a recent work that did the following:</p>
+
+<p>Generate a CSV file for download with up to 100,000 rows in it. Since the contents of the file depends on some dynamic parameters, and the underlying data is changing all the time, the file must be generated live. Generating a large file takes time and the load balancer will drop the connection if it takes more than 1 minute. In fact, as a consumer I myself would be frustrated had it took even 1 minute to see something happening. This problem natually requires a streaming solution.</p>
+
+<p>For a familiar example, let's say we are downloading a CSV file containing transactions on an online store for the accounting folks. Lets say the URL is as follows:</p>
+
+<p>http://transactions.com/transactions.csv?start=2013-01-01&amp;end=2013-04-30&amp;type=CreditCard&amp;min_amount=400</p>
+
+<p>So, this would download a file containing the transactions from January to April of 2013, where a CreditCard was used for a purchase over $400. Here goes the code example with inline comments describing interesting parts.</p>
+
+<p>```ruby app/models/transaction.rb</p>
+
+<p>class Transaction
+  belongs_to :store
+  attr_accessible :time, :amount</p>
+
+<p>  def self.csv_header</p>
+
+<pre><code>#Using ruby's built-in CSV::Row class
+#true - means its a header
+CSV::Row.new([:time, :store, :amount], ['Time', 'Store', 'Amount'], true)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def to_csv_row</p>
+
+<pre><code>CSV::Row.new(title: title, store: store.name, amount: amount)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.find_in_batches(filters, batch_size, &amp;block)</p>
+
+<pre><code>#find_each will batch the results instead of getting all in one go
+where(filters).find_each(batch_size: batch_size) do |transaction|
+  yield transaction
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<p>```</p>
+
+<p>Given this Transaction model, the controller can call the methods and set appropriate http headers to stream the rows as they are generated instead of waiting for the whole file to be generated. Here's the example controller code:</p>
+
+<p>```ruby app/controllers/transactions_controller.rb</p>
+
+<p>class TransactionsController</p>
+
+<p>  def index</p>
+
+<pre><code>respond_to do |format|
+
+  format.csv render_csv
+
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  private</p>
+
+<p>  def render_csv</p>
+
+<pre><code>set_file_headers
+set_streaming_headers
+
+response.status = 200
+
+#setting the body to an enumerator, rails will iterate this enumerator
+self.response_body = csv_lines(filters)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def set_file_headers</p>
+
+<pre><code>file_name = "transactions.csv"
+headers["Content-Type"] = "text/csv"
+headers["Content-disposition"] = "attachment; filename=\"#{file_name}\""
+</code></pre>
+
+<p>  end</p>
+
+<p>  def set_streaming_headers</p>
+
+<pre><code>#nginx doc: Setting this to "no" will allow unbuffered responses suitable for Comet and HTTP streaming applications
+headers['X-Accel-Buffering'] = 'no'
+
+headers["Cache-Control"] ||= "no-cache"
+headers.delete("Content-Length")
+</code></pre>
+
+<p>  end</p>
+
+<p>  def csv_lines</p>
+
+<pre><code>Enumerator.new do |y|
+  y &lt;&lt; Transaction.csv_header.to_s
+
+  #ideally you'd validate the params, skipping here for brevity
+  Transaction.find_in_batches(params){ |transaction| y &lt;&lt; transaction.to_csv_row.to_s }
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>As you see in this example, it's pretty straight forward once you put the pieces together. These streaming headers work under most servers including Passenger, Unicorn, etc. but webrick doesn't support streaming responses. It took me some time to figure out the headers and the enumerator thing, but since then it's working beautifully for us. Hope it will help someone with a similar need.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[On ActiveRecord Query Enhancers]]></title>
+    <link href="http://smsohan.com/blog/2013/01/21/on-activerecord-query-enhancers/"/>
+    <updated>2013-01-21T16:43:00-07:00</updated>
+    <id>http://smsohan.com/blog/2013/01/21/on-activerecord-query-enhancers</id>
+    <content type="html"><![CDATA[<p>The question is, should we use the third-party ActiveRecord Query Enhancers like SearchLogic/Squeel/MetaSearch?</p>
+
+<p>Quoting from <a href="https://github.com/ernie/squeel">Squeel's Github README</a> page,</p>
+
+<p>```ruby
+Squeel lets you rewrite...</p>
+
+<p>Article.where ['created_at >= ?', 2.weeks.ago]
+...as...</p>
+
+<p>Article.where{created_at >= 2.weeks.ago}
+This is a good thing. If you don't agree, Squeel might not be for you.
+```</p>
+
+<p>At work, we are migrating a Rails 3.0 project into Rails 3.2. We used MetaSearch in the project quite extensively and now discussing if using Squeel (successor of MetaSearch for newer Rails versions) would be a good decision. I recognized there are good points on both sides of the debate and wanted to capture the list here for a reference.</p>
+
+<h3>You'd want to use such enhancers because:</h3>
+
+<ol>
+<li>They extend the basic AR API to provide a DSL. For example, Squeel provides you an API so you can write the following:
+<code>User.where{ country != "USA" &amp;&amp; drives_truck == true }</code>
+Instead of this Activ eRecord Query:
+<code>User.where('country &lt;> ? &amp;&amp; drives_truck = ? ', 'USA', true)</code></li>
+<li>They write complex join statements, including outer joins and joining multiple tables, for you using a shorthand. e.g. <code>User.where{company_name_eq 'Coders'}</code></li>
+<li>They support negative logic (not equal, not in) and OR SQL queries that would require raw String queries using ActiveRecord API.</li>
+<li>They provide fancy operations such as <code>User.where{name_or_address_contains 'scott'}</code> that would require some raw String when using AR directly.</li>
+</ol>
+
+
+<h3>You'd avoid using these enhancers because:</h3>
+
+<ol>
+<li>You think that using String is just fine over using a Hash with hardcoded symbols anyway.</li>
+<li>As new versions of AR are released, there's little guarantee the third-party API will still be compatible.</li>
+<li>You are concerned about adding another pile of abstractions and magic on top of ActiveRecord.</li>
+</ol>
+
+
+<p>Please share if you prefer one over another and if you do, please let us know why.</p>
+]]></content>
+  </entry>
+  
+</feed>

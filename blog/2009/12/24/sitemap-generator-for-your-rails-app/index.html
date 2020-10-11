@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sitemap-generator for your Rails App and deployment solution - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="When talking about Search Engine Optimization for your public web pages, you probably try to follow the google guidelines for search engine &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2009/12/24/sitemap-generator-for-your-rails-app/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Sitemap-generator for Your Rails App and Deployment Solution</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-24T00:00:00-07:00" pubdate data-updated="true">Dec 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+When talking about Search Engine Optimization for your public web pages, you probably try to follow the google guidelines for search engine optimization. Its a good one to get started with. For my recent project, <a href="http://www.campzero.com/">www.campzero.com</a>, I read the document and tried to follow the steps. Today, I worked on generating sitemap for www.campzero.com using the following:<ul><li>Installed the site-map generator plugin following this link at <a href="http://aktagon.com/projects/rails/sitemap-generator">Aktagon&#8217;s</a>, <a href="http://github.com/christianhellsten/sitemap-generator">github link</a></li><li>For some reason, probably because of permission issues, my plugin install didn&#8217;t generate the sample sitemap.yml file for me. However, I created the config/sitemap.yml file myself and put the following contents there:</li></ul><pre class="brush: rails">domain: www.campzero.com<br />limit: 5000<br />priority: 1<br />change_frequency: weekly</pre><ul><li>Then, I put the call to the sitemap method as shown in the github documentation. </li><li>Finally, I ran the command <b>rake sitemap:gerenate</b> to generate my sitemap.xml file inside the public folder.</li><li>So far this went well with the local environment. However, when I deployed this code and ran the rake command in my staging environment, it said it was not finding any model with the sitemap method.</li><li>After some debugging, I found that the problem was with the code at the file generator.rb where they put <b>model.methods.include?(&#8216;sitemap_options&#8217;) </b>to see if the model contains a method named sitemap_options. But, at my staging environment, I found that this was returning false although there was this method inside the model. I changed the code to the following so that the include? check is done both for strings and symbols and it worked fine.</li></ul><pre class="brush: rails">if((model.methods.include?(:sitemap_options) || model.methods.include?('sitemap_options')) &amp;&amp; model.sitemap_options != nil)<br />models &lt;&lt; model<br />end</pre><ul><li>Now, I could generate sitemap at my staging environment.</li><li>However, soon I found another issue with deployment, as I want my sitemap file to stay between deployments. So, I had to ensure the sitemap file is generated at a shared place other than the default public folder. I did the following changes to the sitemap_generator_task.rake file:</li></ul><pre class="brush: rails">if defined?(SITEMAP_FILE_PATH)<br />SitemapGenerator::Generator.new(SITEMAP_FILE_PATH).find_models_and_generate<br />else<br />SitemapGenerator::Generator.run<br />end</pre><div><ul><li>I added the constant SITEMAP_FILE_PATH in my config/environments/staging.rb file to get it working.</li><li>Finally, I changed my deployment script to define a symlink from the public folder to the shared file path as follows:</li></ul><div><b>run &#8220;ln -s #{shared_path}/sitemap/sitemap.xml #{release_path}/public/sitemap.xml&#8221;</b></div></div></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-24T00:00:00-07:00" pubdate data-updated="true">Dec 24<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/12/22/how-to-strip-html-tags-truncate-and/" title="Previous Post: How to strip html tags, truncate and highlight texts in ruby on rails">&laquo; How to strip html tags, truncate and highlight texts in ruby on rails</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/12/27/acts-as-permalinkable-seo-friendly/" title="Next Post: acts_as_permalinkable: SEO friendly rails URLs using my first RoR plugin">acts_as_permalinkable: SEO friendly rails URLs using my first RoR plugin &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Forget Me Not! Object Oriented Design in Custom Exception - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="When designing custom exceptions, you may forget about old school OO fundamentals. As a reminder, lets take a look into the following custom &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2009/04/26/object-oriented-design-in-custom/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Forget Me Not! Object Oriented Design in Custom Exception</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-26T00:00:00-06:00" pubdate data-updated="true">Apr 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>When designing custom exceptions, you may forget about old school OO fundamentals. As a reminder, lets take a look into the following custom exception classes.</p> <pre class="brush: rails"><br />StorySaveError<br />StoryDescopeNotAllowedError<br />StoryCompleteError<br />StoryNotFoundError<br />StoryDeleteError<br />StoryDeleteNotAllowedError</pre><p>These exceptions are really useful in my application. But the bad thing is, they all derive from StandardError class, whereas there should be a base class, may be StoryError, which is more meaningful and useful. So, we can have the following-</p><pre class="brush: rails"><br />class StoryError < StandardError<br />end<br />StorySaveError < StoryError<br />StoryDescopeNotAllowedError < StoryError<br />StoryCompleteError < StoryError<br />StoryNotFoundError < StoryError<br />StoryDeleteError < StoryError<br />StoryDeleteNotAllowedError < StoryError</pre><p>With the addition of a base class for all Story related exceptions, I can write cleaner/better code.</p><ul><li>When I am not interested about the specific error, I can just use <code>rescue StoryError</code> to catch &#8216;em all</li><li>I can place a common error handling routine for all Story related exceptions</li><li>I can add new exception types without altering the codes where the specific type of StoryError is insignificant</li></ul><p>From my experience, I found that most people are not cautious about OO when desiging custom exceptions. (because they are exceptions!). Nonetheless, if you follow the OO guides, it will pay off for sure.</p>  </div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, that is another way. Usually, people use ErrorCode to designate such cases. For example, WebException has many error codes in .Net. One code denotes timeout, another denotes network failure and so on.<br />One quick point, I saw you added attr_accessor :message. message is already an attribute of the Exception class, the base class of all Exceptions. So, you need not define a message property again. Its there and you can use it for free!</div>
+</div>
+<div class='comment'>
+<div class='author'>Samiron Paul</div>
+<div class='content'>
+Just sharing a little experience. A situation where user may be failed to delete a task for any of two type of restrictions. But in both case &quot;TaskDeleteNotAllowed&quot; type exception will be raising. Hence it will not be possible to show the exact reason to user. Now instead of being so conservative by creating a new class, we came out in the following way<br /><br />Added a attribute in TaskDeleteNotAllowed:<br />Class TaskDeleteNotAllowed &lt; StandardError<br />    attr_accessor :message<br />end<br /><br />Create an instance of the class while before raising:<br />exception = TaskDeleteNotAllowed.new<br /><br />Setting custom message based on the error occurred and raise that:<br />exception.message = &quot;Task is completed&quot; #or any other message<br />raise exception<br /><br />Of course rescuing the error as following:<br />&#8230;<br />rescue TaskDeleteNotAllowed =&gt; error<br />   #show {error.message} in flash or write in log<br />&#8230;<br />That makes a proper sense to user whenever she fails to delete a task.<br /><br />Anyway, being concerned with OO fundamentals in  designing custom exception handlers is realized again.<br /><br />Thanks for the post</div>
+</div>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-26T00:00:00-06:00" pubdate data-updated="true">Apr 26<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/object-oriented-design/'>Object Oriented Design</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/04/21/unit-test-eager-loading-in-rails/" title="Previous Post: Unit Test eager loading in Rails ActiveRecord association">&laquo; Unit Test eager loading in Rails ActiveRecord association</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/05/13/unit-test-actioncontroller-filters/" title="Next Post: Unit/Functional Test Rails ActionController filters following DRY">Unit/Functional Test Rails ActionController filters following DRY &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Database, | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/database-/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Database Design: Sorting by Concepts on Nullable Fields]]></title>
+    <link href="http://smsohan.com/blog/2012/10/11/database-design-sorting-by-computed-fields/"/>
+    <updated>2012-10-11T21:05:00-06:00</updated>
+    <id>http://smsohan.com/blog/2012/10/11/database-design-sorting-by-computed-fields</id>
+    <content type="html"><![CDATA[<p>In a recent project, we had this requirement to sort a list of items by a concept that is absent in the database schema, but can be derived from other fields. To make it easy to understand, let's build an example, simple enough to isolate the topic of interest.</p>
+
+<p>Let's say we have a list of locations, stored in a database table as follows:</p>
+
+<pre><code>Locations (location_id (primary key), province_id (NULL), city_id (NOT NULL))
+</code></pre>
+
+<p>And say, we want to present a list of locations sorted by "address". As you see in this example, "address" is a concept, not directly present in the database, but can be derived based on province_id and city_id. So, when we say sort by "address", the SQL query may look like the follwing:</p>
+
+<p><code>sql query to sort by address
+  SELECT * FROM Locations order by province_id, city_id
+</code></p>
+
+<p>Now, if you take a second look at the schema, you'll see the <code>province_id</code> is <code>Nullable</code>. And if you are familiar with SQL, you already know that a <code>NULL</code> does not equal another <code>NULL</code>. So, for rows with <code>province_id = NULL</code>, the secondary sort on city_id has no effect at all. As a result, the expected sort by "address" cannot be derived by using this simple <code>order by</code> clause.</p>
+
+<p>There are a few work arounds to it. One obvious workaround is to change the DB schema and make the <code>province_id</code> NOT NULL in favor of a placeholder, for example, "Not Available". This would eliminate the problem altogether. This should be pretty easy to achieve if you have control over the database schema.</p>
+
+<p>But in case this is beyond your control, you'd have to hack your query and sleep with the noisy butterfly in your stomach. Such a poorman's solution would be to put a <code>"case ... when ... else... end..."</code> in the query.</p>
+
+<p>The reason I wanted to share this post is, if your project needs to sort by such a computed concept, here's what you should probably:</p>
+
+<ol>
+<li>Say "No" to it.</li>
+<li>Change your database to incorporate the concept as a column in some table.</li>
+<li>At the very least, make sure you're not sorting on a Nullable field.</li>
+<li>Repeat 1-3 in order.</li>
+</ol>
+
+
+<p>Thanks for reading. Keep crafting good software.</p>
+]]></content>
+  </entry>
+  
+</feed>

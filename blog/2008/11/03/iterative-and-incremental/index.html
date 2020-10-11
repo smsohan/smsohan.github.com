@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Iterative and Incremental implementation of Code Reviews - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="Extreme Programming (XP) advocates for a pair-programming, taking the code review to its extreme. I have also found that pair programming generates &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2008/11/03/iterative-and-incremental/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Iterative and Incremental Implementation of Code Reviews</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-03T00:00:00-07:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+<p>Extreme Programming (XP) advocates for a pair-programming, taking the code review to its extreme. I have also found that pair programming generates a lot of speed and also helps producing better quality product in the first time. But, at the same time it&#8217;s difficult to impress the management or prove return on investment  associated with pair programming to the business people. So, what is the best possible solution? I believe, we can implement frequent peer code reviews to mimic the pair programming to some extent and get the benefit out of it.</p>  <p>In our team, we started implementing code reviews as we now recognize that there is no way to live without it. As usual, our approach is an iterative and incremental approach. So, we are taking small steps and eventually embracing the best practices in the team. I would like to share our plan here in this blog. The review process goes on the following work flow-</p>  <p><em><span style="color:#8080ff;">&#8220;When I am done with my work on task, I commit the code with the reviewer&#8217;s name on the svn comment. CCNet automatically builds and sends a mail to the reviewer. The reviewer gets the review email through a filter and reviews the code and sends his feedback to me via IM/email.&#8221;</span></em></p>  <p><span style="color:#0000ff;"><strong>Sprint #1:</strong></span> Review all the names or classes, files, methods, variables and so on. So, the reviewer emphasizes on the names and provides feedback on the following things-</p>  <blockquote>   <p>1. Is the naming standard correctly followed?</p>    <p>2. Is this a meaningful identifier?</p>    <p>3. Does the name conform to the conventions used elsewhere in the code?</p> </blockquote>  <p><span style="color:#0000ff;"><strong>Sprint#2:</strong></span> Review the use of private methods and code structure. The to-do list is -</p>  <blockquote>   <p>1. Would it make more sense to put some code into the private method for readability and/or reusability?</p>    <p>2. Is there any hard-coded constant directly used without referring to a const/readonly data type?</p>    <p>3. For all the methods, is it possible to reduce the dependency by using a simple parameter instead of a whole object?</p>    <p>4. Learn from sprint#1 and use the common learning.</p> </blockquote>  <p><span style="color:#0000ff;"><strong>Sprint#3:</strong></span> Review the use of loops, if-else blocks. At this iteration, the to-do is-</p>  <blockquote>   <p>1. Is it possible to eliminate a loop?</p>    <p>2. Is it possible to avoid the nested loops?</p>    <p>3. Is there a large if-else-if-else block? Why is it required? Is this large conditional block a possible candidate for future change?</p>    <p>4. Learn from sprint#2 and use the common learning.</p> </blockquote>  <p>Well, this is pretty much it. The idea is, we feel its not practical to go with an overnight policy for implementing peer code reviews. But, its very much possible that we do it in small increments and at each sprint&#8217;s retrospective we bring this point. So, we are all informed that we need to do reviews, which, eventually should sustain as a best practice!</p>  <p>If you think you have some ideas regarding this, please share it with me/my readers.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Gregg Sporar</div>
+<div class='content'>
+Agreed, an incremental approach can work well.<br /><br />FYI, we&#39;re offering a special for one week only on our lightweight code review tool: Code Reviewer. $5 for 5 licenses - 5 days only (July 13-17).  Full details here: http://smartbear.com/code-review-5-for-5.php</div>
+</div>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-03T00:00:00-07:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/agile/'>agile</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/09/06/cruisecontrolnet-ccnet-configuration/" title="Previous Post: CruiseControl.Net (CCNet) configuration example for NCover">&laquo; CruiseControl.Net (CCNet) configuration example for NCover</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/11/10/rowtest-extension-for-nunit/" title="Next Post: RowTest Extension for NUnit">RowTest Extension for NUnit &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

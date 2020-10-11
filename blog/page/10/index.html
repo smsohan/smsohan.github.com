@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="Photo credits to&nbsp;Esteban CavricoI was working on a web project that lets you delete some records using Ajax. The following is just an example, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/page/10/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/23/hardcoded-urls-in-javascript-are-too/">Hardcoded URLs in Javascript Are Too Slippery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-23T00:00:00-06:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://farm3.static.flickr.com/2728/4182189627_ba036b02c8.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="448" src="http://farm3.static.flickr.com/2728/4182189627_ba036b02c8.jpg" width="500" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Photo credits to&nbsp;<span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;"><a href="http://www.flickr.com/photos/36179943@N00/" style="color: #0063dc; text-decoration: none;">Esteban Cavrico</a></span></td></tr></tbody></table><br /><br /><div dir="ltr" style="text-align: left;" trbidi="on">I was working on a web project that lets you delete some records using Ajax. The following is just an example, but you might be familiar with a similar code already:<br /><br /><script src="https://gist.github.com/1237981.js">  </script><br />This code used to work when the DELETE endpoint was indeed under &#8216;/blog/posts&#8217;. However, at some point a developer wants to remove the &#8216;/blog&#8217; from all the endpoints to put them directly under &#8216;/posts&#8217;! You can see, in such cases it is very hard to catch the bug that would be caused by the faulty JS code.<br /><br />Here&#8217;s a quick recommendation:<br /><blockquote>Don&#8217;t hardcode the URLs (or anything that is actually a server configuration) inside your JS.&nbsp;</blockquote>This is a code smell, as its duplicating code. But its also dangerous, because its hard to catch/fix these defects since they can be buried deep under an untested Javascript file. Instead feed this data from your server side code and you&#8217;ll mitigate risk that way.<br /><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/20/code-smell-private-vs-public-method/">Excess of Private Methods Is a Code Smell</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-20T00:00:00-06:00" pubdate data-updated="true">Sep 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Private methods, when used meaningfully, are a great tool for writing beautiful object oriented code. But as many other things in life, excess of private methods is bad, too!<br /><br />In my opinion, we use private methods to:<br /><br />1. &nbsp;isolate a block of code to be reused inside the class.<br />2. &nbsp;extract code from another method for code readability.<br /><br />Now, taking these two use cases in mind, here&#8217;s an easy conclusion:<br /><blockquote>The lower the ratio of public to private methods, the harder it is to write unit tests since the &#8220;units&#8221; are potentially larger.</blockquote>I don&#8217;t know if there is any rule of thumb, but you will smell it when you see your unit tests require a lot of setup and assertions. Here&#8217;s a code example from the Play! framework, an MVC franework for Java developers.<br /><br /><a href="https://github.com/playframework/play/blob/925a0676148f6cb149350f899a60d934544ab61a/framework/src/play/mvc/ActionInvoker.java">ActionInvoker.java </a><br /><br />You will see there are public methods with 100+ lines. I hope you agree with me:<br /><blockquote>&#8220;The ActionInvoker.java code is not readable&#8221;</blockquote>For the sake of readability, introducing private methods with good names would help. However, that doesn&#8217;t eliminate any of&nbsp;the possible code paths from the public methods. So, if you are lucky, you will see really long unit tests with complex setup conditions and mock expectations. Otherwise, there will be no tests at all! Without any tests for such long and complex methods, use them at your own risk. I won&#8217;t :(<br /><br /><span class="Apple-style-span" style="color: #666666;">Disclaimer: I like the play! framework a lot. However, if you take a look at their code and if you think unit testing is important, you&#8217;ll see they have a lot of rooms for improvement with simple</span> <a href="http://books.google.ca/books?id=1MsETFPD3I0C&amp;pg=PA110&amp;lpg=PA110&amp;dq=extract+method+martin+fowler&amp;source=bl&amp;ots=pLM4p0UCef&amp;sig=5nCPhEPwBkNULvuHiOF1jiW1qqk&amp;hl=en&amp;ei=Jrt4TqjZCoK80AG4nbDlDA&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=6&amp;ved=0CEUQ6AEwBQ#v=onepage&amp;q=extract%20method%20martin%20fowler&amp;f=false">extract method</a> <span class="Apple-style-span" style="color: #666666;">refactoring.</span></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/16/quiz-c-async-and-await-what-is-output/">Quiz: C# Async and Await. What Is the Output of This Code?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-16T00:00:00-06:00" pubdate data-updated="true">Sep 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">C# 5.0 (CTP version at this point) has support for async and await to allow clean implementation of non-blocking IO using a task-continuation model. I was just playing with it and here&#8217;s the sample code to tease your brain. Tell me what is the output of this program?<br /></div><br /><script src="https://gist.github.com/1223284.js"> </script></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/16/how-to-extend-ruby-module/">How to Extend a Ruby Module?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-16T00:00:00-06:00" pubdate data-updated="true">Sep 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Modules in Ruby are like classes with a few important differences. One of the differences is, a module cannot inherit from another module using the same syntax as class inheritance. However, its pretty easy to inherit a module&#8217;s method into another module, by just using the include ModuleToInclude syntax. Here&#8217;s an example if you are looking for one:<br /></div><br /><script src="https://gist.github.com/1223271.js"> </script></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/15/should-you-unit-test-interaction-with/">Should You Unit Test Interaction With Static Methods?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-15T00:00:00-06:00" pubdate data-updated="true">Aug 15<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">No. You should not. Here&#8217;s an example:</div><br /><script src="https://gist.github.com/1147225.js">
+  
+ </script></div><br />If you are somehow mocking this static method, you are potentially making it dangerous for other places where this static method is used. Eventually, this will create red test results that are hard to find and make your tests dependent on each other.<br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/12/how-to-list-all-classes-that-include/">How to List All Classes That Include a Module?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-12T00:00:00-06:00" pubdate data-updated="true">Aug 12<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">Here&#8217;s the code:</div><script src="https://gist.github.com/1142228.js">
+  
+ </script></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/09/should-you-unit-test-methods-with-lot/">Should You Unit Test Methods With a Lot of Mocking?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-09T00:00:00-06:00" pubdate data-updated="true">Aug 9<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Well, anytime you have a lot of mocking, it is probably a smell. Particularly, a first smell is violation of the <a href="http://en.wikipedia.org/wiki/Law_of_Demeter">law of demeter</a>. However, we were having discussion about whether or not we should write unit test for something like the following example:<br /><br /><script src="https://gist.github.com/1136189.js">
+  
+ </script><br /><br />As you can see, this method actually does a quite important task. It invokes the search method with specific parameters that will determine your search results. Now, we were debating whether or not the example unit test actually brings any value.<br /><br />Here&#8217;s what we have discussed:<br /><b>Pros:</b><br />It confirms that you are actually calling the third party method with the right parameter.<br /><b>Cons:</b><br />The test is too tightly coupled with the implementation, so it will break if something changes inside the method irrespective of its actual output.<br /><br />But we failed to come to an unanimous decision on its usefulness. We all agreed on the point that it definitely needed some integration tests to make sure the search had actually worked.<br /><br />Here are two questions for you:<br /><br /><ol style="text-align: left;"><li>Would you skip the unit test altogether for this method and rely completely on an integration test? Why/Why not?</li>
+ <li>If you are to rewrite this code, how would you write this using TDD?</li>
+ </ol><br />Looking forward to see your input on this!<br /><br /></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Isa Goksu</div>
+<div class='content'>
+The first question actually has two aspects. It has a design part, and an implementation part. You have to judge which part we are doing here since you know the actual work there. If it is a design side, you write an integration or a functional test to find out whether wiring is done correctly or not. If it is on the implementation side, you have to write a unit test that verifies the behaviour.<br /><br />What I see from just a little code snippet here is basically you are creating a wrapper/facade for the library, or a delegate or even an anti-corruption layer kinda something. And your wrapper object is basically created in such a way that it looks like a Humble Object (http://xunitpatterns.com/Humble%20Object.html). Therefore I&#39;d go for integration test. If the team you are working on is a distributed team, then you might have some trust and/or communication issues, therefore writing an additional unit test wouldn&#39;t hurt. Then again that&#39;s not necessary.<br /><br />Main thing here is to understand that TDD won&#39;t tell you that you have write unit tests all the time. What TDD say is have a coverage before you operate, and drive your design with this mentality. One thing I like in Ruby community is that they do focus on Specs rather than focusing on unit/integration/functional tests differences. A tool like RSpec or Cucumber is even designed in such a way that they give you tagging support which you can easily mark your test with #requiresDB, #requiresFileAccess, #opensBrowser, etc.. And then you can create multiple builds by using these tags to have prioritized test suites.<br /><br />Second question is probably an obvious one. If I were to re-write using TDD, I&#39;d probably end up having an anti-corruption layer to the library which is designed 1:1 from the actual library, hence not need to be unit tested.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/05/ruby-present-method-with-unless/">Ruby Present? Method</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-05T00:00:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Ruby has a nice little keyword called unless, that checks the opposite of if. So, you are probably used to a code like this:<br /><br /><pre lang="ruby">return customer.first_name unless customer.nil?<br /></pre><br />If you haven&#8217;t used present? before, you can in fact turn the above unless into a more familiar and easy to understand if statement:<br /><br /><pre lang="ruby">return customer.first_name if customer.present?<br /></pre><br />So, in most cases when you are using unless with a negative condition, you can use present? and if instead. I find it way easier to read.<br /><br />present? does the opposite of blank?. So, you will get the following:<br /><br /><pre lang="ruby">nil.present? #=&gt; false<br />[].present? #=&gt; false<br />"hello".present? =&gt; true<br />["a"].present? #=&gt; true<br /></pre>Hope it helps!</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, you are right.</div>
+</div>
+<div class='comment'>
+<div class='author'>michaelkoper</div>
+<div class='content'>
+So far as i know is present? not a Ruby method but a Ruby on Rails method. http://api.rubyonrails.org/classes/Object.html#method-i-present-3F<br /><br />.zero? is indeed a ruby method.</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yap, you can do my_integer.zero? instead of my_integer == 0<br /><br />or my_integer.nonzero?</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+Is there an equivalent for zero? ?<br />Except for != 0 of course&#8230;</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks Ashif!</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Yes, I often halt at whether I am doing it wright anytime I use &#39;unless&#39; in any condition. Its much more easier to read if I use &#39;if&#39;. Thanks for this short but useful post&#8230;</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/26/should-you-write-unit-tests-for/">Constructors Are Methods, Too!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-26T00:00:00-06:00" pubdate data-updated="true">Jul 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br />Yes, if your constructor does something meaningful. This is just like another method and should be treated equally for unit testsing purpose. Here&#8217;s an example that should need unit test:<br /><script src="https://gist.github.com/1107355.js">  </script><br />It looks simple, so testing it should be simple, too. I would only skip the default constuctors, as long as they don&#8217;t do anything interesting.</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Alexander Beletsky</div>
+<div class='content'>
+Sure, the constructors are methods too.. but they should not do anything more except internal initialization.<br /><br />I had a little habbit to put additional logic inside constructor, to be possible to write something like<br /><br />= new DoSomethingClass(x, y);<br /><br />I&#39;m getting rid of that also because of bad testability. Instead of that I write now:<br /><br />var smth = new DoSomethingClass(x, y);<br />smth.DoIt();</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/22/how-to-annoy-your-customer-learn-from/">How to Annoy Your Customers? Learn From GoDaddy Account Status Email</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-22T00:00:00-06:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://3.bp.blogspot.com/-0DN9O0Y4w3I/TinJW3lhP5I/AAAAAAAAAVw/Xn2pmjJjXbE/s1600/Screenshot-1.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="560" src="http://3.bp.blogspot.com/-0DN9O0Y4w3I/TinJW3lhP5I/AAAAAAAAAVw/Xn2pmjJjXbE/s640/Screenshot-1.png" width="640" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Just looking at this screenshot alone, what do you think it is?</td></tr></tbody></table>I have a few domains registered with GoDaddy. I went with them, because at that time, I didn&#8217;t know of another renowned provider. But they have always been the best of producing the most confusing ever user interface. The account status email is one step ahead in that same direction.<br /><br />This is how it starts:<br /><br />At the top right corner, it says July 2011, in grayed out font! A deliberate attempt to de-emphasize the statement period!<br /><br />Just below the date, there is a fake input box and a button labeled Go. This is an image and if you click it, it will actually open a new page instead of asking for user input right inside the search box. This is just following the theory of most surprise (as opposed to <a href="http://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least surprise</a>)!<br /><br />Next, in red background, they welcome me by saying, Welcome, S. M. Sohan! Customer Number: ### wtf? Customer Number? Do I give a shit what my customer number is? Why is the welcome grouped together with search and contact? How are these related?<br /><br />Then it says, Log in to your account on <b>our secure website</b> to view <b>your most recent account</b> statement. What does this mean? Does it mean, this statement is not recent? Is this not secure?<br /><br />Then it says, Summary of your account as of 7/21/2011<b>**</b>. That f&#8217;ing footnote will tell you that, the information may not reflect recent changes! What? Is this good enough till 7/21? If not, why do you even send this bullshit to me?<br /><br />Then it has 4 boxes side by side. The first one, <b>Messages</b> has Alerts: No, Notification(s): Yes. <b>View now</b> is a button to their site. How stupid is this? Why bother saying alerts &#8220;No&#8221;? If you know I have notifications, why not put it right here? Why are you confused about notification&#8221;(s)&#8221; - you should know if its just one (notification) or more (notifications). How lazy is that?<br /><br />Items Expiring is the other funny one. It says, Domain names: No. Then it says renew now. What? You&#8217;re saying nothing is expiring. Why on earth I would renew something?<br /><br />Then it takes almost 50% of the screen for asking me to contact with them through a number of channels including Facebook. Really? Facebook fan of GoDaddy? Crazy people!<br /><br />In the end, they don&#8217;t care putting a note of thanks, let alone personalize it with the name of an actual person. Isn&#8217;t it rude to end an email this way?<br /><br />Now, with all these hammerings - as if it fell short of creating enough fun, it says, More for You: followed by tens of fine print links to things that don&#8217;t matter at all to me. Oh boy! you are awesome!<br /><br />I am not a designer by any means. However, I think, even I can design a better version than this crap. Here&#8217;s my version in a screen mockup.<br /><br /><div class="separator" style="clear: both; text-align: center;"></div><div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-T-ySiJT4c-s/TinOUi2YfRI/AAAAAAAAAV0/zXKeZxR2wIM/s1600/Screenshot-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="330" src="http://2.bp.blogspot.com/-T-ySiJT4c-s/TinOUi2YfRI/AAAAAAAAAV0/zXKeZxR2wIM/s400/Screenshot-2.png" width="400" /></a></div><br /><br /><br /><br /><br /></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/11/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/9/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: EmberJS | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/emberjs/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Unconventional Conventions]]></title>
+    <link href="http://smsohan.com/blog/2013/04/19/unconventional-conventions/"/>
+    <updated>2013-04-19T09:33:00-06:00</updated>
+    <id>http://smsohan.com/blog/2013/04/19/unconventional-conventions</id>
+    <content type="html"><![CDATA[<p>JavaScript has been reborn, thanks to <a href="http://jquery.com">jQuery</a> to begin this epic and wonderful march. These days, we have a huge influx of micro to macro frameworks, all providing some well curated set of features. Every now and then I try to get a glimpse of the new and hot stuff so when time comes, I can make an informed decision on what to use and why.</p>
+
+<p>This post is about my recent attempt at learning <a href="http://angularjs.org/">AngularJS</a> and <a href="http://emberjs.com/">EmberJS</a>. Client-side MVC and/or single page apps need some core features as follows:</p>
+
+<ol>
+<li>URL routing</li>
+<li>Rendering views</li>
+<li>Read/write data from/to the backend server</li>
+</ol>
+
+
+<p>Both AngularJS and EmberJS offer these and some additional features, most notably, <a href="http://emberjs.com/guides/object-model/bindings/">two-way data binding</a>, so a change in the JavaScript object reflects on the rendered view and vice versa. But, to be honest, I think they overstretched the framework N miles to the north of where it should be. Let me explain with an example:</p>
+
+<p>Conventions are good when they offer an easy mental model. For example using the following router mapping:</p>
+
+<p><code>javascript
+App.Router.map(function() {
+  this.route('favorites');
+});
+</code></p>
+
+<p>it would match <code>favorites</code> with a <code>App.FavoritesRoute</code> based on the names. It's an easy enough pattern to recognize and remember. However, I find it's too far fetched in the following example:</p>
+
+<p>```javascript
+App.FavoritesRoute = Ember.Route.extend({
+  model: function() {</p>
+
+<pre><code>// the model is an Array of all of the posts
+return App.Post.find();
+</code></pre>
+
+<p>  }
+});
+```</p>
+
+<p>My mental model is challenged in a few ways here:</p>
+
+<ol>
+<li>Route has a <code>model</code> hook - which, by conventional usage, I can't seem to recognize as a pattern.</li>
+<li><code>App.Post.find()</code> entails an <code>Ember.ArrayController</code>, one provided by the framework. Here, a router is producing a <code>Controller</code> in disguise from the <code>model</code> hook.</li>
+</ol>
+
+
+<p>I'm sure with repeated usage, I'd be able to use these conventions without much of a problem. But on a pure API design/Architecture perspective, I think it'd make more sense to remove such unconventional conventions.</p>
+
+<p>To be honest, I've attempted the EmberJS guides for the 3rd time now, in less than a month, and I feel lost in so many conventions. I have had similar experience with learning AngularJS as well.</p>
+
+<p>With AngularJS, I was first a bit skeptical about all the custom tags that you'd introduce when using AngularJS. But after giving it a go, it sort of made sense as a trade-off between less code and manageable clutters. But I got really uncomfortable with the likes of the following:</p>
+
+<p>```html</p>
+
+<ul class="phones">
+  <li ng-repeat="phone in phones | filter:query">
+
+  </li>
+</ul>
+
+
+<p>```</p>
+
+<p>While it offers a snappy filtering experience and some declarative code, it feels too far stretched again. The convention around <code>$scope</code>, and a few other oddities as you'll see in this <a href="http://www.egghead.io/video/NnB2NBtoeAY">EggHead.io $scope vs scope tutorial</a> can be quite a stress on the brain.</p>
+
+<p>To conclude, I personally like both frameworks and think they offer some great features over their counterparts, but it'd make sense in a later version to pick conventions where it's truly conventional over an imposed one with lots of foreign concepts.</p>
+]]></content>
+  </entry>
+  
+</feed>

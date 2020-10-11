@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Database | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/database/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Implementation Challenges with a Multi-Tenant/SaaS Database]]></title>
+    <link href="http://smsohan.com/blog/2013/04/04/implementation-challenges-with-with-a-saas-database/"/>
+    <updated>2013-04-04T10:29:00-06:00</updated>
+    <id>http://smsohan.com/blog/2013/04/04/implementation-challenges-with-with-a-saas-database</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://farm1.staticflickr.com/21/26445881_7c69777b7b.jpg" width="500" height="353" title="Photo credits to corydalus" alt="climbing"></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/aa479086.aspx">This 2006 MSDN article</a> points out some key aspects of designing a multi-tenant database for SaaS applications. As you can read in the article, SaaS databases need to pick one of the following three configurations:</p>
+
+<ol>
+<li>separate databases</li>
+<li>shared database, separate schema and</li>
+<li>shared database, shared schema.</li>
+</ol>
+
+
+<p>A number of factors including economic, security, skillset, etc. contribute to the selection of the best suitable configuration. In this post, from my experience, I'm sharing the following practical requirements that introduce additional implementation challenges:</p>
+
+<ol>
+<li>Each account needs to have a <strong>maximum allowed space</strong> on the database (economic).</li>
+<li>Data from one account should never be accessible to other accounts (security).</li>
+<li>However, for backend usage, we need the ability to run queries across all accounts.</li>
+</ol>
+
+
+<p><strong>Size limiting is quite hard</strong>. It almost forces the use of separate database/schema per account. Even then,  most databases of today don't have a clean mechanism to exert such a hard limit.</p>
+
+<p><strong>Separate databases reduce the chance of cross-account data leaks</strong>. But backend tasks suffer for this. For example, your monthly billing processor needs to generate bill for all accounts. With one database/account, it cannot do one simple query to a single database anymore.</p>
+
+<p>Also, <strong>most ORM libraries don't support separate databases</strong> for a single type. For example, to fetch the orders from the database, the ORM library needs to connect to database A for account X, but to database B for account Y and so on. At this point, if possible, you'll need to tweak the ORMs a lot or fall back to your own ORM, which as <a href="/blog/2012/11/06/orm-or-not/">I wrote in the past</a>, is almost never a good idea.</p>
+
+<p><strong>Connection pooling is another challenge</strong>. It's generally a good practice to use connection pooling, to save the overhead of establishing a connection before every query. With separate databases, and hundreds, if not thousands, of accounts being served from an app server, the connection pool would either have too many or too few connections in it to be useful.</p>
+
+<p>I don't know about a clean architecture that'd address these requirements while not introducing the dev challenges. Please comment if you've any suggestion.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hybrid Persistence]]></title>
+    <link href="http://smsohan.com/blog/2013/01/08/hybrid-persistence/"/>
+    <updated>2013-01-08T15:08:00-07:00</updated>
+    <id>http://smsohan.com/blog/2013/01/08/hybrid-persistence</id>
+    <content type="html"><![CDATA[<p>Often times the business requirements demand for database features that aren't easily achievable using a single type of database. And now we have quite a few options to choose from, for example Key Value stores, Document databases, Relational databases etc, each providing some mutually exclusive features from the rest. So, it can be tempting to introduce multiple databases to rip the benefits of each.</p>
+
+<p>But, it comes with a few gotchas that are worth knowing. Here's a short list from my recent experience on a project:</p>
+
+<ol>
+<li>No simple way to join data from multiple databases without multiple round trips.</li>
+<li>Deployment is tricky as it adds more infrastructure.</li>
+<li>If data is duplicated, migrations need to address multiple sources.</li>
+</ol>
+
+
+<p>Let's explain this with an example. Say, we need to store data for an e-commerce site. Document stores seem to be good candidate for storing the product info, since different products have different data associated with it.</p>
+
+<p>```json products.json</p>
+
+<p>  {</p>
+
+<pre><code>id: '4wqrqw4890ipoip',
+name: 'iPhone 5',
+color: 'Black',
+price: '699.99'
+</code></pre>
+
+<p>  }</p>
+
+<p>  {</p>
+
+<pre><code>id: '4wqrqw4890ipoiq',
+name: 'Fine Sheet',
+thread_count: 400,
+size: 'Queen',
+price: '699.99'
+</code></pre>
+
+<p>  }</p>
+
+<p>```</p>
+
+<p>We also need to store transactional data and Relational databases have been successfully used for transactions. So, a simple schema may look like this:</p>
+
+<p><code>ruby
+  Sales(id, store_id, product_id, quantity)
+</code></p>
+
+<p>With a hybrid persistence approach like this, just beware that implementing simple features as follows will need more roundtrips:</p>
+
+<ol>
+<li>Show the invoice for sale with product <b>name</b>, quantity and price.</li>
+<li>Show all 'Fine Sheets' that are sold in the 'Brentwood' store.</li>
+<li>List all products sold today, sorted by <b>name</b>.</li>
+</ol>
+
+
+<p>Hybrid persistence works fine for caching. But whenever your data is split into multiple sources in way that you'd have to combine the parts from each, it's not gonna be fun time. Just so you know.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Object Versioning is an Open Design Problem]]></title>
+    <link href="http://smsohan.com/blog/2012/01/17/object-versioning-is-open-design/"/>
+    <updated>2012-01-17T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2012/01/17/object-versioning-is-open-design</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br /><table cellpadding="0" cellspacing="0" class="tr-caption-container" style="float: right; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://farm3.staticflickr.com/2517/3874492115_e69defd351.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="213" src="http://farm3.staticflickr.com/2517/3874492115_e69defd351.jpg" width="320" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">This unsolvable maze is a local food from Bangladesh, known as Jilapi<br />Photo credits to&nbsp;<span style="background-color: #fefefe; color: blue; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; text-align: left; text-decoration: none;"><a href="http://www.flickr.com/photos/udvranto_pothik/" style="background-color: #fefefe; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; text-align: left; text-decoration: none;">udvranto pothik</a></span></td></tr></tbody></table>Object Versioning is often required by a business rule, for example, to maintain an audit trail or to be able to revert to a previous version, etc. This is the 3rd time in my career where this Object Versioning requirement made me think like -<br /><blockquote class="tr_bq">There's gotta be an easier solution!&nbsp;</blockquote>But, I am yet to find one. So, I am thinking it's one of those open design problems, may be.<br /><br />To clarify the requirement with an example, let's consider the following scenario:<br /><br />A lawyer is preparing a document for one of her clients using a software. On January 17th, she needs to take a look at the version of the same document from May last year so that she can backtrace some changes that took place during these months.<br /><br />Lets assume the lawyer is using a software that stores the documents in a relational database with the following schema.<br /><pre>A Document has many Evidences, each provided by an EvidenceProvider<br /><br />Document (id, client_id, case_id, name)<br />Evidence (id, document_id, evidence_provider_id, details)<br />EvidenceProvider(id, name)<br /></pre>Now, given the versioning requirement how would you design your data model?<br /><br />Here's a couple of points that your design should address at a minimum:<br /><ul style="text-align: left;"><li>Going back to a version means a complete snapshot of the old version of the document. So, the version of May 1st should only bring the evidences that were there on that very day.</li><li>As a new version is created, it should inherit all previous evidences.</li></ul>As I have mentioned earlier, I am yet to find a good data model that can take care of these concerns without over-complicating everything. Let me know if you got a beautiful solution to this problem.<br /><br />However, in my latest project, the requirement is even harder. It's somewhat like this:<br /><br />The lawyer may have some documents in the "work in progress version". This means, if she needs to print a document for the court, she only wants to print the last "good version", skipping the "work in progress version".<br /><br />Also, when there is such a "work in progress version", she needs to attach any new Evidence to both the last "good version" as well as to the "work in progress version".<br /><br />Well, now you see the design of a data model for Object Versioning becomes really messy and unintuitive.<br /><blockquote class="tr_bq">So, here's my question to you - how would you design a solution for this?</blockquote></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Perils of Soft Delete]]></title>
+    <link href="http://smsohan.com/blog/2011/09/28/perils-of-soft-delete/"/>
+    <updated>2011-09-28T00:00:00-06:00</updated>
+    <id>http://smsohan.com/blog/2011/09/28/perils-of-soft-delete</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Often times, applications cannot get rid of the database records for business rules. For example, if you are a cable TV provider, you might have a customer calling you to stop the National Geographic Channel subscription from next month.&nbsp;Ideally you would like to delete this record, but you can't do it until the effective date:( If you delete it, the next invoice will not be able to charge for this channel, although it's still being used.<br /><br />In such scenarios, its common to fall back to a soft delete model. As an example, here's a little code:<br /><br /><script src="https://gist.github.com/1249283.js">  </script><br />This code looks simple and harmless at a first sight. But, as you develop your app, you'll run into a lot of issues from this. Here's a short list:<br /><ol style="text-align: left;"><li>You need to take care of cascading soft delete, for example, cancelling a customer's subscription needs to cascade down to all channels and other objects under it.</li><li>Whenever, you are listing the current subscriptions of a customer, you need to filter out the ended ones.</li><li>You need to figure out a strategy to periodically clean the ended subscriptions so that your database is not filled with outdated data.</li><li>If you have a business key used as a primary key as well, you will be in trouble if an ended subscription is restarted.</li><li>Your code will eventually have a lot of if-else blocks to apply changes to only on active objects.</li></ol>So, what is the solution? Its best to avoid them as much as possible. Richard Dingwall has <a href="http://richarddingwall.name/2009/11/20/the-trouble-with-soft-delete/">a detailed blog post</a> on some alternative techniques to avoid soft-delete. But if you have to have soft delete, as shown in the example, its worth remembering the aforementioned points.<br /><div><br /></div></div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Working on a Data Warehouse project]]></title>
+    <link href="http://smsohan.com/blog/2009/02/22/working-on-data-warehouse-project/"/>
+    <updated>2009-02-22T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2009/02/22/working-on-data-warehouse-project</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>I have been busy for the last month as we, at <a href="http://code71.com/" target="_blank">Code71</a>, rolled out the first release of the Business Intelligence project for <a href="http://www.vuenu.com/" target="_blank">Vuneu Media</a>. I will give you a brief on my project here so that you can follow my coming posts.</p>  <p>The used vehicle dealers buy their vehicles from different Auctions across the country. When making a buy decision, they try to find answer to these questions-</p>  <ol>   <li>What vehicles are customers buying?</li>    <li>How much it costs to get those from Auctions?</li>    <li>How many of these are receiving cash advances and by which lenders?</li>    <li>What is my potential gross profit if I deal a vehicle?</li>    <li>Where can I find the vehicles in Auctions?</li> </ol>  <p>So, we are getting the information from data vendors. Since, the amount of data is really large (nearly 10 million rows per month in total) for human manipulation, we are adding real value to the business by providing software intelligence. We developed the technology to put the pieces together and make it handy for the dealers.</p>  <p>We are using the following software/technologies:-</p>  <ol>   <li>SQL Server 2008, 64 Bit, Standard Edition.</li>    <li>SQL Server Integration Service.</li>    <li>SQL Server Reporting Service.</li>    <li>ASP.Net, C#, WCF.</li>    <li>SQL Server Analysis Service (is in the pipeline, not used yet!)</li>    <li>Windows Server 2008, 64 Bit.</li> </ol>  <p>I came across a number of innovations as well as issues at each step of the project. The database schema design was itself a challenge since data come from different vendors in various formats and granularities.</p>  <p>Here, I will start with an issue resulting from the <strong>“64 bit”</strong> SQL Server limitations-</p>  <p>SQL Server 64 bit versions include Integration Services, but it lacks support for some components. One such is, Microsoft Jet Driver. We use this driver to load data from Excel files.</p>  <p>To load Excel data using SSIS, you have the following options:-</p>  <p>1. Locate Program Files (x86)\Microsoft SQL Server\90\DTS\Binn\DTExec.exe. Then use this with your options. You can take a look at the command arguments by invoking DTExec –? This way you can run the SSIS packages using command line.</p>  <p>2. Using the SQL Server Agent Job is rather simple. Just Create/edit your job step having the Excel, then select Use 32 Bit in the Options/Execution Options tab. It will automatically use the 32 bit version of DTExec.</p>  <p>3. If you are using the IDE, you can turn of 64 bit by un-checking the Use 64 Bit Runtime at the Project Properties &gt; Debugging.</p>  <p>More information on 64 bit SQL Server related issues are <a href="http://msdn.microsoft.com/en-us/library/ms141766%28SQL.90%29.aspx" target="_blank">here at MSDN.</a></p>  <p>Also, I got help from <a href="http://blog.n-technologies.be/post/2008/08/26/Import-Excel-files-with-SQL-Server-Integration-Services-on-a-64-bit-server.aspx" target="_blank">Blog N-Technologies</a>.</p></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Tanvir Anowar</div>
+<div class='content'>
+good post.keep it up.</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

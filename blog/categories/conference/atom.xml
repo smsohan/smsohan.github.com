@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Conference | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/conference/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Notes from The VoxxedDays Banff, 2019]]></title>
+    <link href="http://smsohan.com/blog/2019/09/23/notes-from-the-voxxeddays-banff/"/>
+    <updated>2019-09-23T15:10:00-06:00</updated>
+    <id>http://smsohan.com/blog/2019/09/23/notes-from-the-voxxeddays-banff</id>
+    <content type="html"><![CDATA[<p><img src="/images/voxxed_banff.png" alt="VoxxedDaysBanff2019" /></p>
+
+<p>Gone are the days when I used to go to a ton of local developer meetups. After <a href="/blog/2019/06/05/polyglot-yyc-2019-my-first-unconference/">Polyglot YYC</a>, this was the second conference I joined this year. This was a 50/50 event for me in terms of like vs. dislike. Here goes my notes:</p>
+
+<p>Ix-Chel Ruiz presented the keynote to start the day. Her storytelling style reminded me of WWII movies, where a lot of cloudy and gloomy scene keep getting darker and darker, ending with a deep sense of sadness. Ix-Chel used quotes from the likes of <a href="https://en.wikipedia.org/wiki/Scott_Galloway_(professor)">Prof. Galloway</a> and Elon Musk to tell a story about how the modern tech is creeping into our private lives. I wish she had prepared for the keynote a little better. She paced it so slowly yet ran out of the material half-way through the slot. In a way I liked the early finish because I just wanted to feel optimistic about the future.</p>
+
+<p>The stunning view of Banff landscape brightened up the mood a bit:</p>
+
+<p><img src="/images/banff.jpg" alt="banff" /></p>
+
+<p>There were 4 other talks on the same day and I liked the talk on <a href="https://vuejs.org">Vue.js</a> and <a href="https://vuetifyjs.com/en/">Vuetify</a> by <a href="https://www.davepaquette.com">Dave Paquette</a>. Since, I use VueJS at work, it was easier to relate to. Dave showed us how he's using Vue.js to render a real-time collaborative UI for complex seating requirements at <a href="https://www.flyovercanada.com">FlyOver Canada</a>.</p>
+
+<p>Among other talks, there was one on data management for machine learning and another one on Kotlin, I liked these  talks but didn't fully relate with the topics.</p>
+
+<p>There was a talk on using Kafka for geo-fencing applications. The presenter could've spent more time on the parts of kafka that makes it a compelling case for using in geo-fencing applications. Instead, he delved into the code, java, and jar files.</p>
+
+<p>There was another talk on using <a href="https://eventstore.org">EventStore</a> for event sourcing. The presenters set the story saying that they had an opportunity to try new technologies while rewriting a "monolithic" application and they used EventStore with "multi-services" to implement it so it's easier to evolve the system. I'd love to see some evidence of the desired outcome, that'd be motivating. But in the end it was about the "how" instead of the "why".</p>
+
+<p>One thing to note is, even for talks that could be more engaging, I still learned quite a few new things.</p>
+
+<p>Beyond the talks, I like going to conferences as it opens the opportunity to meet new people and some known faces. In hindsight, had I known about this event before the talks were finalized, we'd have submitted a few proposals from Cisco. Looking forward to the next round for an opportunity to share some innovative work we're doing at Cisco.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Polyglot YYC 2019: My First Unconference]]></title>
+    <link href="http://smsohan.com/blog/2019/06/05/polyglot-yyc-2019-my-first-unconference/"/>
+    <updated>2019-06-05T16:49:00-06:00</updated>
+    <id>http://smsohan.com/blog/2019/06/05/polyglot-yyc-2019-my-first-unconference</id>
+    <content type="html"><![CDATA[<p><img src="/images/polyglot_yyc.png" alt="polyglot_yyc" />
+<sub>
+Source: <a href="https://polyglotyyc.ca">Polyglot YYC</a>
+</sub></p>
+
+<p>This weekend I went to <a href="https://polyglotyyc.ca">Polyglot YYC 2019</a>.
+It's a gathering of tech people from around Calgary. The event was open
+to all possible topics, hence the name Polyglot.
+It was the first unconference style meetup I went to and this post
+is a summary of my day.</p>
+
+<p>About the attendees, I don't have the official count, but I imagine there were
+close to a hundred people. Quite a few
+people represented the sponsor companies. The sponsors
+advertised for hiring new employees, mostly software engineers. On the
+other hand, I met a few people who joined this venue to talk to prospective employers.
+Some of the attendees were enrolled in a coding bootcamp to switch
+careers. I was quite happy to see the community praising their enthusiasm towards the bootcampers.
+Moreover, I met a few regular tech meetup people after a long time. I used to go to
+all tech meetups I could find in town before having kids, and I felt
+great to be among the self-motivated crowd after a long break.</p>
+
+<p>About the event, I was fascinated by how the unconference took its shape.
+At check-in time, everyone got a couple of forms to write down topics
+of interest, either as a host or a participant. Everyone could vote for five
+such topics. I didn't prepare
+beforehand. So, I put up a topic that I'm presently curios about, "Writing for Developers".
+A handful of people voted for me, but it didn't make the cut. I found
+some ideas better than mine and was happy that those got
+voted to the top. In hindsight, I should've proposed the topic of "Why
+Are You Not Innovating?". I did an internal presentation on this topic
+at Cisco and it was generally praised by my colleagues.</p>
+
+<p>My other observation is, between technical and soft-skill related
+topics, I liked the soft-skill ones better. For example, I found the topics on hiring,
+choosing a technical vs. managerial career path to be more interesting than
+the topics such as GraphQL and ReactJS. A few years ago, I'd
+just choose the technical topics without thinking twice. This is also a
+pattern in my recent blog posts or reading list.</p>
+
+<p>In the hiring session, I saw a positive attitude towards hiring remotes
+and treating them as equals. This is a major mindset shift among the
+community.</p>
+
+<p>In the individual contributor vs. management career path session, the
+attendee list included both kinds as well as people that had transitioned in either
+direction. The one take home message I got from this session was, when
+confused with career choice, individual contributors and managers should take the step to
+switch roles. And if things don't work out, it's totally possible
+to revert later.</p>
+
+<p>I'm looking forward to the 2020 edition of this event and may even prepare to
+come up with a good idea for the unconference. If you can, please
+join us for the next round.</p>
+]]></content>
+  </entry>
+  
+</feed>

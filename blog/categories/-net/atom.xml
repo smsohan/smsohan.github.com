@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: .Net | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/-net/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MvcMailer and Open Source Happiness]]></title>
+    <link href="http://smsohan.com/blog/2013/03/18/mvcmailer-and-open-source-happiness/"/>
+    <updated>2013-03-18T09:17:00-06:00</updated>
+    <id>http://smsohan.com/blog/2013/03/18/mvcmailer-and-open-source-happiness</id>
+    <content type="html"><![CDATA[<p>MvcMailer makes me happy as a developer.</p>
+
+<p>I find an immense amount of happiness everytime I check the <a href="https://nuget.org/packages/MvcMailer/">Nuget page of MvcMailer</a>. It's so refreshing to see the download count going up (42,427 total downloads as I write), receiving feedback, praises and even the complains.</p>
+
+<p><img src="/images/mvcmailer_tweets.png" alt="MvcMailer Tweets" /></p>
+
+<p>The idea of MvcMailer came from trying to bring some of the amazing <a href="http://guides.rubyonrails.org/action_mailer_basics.html">Ruby on Rails ActionMailer</a> features to ASP.NET MVC developers. It was well accepted since the very beginning and I hope is still helping people. As a side-effect, MvcMailer gives me an opportunity to keep in touch with the developments in ASP.NET MVC, C#, the .NET framework and the community around these. During our Sunday coffee and code seessions, I usually pair up with <a href="http://codecuriosity.com/">Tyler Mercier</a>, and MvcMailer is often the project we'd work on, or at least talk about. It also gives me a code to share on my <a href="https://github.com/smsohan/MvcMailer">github profile</a>, which I expect a good future employer to care about :)</p>
+
+<p>Yesterday, we met for Coffee and Code and released a new version to better work with .NET 4.5. This has been the most requested feature in the last couple months and required a small code change. After we released it, I drove home in about 20 minutes. Checked the counts, and it had already seen 4 downloads. This felt just amazing. Now after about 20 hours, it feels even better to see 100+ downloads of the new release. It feels so good.</p>
+
+<p>Open source is truly rewarding, both to its contributors and to its consumers.</p>
+
+<p>Happy open sourcing.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MvcMailer new API]]></title>
+    <link href="http://smsohan.com/blog/2012/10/02/mvcmailer-new-api/"/>
+    <updated>2012-10-02T10:23:00-06:00</updated>
+    <id>http://smsohan.com/blog/2012/10/02/mvcmailer-new-api</id>
+    <content type="html"><![CDATA[<p>With the help of <a href="http://codecuriosity.com/">@TylerMercier</a>, and many active users of MvcMailer, we have just released the new API for MvcMailer. This is a summary post capturing the work and lessons learned in the process.</p>
+
+<p>The bulk of the work has been done on removing hard dependencies on dll files for 3rd party libraries in favor of NuGet packages. For example, we used NUnit, for running our tests. Instead of referencing the dlls directly, we are now using the NuGet package. This will help the contributors to get up and running with the source code without having to worry about the depedencies being in the right place.</p>
+
+<p>NuGet command line also added a dependency as a Nuget package!</p>
+
+<p>But this cleanup is not gonna be directly visible to the users of MvcMailer. If you install MvcMailer today, you should see a few changes as follows:</p>
+
+<ol>
+<li>MvcMailer now uses T4Scaffolding 1.0.7 instead of the older version that was causing issue with ASP.NET MVC 4.</li>
+<li>MvcMailer package is now exclusively for ASP.NET MVC 4. And a new package MvcMailer3 is published for ASP.NET MVC3. After looking into options, we found this was probably the best way to release an upgrade, while still remaining compatible with MVC3.</li>
+<li>The MailerBase has a sweet new API. The old API still works, but I'd highly discourage using it. This is how it'd look:</li>
+</ol>
+
+
+<p>``` csharp Example code showing old API</p>
+
+<p>class WelcomeMailer : MailerBase{</p>
+
+<p>  public MailMessage Welcome(){</p>
+
+<pre><code>var mailMessage = new MailMessage(){Subject = 'Welcome to the world!'};
+mailMessage.To.Add("hello@example.com");
+
+PopulateBody(mailMessage, 'Welcome');
+
+return mailMessage;
+</code></pre>
+
+<p>  }</p>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>As you see here, the old API would require you to initialize your own <code>MailMessage</code>, set some parameters to it and then hand it over to MailerBase so it can render the view into its body.</p>
+
+<p>We found it would be nice to reverse this workflow using lambdas. So, there's a new populate method, that will call you back with an already instantiated <code>MvcMailMessage</code> object so you can set its properties as required. <code>MvcMailMessage</code> is an extension of <code>MailMessage</code> from the core .Net library, with new properties added so you can specify the <code>ViewName, MasterName, LinkedResources</code> etc.</p>
+
+<p>So, with this new API, the code from above will look like the following:</p>
+
+<p>``` csharp Example code with the new API</p>
+
+<p>class WelcomeMailer : MailerBase{</p>
+
+<p>  public MvcMailMessage Welcome(){</p>
+
+<pre><code>return Populate(x =&gt; {
+  x.Subject = 'Welcome to the world!';
+  x.ViewName = 'Welcome';
+  x.To.Add("hello@example.com");
+});
+</code></pre>
+
+<p>  }</p>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>As you see here, the new API provides a nice way get rid of some of the repiting parts of your mailer code. This API is available on both MvcMailer3 and MvcMailer.</p>
+
+<p>We'd like to hear your feedback on this new API. Thank you for using MvcMailer.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NuGet - Why Should You Care?]]></title>
+    <link href="http://smsohan.com/blog/2011/03/17/nuget-why-should-you-care/"/>
+    <updated>2011-03-17T00:00:00-06:00</updated>
+    <id>http://smsohan.com/blog/2011/03/17/nuget-why-should-you-care</id>
+    <content type="html"><![CDATA[<div class='post'>
+Traditionally the .NET community, or more appropriately the users of .NET framework relied on products from Microsoft - so, in a product stack you are likely to see almost everything coming from Microsoft. However, some community contribution made its way into the main stream - for example, NUnit or Log4Net. But you can literally count the number of such main stream non-Microsoft products in your development stacks with your fingers (sparing a few)!<br /><blockquote>NuGet makes it easy to share your reusable library/utility code to the community. So, if you've done something cool that you wanna share, you should utilize the platform.</blockquote>One important difference between your and Microsoft's contribution is, whatever you are contributing is likely to be a piece of software extracted from one of your real world projects. On the other hand, Microsoft attempts to produce something based on public interest and their imagination - often missing the real pain that you or I have. So, this mismatch between the designer and the actual consumer of the product often leaves a lot of opportunity for you. If you did something to solve your own pain on a project, its likely you're not alone. So, share it with us.<br /><blockquote>NuGet official feed and website is a great place to get feedback.</blockquote>Did something cool? Well, you should feel good as people will use and appreciate your work. More importantly, they will provide you with interesting ideas and reviews that you haven't thought about. Does this sound useful to you? People will go even further - they will directly contribute to the project with code!<br /><blockquote>NuGet will challenge you with competition from other contributors.</blockquote>A healthy competition is a great way of learning from others too. You'll see other contributors attacking the same pain you are solving in a different approach, often directly challenging you! You love challenge, don't you?<br /><blockquote>If you need hard numbers to get motivated, here's some data from my MvcMailer project:<ul><li>Downloaded 600+ times in less than 2 months.</li></ul><ul><li>Received 60+ emails from people using MvcMailer, mostly encouraging feedback.</li></ul><ul><li>300%+ increase in my blog traffic.</li></ul></blockquote><br /><div>Bottom line is, you should publish your NuGet package if there's any cool project you have done. Or, look out for what others are doing and possibly contribute with your code/suggestions. If you need an idea, look for StackOverflow questions, you'll see there are solvable problems that people are fighting against time and again.</div></div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My Article at CodeProject: MvcMailer]]></title>
+    <link href="http://smsohan.com/blog/2011/01/13/my-article-at-codeproject-mvcmailer/"/>
+    <updated>2011-01-13T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2011/01/13/my-article-at-codeproject-mvcmailer</id>
+    <content type="html"><![CDATA[<div class='post'>
+I just released a .Net NuGet package called MvcMailer and to get people super easily started, put an article at CodeProject.com. You are most welcome to the article at&nbsp;<a href="http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx">http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx</a><br />I welcome your comments and suggestions!</div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Just released 0.8 and it should work. But please let me know if it doesn&#39;t.<br />I also added multi-part emails in version 0.8. You may check that out as well.<br />One important change:<br />mail.Body = PopulateBody(mail, &quot;welcome&quot;) needs to be replaced with PopulateBody(mail, &quot;Welcome&quot;), it gets rid of the duplication</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+This comment has been removed by the author.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Brilliant! Can&#39;t wait. Could you post a comment here or send me a line to jkonecki [at] gmail.com when the new release is out so I can test it as well?</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks for your reply. I will test this out before I push a new release. The new release will also add multi-part emails so that you can easily send html and plain text emails.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+My route is defined as:<br /><br />routes.Add(&quot;Account&quot;, new Route(&quot;{account}/{controller}/{action}/{id}&quot;,<br />new RouteValueDictionary(new { account = &quot;&quot;, controller = &quot;Home&quot;, action = &quot;Index&quot;, id = &quot;&quot; }), new AccountMvcRouteHandler()));<br /><br />I&#39;m trying to render a link:<br />href=&quot;@Url.Abs(Url.Action(&quot;About&quot;, &quot;Home&quot;))&quot;<br /><br />The url that is generated looks like:<br /><br />http://mysite/Home/About<br /><br />instead of<br /><br />http://mysite/myaccount/Home/About</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Can you please share your specific route and ActionLink in mailer view that breaks for the route data?<br /><br />I know a solution to your problem now. But I would like to make sure I know the problem in detail.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Great! I&#39;m waiting impatiently... ;-)<br /><br />PS. Congratulations on joining ThoughtWorks</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, a new version is overdue now:)</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Awesome!<br /><br />Will you release a new version through NuGet? I will be able to upgrade easily and test it for you.<br /><br />Cheers!<br />Jakub</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks for your suggestion. I will fix this issue this weekend.</div>
+</div>
+<div class='comment'>
+<div class='author'>Jakub</div>
+<div class='content'>
+Hi!<br /><br />Thirst of all, thank you for a brilliant package! It&#39;s simple and easy to use!<br /><br />I&#39;ve just found one little issue - I&#39;ve notices that the ControllerContext for Notifier doesn&#39;t have the RouteData dictionary populated with the same values as the RouteData for main controller. This causes UrlHelper to generate invalid Urls. My app is a multi-tenant one and all my routes have format: /{account}/{controller}/{action}/ I&#39;ve managed to &#39;fix&#39; it by adding following code in the WelcomeMessage.cshtml<br /><br />@{<br />    this.Url.RequestContext.RouteData = (this.Context.CurrentHandler as MvcHandler).RequestContext.RouteData;<br />}<br /><br />I wonder if you could fix it properly, then MvcMailer will be just perfect! ;-)<br /><br />Thank you,<br />Jakub</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A good example of C# Regular Expression: Implementing InitCap or Titleize/TitleCase using C# and Regular Expression]]></title>
+    <link href="http://smsohan.com/blog/2009/01/21/good-example-of-c-regular-expression/"/>
+    <updated>2009-01-21T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2009/01/21/good-example-of-c-regular-expression</id>
+    <content type="html"><![CDATA[<div class='post'>
+<p>Ever since I first learned about the regular expressions, I have always been fascinated by its magical capability. When I first learned about DFA/NFA, I figured out how it is possible to evaluate a regular expression and eventually, during my Undergrad at BUET, I implemented a regular expression evaluator for the Compiler Lab.</p> <p>Now, given this history, here is a simple code that I wrote today. Let me know if you liked it-</p> <div style="background: white none repeat scroll 0% 0%; font-size: 10pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; font-family: courier new;"> <p style="margin: 0px;">        Program()</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(Titleize(<span style="color: rgb(163, 21, 21);">"hello! This is a sample string for titleize!"</span>));</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.Read();</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> Titleize(<span style="color:blue;">string</span> input)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color: rgb(43, 145, 175);">Regex</span>.Replace(input.ToLower(), <span style="color: rgb(163, 21, 21);">@"(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)"</span>, <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MatchEvaluator</span>(OnMatch));</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> OnMatch(<span style="color: rgb(43, 145, 175);">Match</span> match)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">"{0}{1}{2}"</span>, match.Groups[<span style="color: rgb(163, 21, 21);">"space"</span>].Value, match.Groups[<span style="color: rgb(163, 21, 21);">"first"</span>].Value.ToUpper(), match.Groups[<span style="color: rgb(163, 21, 21);">"rest"</span>].Value);</p> <p style="margin: 0px;">        }</p></div> <p style="margin: 0px;">For a little explanation, the pattern <span style="color: rgb(163, 21, 21);">@"(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)"</span> matches to a series of space followed by a word. The word is further divided into two parts, the first one is just the first character and the rest understandably captures the "rest" part of the word.</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Next the OnMatch method takes each occurrence of a match of the above pattern and as shown, simply regroups the word as previous but just takes the Upper case of the first letter!</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Simple? You got another good example of Regular Expression? Share with me.</p></div>
+
+
+<h2>Comments</h2>
+
+
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+The pattern could be much easier:<br />=======================================<br />public string Titleize(string input)<br />{ return Regex.Replace(input.ToLower(), <br />@&quot;(?&lt;first&gt;\b\w),new MatchEvaluator(OnMatch));<br />}<br />public string OnMatch(Match match)<br />{ return match.Groups[&quot;first&quot;].Value.ToUpper(); }</div>
+</div>
+<div class='comment'>
+<div class='author'>Sadique</div>
+<div class='content'>
+Yes, this is a nice example of power of regular expression. <A HREF="http://support.microsoft.com/kb/308252" REL="nofollow">Here</A> is a nice article to learn quickly the grouping of match &amp; several useful links of regular expression.</div>
+</div>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

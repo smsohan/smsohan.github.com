@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby on Rails | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Are ActiveRecord Callbacks Any Good?]]></title>
+    <link href="http://smsohan.com/blog/2013/02/07/activerecord-callbacks/"/>
+    <updated>2013-02-07T09:04:00-07:00</updated>
+    <id>http://smsohan.com/blog/2013/02/07/activerecord-callbacks</id>
+    <content type="html"><![CDATA[<p>Wanted to share my thoughts on ActiveRecord Callbacks. I'd like to know your thoughts if you disagree. Please use the comments.</p>
+
+<ul>
+<li>Only use them when the behavior is <b>must have</b> under all situations, including your tests. For example, we know email addresses are case-insensitive. So no matter what, we may always want to store a lower cased version in the db.</li>
+</ul>
+
+
+<p>```ruby user.rb</p>
+
+<h1>Good</h1>
+
+<p>class User &lt; ActiveRecord::Base</p>
+
+<p>  before_save :downcase_email</p>
+
+<p>  def downcase_email</p>
+
+<pre><code>email.downcase!
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<p>```</p>
+
+<ul>
+<li>Never use them otherwise. A couple of classic examples that I consider as bad:</li>
+</ul>
+
+
+<p>```ruby user.rb</p>
+
+<h1>Bad: Sends email, probably not required under all situations such as when creating via migrations, tests etc.</h1>
+
+<p>class User &lt; ActiveRecord::Base</p>
+
+<p>  after_create :welcome</p>
+
+<p>  def welcome</p>
+
+<pre><code>WelcomeMailer.welcome(self).deliver
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<h1>Bad: Interacts with external components</h1>
+
+<p>class User &lt; ActiveRecord::Base</p>
+
+<p>  after_create :setup_orientation</p>
+
+<p>  def setup_orientation</p>
+
+<pre><code>OrientationMessageQueue.enque(self)
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<p>```</p>
+
+<ul>
+<li>A common problem with the callbacks is, there are some handy methods that skip the callbacks. For example, consider the following:</li>
+</ul>
+
+
+<p>```ruby User.rb</p>
+
+<h1>Careful</h1>
+
+<p>class User &lt; ActiveRecord::Base</p>
+
+<p>  before_save :update_coordinates</p>
+
+<p>  def update_coordinates</p>
+
+<pre><code>self.coordinates = Geo.find_coordinates(zip_code)
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<h1>works fine</h1>
+
+<p>sohan = User.find_by_name('Sohan')
+sohan.zip_code = '33333'
+sohan.save!</p>
+
+<h1>doesn't fire the callback</h1>
+
+<p>User.update_all({zip_code: '33333'}, {zip_code: '55555'})
+```</p>
+
+<p>If you're using the callbacks, I'd emphasize again, only use when you are absolutely sure the desired behavior applies under all contexts.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Seed Data in a Rails Project]]></title>
+    <link href="http://smsohan.com/blog/2012/11/23/seed-data-in-a-rails-project/"/>
+    <updated>2012-11-23T13:18:00-07:00</updated>
+    <id>http://smsohan.com/blog/2012/11/23/seed-data-in-a-rails-project</id>
+    <content type="html"><![CDATA[<p>Most applications I've worked on required some kind of seed data. For example, I've used seed data to create a super admin user so the site can actually be used upon a fresh install. Some other common cases include things like, list of credit card types, names of countries/states etc. This post is about some ideas to manage thsese seed data in a Ruby on Rails project.</p>
+
+<h3>Where to put the seed data?</h3>
+
+<p>I think you have 2 choices to pick from.</p>
+
+<ol>
+<li>db/seeds.rb</li>
+<li>db/migrate/2342423424_some_migration.rb</li>
+</ol>
+
+
+<p>I prefer having it in the seeds.rb whenever possible since this is the obvious place for it. But I've often put them in migrations as well. There are trade-offs associated with both.</p>
+
+<p>Migrations only run once. This means, "double/miltiple seeding" is not a concern at all. So, you can write a migration with some seeding command as follows:</p>
+
+<p>```ruby Migration CreateUsers</p>
+
+<p>  def self.up</p>
+
+<pre><code>create_table :users do |u|
+  u.name
+  u.email
+  u.encrypted_password
+  u.password_salt
+end
+
+create_super_admin_user
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.create_super_admin_user</p>
+
+<pre><code>User.create!(name: 'SuperAdmin', email: 'super@mysite.com', ...)
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>This works great. It creates the super user and by virtue of migrations, it only ever creates one super admin.</p>
+
+<p>The caveat with this approach is, if you change certain things later, then this migration will fail to run. For example, say we added a required field to user as follows:</p>
+
+<p>```ruby User</p>
+
+<p>  class User</p>
+
+<pre><code>validates :age, presence: true
+</code></pre>
+
+<p>  end</p>
+
+<p>```</p>
+
+<p>Now, if you run the migration on a freshly checked out code, it will fail due to this validation. One workaround is to fix the code in this migration. But for people that already ran the migrations, and likely your production environment already did so, this has no effect. At this point, it starts getting complicated and some band-aid solutions are usually implemented.</p>
+
+<p>On the other hand, if you are using db/seeds.rb for seed data, you'd have to make sure its idempotent. So, a rerun should not create a 2nd copy of the objects. As a start, your code could be like this:</p>
+
+<p>```ruby db/seeds.rb
+  if User.where(email: 'super@mysite.com').blank?</p>
+
+<pre><code>User.create!(name: 'SuperAdmin', email: 'super@mysite.com', ...)
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>With this in place, you can easily incorporate the change for the new validation as follows:</p>
+
+<p>```ruby db/seeds.rb
+  super_user = User.where(email: 'super@mysite.com').first
+  if super_user &amp;&amp; super_user.age.blank?</p>
+
+<pre><code>super_user.update_attributes(age: 20)
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>User.create!(age: 20, name: 'SuperAdmin', email: 'super@mysite.com', ...)
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>This would work for people who already had a super user and also for people that just got a fresh copy of the code.</p>
+
+<blockquote><p>So, I prefer putting data in seeds.rb with idempotency.</p></blockquote>
+
+<p>In addition to handling such cases, it also makes it easy for anyone to take glance at the seed data in one place.</p>
+
+<h3>How to handle large amount of seed data?</h3>
+
+<p>When you have more than a handful of data to seed, I'd recommend tidying up your db/seeds.rb into a more manageable structure. Here's how I'd do it:</p>
+
+<p>```bash File organization
+  |- app
+  |- db</p>
+
+<pre><code>- seeds.rb
+|- seeds
+  - users.rb
+  - credit_card_types.rb
+</code></pre>
+
+<p>```</p>
+
+<p>With this structure in place, you can turn you seeds.rb into a simple manifesto file as follows:</p>
+
+<p>```ruby seeds.rb</p>
+
+<p>  require 'seeds/users'
+  require 'seeds/credit_card_types'</p>
+
+<p>```</p>
+
+<p>This will help you keeping things organized and hopefully give you a happier solution to the seed data problem.</p>
+]]></content>
+  </entry>
+  
+</feed>

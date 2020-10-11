@@ -1,0 +1,642 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="I have been busy for the last month as we, at Code71, rolled out the first release of the Business Intelligence project for Vuneu Media. I will give &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/page/18/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/02/22/working-on-data-warehouse-project/">Working on a Data Warehouse Project</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-22T00:00:00-07:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I have been busy for the last month as we, at <a href="http://code71.com/" target="_blank">Code71</a>, rolled out the first release of the Business Intelligence project for <a href="http://www.vuenu.com/" target="_blank">Vuneu Media</a>. I will give you a brief on my project here so that you can follow my coming posts.</p>  <p>The used vehicle dealers buy their vehicles from different Auctions across the country. When making a buy decision, they try to find answer to these questions-</p>  <ol>   <li>What vehicles are customers buying?</li>    <li>How much it costs to get those from Auctions?</li>    <li>How many of these are receiving cash advances and by which lenders?</li>    <li>What is my potential gross profit if I deal a vehicle?</li>    <li>Where can I find the vehicles in Auctions?</li> </ol>  <p>So, we are getting the information from data vendors. Since, the amount of data is really large (nearly 10 million rows per month in total) for human manipulation, we are adding real value to the business by providing software intelligence. We developed the technology to put the pieces together and make it handy for the dealers.</p>  <p>We are using the following software/technologies:-</p>  <ol>   <li>SQL Server 2008, 64 Bit, Standard Edition.</li>    <li>SQL Server Integration Service.</li>    <li>SQL Server Reporting Service.</li>    <li>ASP.Net, C#, WCF.</li>    <li>SQL Server Analysis Service (is in the pipeline, not used yet!)</li>    <li>Windows Server 2008, 64 Bit.</li> </ol>  <p>I came across a number of innovations as well as issues at each step of the project. The database schema design was itself a challenge since data come from different vendors in various formats and granularities.</p>  <p>Here, I will start with an issue resulting from the <strong>“64 bit”</strong> SQL Server limitations-</p>  <p>SQL Server 64 bit versions include Integration Services, but it lacks support for some components. One such is, Microsoft Jet Driver. We use this driver to load data from Excel files.</p>  <p>To load Excel data using SSIS, you have the following options:-</p>  <p>1. Locate Program Files (x86)\Microsoft SQL Server\90\DTS\Binn\DTExec.exe. Then use this with your options. You can take a look at the command arguments by invoking DTExec –? This way you can run the SSIS packages using command line.</p>  <p>2. Using the SQL Server Agent Job is rather simple. Just Create/edit your job step having the Excel, then select Use 32 Bit in the Options/Execution Options tab. It will automatically use the 32 bit version of DTExec.</p>  <p>3. If you are using the IDE, you can turn of 64 bit by un-checking the Use 64 Bit Runtime at the Project Properties &gt; Debugging.</p>  <p>More information on 64 bit SQL Server related issues are <a href="http://msdn.microsoft.com/en-us/library/ms141766%28SQL.90%29.aspx" target="_blank">here at MSDN.</a></p>  <p>Also, I got help from <a href="http://blog.n-technologies.be/post/2008/08/26/Import-Excel-files-with-SQL-Server-Integration-Services-on-a-64-bit-server.aspx" target="_blank">Blog N-Technologies</a>.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Tanvir Anowar</div>
+<div class='content'>
+good post.keep it up.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/01/21/good-example-of-c-regular-expression/">A Good Example of C# Regular Expression: Implementing InitCap or Titleize/TitleCase Using C# and Regular Expression</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-21T00:00:00-07:00" pubdate data-updated="true">Jan 21<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Ever since I first learned about the regular expressions, I have always been fascinated by its magical capability. When I first learned about DFA/NFA, I figured out how it is possible to evaluate a regular expression and eventually, during my Undergrad at BUET, I implemented a regular expression evaluator for the Compiler Lab.</p> <p>Now, given this history, here is a simple code that I wrote today. Let me know if you liked it-</p> <div style="background: white none repeat scroll 0% 0%; font-size: 10pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; font-family: courier new;"> <p style="margin: 0px;">        Program()</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(Titleize(<span style="color: rgb(163, 21, 21);">&#8220;hello! This is a sample string for titleize!&#8221;</span>));</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.Read();</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> Titleize(<span style="color:blue;">string</span> input)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color: rgb(43, 145, 175);">Regex</span>.Replace(input.ToLower(), <span style="color: rgb(163, 21, 21);">@&#8221;(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)&#8221;</span>, <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MatchEvaluator</span>(OnMatch));</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> OnMatch(<span style="color: rgb(43, 145, 175);">Match</span> match)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;{0}{1}{2}&#8221;</span>, match.Groups[<span style="color: rgb(163, 21, 21);">&#8220;space&#8221;</span>].Value, match.Groups[<span style="color: rgb(163, 21, 21);">&#8220;first&#8221;</span>].Value.ToUpper(), match.Groups[<span style="color: rgb(163, 21, 21);">&#8220;rest&#8221;</span>].Value);</p> <p style="margin: 0px;">        }</p></div> <p style="margin: 0px;">For a little explanation, the pattern <span style="color: rgb(163, 21, 21);">@&#8221;(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)&#8221;</span> matches to a series of space followed by a word. The word is further divided into two parts, the first one is just the first character and the rest understandably captures the &#8220;rest&#8221; part of the word.</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Next the OnMatch method takes each occurrence of a match of the above pattern and as shown, simply regroups the word as previous but just takes the Upper case of the first letter!</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Simple? You got another good example of Regular Expression? Share with me.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+The pattern could be much easier:<br />=======================================<br />public string Titleize(string input)<br />{ return Regex.Replace(input.ToLower(), <br />@&quot;(?&lt;first&gt;\b\w),new MatchEvaluator(OnMatch));<br />}<br />public string OnMatch(Match match)<br />{ return match.Groups[&quot;first&quot;].Value.ToUpper(); }</div>
+</div>
+<div class='comment'>
+<div class='author'>Sadique</div>
+<div class='content'>
+Yes, this is a nice example of power of regular expression. <A HREF="http://support.microsoft.com/kb/308252" REL="nofollow">Here</A> is a nice article to learn quickly the grouping of match &amp; several useful links of regular expression.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/12/23/solution-to-javascript-file-include/">Solution to JavaScript File Include Problem From ASP.Net MasterPage</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-23T00:00:00-07:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>You can include javascript files using a simple script tag. However, you will soon discover that, when you are using this master page from content pages that are at different levels in folder hierarchy then the script files will be missing at some cases. This is due to the fact that, script file paths are referenced relative to the content page and NOT to the master page. As a result, despite having the correct include wrt the master page, your content pages may still miss the scripts!</p>  <p>The solution is simple. Add this following line (of course, replacing the sample values with your own ones) to your master page&#8217;s page load method to add the script tag through code instead of through markup.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red163\green21\blue21;}??\fs20 \cf1 this\cf0 .Page.ClientScript.RegisterClientScriptInclude(\cf4 "YourKey"\cf0 , ResolveUrl(\cf4 "~/Scripts/myscript.js"\cf0 );} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color:blue;">this</span>.Page.ClientScript.RegisterClientScriptInclude(<span style="color: rgb(163, 21, 21);">&#8220;YourKey&#8221;</span>, ResolveUrl(<span style="color: rgb(163, 21, 21);">&#8221;~/Scripts/myscript.js&#8221;</span>);</p>    <p style="margin: 0px;"> </p>    <p style="margin: 0px;">Hope it saves you from the pain of adding a common js file into each of your content pages.</p> </div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thank you Yoann for your comment. I will check your solution.</div>
+</div>
+<div class='comment'>
+<div class='author'>Yoann</div>
+<div class='content'>
+You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Place Holder which is runat=&#8221;server&#8221; so relative url works.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/12/23/aspnet-membership-how-to-change-user/">Asp.Net Membership: How to Change a User&#8217;s Password From an Admin Account Without Knowing the Current Password?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-23T00:00:00-07:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Like mine, you may also need to change a user&#8217;s password from an admin account. By default, when you are using ASP.Net authentication and storing the password in the hashed format, you will not be able to see the existing password in its decrypted form. Also, to change a password using the Membership API, you will need to know the existing password. However, here is a simple solution to the problem -</p>  <p><a href="http://lh4.ggpht.com/_Gr1ozXzBWpM/SVHO80nP0PI/AAAAAAAAAEg/dwiTndV7ajM/s1600-h/AspNetChangePassword%5B4%5D.png"><img style="border: 0px none ;" alt="AspNetChangePassword" src="http://lh5.ggpht.com/_Gr1ozXzBWpM/SVHO-soxcqI/AAAAAAAAAEk/f7_FTsN04wU/AspNetChangePassword_thumb%5B2%5D.png?imgmax=800" width="692" border="0" height="87" /></a> </p>  <p>The idea is, you can reset the password of a user using the following code-</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}??\fs20 \cf1 string\cf0  tempPass = \cf4 Membership\cf0 .Provider.ResetPassword(\cf5 "username"\cf0 , \cf1 string\cf0 .Empty)} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color:blue;">string</span> tempPass = <span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ResetPassword(<span style="color: rgb(163, 21, 21);">&#8220;username&#8221;</span>, <span style="color:blue;">string</span>.Empty)</p> </div>  <p>Make sure you have the config that allows you to change password without an answer to the security question. Now, you can invoke the ChangePassword method using this tempPass as the existing pass and your custom password as the new password. Refer to the following line for a compact implementation-</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red43\green145\blue175;\red255\green255\blue255;\red0\green0\blue0;\red163\green21\blue21;\red0\green0\blue255;}??\fs20 \cf1 Membership\cf0 .Provider.ChangePassword(\cf4 "username"\cf0 , \cf1 Membership\cf0 .Provider.ResetPassword(\cf4 "username"\cf0 , \cf5 string\cf0 .Empty), \cf4 "custompass"\cf0 )} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ChangePassword(<span style="color: rgb(163, 21, 21);">&#8220;username&#8221;</span>, <span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ResetPassword(<span style="color: rgb(163, 21, 21);">&#8220;username&#8221;</span>, <span style="color:blue;">string</span>.Empty), <span style="color: rgb(163, 21, 21);">&#8220;custompass&#8221;</span>)</p> </div>  <p>I believe this will save your time with a similar need.</p></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/26/part-1-how-am-i-impacting/">Part 1: How Am I IMPACTing Following Scrum?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-26T00:00:00-07:00" pubdate data-updated="true">Nov 26<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>In a previous post in this blog, I introduced the nice little acronym <a href="http://smsohan.blogspot.com/2008/11/impact-of-agile-software-development.html">IMPACT for agile</a>. To recap, here is what <strong>IMPACT</strong> stands f<em>or -</em></p>  <blockquote style="background-color: rgb(0, 128, 192);">   <p><span style="color: rgb(253, 253, 253);"><em><strong>&#8220;I</strong>terative and Incremental development of a software by means of <strong>M</strong>erciless refactoring, <strong>P</strong>eer reviews, <strong>A</strong>utomated acceptance testing, <strong>C</strong>ontinuous integration and of course, <strong>T</strong>est driven development&#8221;</em></span></p> </blockquote>  <p>To give you a little background around my story, let me tell you about a project that I am working since June 2006. The project is a micro-finance loan application automation server for the US financial industry. It acts as a mediator between a loan seeking customer and one of over 50 lenders in an attempt to get a loan for the customer. So, the server adds value by taking a single application to 50 odd lenders from a single submission unless no lender is left untried or some lender says &#8216;yes&#8217; to it. This is done in real time, the processing time in average is less than 3 minutes.</p>  <p>Now that you have the background, let me introduce the the challenges associated with this project. The bullet points are-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Since this involves real dollars, there is nearly no margin for an error. </li>    <li>It processes more than a thousand loan applications per hour, so a high availability is a must. </li>    <li>This is done following agile Scrum and each two week one/two new lending partners need to be integrated. </li>    <li>The lending partners change their integration API from time to time and we need to accommodate the changes ASAP. </li> </ul>  <p>To address these challenges this is how we are responding-</p>  <p><strong>Iterative and Incremental development (IID)</strong></p>  <p>We are following Scrum and using <a href="http://www.scrumpad.com/">ScrumPad</a> to manage the IID. Basically, our clients/product owners put new requirements in terms of user stories in the product backlog at ScrumPad. So, with the prioritized product backlog we, the team, pick items to a sprint&#8217;s backlog. Then as usual, we break it down to tasks and do everything that it takes to meet the deadline of two weeks. Within a sprint the following are the milestones-</p>  <table style="color: rgb(255, 255, 255); background-color: rgb(0, 128, 192);" width="612" border="1" cellpadding="2" cellspacing="0"><tbody>     <tr>       <td valign="top" width="66">Day 1</td>        <td valign="top" width="57">Day 2</td>        <td valign="top" width="57">Day 3</td>        <td valign="top" width="57">Day 4</td>        <td valign="top" width="57">Day 5</td>        <td valign="top" width="57">Day 6</td>        <td valign="top" width="57">Day 7</td>        <td valign="top" width="57">Day 8</td>        <td valign="top" width="63">Day 9</td>        <td valign="top" width="82">Day 10</td>     </tr>      <tr>       <td style="font-weight: bold;" valign="top" width="68">Sprint Planning</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td style="font-weight: bold;" valign="top" width="66">Test Release</td>        <td style="font-weight: bold;" valign="top" width="82">Production Release</td>     </tr>   </tbody></table>  <ul style="background-color: rgb(211, 249, 118);">   <li>8th day - Sprint works are completed. </li>    <li>9th day - Test delivery at a near production environment and feedback gathering from product owner. </li>    <li>10th day - Incorporate feedbacks and release in production. </li> </ul>  <p>Note that, we generally produce a number of test releases within the first 8 days. That gives us an earlier chance to gather client feedbacks.</p>  <p>The beauty if this approach is, with this model in place we can release as early as in 8 working days, if not earlier. So, this helps us meeting the last two challenges as mentioned above.</p>  <p><strong>Merciless refactoring</strong></p>  <p>Developing incrementally offers much challenge in attaining the longevity of the product. Because, naturally as new features come in, we need to make room for that in the existing implementation.To ensure the quality and life of the product, we do merciless refactoring as we go. We have over 90% unit test coverage, which helps us in doing this continuous refactoring. So, the idea is-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Writing unit test and acceptance test. </li>    <li>Refactoring our code/design and validating against automated tests. </li> </ul>  <p><strong>Peer reviews</strong></p>  <p>This is probably the most important practice that I recommend. Because, as we had new members in the team, we found that the quality was somewhat degrading. Once, we started peer reviews, it was very helpful to the new comers as well as the veterans to keep the code quality up to the mark. We review the following things-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Naming of variables, methods, classes, files, namespaces etc. </li>    <li>Use of private methods for increased readability. </li>    <li>Hard coded string literals or constants. </li>    <li>Long/nested loops and long running if-else blocks. </li>    <li>Code commenting. </li>    <li>Quality of coding. </li> </ul>  <p>I would suggest you to try Microsoft&#8217;s Stylecop, it will give you a great head start to ensure the first level code quality by enforcing the common rules. This practice is allowing us to continue the good quality over time.</p>  <p>I have always been shy of reading extra large text in the web. So, I thought I could better post this in two parts! I assure, next post will contain more images than texts, So, you better stay tuned for the next one&#8230;</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Hasan,<BR/>Thanks for the complement!<BR/>Yes, I am promoting the acronym. I believe this acronym somehow unites the best practices all in a single word. Just like how we need to unite these to make the most of our efforts!</div>
+</div>
+<div class='comment'>
+<div class='author'>hasan</div>
+<div class='content'>
+nice acronym sohan bhai, lets spread the agile IMPACT!!</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/18/impact-of-agile-software-development/">IMPACTing for Agile Software Development</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Well, next time on a dev job interview when someone asks you the question, <em>&#8220;<span style="color:#5b2fdf;">Can you give us a brief idea on agile software development engineering practices?&#8221;</span>,</em> you are probably gonna laugh on your mind and just answer, <strong><span style="color:#355abd;">&#8220;IMPACT!&#8221;</span></strong>. Yes, this is it, compact and right on target!</p>  <p>Today, I came up with this acronym about agile engineering practices and I think its a nice one :-)</p>  <p><span style="font-size:130%;"><span style="color:#404040;"><strong>IMPACT</strong> can be elaborated as follows-</span></span></p>  <table width="659" border="0" cellpadding="2" cellspacing="0"><tbody>     <tr style="background-color: rgb(153, 62, 60);">       <td valign="top" width="49"><span style="font-size:130%;color:#ffffff;">I</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Iterative and Incremental Development</span></td>     </tr>      <tr style="background-color: rgb(192, 80, 77);">       <td valign="top" width="52"><span style="font-size:130%;color:#ffffff;">M</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Merciless Continuous Refactoring</span></td>     </tr>      <tr style="background-color: rgb(153, 62, 60);">       <td valign="top" width="54"><span style="font-size:130%;color:#ffffff;">P</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Peer Code Reviews</span></td>     </tr>      <tr style="background-color: rgb(192, 80, 77);">       <td valign="top" width="57"><span style="font-size:130%;color:#ffffff;">A</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Automated Acceptance Tests</span></td>     </tr>      <tr style="background-color: rgb(153, 62, 60);">       <td valign="top" width="59"><span style="font-size:130%;color:#ffffff;">C</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Continuous Integration</span></td>     </tr>      <tr style="background-color: rgb(192, 80, 77);">       <td valign="top" width="61"><span style="font-size:130%;color:#ffffff;">T</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Test Driven Development</span></td>     </tr>   </tbody></table>  <p>For all you agile folks out there, I hope this <strong>IMPACT</strong> makes sense to you! I have found many people to take agile as a panacea and start getting skeptical as soon as they feel the heat in real life. Well, we all know, there is no free lunch! So, lets get our feet on track and do the first things first. </p>  <p>What are the first things? The answer is, IMPACT, if you really want to create a positive impact out of agile methods.</p>  <p>Comments are welcome!</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks!</div>
+</div>
+<div class='comment'>
+<div class='author'>Alexander Beletsky</div>
+<div class='content'>
+I really liked the idea of Impact :) nicely done!</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Syed,<BR/>Thanks for sharing your idea. I also think peer reviews are applicable to design and user stories.</div>
+</div>
+<div class='comment'>
+<div class='author'>Syed</div>
+<div class='content'>
+Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stories/design/code, and not just code.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/18/delving-into-client-side-capabilities/">Delving Into Client Side Capabilities of ASP.Net Ajax</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I believe the client side scripting capabilities of ASP.Net Ajax is not utilized by many ASP.Net developers. This is most probably due to the fact that, not many people are aware of it at the first place. Also, since most of the javascripts are rendered secretly (read, not blatantly, which is good), most developers don&#8217;t even feel the existence of the underlying javascript at all.</p>  <p>Two very simple examples of the client side library are given here as examples -</p>  <p>1. Did you know, if you have the following javascript method, it will be automatically called when your page&#8217;s DOM is finished loading?</p>  <pre>function pageLoad(sender, args) {<br />}</pre><br /><br /><p>2. Do you know the following javascript code will add an event handler to catch whenever an asynchronous post back is completed?</p><br /><br /><pre>Sys.WebForms.PageRequestManager.instance.add_endRequest(endRequestHandler)</pre><br /><br /><p>These are just very little glimpses of the big scenario. To uncover more, visit the official MSDN documentation at <a title="http://msdn.microsoft.com/en-au/library/bb398822.aspx" href="http://msdn.microsoft.com/en-au/library/bb398822.aspx">http://msdn.microsoft.com/en-au/library/bb398822.aspx</a> <br /><br />  <br />If you are new to this, I assure, you will have a much better knowledge about ASP.Net Ajax scripting than ever before and can produce better quality javascript for your ASP.Net websites. <br /><br />  <br />Happy digging!</p>  </div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/10/rowtest-extension-for-nunit/">RowTest Extension for NUnit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-10T00:00:00-07:00" pubdate data-updated="true">Nov 10<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Well, I was just about to implement it myself! However, its good to see that the NUnit addin named RowTest actually allows us to do the data driven unit test through declarative programming and adding parameters to the dumb test methods!</p>  <p><a title="http://www.andreas-schlapsi.com/projects/rowtest-extension-for-nunit/" href="http://www.andreas-schlapsi.com/projects/rowtest-extension-for-nunit/">http://www.andreas-schlapsi.com/projects/rowtest-extension-for-nunit/</a></p>  <p>Check out this website for an example and get started with RowTest.</p></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/11/03/iterative-and-incremental/">Iterative and Incremental Implementation of Code Reviews</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-03T00:00:00-07:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Extreme Programming (XP) advocates for a pair-programming, taking the code review to its extreme. I have also found that pair programming generates a lot of speed and also helps producing better quality product in the first time. But, at the same time it&#8217;s difficult to impress the management or prove return on investment  associated with pair programming to the business people. So, what is the best possible solution? I believe, we can implement frequent peer code reviews to mimic the pair programming to some extent and get the benefit out of it.</p>  <p>In our team, we started implementing code reviews as we now recognize that there is no way to live without it. As usual, our approach is an iterative and incremental approach. So, we are taking small steps and eventually embracing the best practices in the team. I would like to share our plan here in this blog. The review process goes on the following work flow-</p>  <p><em><span style="color:#8080ff;">&#8220;When I am done with my work on task, I commit the code with the reviewer&#8217;s name on the svn comment. CCNet automatically builds and sends a mail to the reviewer. The reviewer gets the review email through a filter and reviews the code and sends his feedback to me via IM/email.&#8221;</span></em></p>  <p><span style="color:#0000ff;"><strong>Sprint #1:</strong></span> Review all the names or classes, files, methods, variables and so on. So, the reviewer emphasizes on the names and provides feedback on the following things-</p>  <blockquote>   <p>1. Is the naming standard correctly followed?</p>    <p>2. Is this a meaningful identifier?</p>    <p>3. Does the name conform to the conventions used elsewhere in the code?</p> </blockquote>  <p><span style="color:#0000ff;"><strong>Sprint#2:</strong></span> Review the use of private methods and code structure. The to-do list is -</p>  <blockquote>   <p>1. Would it make more sense to put some code into the private method for readability and/or reusability?</p>    <p>2. Is there any hard-coded constant directly used without referring to a const/readonly data type?</p>    <p>3. For all the methods, is it possible to reduce the dependency by using a simple parameter instead of a whole object?</p>    <p>4. Learn from sprint#1 and use the common learning.</p> </blockquote>  <p><span style="color:#0000ff;"><strong>Sprint#3:</strong></span> Review the use of loops, if-else blocks. At this iteration, the to-do is-</p>  <blockquote>   <p>1. Is it possible to eliminate a loop?</p>    <p>2. Is it possible to avoid the nested loops?</p>    <p>3. Is there a large if-else-if-else block? Why is it required? Is this large conditional block a possible candidate for future change?</p>    <p>4. Learn from sprint#2 and use the common learning.</p> </blockquote>  <p>Well, this is pretty much it. The idea is, we feel its not practical to go with an overnight policy for implementing peer code reviews. But, its very much possible that we do it in small increments and at each sprint&#8217;s retrospective we bring this point. So, we are all informed that we need to do reviews, which, eventually should sustain as a best practice!</p>  <p>If you think you have some ideas regarding this, please share it with me/my readers.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Gregg Sporar</div>
+<div class='content'>
+Agreed, an incremental approach can work well.<br /><br />FYI, we&#39;re offering a special for one week only on our lightweight code review tool: Code Reviewer. $5 for 5 licenses - 5 days only (July 13-17).  Full details here: http://smartbear.com/code-review-5-for-5.php</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/09/06/cruisecontrolnet-ccnet-configuration/">CruiseControl.Net (CCNet) Configuration Example for NCover</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-06T00:00:00-06:00" pubdate data-updated="true">Sep 6<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><a href="http://ccnet.thoughtworks.com/">CruiseControl.Net</a> is a great continuous integration tool for .Net projects. It not only continuously builds your software but provides some really helpful reports to monitor your project&#8217;s progress.</p>  <p>In agile world, we all speak of self-testing code or test driven development (TDD). If we really want to ensure our code has enough test coverage, we need to use some tool to ease our lives and NCover is a good one for this purpose. To learn more about NCover, please visit <a href="http://www.ncover.com/">this</a>.</p>  <p>When integrating to CCNet, you can use a similar configuration in ccnet.config as shown below to show NCover reports for your project-</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red163\green21\blue21;\red0\green128\blue0;\red0\green0\blue0;}??\fs20 \cf1 <\cf3 tasks\cf1 >\par ??    <!--\cf4  Task for MSBuild \cf1 -->\par ??    <\cf3 msbuild\cf1 >\par ??      <\cf3 executable\cf1 >\cf0 C:&#92;WINDOWS&#92;Microsoft.NET&#92;Framework&#92;v3.5&#92;MSBuild.exe\cf1 \par ??      <\cf3 projectFile\cf1 >\cf0 CISample.sln\cf1 \par ??      <\cf3 buildArgs\cf1 >\cf0 /p:Configuration=Debug\cf1 \par ??      <\cf3 targets\cf1 >\cf0 Rebuild\cf1 \par ??      <\cf3 timeout\cf1 >\cf0 300\cf1 \par ??      <\cf3 logger\cf1 >\cf0 C:&#92;Program Files&#92;CruiseControl.NET&#92;server&#92;ThoughtWorks.CruiseControl.MsBuild.dll\cf1 \par ??    \par ??\par ??    <!--\cf4  Task for NUnit \cf1 -->\par ??    <\cf3 nunit\cf1 >\par ??      <\cf3 path\cf1 >\cf0 C:&#92;Program Files&#92;NUnit 2.4.1&#92;bin&#92;nunit-console.exe\cf1 \par ??      <\cf3 assemblies\cf1 >\par ??        <\cf3 assembly\cf1 >\cf0 CISample&#92;bin&#92;Debug&#92;CISample.dll\cf1 \par ??      \par ??    \par ??\par ??    <!--\cf4  Task for NCover \cf1 -->\par ??    <\cf3 exec\cf1 >\par ??      <\cf3 executable\cf1 >\cf0 ncover.console.exe\cf1 \par ??      <\cf3 baseDirectory\cf1 >\cf0 CISample&#92;bin&#92;Debug&#92;\cf1 \par ??      <\cf3 buildArgs\cf1 >\cf0 nunit-console CISample.dll //xml coverage.xml //ea NUnit.Framework.TestFixtureAttribute\cf1 \par ??    \par ??\par ??    <!--\cf4  Task for NCoverExplorer \cf1 -->\par ??    <\cf3 exec\cf1 >\par ??      <\cf3 executable\cf1 >\cf0 NCoverExplorer.Console.exe\cf1 \par ??      <\cf3 baseDirectory\cf1 >\cf0 CISample&#92;bin&#92;Debug&#92;\cf1 \par ??      <\cf3 buildArgs\cf1 >\cf0 coverage.xml /xml /r:ModuleMethodFunctionSummary\cf1 \par ??    \par ??\par ??  } &#8211;>  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   10</span> <span style="color:blue;">&lt;</span><span style="color: rgb(163, 21, 21);">tasks</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   11</span> <span style="color:blue;">    &lt;!&#8211;</span><span style="color:green;"> Task for MSBuild </span><span style="color:blue;">&#8211;&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   12</span> <span style="color:blue;">    &lt;</span><span style="color: rgb(163, 21, 21);">msbuild</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   13</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">executable</span><span style="color:blue;">&gt;</span>C:\WINDOWS\Microsoft.NET\Framework\v3.5\MSBuild.exe<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">executable</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">projectFile</span><span style="color:blue;">&gt;</span>CISample.sln<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">projectFile</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">buildArgs</span><span style="color:blue;">&gt;</span>/p:Configuration=Debug<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">buildArgs</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">targets</span><span style="color:blue;">&gt;</span>Rebuild<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">targets</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">timeout</span><span style="color:blue;">&gt;</span>300<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">timeout</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">logger</span><span style="color:blue;">&gt;</span>C:\Program Files\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MsBuild.dll<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">logger</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span> <span style="color:blue;">    &lt;/</span><span style="color: rgb(163, 21, 21);">msbuild</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span> <span style="color:blue;">    &lt;!&#8211;</span><span style="color:green;"> Task for NUnit </span><span style="color:blue;">&#8211;&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span> <span style="color:blue;">    &lt;</span><span style="color: rgb(163, 21, 21);">nunit</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">path</span><span style="color:blue;">&gt;</span>C:\Program Files\NUnit 2.4.1\bin\nunit-console.exe<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">path</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">assemblies</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">assembly</span><span style="color:blue;">&gt;</span>CISample\bin\Debug\CISample.dll<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">assembly</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span> <span style="color:blue;">      &lt;/</span><span style="color: rgb(163, 21, 21);">assemblies</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span> <span style="color:blue;">    &lt;/</span><span style="color: rgb(163, 21, 21);">nunit</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span> <span style="color:blue;">    &lt;!&#8211;</span><span style="color:green;"> Task for NCover </span><span style="color:blue;">&#8211;&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span> <span style="color:blue;">    &lt;</span><span style="color: rgb(163, 21, 21);">exec</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">executable</span><span style="color:blue;">&gt;</span>ncover.console.exe<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">executable</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">baseDirectory</span><span style="color:blue;">&gt;</span>CISample\bin\Debug\<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">baseDirectory</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">buildArgs</span><span style="color:blue;">&gt;</span>nunit-console CISample.dll //xml coverage.xml //ea NUnit.Framework.TestFixtureAttribute<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">buildArgs</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span> <span style="color:blue;">    &lt;/</span><span style="color: rgb(163, 21, 21);">exec</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   36</span> <span style="color:blue;">    &lt;!&#8211;</span><span style="color:green;"> Task for NCoverExplorer </span><span style="color:blue;">&#8211;&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   37</span> <span style="color:blue;">    &lt;</span><span style="color: rgb(163, 21, 21);">exec</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   38</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">executable</span><span style="color:blue;">&gt;</span>NCoverExplorer.Console.exe<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">executable</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   39</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">baseDirectory</span><span style="color:blue;">&gt;</span>CISample\bin\Debug\<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">baseDirectory</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   40</span> <span style="color:blue;">      &lt;</span><span style="color: rgb(163, 21, 21);">buildArgs</span><span style="color:blue;">&gt;</span>coverage.xml /xml /r:ModuleMethodFunctionSummary<span style="color:blue;">&lt;/</span><span style="color: rgb(163, 21, 21);">buildArgs</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   41</span> <span style="color:blue;">    &lt;/</span><span style="color: rgb(163, 21, 21);">exec</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   42</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   43</span> <span style="color:blue;">  &lt;/</span><span style="color: rgb(163, 21, 21);">tasks</span><span style="color:blue;">&gt;</span></p> </div>  <p>You see that there are two NCover related &lt;exec&gt; nodes. The first one generates the coverage.xml. Then using this first one you can create actual report to present specifying the desired level of details of the report.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Abhishek Tyagi</div>
+<div class='content'>
+NUnit task in this example does not work.<br /><br />The warning : warning MSB6003: The specified task executable could not be run. The directory name is invalid<br /><br />the path is correct. can u help out in this issue thank you</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/19/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/17/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,966 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="Most applications I&#8217;ve worked on required some kind of seed data. For example, I&#8217;ve used seed data to create a super admin user so the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/page/8/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/23/seed-data-in-a-rails-project/">Seed Data in a Rails Project</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-23T13:18:00-07:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most applications I&#8217;ve worked on required some kind of seed data. For example, I&#8217;ve used seed data to create a super admin user so the site can actually be used upon a fresh install. Some other common cases include things like, list of credit card types, names of countries/states etc. This post is about some ideas to manage thsese seed data in a Ruby on Rails project.</p>
+
+<h3>Where to put the seed data?</h3>
+
+<p>I think you have 2 choices to pick from.</p>
+
+<ol>
+<li>db/seeds.rb</li>
+<li>db/migrate/2342423424_some_migration.rb</li>
+</ol>
+
+
+<p>I prefer having it in the seeds.rb whenever possible since this is the obvious place for it. But I&#8217;ve often put them in migrations as well. There are trade-offs associated with both.</p>
+
+<p>Migrations only run once. This means, &#8220;double/miltiple seeding&#8221; is not a concern at all. So, you can write a migration with some seeding command as follows:</p>
+
+<figure class='code'><figcaption><span>Migration CreateUsers</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">name</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">email</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">encrypted_password</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">password_salt</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">create_super_admin_user</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_super_admin_user</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works great. It creates the super user and by virtue of migrations, it only ever creates one super admin.</p>
+
+<p>The caveat with this approach is, if you change certain things later, then this migration will fail to run. For example, say we added a required field to user as follows:</p>
+
+<figure class='code'><figcaption><span>User</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">User</span>
+</span><span class='line'>    <span class="n">validates</span> <span class="ss">:age</span><span class="p">,</span> <span class="n">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, if you run the migration on a freshly checked out code, it will fail due to this validation. One workaround is to fix the code in this migration. But for people that already ran the migrations, and likely your production environment already did so, this has no effect. At this point, it starts getting complicated and some band-aid solutions are usually implemented.</p>
+
+<p>On the other hand, if you are using db/seeds.rb for seed data, you&#8217;d have to make sure its idempotent. So, a rerun should not create a 2nd copy of the objects. As a start, your code could be like this:</p>
+
+<figure class='code'><figcaption><span>db/seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">if</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this in place, you can easily incorporate the change for the new validation as follows:</p>
+
+<figure class='code'><figcaption><span>db/seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">super_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">super_user</span> <span class="o">&amp;&amp;</span> <span class="n">super_user</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>    <span class="n">super_user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">age</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">age</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would work for people who already had a super user and also for people that just got a fresh copy of the code.</p>
+
+<blockquote><p>So, I prefer putting data in seeds.rb with idempotency.</p></blockquote>
+
+<p>In addition to handling such cases, it also makes it easy for anyone to take glance at the seed data in one place.</p>
+
+<h3>How to handle large amount of seed data?</h3>
+
+<p>When you have more than a handful of data to seed, I&#8217;d recommend tidying up your db/seeds.rb into a more manageable structure. Here&#8217;s how I&#8217;d do it:</p>
+
+<figure class='code'><figcaption><span>File organization</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  |- app
+</span><span class='line'>  |- db
+</span><span class='line'>    - seeds.rb
+</span><span class='line'>    |- seeds
+</span><span class='line'>      - users.rb
+</span><span class='line'>      - credit_card_types.rb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this structure in place, you can turn you seeds.rb into a simple manifesto file as follows:</p>
+
+<figure class='code'><figcaption><span>seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;seeds/users&#39;</span>
+</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;seeds/credit_card_types&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will help you keeping things organized and hopefully give you a happier solution to the seed data problem.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/06/orm-or-not/">ORM or Not?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T09:39:00-07:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yes to ORM, No to custom queries. Here&#8217;s a bullet list:</p>
+
+<ol>
+<li>You&#8217;d probably end up writing your own ORM anyway.</li>
+<li>Doing so, you&#8217;d spend <strong>a lot of money</strong> writing library level code instead of your business logic.</li>
+<li>The time tested ones are likely to be <strong>better than yours</strong>.</li>
+<li>Beware, you&#8217;d have to figure out some <strong>complex issues</strong>: connection pooling, concurrency/locking, caching, transactions, updates, versioning, documentation etc.</li>
+</ol>
+
+
+<p>If you find yourself ORM is falling short of what you need, you&#8217;re either presenting information overload or using a transactional database as a reporting store.</p>
+
+<p>In this article, I mean ORM to be an object database mapping, so it applies to both SQL/NoSQL databases.</p>
+
+<p>Disagree? I&#8217;d like to find your opinion in the comments.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/25/development-environments-and-dependencies-hell/">Development Environments and Dependency Hell</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-25T21:51:00-06:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It used to be pretty straight forward to get up and running with a Rails app. You&#8217;d expect something like the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git@blah/blah.git
+</span><span class='line'><span class="nb">cd </span>blah
+</span><span class='line'>bundle
+</span><span class='line'>rake db:migrate
+</span><span class='line'>rails s
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the project is using rvm and bundler, the ruby versions and gem depdendencies are all taken care of. So far life is good this way.</p>
+
+<p>But it starts getting complicated. For example, your project probably uses MySQL and no matter what, I can&#8217;t remeber all the c libraries that are pre-requisites for the mysql2 gem to actually install successfully. If it uses Nokogiri, get another hit of all the who-knows-what libxml2* libraries that need to be there. Another gem quite commonly used is rmagick with similar c depdencies. Every time I hit these road blocks, I feel so helpless for:</p>
+
+<ul>
+<li>I have no idea what is required</li>
+<li>Someone on StackOverflow has a magical solution</li>
+<li>The solution will work on one unix distro but won&#8217;t on others</li>
+</ul>
+
+
+<p>This starts getting even more complicated as you start adding external project depdendencies. For example, your project will probably need some Queueing, Caching, Emailing, SOA integration etc. And even if you have very good tests, it&#8217;s likely that you&#8217;d want to manually test to see if your project holds up when integrated to other projects. It&#8217;s best to have all these third-party products in your dev box for obvious reasons. But its also super hard to keep everything in sync, because</p>
+
+<ul>
+<li>You&#8217;d have to automate the installation of all the third-party products in your dev box</li>
+<li>Find a mechanism to update the third-party projects as they change</li>
+</ul>
+
+
+<p>To tackle these problems, teams often use Chef/Puppet/Powershell/Vagrant etc. infrastructure automation tools. In practice, I&#8217;m yet to find a project where these tools would just work in a single pass. For example, it would miss one package or the other, sometimes it would fail at halfway, sometimes it would get you pretty close but almost never I have seen it to work on a single pass. I find this to be a recurring problem, faced by almost all dev teams.</p>
+
+<h2>One solution I think may work is as follows:</h2>
+
+<pre><code>1. Teams from each project writes their own bootstrap scripts, so others can just use it
+2. The bootstrap script runs on a CI server and fails a commit if it breaks the bootstrap
+3. Nobody runs a manual command ever for bootstrapping the dev machines
+</code></pre>
+
+<p>I&#8217;m yet to try this approach in practice. But too many times I&#8217;ve seen there&#8217;s only one/couple people writing the bootstrapping scripts for all projects. Also, nobody really finds the issues until a new dev box needs bootstrapping. A CI server would be a big push to keep it green all the time. And finally, everytime a one-off command is run for bootstrapping, a little part of automation opportunity is missed.</p>
+
+<p>If you&#8217;ve had success with these problems, please share. I&#8217;d really like to learn from you and hopefully implement some of your proven practices/principles.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/22/pairing-vs-code-reviews/">Pair Programming vs. Code Reviews</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-22T20:43:00-06:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/sync_dive.jpeg" alt="Sync Dive" /> Photo credits to http://womendiving.blogspot.ca/2012/08/2012-olympic-games-10m-synchronized.html</p>
+
+<p>Pair programming is like synchronized swimming. You do it together, you win it together. You try to improve your chances by helping your partner, and vice verca. Even if you lose, its highly likely you&#8217;ve improved simply by being together sharing a united goal.</p>
+
+<p>Code review can be fun and really useful too. But deep deep care needs to be taken to ensure it remains same in spirit, that is, the unified shared goal. In practice I have seen it to be super hard to achieve consistently.</p>
+
+<p>Are you pair programming? Are you doing code reviews only? Why/why not? Would you change?</p>
+
+<p>Comments are welcome.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/22/joined-sourcefire/">Joined Sourcefire</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-22T19:16:00-06:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Hello Dear Readers:</p>
+
+<p>I just wanted to inform you that I&#8217;ve joined Sourcefire this morning as a Principal Software Engineer. My primary responsibility will be helping my team with Ruby on Rails and Web technology related expertise. I&#8217;m looking forward to this new role.</p>
+
+<p>ThoughtWorks was a wonderful experience. In the last couple of years with ThoughtWorks, I have worked on 4 different projects, for 4 different clients and business domains from 4 different cities in North America. In a future post I would like to write about the fantastic journey, but for now I just wanted to share the news.</p>
+
+<p>Hopefully, Sourcefire will be an amazing experience as well.</p>
+
+<p>Thank you again for reading my blog.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/11/database-design-sorting-by-computed-fields/">Database Design: Sorting by Concepts on Nullable Fields</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-11T21:05:00-06:00" pubdate data-updated="true">Oct 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a recent project, we had this requirement to sort a list of items by a concept that is absent in the database schema, but can be derived from other fields. To make it easy to understand, let&#8217;s build an example, simple enough to isolate the topic of interest.</p>
+
+<p>Let&#8217;s say we have a list of locations, stored in a database table as follows:</p>
+
+<pre><code>Locations (location_id (primary key), province_id (NULL), city_id (NOT NULL))
+</code></pre>
+
+<p>And say, we want to present a list of locations sorted by &#8220;address&#8221;. As you see in this example, &#8220;address&#8221; is a concept, not directly present in the database, but can be derived based on province_id and city_id. So, when we say sort by &#8220;address&#8221;, the SQL query may look like the follwing:</p>
+
+<figure class='code'><figcaption><span>query to sort by address</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'>  <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Locations</span> <span class="k">order</span> <span class="k">by</span> <span class="n">province_id</span><span class="p">,</span> <span class="n">city_id</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, if you take a second look at the schema, you&#8217;ll see the <code>province_id</code> is <code>Nullable</code>. And if you are familiar with SQL, you already know that a <code>NULL</code> does not equal another <code>NULL</code>. So, for rows with <code>province_id = NULL</code>, the secondary sort on city_id has no effect at all. As a result, the expected sort by &#8220;address&#8221; cannot be derived by using this simple <code>order by</code> clause.</p>
+
+<p>There are a few work arounds to it. One obvious workaround is to change the DB schema and make the <code>province_id</code> NOT NULL in favor of a placeholder, for example, &#8220;Not Available&#8221;. This would eliminate the problem altogether. This should be pretty easy to achieve if you have control over the database schema.</p>
+
+<p>But in case this is beyond your control, you&#8217;d have to hack your query and sleep with the noisy butterfly in your stomach. Such a poorman&#8217;s solution would be to put a <code>"case ... when ... else... end..."</code> in the query.</p>
+
+<p>The reason I wanted to share this post is, if your project needs to sort by such a computed concept, here&#8217;s what you should probably:</p>
+
+<ol>
+<li>Say &#8220;No&#8221; to it.</li>
+<li>Change your database to incorporate the concept as a column in some table.</li>
+<li>At the very least, make sure you&#8217;re not sorting on a Nullable field.</li>
+<li>Repeat 1-3 in order.</li>
+</ol>
+
+
+<p>Thanks for reading. Keep crafting good software.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/02/mvcmailer-new-api/">MvcMailer New API</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-02T10:23:00-06:00" pubdate data-updated="true">Oct 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>With the help of <a href="http://codecuriosity.com/">@TylerMercier</a>, and many active users of MvcMailer, we have just released the new API for MvcMailer. This is a summary post capturing the work and lessons learned in the process.</p>
+
+<p>The bulk of the work has been done on removing hard dependencies on dll files for 3rd party libraries in favor of NuGet packages. For example, we used NUnit, for running our tests. Instead of referencing the dlls directly, we are now using the NuGet package. This will help the contributors to get up and running with the source code without having to worry about the depedencies being in the right place.</p>
+
+<p>NuGet command line also added a dependency as a Nuget package!</p>
+
+<p>But this cleanup is not gonna be directly visible to the users of MvcMailer. If you install MvcMailer today, you should see a few changes as follows:</p>
+
+<ol>
+<li>MvcMailer now uses T4Scaffolding 1.0.7 instead of the older version that was causing issue with ASP.NET MVC 4.</li>
+<li>MvcMailer package is now exclusively for ASP.NET MVC 4. And a new package MvcMailer3 is published for ASP.NET MVC3. After looking into options, we found this was probably the best way to release an upgrade, while still remaining compatible with MVC3.</li>
+<li>The MailerBase has a sweet new API. The old API still works, but I&#8217;d highly discourage using it. This is how it&#8217;d look:</li>
+</ol>
+
+
+<figure class='code'><figcaption><span>Example code showing old API</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">class</span> <span class="nc">WelcomeMailer</span> <span class="p">:</span> <span class="n">MailerBase</span><span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="n">MailMessage</span> <span class="nf">Welcome</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">mailMessage</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MailMessage</span><span class="p">(){</span><span class="n">Subject</span> <span class="p">=</span> <span class="err">&#39;</span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="n">world</span><span class="p">!</span><span class="err">&#39;</span><span class="p">};</span>
+</span><span class='line'>    <span class="n">mailMessage</span><span class="p">.</span><span class="n">To</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;hello@example.com&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">PopulateBody</span><span class="p">(</span><span class="n">mailMessage</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">Welcome</span><span class="err">&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="n">mailMessage</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see here, the old API would require you to initialize your own <code>MailMessage</code>, set some parameters to it and then hand it over to MailerBase so it can render the view into its body.</p>
+
+<p>We found it would be nice to reverse this workflow using lambdas. So, there&#8217;s a new populate method, that will call you back with an already instantiated <code>MvcMailMessage</code> object so you can set its properties as required. <code>MvcMailMessage</code> is an extension of <code>MailMessage</code> from the core .Net library, with new properties added so you can specify the <code>ViewName, MasterName, LinkedResources</code> etc.</p>
+
+<p>So, with this new API, the code from above will look like the following:</p>
+
+<figure class='code'><figcaption><span>Example code with the new API</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">class</span> <span class="nc">WelcomeMailer</span> <span class="p">:</span> <span class="n">MailerBase</span><span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">public</span> <span class="n">MvcMailMessage</span> <span class="nf">Welcome</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nf">Populate</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">Subject</span> <span class="p">=</span> <span class="err">&#39;</span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="n">world</span><span class="p">!</span><span class="err">&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">ViewName</span> <span class="p">=</span> <span class="err">&#39;</span><span class="n">Welcome</span><span class="err">&#39;</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">To</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;hello@example.com&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see here, the new API provides a nice way get rid of some of the repiting parts of your mailer code. This API is available on both MvcMailer3 and MvcMailer.</p>
+
+<p>We&#8217;d like to hear your feedback on this new API. Thank you for using MvcMailer.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/13/lovejs-presentation-at-camug/">LoveJS Presentation at CAMUG</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-13T21:32:00-06:00" pubdate data-updated="true">Sep 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I paired with <a href="http://codecuriosity.com">@TylerMercier</a> as we did a little <a href="http://www.meetup.com/Calgary-Agile-Methods-User-Group/events/79722562/">hands-on demo on writing testable and OO JavaScript</a>.</p>
+
+<p><img src="/images/LoveJS.jpg" alt="Presenting with Tyler" /></p>
+
+<p>This was mostly based on our pairing experience on the current project, but also had things that we learned from our previous web projects. I wanted to share some of the highlights of this session with my readers on this blog:</p>
+
+<p>From experience, I have seen a few charactersitics that make JavaScript coding a real fun. Here&#8217;s a few that stand out:</p>
+
+<blockquote><p>Good JavaScript is Testable and Object Oriented</p></blockquote>
+
+<p>Really simple stuff, but it took me quite a few years to actually start writing OO JavaScript, and more so, to write automated tests that run on CI server. As I often say, the shittiest part of most web projects is its CSS, with its hacks, and the inherent nature of it. And JavaScript is often just as smelly. But if you just start writing OO JavaScript with tests, your code will drive you to a cleaner path simply because bad code makes testing really tough. And with Jasmine, testing JavaScript is super fun. So, we suggested the following toolset:</p>
+
+<ol>
+<li>CoffeeScript</li>
+<li>Jasmine</li>
+<li>PhantomJS</li>
+<li>CI integration</li>
+</ol>
+
+
+<p>The materials related to this session are available online at <a href="http://codecuriosity.com/love_javascript">github</a>.</p>
+
+<p>It was a great turnout, full house, engaged audience, and, asking really good questions. I had a lot of fun doing the hands-on. You know live demos can be daunting, especially when you are writing on a low res screen so people can actually read the projected text. But thanks a lot to Tyler, we had done a couple dry runs of the demo. That helped us a lot in terms of finding the points to transition between us, as well as some muscle memory as we were writing the code live in front of the audience.</p>
+
+<p>But, I also wanted to share a checklist that we should have done as a preparation for this talk. It&#8217;s too bad, we didn&#8217;t do the following, hopefully this will be better next time. Here&#8217;s what I have in my mind:</p>
+
+<ul>
+<li><strong>Audio/video record</strong> the session. So, I can see myself afterwards and find some obvious rooms for improvement.</li>
+<li>Practice using <strong>real projector</strong> so we can find the best theme for the room size. This time I felt some of the text colors weren&#8217;t as readable for the back benchers.</li>
+<li>Never plan for a 50 minute talk when you have a 60 minute slot. Leave <strong>at least 20 minutes slack</strong>. Have a backup plan for an extension in case you are done early. It sucks to cut short or rush to the ending.</li>
+</ul>
+
+
+<p>But in retrospect, I was super impressed with how the session ran. Hopefully, with practice it will only keep getting better.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/07/deploying-a-java-application-using-capistrano/">Deploying a Java Application Using Capistrano</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-07T20:18:00-06:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In our current project, we have a little Java Bridge, that reads JMS messages from an enterprise service bus (ESB) and pipes it to an ActiveMQ topic. This had to be written in Java, or some flavor of it like JRuby/Scala, because the ESB only allows their signed client libraries to interact with their API.</p>
+
+<p>Since, we were already using Capistrano to deploy our Rails/Nginx app, we wanted to leverage the same tool for deploying the Java Bridge. This would also make maintenance easier, since the same standards is used for deploy locations/log files/roations etc.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/05/design-of-a-mongodb-analytics-database/">Design of a MongoDB Analytics Database</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-05T17:38:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>We built a MongoDB based realtime analytics solution and learned a few things in the process. I would like to share some of our learnings in this post.</p>
+
+<p>When tasked to find a good database for holding realtime analytics data, I was searching through the wisdom of internet to come up with a good choice. At a high level, the database needed to deliver the following:</p>
+
+<ol>
+<li>Atomic counters so that events could be counted fast. For example, count up the Total Sales metric for each sale event.</li>
+<li>Unique sets. For example, unique set of buyers who bought anything today.</li>
+<li>Simple lookups. For example, when a sale happens, it needs to lookup the original price to calculate the profit on the fly.</li>
+<li>Indexing on multiple fields. For example, a product lookup may be by its ID as well as by a combination of other fields.</li>
+<li>Fast at doing 1-4, so it can keep up with the event stream in realtime.</li>
+</ol>
+
+
+<p>It became pretty clear that, the internet was favoring either Redis or MongoDB for such requirements. I did a little spike using both, and settled down on MongoDB. This was becauase, MongoDB had better support for performing lookups and indexing. Also, the document oriented nature of MongoDB suited well with the Object Oriented models, leaning towards a more direct match between the two worlds. Redis is awesome for doing increments and set operations, but it would require some application level handling of OO -> DB interfacing as well as intelligent lookups. So, MongoDB was the winner for the job.</p>
+
+<p>If you&#8217;ve watched the video at <a href="http://www.10gen.com/events/analytics-with-mongodb">the mongodb blog</a> you know it&#8217;s quite straight forward to design a document for holding realtime analytics data.</p>
+
+<blockquote><p>The key design goal is: precopute the metrics in the required aggregation levels.</p></blockquote>
+
+<p>This design goal is applicable to pretty much all reporting/dashboarding projects. Since it&#8217;s common to aggregate different types of data on a dashboard, without precomputing the results, it would test anyone&#8217;s patience before the report is ready. In our case, the dashboard mostly displays data for the day in realtime. So, a simplified text only view would display the following:</p>
+
+<pre>
+###Sunday, August 5, 2012
+
+* Total Sold: 2,500
+* Total Profit: $ 1,345,427
+* Proft Margin: 5.09%
+* Buyers: 311
+* Sellers: 126
+
+####Online
+
+* Total Sold: 400
+* Total Profit: $ 98,762
+* Proft Margin: 7.1%
+* Buyers: 114
+* Sellers: 28
+
+####In Stores
+
+* Total Sold: 2,100
+* Total Profit: $ 124,666,5
+* Proft Margin: 4.91%
+* Buyers: 257
+* Sellers: 110
+</pre>
+
+
+<p>As discussed above, for a faster (and sane!) response time, the data better be precomputed in the database. So, to hold this precomputed data, we have designed a document like the following example:</p>
+
+<pre>
+metric: {
+  event_date: '2010/08/05',
+  channel: 'online',
+  total_sold: 2100,
+  total_buying_price: 112,567,432,
+  total_selling_price: 123,875,127,
+  buyers: ['buyer 1', 'buyer 2'],
+  sellers: ['seller 1', 'seller 2']
+}
+</pre>
+
+
+<p>And there is a document like this for each channel, for each day. This simple document is suitable for producing the desired report. Of course, in the real project, we need more data points in the report as well as aggregation levels beyond just a day and a channel. And you guessed it right, we have a document like this example one for each required aggregation level.</p>
+
+<p>This design has held pretty well for our project. This is simple, there&#8217;s a direct match between what is shown and what is stored. The data is already grouped, so queries simply fetch the documents without needing to perform any major computation on the fly. This model makes it trivial to add a new data point, as well as a new reporting aggregation level.</p>
+
+<p>But the challenge is to make sure we can in fact keep a document like this up-to-date as events happen in realtime without falling behind. Let&#8217;s talk about it in the upcoming post.</p>
+
+<p>If you haven&#8217;t had a chance to read the previous post in this series, here&#8217;s a link to <a href="http://blog.smsohan.com/blog/2012/07/28/deploying-to-TV-screens/">Deploying to TV Screens</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/9/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/7/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

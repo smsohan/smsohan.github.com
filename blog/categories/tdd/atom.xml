@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: TDD | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/tdd/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Random Data in Tests]]></title>
+    <link href="http://smsohan.com/blog/2013/02/27/random-data-in-tests/"/>
+    <updated>2013-02-27T15:24:00-07:00</updated>
+    <id>http://smsohan.com/blog/2013/02/27/random-data-in-tests</id>
+    <content type="html"><![CDATA[<p>... are evil if you expect the randomizer to give you unique values on each call.</p>
+
+<p>Here's an example:</p>
+
+<p>```ruby
+before(:each) do
+  @user_1 = User.create!(email: "email-#{Random.rand(1000)}@example.com")</p>
+
+<p>  # the following will fail intermittently if you have a unique validation on User#email</p>
+
+<p>  @user_2 = User.create!(email: "email-#{Random.rand(1000)}@example.com")
+end
+```</p>
+
+<p>It's a timebomb, use it, it will haunt you later. Be sane, stop using random numbers in tests like this.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Myth of One Assert Per Test]]></title>
+    <link href="http://smsohan.com/blog/2012/12/06/the-myth-of-one-assert-per-test/"/>
+    <updated>2012-12-06T09:55:00-07:00</updated>
+    <id>http://smsohan.com/blog/2012/12/06/the-myth-of-one-assert-per-test</id>
+    <content type="html"><![CDATA[<blockquote><p>TL;DR; It's not one <code>assert</code> per test, rather one logical path per test.</p></blockquote>
+
+<p>I find this to be a classical example of how an inappropriate choice of terminology leads to huge confusion. In trying to find the original source of the "one assertion per test" quote, google came back only with a bunch of confused blog entries :(</p>
+
+<p>Without much ranting, lets see a code example to start with:</p>
+
+<p>```ruby example code
+def eligible_credit_card_types(customer)</p>
+
+<p>  annual_income = customer.annual_income</p>
+
+<p>  if annual_income > 100_000</p>
+
+<pre><code>[CreditCard.new(type: 'platinum', limit: 10_000),
+ CreditCard.new(type: 'gold', limit: 8_000),
+ CreditCard.new(type: 'cashback', limit: 5_000) ]
+</code></pre>
+
+<p>  elsif annual_income > 50_000</p>
+
+<pre><code>[CreditCard.new(type: 'gold', limit: 6_000),
+CreditCard.new(type: 'cashback', limit: 3_000)]
+</code></pre>
+
+<p>  elsif annual_income > 30_000</p>
+
+<pre><code>[CreditCard.new(type: 'cashback', limit: 1_500)]
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>[]
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>By saying one logical path per test, I mean I'd write a total of 4 tests for this method, each covering a logical path. But I really don't care about how many assert calls you need in each logical path to express the desired behavior. For example, this is totally fine:</p>
+
+<p>```ruby example test
+context '#eligible_credit_card_types' do
+  it 'returns platinum, gold and cashback for people making over a 100K annually' do</p>
+
+<pre><code>#setup customer, call the method
+cards = credit_card_authorizer.eligible_credit_card_types(customer)
+
+cards.size.should == 3
+cards[0].type.should == 'platinum'
+cards[0].limit.should == 10_000
+#same for cards[1], cards[2]
+</code></pre>
+
+<p>  end
+end
+```
+Of course, this can indeed be converted into a single assertion, if you already had <code>equals</code> method overriden for the credit cards. But, I'd probably skip adding that code if its just for the sake of writing tests.</p>
+
+<p><img class="right" src="/images/bowling.jpg" width="300" height="550">
+<i>Image taken from mchenrybowl</i></p>
+
+<p>The mechnical thought of "one assertion per test" is lame.</p>
+
+<ol>
+<li>If for nothing else, these silly assertions would multipy the running time of your test suite by a factor of digits.</li>
+<li>Doesn't provide you any additional coverage or safety.</li>
+<li>As long as each of your tests cover a unique logical path, there's only one logical reason why it'd fail, irrespective of how many assertions you put in there.</li>
+</ol>
+
+
+<p>But, there's a but! If you need many asserts per test, the code is probably asking for some refactoring. It indicates that one logical path in your code is touching too many things. Worse, when it calls too many methods that belong to other objects. Testing such a logical path is hard, usually requires a big setup and a bigger assertion. In such cases, breaking down the test into multiple tests may yield some superficial readability of the test, but certainly works around the actual problem in the code without fixing it. Almost always, this indicates long procedural methods and I'd suggest taking a second look at it to refactor into a more OO code.</p>
+
+<p>Happy Friday!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Readable Unit Tests]]></title>
+    <link href="http://smsohan.com/blog/2012/11/28/readable-unit-tests/"/>
+    <updated>2012-11-28T10:10:00-07:00</updated>
+    <id>http://smsohan.com/blog/2012/11/28/readable-unit-tests</id>
+    <content type="html"><![CDATA[<p>From my experience with writing/reading unit tests for years, here's a little guideline to keep 'em readable:</p>
+
+<ol>
+<li>A unit test needs to fit entirely (including setups) on a screen without scrolling.</li>
+<li>It is OK to have a little bit of duplication in unit tests for readability.</li>
+<li>Avoid nesting of contexts beyond 2 levels. Instead, use methods to setup and flatten.</li>
+<li>Do not use if/else/loops in a unit test.</li>
+<li>If your test needs too much setup/mocking/stubbing, time to refactor the code.</li>
+</ol>
+
+
+<p>A simple readable unit test is only achievable when the code itself is simple. Adhereing to these guideline will probably make the code simpler as a direct impact!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unit Testing and Sleep]]></title>
+    <link href="http://smsohan.com/blog/2012/11/27/unit-testing-asynchronous-side-effects/"/>
+    <updated>2012-11-27T15:01:00-07:00</updated>
+    <id>http://smsohan.com/blog/2012/11/27/unit-testing-asynchronous-side-effects</id>
+    <content type="html"><![CDATA[<p>If your unit test code needs a sleep, its time to refactor it. Ideally, you'd only need to stub/mock the asynchronous call instead of introducing arbitrary sleeps in the test code, because they will eventually fail. Moreover, until it fails, it will slow down your test runner.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Should You Unit Test Interaction with Static Methods?]]></title>
+    <link href="http://smsohan.com/blog/2011/08/15/should-you-unit-test-interaction-with/"/>
+    <updated>2011-08-15T00:00:00-06:00</updated>
+    <id>http://smsohan.com/blog/2011/08/15/should-you-unit-test-interaction-with</id>
+    <content type="html"><![CDATA[<div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">No. You should not. Here's an example:</div><br /><script src="https://gist.github.com/1147225.js">
+  
+ </script></div><br />If you are somehow mocking this static method, you are potentially making it dangerous for other places where this static method is used. Eventually, this will create red test results that are hard to find and make your tests dependent on each other.<br /></div>
+
+]]></content>
+  </entry>
+  
+</feed>

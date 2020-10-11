@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: SpyREST | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/spyrest/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[You Can Haz Automated REST API Documentation]]></title>
+    <link href="http://smsohan.com/blog/2015/01/13/you-can-haz-automated-rest-api-documentation/"/>
+    <updated>2015-01-13T09:29:00-07:00</updated>
+    <id>http://smsohan.com/blog/2015/01/13/you-can-haz-automated-rest-api-documentation</id>
+    <content type="html"><![CDATA[<p>Let's face it, the manual process of documenting REST APIs sucks big time. The process goes like this:</p>
+
+<ol>
+<li>Craft a cURL request for an API Endpoint.</li>
+<li>Copy the response.</li>
+<li>Narrate the API, paste the cURL and response on an editor.</li>
+<li>Edit the response, describe necessary request and response headers, query parameters etc.</li>
+<li>Repeat steps 1-4 for each of your tens of Endpoints.</li>
+<li>Publish the documentation on the web.</li>
+<li>Repeat these steps for each release.</li>
+</ol>
+
+
+<p>This is a laborious process. However, it doesn't have to be this way. Meet <a href="http://SpyREST.com">SpyREST</a> to see how it produces purely <strong>organic</strong>, <strong>automated</strong>, <strong>replayable</strong>, <strong>published</strong>, <strong>version aware</strong> and <strong>customizable</strong> API Documentation for you.</p>
+
+<p>This is how it works:</p>
+
+<ol>
+<li>You script the API calls using any scripting you prefer, including bash/cURL, automated test frameworks, etc. For example, using a test framework:</li>
+</ol>
+
+
+<p>```
+describe 'gists' do
+  it "List a user's gists since a time:" do</p>
+
+<pre><code>response = Github.get '/users/smsohan/gists?since=20140101T00:00:00Z', @common_options
+assert_equal 200, response.code
+refute_nil response.body
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<ol>
+<li>Use the SpyREST http proxy <code>http://SpyREST.com:9081</code> to perform this call on a real API.</li>
+<li>You get the same response, and SpyREST produces a fully baked API documentation as you see <a href="http://spyrest.com/api_actions/details?api_action=GET+%2Fusers%2Fsmsohan%2Fgists&amp;api_host=api.github.com&amp;api_resource=gists&amp;api_version=v3">here</a>:</li>
+</ol>
+
+
+<p>Try here if you want to see for yourself:</p>
+
+<p><code>
+curl -k -x "http://spyrest.com:9081" -H "Accept: application/vnd.github.v3+json" "https://api.github.com/users/YOUR_GITHUB_USER_NAME/gists"
+</code></p>
+
+<p>See the documentation at</p>
+
+<p><a href="http://spyrest.com/api_resources/gists?api_host=api.github.com&amp;api_version=v3">http://spyrest.com/api_resources/gists?api_host=api.github.com&amp;api_version=v3</a></p>
+
+<p>Drop me a line if you'd like to use this to publish your API documentations.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How is Rails plugins helping me in developing CampZero.com? - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="I am up to a web venture called www.CampZero.com - an online market place for you service providers in Bangladesh. This is somewhat similar in &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2009/12/18/how-is-rails-plugins-helping-me-in/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How Is Rails Plugins Helping Me in Developing CampZero.com?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-18T00:00:00-07:00" pubdate data-updated="true">Dec 18<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><div class='post'>
+I am up to a web venture called www.CampZero.com - an online market place for you service providers in Bangladesh. This is somewhat similar in spirit to classified sites like ebay and craigslist, but the target market it consciously chosen to be the service industry. Anyway, I will go to the point why I picked rails for this project and how it is paying off.<div><br /></div><div>A little background about me. I have some good background on .Net/C# and I developed several projects using this technologies. Also, I have some experience with Rails and developed almost same number of projects as that of .Net. So, I made an informed decision about choosing the Ruby on Rails framework for my project over .Net/C#. Here&#8217;s the rationale:</div><div><br /></div><div><b>Story#1: As a CampZero developer, I want to deploy the system as soon as I am done with a feature.</b></div><div>Solution: Use capistrano to automate the deployment process. It took me less than 30 minutes to setup the automatic one-click deployment. The deployment steps are at a minimum as follows:</div><div><ol><li>Get the latest code from the code repository.</li><li>Create a link to the shared log directory.</li><li>Create a link to the shared assets directory.</li><li>Create a link to the full text search configuration file.</li><li>Migrate the database schema.</li><li>Change the link to the application to the latest code.</li><li>Restart the full text search engine.</li><li>Restart the web server.</li><li>Rollback if any step of 1-8 results in a failure.</li></ol><div>The whole process is triggered by a single line of command &#8221;<b>cap staging deploy:migrations</b>&#8221; and takes less that 3 minutes to complete on an average.</div><div><br /></div><div><b>Story#2: As a guest user of CampZero, I would like to sign up for an account so that I can post an ad and/or rank the service providers.</b></div></div><div>The signup process is actually a three step process as follows:</div><div><ol><li>Create account, with password encrypted.</li><li>Get an email with an activation link.</li><li>Verify email address by clicking an activation link.</li></ol><div>Also, there are several related works as follows:</div><div><ol><li>Login</li><li>Logout</li><li>Reset password</li></ol><div>I used Authlogic for this purpose and it has taken care of all the aspects for me. For emailing I used ActionMailer. The whole job of authentication took no more than 4 hours! Thanks again to Authlogic.</div><div><br /></div><div><span class="Apple-style-span" style="font-weight: bold; ">Story#3: As a user of CampZero, I want to search for service providers using natural text.</span></div><div>The full text search was implemented using Sphinx and Thinking-sphinx. This also comes with default support for paginating lists. So, Thinking sphinx took care of all my search needs. I used the following features:</div><div><ol><li>Search by full text in the service description, title.</li><li>Also search the service provider names and service categories.</li><li>Rank by the ratings.</li><li>Search using English morphology, for example, if searching for &#8216;cars&#8217; it also searches for &#8216;car&#8217;.</li></ol><div>I spent as little as 6 hours to setup and code the whole free text search! The total coding size for search is less than even 15 lines in total!</div><div><br /></div><div><b>Story#4: As a service consumer, I want to rate and write comment on my service providers so that other consumers can make informed decisions.</b></div><div>I used two plugins called, rate-fu and acts as commentable! These plugins are great time savers as well. All the underlying logics for handling ratings and commenting are already there and you merely plug the features in. It took me 5 hours and most of it was due to the UI part!</div><div><br /></div><div>I am convinced that for most web applications now, Ruby on Rails is an automatic best seller. But, of course, my prior experience helped me in getting things done even faster. Lets see how this project makes a business :-)</div></div><div><br /></div></div></div><div><br /></div><div> </div></div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-18T00:00:00-07:00" pubdate data-updated="true">Dec 18<span>th</span>, 2009</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/12/15/what-i-learned-from-my-first-semester/" title="Previous Post: What I learned from my first semester at University of Calgary as a Grad Student?">&laquo; What I learned from my first semester at University of Calgary as a Grad Student?</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/12/22/how-to-strip-html-tags-truncate-and/" title="Next Post: How to strip html tags, truncate and highlight texts in ruby on rails">How to strip html tags, truncate and highlight texts in ruby on rails &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

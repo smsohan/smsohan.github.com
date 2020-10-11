@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MVC | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/mvc/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Social Helpers in ASP.Net MVC3 (Facebook, Twitter, Gravatar etc.)]]></title>
+    <link href="http://smsohan.com/blog/2011/01/14/social-helpers-in-aspnet-mvc3-facebook/"/>
+    <updated>2011-01-14T00:00:00-07:00</updated>
+    <id>http://smsohan.com/blog/2011/01/14/social-helpers-in-aspnet-mvc3-facebook</id>
+    <content type="html"><![CDATA[<div class='post'>
+This site shows the examples!<br /><a href="http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site">http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site</a><br /><br />Now, the social links and buttons are no longer from a third-party source, its straight from Microsoft. I don't know if this is first-party or second-party :p</div>
+
+]]></content>
+  </entry>
+  
+</feed>

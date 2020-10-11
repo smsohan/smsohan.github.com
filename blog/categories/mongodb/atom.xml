@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MongoDB | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/mongodb/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-10-11T17:31:10-06:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MongoDB is Abusing JSON!]]></title>
+    <link href="http://smsohan.com/blog/2013/01/17/abusing-json/"/>
+    <updated>2013-01-17T16:11:00-07:00</updated>
+    <id>http://smsohan.com/blog/2013/01/17/abusing-json</id>
+    <content type="html"><![CDATA[<p>I find the MongoDB API is abusing JSON in a really bad way. JSON is probably a good format for storing the documents in MongoDB, but using JSON for it's weird API is simply a terrible idea. Here's an example from the <a href="http://docs.mongodb.org/manual/reference/sql-aggregation-comparison/">SQL to Aggregation Framework Mapping Chart</a></p>
+
+<p>```js MongoDB Example
+  db.orders.aggregate( [</p>
+
+<pre><code> { $group: { _id: { cust_id: "$cust_id",
+                    ord_date: "$ord_date" },
+             total: { $sum: "$price" } } },
+ { $match: { total: { $gt: 250 } } }
+</code></pre>
+
+<p>  ] )
+```</p>
+
+<p>I find the UI of this query to be distasteful at the best. Here's an SQL example of the same:</p>
+
+<p>```sql SQL Equivalent
+  SELECT cust_id,</p>
+
+<pre><code>     ord_date,
+     SUM(price) AS total
+</code></pre>
+
+<p>  FROM orders
+  GROUP BY cust_id, ord_date
+  HAVING total > 250
+```</p>
+
+<p>I find this SQL example to be a few magnitudes more readable than the JSON one. The JSON query in this example, is full of hacks. Every time I see a "$" sign, I'm totally confused about what it means. For example, consider this fragment, total: { $sum: "$price" } and compare it to SUM(price) AS total.</p>
+
+<p>I think MongoDB has its strengths. But for haven's sake, if they can't find any better, they should leave this JSON ugliness in favor of SQL as a query interface to MongoDB. What do you think?</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="Off late, I am working on a project to render real time business data with interesting visualizations, so people can feel the pulse of the business. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/page/9/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/07/28/deploying-to-TV-screens/">Deploying to TV Screens</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-28T15:28:00-06:00" pubdate data-updated="true">Jul 28<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Off late, I am working on a project to render real time business data with interesting visualizations, so people can feel the pulse of the business. For the last couple of months, I have been planning to write a detailed post about it. But after a few false starts, I am finally settling on smaller posts, telling a small part of the story each time.</p>
+
+<blockquote><p>So, have you ever worked on a web application that is primarily viewed through 55&#8221;+ 1080p TV screens?</p></blockquote>
+
+<p>We are showing real time business data, aggregated from multiple data sources as they are happening. The screens are gonna be mounted on the wall, like as you&#8217;d see in the airports. And it needs to be running 24x7</p>
+
+<p>This introduces an interesting deployment challenge:</p>
+
+<blockquote><p>How would you reload the screen every time you re-deploy the app?</p></blockquote>
+
+<p>A regular web app is interactive. So, when we re-deploy the app, the users typically get the latest version as soon as they reload the page or navigate through the app. However, in an airport like setting, where information is displayed across many screens, and typically no-one is clicking it, the app needs to be aware of updates and reload itself to achieve the same. This is essential, for example, if there&#8217;s an API change on the server side, the HTML/Javascript/CSS must be in sync to be able render it.</p>
+
+<p><img src="http://farm1.staticflickr.com/65/212623519_eae543d64c.jpg" alt="Airport displays" /></p>
+
+<p>Photo credits to  5mal5</p>
+
+<p>The app itself uses JSON API calls to render the live data. Each screen is somewhat like a single page app, using multiple AJAX calls to render different parts of the screen, showing different data. The API calls are all funneled through a single Javascript module. The module looks like the following (showing a simplified version for brevity):</p>
+
+<div><script src='https://gist.github.com/3194417.js?file='></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p>If you have noticed here, there&#8217;s an extra check inside the success callback. To begin with, the page remembers the server token on reload. So, whenever there&#8217;s a new token, it refreshes the page. Since all API calls are funneled through this module, this becomes a no-brainer to support new screens/API calls.</p>
+
+<p>Our API&#8217;s respond with a server token, which is guaranteed to:</p>
+
+<ol>
+<li>Remain same for each server deployment, and</li>
+<li>Change whenever there&#8217;s a new deployment.</li>
+</ol>
+
+
+<p>However, we still need to make sure the server token indeed ensures these two essential properties. With a little trick, this becomes trivial. For our app, we are using Capistrano to deploy our Ruby on Rails project. For those new to Capistrano, it uses a timestamped directory for each deploy, symlinking it to the current. So, it looks somewhat like the following:</p>
+
+<div><script src='https://gist.github.com/3194484.js?file='></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p>Every Ruby on Rails app also comes with a little method, Rails.root that returns the full path to the directory of the current deployment. So, in this example scenario, we get the following:</p>
+
+<p>Rails.root #==&gt; /app/realtime/releases/20120729083021</p>
+
+<p>Since every deployment will be a new timestamp, this method ensures a unique token for each deployment. That&#8217;s all we need for the api module to be aware of new deployments and auto refreshes. Here&#8217;s an example controller/action (again, simplified for brevity):</p>
+
+<div><script src='https://gist.github.com/3194430.js?file='></script>
+<noscript><pre><code></code></pre></noscript></div>
+
+
+<p>I liked the organic nature of this technique. It is harvesting on the available tools. Although the examples in this post show Ruby/Rails as an example, I am sure the same techniques can be applied to other technologies with the same simplicity.</p>
+
+<p>Before I conclude, I would share one limitation of this technique here. Since the page reload happens on a shared api module, the reload needs to be generic, without requiring any special knowledge about the pages to reload. This pretty much means, a page needs to be able to reconstruct itself entirely from it&#8217;s URL. Requiring any Javascript state beyond the URL, would probably require API specific handling to reload, killing the advantage of this technique. But the good news is, its always a good practice to rely solely on the URL to construct a page.</p>
+
+<p>Thanks a ton if you&#8217;ve followed all the way. Stay tuned for the upcoming posts, where I will be telling the story of handling multiple API calls on a page, highlighting data changes and some other interesting bits about a real time dashboard.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/30/my-take-on-client-side-mvc/">My Take on Client-Side MVC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-30T00:00:00-06:00" pubdate data-updated="true">Mar 30<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">I just rolled off my last project this Wednesday. It was a great team, worked on some cutting edge technologies, mobile web, HTML5, mongo and some other fun stuff. Now that I got two &#8220;beach&#8221; days before jumping on to the next gig, I spent some time trying out Backbonejs to knockout one item from the long list of to-dos. This post is about my initial take on client side MVC, solely based on these two days with <a href="http://documentcloud.github.com/backbone/">Backbonejs</a>.<br /><br /><h2 style="text-align: left;">Summary</h2><blockquote class="tr_bq">Client-side MVC is in its infancy, but promises a bright future</blockquote><div><br /></div><div><h2 style="text-align: left;">The Good</h2></div><div>Writing &#8220;clean code&#8221; while doing Javascript can be quite a challenge. Doing MVC gets you a step closer to that by splitting responsibility among models, views and controllers. So, your Javascript code will be domain driven, instead of just a bunch of monolithic methods.</div><div><br /></div><div>Your client-side MVC application can be very responsive, or even a &#8221;<a href="http://en.wikipedia.org/wiki/Single-page_application">single page app</a>&#8221;. This is an advantage if your app needs some data from the server, but can leverage Javascript for most of its visual needs. For example, a real-time analytics dashboard can use client-side MVC to do most of the processing on the client side after fetching the data from the server.</div><div><br /></div><div>Backbonejs offers event wiring API between your models and views. For example, say you have a model called Vehicle and a view called VehicleView, you can put the following code to wire up the &#8220;change&#8221; event on the model so that the view renders whenever the model is updated.<br /><br /></div><script src="https://gist.github.com/2252292.js">  </script> <br />Using such events, it becomes a trivial process to keep all the views in sync with the models as they change across different actions.<br /><br />Another advantage of client-side MVC is, it forces &#8221;<a href="http://en.wikipedia.org/wiki/Eating_your_own_dog_food">eat your own dog food</a>&#8221; as you are essentially creating an API on your server and using it first hand on the client side. So, if you are building multiple clients, for example, native mobile clients and browser web apps, you can leverage the same API.<br /><br /><h2 style="text-align: left;">The Bad</h2>Ever since Ruby on Rails came into the game, we all became keen on having conventions. Can&#8217;t speak for the rest of the client-side MVC projects, but Backbonejs definitely lacks in this regard. It doesn&#8217;t default to any view template. Also, it doesn&#8217;t have a default project structure. And even worse, no in-built testing recipe either. This means, you are left on your own to choose and debate about each of these, and more that just these, to find a standard set of tools for your project.<br /><br /><blockquote class="tr_bq">Having no in-built test framework reduces the emphasis on testing, this is a Big Big lacking.</blockquote><br />I find the backbonejs MVC to be a little&nbsp;weird, they have Model and View, but no Controller. Instead they have a Router and a confused concept of Collection. So, for example, if you wanted to work on a resource called Vehicle, you will probably end up with the following &#8220;classes&#8221;:<br /><br />Vehicle model, Vehicles collection, Vehicle view, Vehicles view and Vehicle router<br /><br />But as you can see here, there is no Vehicle controller. I know you can always write a controller on your own, but thats the whole point about having strong opinionated conventions.<br /><br />The relation between a Collection and its Model can be confusing, specially when wiring up events. For example, a change in a model can trigger the view for the model and/or the view for its collection. The logic for handling/bubbling such events can get quite messy at times.<br /><br /><h2 style="text-align: left;">The Future</h2>It took several years for server side MVC to find a good common set of conventions and tools. Then, it took a few more years for people to get used to the goodness of it. I think client-side MVC frameworks will hit a similar sweet spot, but only after we give it some time to settle on the conventions and build intelligent tools around those.<br /><br /><br /><br /></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+MVC might not be proper wrt javascript. here is a good read http://addyosmani.github.com/backbone-fundamentals/</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/22/are-you-still-parsing-html-element-ids/">Are You Still Parsing HTML Element Ids?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-22T00:00:00-07:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">To render a list, often times we use repeated HTML elements with a similar template. For example, the search results in ebay.com is a list of divs, each containing different data in the same template. In a server side, this rendering code is somewhat similar to this:<br /><div><br /></div><script src="https://gist.github.com/1660430.js"></script><br />If you noticed, a product with it&#8217;s database id = 123 will be rendered inside a div with id=&#8221;product_123&#8221;, and similarly div id=&#8221;product_456&#8221; will contain the product with id = 456.<br /><br />With such ids, we can write JavaScript code that can extract the database id of a selected product to do interesting things, for example:<br /><br /><script src="https://gist.github.com/1660456.js">  </script><br />This is a useful and a common technique. However, in this era of <a href="http://dev.w3.org/html5/spec/Overview.html#embedding-custom-non-visible-data-with-the-data-attributes">HTML5</a>, we can make use of its custom attributes feature to write a clean JavaScript event handler without the help of parsing. Here&#8217;s an example:<br /><br /><script src="https://gist.github.com/1660524.js">  </script><br />I will never parse my HTML element Id again. What about you?</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Cronos</div>
+<div class='content'>
+nice!, I didt know this function, tks for sharing!</div>
+</div>
+<div class='comment'>
+<div class='author'>honeyclarck</div>
+<div class='content'>
+In my point of view You sure did put a new twist on something that Ive heard so much about <b><a href="http://www.actualexams.me/" rel="nofollow">ActualExams</a></b>. And How did you manage to make a blog that as smart as it is sleek?</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/17/object-versioning-is-open-design/">Object Versioning Is an Open Design Problem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T00:00:00-07:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br /><table cellpadding="0" cellspacing="0" class="tr-caption-container" style="float: right; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://farm3.staticflickr.com/2517/3874492115_e69defd351.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="213" src="http://farm3.staticflickr.com/2517/3874492115_e69defd351.jpg" width="320" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">This unsolvable maze is a local food from Bangladesh, known as Jilapi<br />Photo credits to&nbsp;<span style="background-color: #fefefe; color: blue; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; text-align: left; text-decoration: none;"><a href="http://www.flickr.com/photos/udvranto_pothik/" style="background-color: #fefefe; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px; text-align: left; text-decoration: none;">udvranto pothik</a></span></td></tr></tbody></table>Object Versioning is often required by a business rule, for example, to maintain an audit trail or to be able to revert to a previous version, etc. This is the 3rd time in my career where this Object Versioning requirement made me think like -<br /><blockquote class="tr_bq">There&#8217;s gotta be an easier solution!&nbsp;</blockquote>But, I am yet to find one. So, I am thinking it&#8217;s one of those open design problems, may be.<br /><br />To clarify the requirement with an example, let&#8217;s consider the following scenario:<br /><br />A lawyer is preparing a document for one of her clients using a software. On January 17th, she needs to take a look at the version of the same document from May last year so that she can backtrace some changes that took place during these months.<br /><br />Lets assume the lawyer is using a software that stores the documents in a relational database with the following schema.<br /><pre>A Document has many Evidences, each provided by an EvidenceProvider<br /><br />Document (id, client_id, case_id, name)<br />Evidence (id, document_id, evidence_provider_id, details)<br />EvidenceProvider(id, name)<br /></pre>Now, given the versioning requirement how would you design your data model?<br /><br />Here&#8217;s a couple of points that your design should address at a minimum:<br /><ul style="text-align: left;"><li>Going back to a version means a complete snapshot of the old version of the document. So, the version of May 1st should only bring the evidences that were there on that very day.</li><li>As a new version is created, it should inherit all previous evidences.</li></ul>As I have mentioned earlier, I am yet to find a good data model that can take care of these concerns without over-complicating everything. Let me know if you got a beautiful solution to this problem.<br /><br />However, in my latest project, the requirement is even harder. It&#8217;s somewhat like this:<br /><br />The lawyer may have some documents in the &#8220;work in progress version&#8221;. This means, if she needs to print a document for the court, she only wants to print the last &#8220;good version&#8221;, skipping the &#8220;work in progress version&#8221;.<br /><br />Also, when there is such a &#8220;work in progress version&#8221;, she needs to attach any new Evidence to both the last &#8220;good version&#8221; as well as to the &#8220;work in progress version&#8221;.<br /><br />Well, now you see the design of a data model for Object Versioning becomes really messy and unintuitive.<br /><blockquote class="tr_bq">So, here&#8217;s my question to you - how would you design a solution for this?</blockquote></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/20/care-driven-development-javascript/">Care Driven Development: Javascript</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-20T00:00:00-07:00" pubdate data-updated="true">Nov 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">There <a href="http://blankdd.com/">is * Driven Development</a>, where they listed &#8220;all possible thing&#8221; driven development and dedicated a whole website to it! Well, I am adding one more to the list, &#8220;Care Driven Development&#8221;, with an emphasis to Javascript coding.<br /><br /><blockquote class="tr_bq">Javascript coding, do you care enough?</blockquote>CSS is the most hairy spagetti piece of almost any web project. And its not leading by a far distance to it&#8217;s first cousin; Javascript. But, the good thing is, it just takes a little care to clean the bush out of Javascript and make it pretty.<br /><br />Do you care enough not to use the following ever again?<br /><br /><ul style="text-align: left;"><li>$(&#8216;#deep_under_the_ocean&#8217;)<span class="Apple-style-span" style="color: #cc0000;">.parent().parent()</span>.hide()?</li><li>$.ajax(<span class="Apple-style-span" style="color: #cc0000;">url: &#8216;bank_accounts/transfer_money&#8217;</span>, amount: 500&#8230;)</li><li>$(&#8216;#eiffel_tower&#8217;).height(<span class="Apple-style-span" style="color: #cc0000;">$(&#8216;#paris&#8217;).height() + &nbsp;$(&#8216;#eiffel_tower base&#8217;).height() +&nbsp;$(&#8216;#eiffel_tower tower&#8217;).height()&nbsp;+</span> &#8230;)</li><li>populateNewYork(<span class="Apple-style-span" style="color: #cc0000;">&#8216;east&#8217;, &#8216;north&#8217;, 50, 100, 23, &#8230;</span>)</li><li>$(&#8216;.shark&#8217;).click(function()<span class="Apple-style-span" style="color: #cc0000;">{$(&#8216;.small_fish&#8217;).attacked(function(){&#8230;})}</span>)</li><li>parseInt(<span class="Apple-style-span" style="color: #cc0000;">$(&#8216;.selected&#8217;).id().split(&#8216;-&#8216;).last()</span>)</li></ul><div>I am compiling a list of such careless JS coding examples and this is just a start. If you have a few to add to this list, please keep sending!</div><br /><br /></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/18/enterprise-software-projects-oh-yeah/">Enterprise Software Projects: Oh, Yeah!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">I just rolled off my first ever enterprise software project couple of weeks ago. After staying six months on the project and while the memory is still fresh, I thought I would write a retrospect on the project and on my role.<br /><div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-5wSfo6UY1JE/TsdJk-YQvzI/AAAAAAAAAXk/Xy4XWTycW0U/s1600/Screen+shot+2011-11-18+at+11.15.16+PM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://2.bp.blogspot.com/-5wSfo6UY1JE/TsdJk-YQvzI/AAAAAAAAAXk/Xy4XWTycW0U/s1600/Screen+shot+2011-11-18+at+11.15.16+PM.png" /></a></div><br />The program is rather big, I guess it had ~300 people for the last couple or so years. I joined late for the program. So, by the time I went there, a massive amount of work has already been done, meaning a huge learning curve for me. On retrospect, I think I did well :)<br /><br />My team was small, 4-5 people including 3 devs. But we were responsible for really high value enterprise integration work, especially, linking the two most important applications in the program. This was a great place to learn some of the core business domain specific knowledge and I loved it!<br /><br />However, enterprise integration stuff is full of XML messaging and translation. While XSLT works when it works, in our situation we had too much logic and stateful data involved in the translation. So, we had to write a hell lot of custom code for all the XML messaging&#8230; and it sucks! Why?<br /><blockquote class="tr_bq">Service APIs change all the time!&nbsp;</blockquote>I was mostly writing Java at work in this project for the first time in my professional career. This was a big change as well as a good exposure, considering my recent work mostly being in C# and Ruby. &nbsp;In retrospect, I would say, I would rather not use Java, its a great platform but offers your an aging language.<br /><br />Being in the enterprise world means dealing with enterprise service buses, queues, oracle database, weblogic, load balancers, risk and compliance and you name it&#8230; sometimes the complexity of these things seemed to be&nbsp;unnecessarily&nbsp;troublesome, but then again, at times they made sense as well.<br /><br />People factors matter way greater than any other factor in such a big project. In retrospect, I think a hierarchical system often leads to longer meetings, useless communication and less ownership for most people.<br /><br />I will continue this post to a second episode where I will talk about development practices, challenges with multi-project communication, politics and power relations etc. Stay tuned!&nbsp;</div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/13/aligning-html-div-inside-another-one/">Aligning an HTML DIV Inside Another One</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-13T00:00:00-07:00" pubdate data-updated="true">Nov 13<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">Across different projects, I have found people taking CSS shortcuts for translating the Photoshopped design templates into HTML. Back in the days, layout used to be all Table based and it was kind of straight forward to fit everything into grid cells. However, with CSS styling the extra flexibility to put elements in any arbitrary layout came extra responsibility - to make sure things still align nicely while being fluid to accommodate different screen resolutions and form factors.<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-21-12O0-QHA/TsBacV3pq_I/AAAAAAAAAXM/aUOql7Yjy8k/s1600/Screen+shot+2011-11-13+at+5.01.16+PM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="34" src="http://3.bp.blogspot.com/-21-12O0-QHA/TsBacV3pq_I/AAAAAAAAAXM/aUOql7Yjy8k/s320/Screen+shot+2011-11-13+at+5.01.16+PM.png" width="320" /></a></div><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://3.bp.blogspot.com/-AEiJnBUw8wA/TsBackj_N-I/AAAAAAAAAXQ/nGFX0AnYL-I/s1600/Screen+shot+2011-11-13+at+5.01.27+PM.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="43" src="http://3.bp.blogspot.com/-AEiJnBUw8wA/TsBackj_N-I/AAAAAAAAAXQ/nGFX0AnYL-I/s320/Screen+shot+2011-11-13+at+5.01.27+PM.png" width="320" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Aligning the child div in red inside a parent div in green using CSS</td></tr></tbody></table><br />Here&#8217;s a quick and dead simple example to create CSS alignment for a div inside another one!<br /><br /><blockquote class="tr_bq">Pro Tip: Use position:relative for the parent div and position:absolute for the child div.</blockquote><br /><script src="https://gist.github.com/1362939.js">  </script>This will make sure the parent is positioned relatively to other elements in the page. However, the absolutely positioned child can be positioned anywhere inside the parent without making the whole layout fixed.<br /><br /><br /></div></div></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks Scott! Almost invariably the most &quot;hacky&quot; part of any web app can be found in its stylesheet. Hope it changes someday, at least for the apps that I will work on!</div>
+</div>
+<div class='comment'>
+<div class='author'>Scott Muc</div>
+<div class='content'>
+Nice, I too learned about the wonderfulness of parent divs being postion:relative and child divs being postion:absolute when I worked at Radio 3. After the eureka moment positioning didn&#39;t seem that hard anymore.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/01/using-instanceof-is-mostly-code-smell/">Using Instanceof Is Mostly a Code Smell</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-01T00:00:00-06:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">When using static programming languages such as Java, often time I have seen people writing methods that accept Object as a parameter. These methods typically don&#8217;t really work on any Object, but works with multiple types of classes that don&#8217;t have any common base class. Here&#8217;s an example of such a method:<br /><br /></div><script src="https://gist.github.com/1332622.js"></script>As you can see in this example, the <code>process</code> method actually expects one of <code>CleanFloor</code> or <code>LaunchRocket</code> instances. However, since the two don&#8217;t have a common subclass, it falls back to an Object type. And that results in the smelly code as you see in the example.<br /><br />An ideal solution would be to change the design of the classes so that you can either use a common base class or a generic method. But if you can&#8217;t just do that<br /><br /><blockquote class="tr_bq">Get rid of the instanceof anyway!</blockquote><br />However, this doesn&#8217;t need to be smelly. Turning to basics of OO programming concepts, you will recall that there&#8217;s this thing called method overloading that is specifically there to solve this very problem.<br /><br /><script src="https://gist.github.com/1332647.js">  </script>It seems so obvious in this example that you might question, why someone would use the former code? Well, I have seen quite a few of them and if you search for instanceof in your Java project, I won&#8217;t be surprised if you see a few code fragments that match the former example. </div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/10/04/nightly-build-is-warning-or-horror/">Nightly Build Is a Warning (or Horror)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-04T00:00:00-06:00" pubdate data-updated="true">Oct 4<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><table cellpadding="0" cellspacing="0" class="tr-caption-container" style="float: right; margin-left: 1em; text-align: right;"><tbody><tr><td style="text-align: center;"><a href="http://farm7.static.flickr.com/6167/6175859290_ebca7ae0e3.jpg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: auto; margin-right: auto;"><img border="0" height="225" src="http://farm7.static.flickr.com/6167/6175859290_ebca7ae0e3.jpg" width="400" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Photo credits:&nbsp;<span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;"><a href="http://www.flickr.com/photos/insidethemagic/" style="color: #0063dc; text-decoration: none;">insidethemagic</a></span></td></tr></tbody></table><br />I think, Nightly build is an anti-pattern for Continuous Integration. If you are integrating continuously, then you shouldn&#8217;t need a nightly build, that would be too discrete :(<br /><br />If you already have a per-commit continuous integration setup, you shouldn&#8217;t need the so called nightly build unless there&#8217;s something bad about the code.<br /><br />Often times, builds taking &gt;10 minutes are put in the bucket of nightly builds.<br />Some people put batch processing related tests under such nightly builds. A colleague told me they used nightly build to clean up resources (disk space, recreate the database etc.) on a nightly build - to ensure the apps worked fine on a fresh state.<br /><blockquote>Under most circumstances, a nighly build means something long running. That in itself can be an indication of poor performance.</blockquote>But what I have seen is, when such nightly builds are broken - they are rarely looked after or cared for. Because, first thing in the morning, who the hell wants to look at that broken nightly build? Even if someone takes a look, since its long running, it might well eat up all morning to actually try/fix/commit changes and see it go green again! Since it takes longer to make the build green, people keep delaying it for later&#8230; meaning<br /><blockquote>it becomes generally acceptable to let the nightly build stay in RED.&nbsp;</blockquote>And once people get used the redness of the nightly build, they start ignoring it, inevitably.<br /><br />So, here&#8217;s what I would do:<br /><blockquote>Avoid nightly builds altogether.<br />Avoid nightly builds altogether.<br />Avoid nightly builds altogether.<br />Otherwise, make one person from the team responsible for the build (rotate people).</blockquote><div><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/28/perils-of-soft-delete/">The Perils of Soft Delete</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-28T00:00:00-06:00" pubdate data-updated="true">Sep 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Often times, applications cannot get rid of the database records for business rules. For example, if you are a cable TV provider, you might have a customer calling you to stop the National Geographic Channel subscription from next month.&nbsp;Ideally you would like to delete this record, but you can&#8217;t do it until the effective date:( If you delete it, the next invoice will not be able to charge for this channel, although it&#8217;s still being used.<br /><br />In such scenarios, its common to fall back to a soft delete model. As an example, here&#8217;s a little code:<br /><br /><script src="https://gist.github.com/1249283.js">  </script><br />This code looks simple and harmless at a first sight. But, as you develop your app, you&#8217;ll run into a lot of issues from this. Here&#8217;s a short list:<br /><ol style="text-align: left;"><li>You need to take care of cascading soft delete, for example, cancelling a customer&#8217;s subscription needs to cascade down to all channels and other objects under it.</li><li>Whenever, you are listing the current subscriptions of a customer, you need to filter out the ended ones.</li><li>You need to figure out a strategy to periodically clean the ended subscriptions so that your database is not filled with outdated data.</li><li>If you have a business key used as a primary key as well, you will be in trouble if an ended subscription is restarted.</li><li>Your code will eventually have a lot of if-else blocks to apply changes to only on active objects.</li></ol>So, what is the solution? Its best to avoid them as much as possible. Richard Dingwall has <a href="http://richarddingwall.name/2009/11/20/the-trouble-with-soft-delete/">a detailed blog post</a> on some alternative techniques to avoid soft-delete. But if you have to have soft delete, as shown in the example, its worth remembering the aforementioned points.<br /><div><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/10/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/8/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

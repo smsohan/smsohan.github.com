@@ -1,0 +1,626 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="I know, while most of you are very happy with the new features in Visual Studio 2008, its sad that not all your deployment environments are upgraded &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/page/19/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/09/01/set-and-compile-using-c-language/">Set and Compile Using C# Language Version 2.0 in Visual Studio 2008</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-01T00:00:00-06:00" pubdate data-updated="true">Sep 1<span>st</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I know, while most of you are very happy with the new features in Visual Studio 2008, its sad that not all your deployment environments are upgraded to .Net framework 3.5. I had a similar situation as well on one of my projects.</p>  <p>Its great that you can just navigate to a VS 2008 project file properties and from the Application Tab select the Target .Net Framework version to use one of .Net 2.0, 3.0 and 3.5. But this doesn&#8217;t solve all the problems. You will soon discover that, your application doesn&#8217;t show an error when you write C# 3.0 code with the target framework set to 2.0. This is because, the IDE by default uses the latest language version by default.</p>  <p>To solve this problem, Navigate to <span style="color:#8080ff;"><strong>project properties &gt; Build &gt; Advanced &gt; Language Version and choose ISO-2 (or ISO-1).</strong></span> Now with this information, the VS 2008 will start showing compiler errors for features that don&#8217;t comply to the version specification!</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Jeff Sinclair</div>
+<div class='content'>
+The important thing to remember is that if you compile using c# 3.0 features, this does not mean that the compiled output won&#8217;t run on 2.0 Most of the c# 3 features are compile time only. <BR/>Be clear on if you want to be restricted at compile time, or if your goal is to have the output work on 2.0 at runtime.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/09/01/bdd-my-first-bdd-code-using-rspec-in/">BDD - My First BDD Code Using RSpec in Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-01T00:00:00-06:00" pubdate data-updated="true">Sep 1<span>st</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I am really really happy to see people putting so much efforts for building high quality, nearly all avoidable error free software. I am a big believer of Test Driven Development and doing TDD for about two years now. I have always had the feeling that TDD is a kind of a misnomer because to some people the term &#8216;Test&#8217; refers to finding bugs. For this very reason, when people gets started with TDD, they consider it as a waste of time to write so much extra code that doesn&#8217;t necessarily find bugs!</p>  <p>Well, a good vocabulary always makes it more attractive and useful. Now with BDD, Behavior Driven Development, I think the vocabulary that people actually codes the behaviors and implements the behaviors, not the tests, makes it more like it.</p>  <p>So, lets see my first ever written RSpec ruby code and the sexy html output!</p>  <p>#This is a poor Stack implementation</p>  <p><span style="color:#404040;">class</span> Stack   <br />   <span style="color:#404040;">def</span> initialize   <br />       @items = []   <br />   end   <br />   def push(item)   <br />       @items &lt;&lt; item   <br />   end   <br />   def pop   <br />       return nil unless @items &amp;&amp; @items.length &gt; 0   <br />       item = @items.last   <br />       @items.delete item   <br />       return item   <br />   end   <br />   def peek   <br />       return nil unless @items &amp;&amp; @items.length &gt; 0   <br />       @items.last   <br />   end   <br />   def empty?   <br />       @items.empty?   <br />   end   <br />end</p>  <p>#This is the RSpec ruby code. Isn&#8217;t is Simple?</p>  <p>describe Stack do  <br />   before(:each) do   <br />       @stack = Stack.new   <br />   end   <br />   describe &#8220;Empty&#8221; do   <br />       it &#8220;Should be empty when created&#8221; do   <br />           @stack.empty?.should == true   <br />       end   <br />   end   <br />   describe &#8220;With One Item (value = 3)&#8221; do   <br />       before(:each) do   <br />           @stack.push(3)   <br />       end   <br />       it &#8220;should not be empty&#8221; do   <br />           @stack.empty?.should be_false   <br />       end   <br />       it &#8220;should return the item (=3) when #peek&#8221; do   <br />           @stack.peek.should == 3   <br />       end   <br />       it &#8220;should return the item (=3) when #pop&#8221; do   <br />           @stack.pop.should == 3   <br />       end   <br />   end   <br />end</p>  <p>Well, we all write codes and are doing this day and night for years. What I like to see is as sexy an output as the following from my source code :-)</p>  <p><a href="http://lh5.ggpht.com/sohan39/SLu558pW0rI/AAAAAAAAAD8/1nk1GLN_mBM/s1600-h/RSpec%5B12%5D.jpg"><img style="border: 0px none ;" alt="RSpec" src="http://lh3.ggpht.com/sohan39/SLu57kNJhoI/AAAAAAAAAEA/ZIjSLFPkOOk/RSpec_thumb%5B8%5D.jpg?imgmax=800" width="812" border="0" height="244" /></a> </p>  <p>I know, you liked the output. For more you may check at <a title="http://rspec.info/" href="http://rspec.info/">http://rspec.info/</a></p>  <p>Need a similar solution on .Net? Keep Googling and come back to me if you see a good BDD tool. I would really like to use BDD in my .Net projects and see how better it performs over TDD. </p></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/20/my-target-items-still-in-2008-learning/">My Target Items Still in the 2008 Learning Queue</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-20T00:00:00-06:00" pubdate data-updated="true">Aug 20<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>1. Windows Workflow foundation.</p>  <p>2. Study about ERP and take a good look into a popular open-source ERP application.</p>  <p>3. Study on SOA.</p>  <p>4. Study on Smart Client applications.</p>  </div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/13/unit-testing-using-mocks-fillwithmocks/">Unit Testing Using Mocks - FillWithMocks, Fill All or Only Selected Properties With Mocks Using Only a Single Method Call</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-13T00:00:00-06:00" pubdate data-updated="true">Aug 13<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I have been doing TDD for about two years now and using mock testing for interaction based unit testing in my projects. What I have learned over this time is, a unit testable design leads to introduction of interfaces and dependency injection for testing a code in isolation. And when I want to perform tests on my interactions, I need to create mock objects and inject these mock instances to my object under test. Sometimes, a unit test class needs to create quite a few of such mock objects and I feel this can be done using a simple wrapper around the usual mocking frameworks.</p>  <p>I suggest a similar and even more powerful wrapper so that you don&#8217;t need to create instances for each of the mock objects, rather do it in a single call for all your desired mocks. I have shown this method for NMock2, however, its evident that you can write your own method for your favorite mocking framework just using this code as a reference.</p>  <p>This code is written in C# 3.0 and should compile in .Net 3.5. You will need to add a reference to NMock2 to compile this. Also, you need to know a bit about Reflection to understand the following code fragment.</p>  <p><strong>Disclaimer:</strong> This code is just a simple example and it may not suit all your needs.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red128\green128\blue128;\red0\green128\blue0;\red163\green21\blue21;}??\fs20 \cf1 using\cf0  System;\par ??\cf1 using\cf0  System.Collections.Generic;\par ??\cf1 using\cf0  System.Linq;\par ??\cf1 using\cf0  System.Text;\par ??\cf1 using\cf0  System.Reflection;\par ??\par ??\par ??\cf1 namespace\cf0  NMock2.Extensions\par ??\{\par ??    \cf1 public\cf0  \cf1 static\cf0  \cf1 class\cf0  \cf4 MockeryExtensions\par ??\cf0     \{\par ??        \cf5 ///\cf6  \cf5 <summary>\par ??\cf0         \cf5 ///\cf6  This method will fill all properties of the &#8216;target&#8217; of interface type having a setter\par ??\cf0         \cf5 ///\cf6  \cf5 </summary>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="mocks"></param>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="target"></param>\par ??\cf0         \cf1 public\cf0  \cf1 static\cf0  \cf1 void\cf0  FillWithMocks(\cf1 this\cf0  \cf4 Mockery\cf0  mocks, \cf1 object\cf0  target)\par ??        \{\par ??            \cf4 Type\cf0  targetType = target.GetType();\par ??            \cf4 PropertyInfo\cf0  []properties = target.GetType().GetProperties();\par ??            \par ??            \cf1 foreach\cf0  (\cf4 PropertyInfo\cf0  property \cf1 in\cf0  properties)\par ??            \{\par ??                \cf4 Type\cf0  ptype = property.PropertyType;\par ??                \cf1 if\cf0  (ptype.IsInterface)\par ??                \{\par ??                    \cf1 if\cf0 (targetType.GetMethod(\cf1 string\cf0 .Format(\cf7 &#8220;set_\{0\}&#8221;\cf0 , property.Name)) != \cf1 null\cf0 )\par ??                    \{\par ??                        targetType.GetProperty(property.Name).SetValue(target, mocks.NewMock(ptype), \cf1 new\cf0  \cf1 object\cf0 [] \{ \});\par ??                    \}\par ??                \}\par ??            \}\par ??        \}\par ??\par ??        \cf5 ///\cf6  \cf5 <summary>\par ??\cf0         \cf5 ///\cf6  This method will fill the properties with names specified in the propertyNames array having a setter\par ??\cf0         \cf5 ///\cf6  \cf5 </summary>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="mocks"></param>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="target"></param>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="propertyNames"></param>\par ??\cf0         \cf1 public\cf0  \cf1 static\cf0  \cf1 void\cf0  FillWithMocks(\cf1 this\cf0  \cf4 Mockery\cf0  mocks, \cf1 object\cf0  target, \cf1 params\cf0  \cf1 string\cf0 [] propertyNames)\par ??        \{\par ??            \cf4 Type\cf0  targetType = target.GetType();\par ??            \cf1 foreach\cf0  (\cf1 string\cf0  propertyName \cf1 in\cf0  propertyNames)\par ??            \{\par ??                \cf4 PropertyInfo\cf0  pInfo = targetType.GetProperty(propertyName);\par ??                \cf1 if\cf0  (pInfo != \cf1 null\cf0  &amp;&amp; targetType.GetMethod(\cf1 string\cf0 .Format(\cf7 &#8220;set_\{0\}&#8221;\cf0 , propertyName)) != \cf1 null\cf0 )\par ??                \{\par ??                    pInfo.SetValue(target, mocks.NewMock(pInfo.PropertyType), \cf1 null\cf0 );\par ??                \}\par ??                \cf1 else\par ??\cf0                 \{\par ??                    \cf1 throw\cf0  \cf1 new\cf0  \cf4 ArgumentException\cf0 (\cf1 string\cf0 .Format(\cf7 &#8220;the property \{0\} is not found or does not have a setter&#8221;\cf0 , pInfo.Name));\par ??                \}\par ??            \}\par ??        \}\par ??    \}\par ??\}\par ??} &#8211;>  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    1</span> <span style="color:blue;">using</span> System;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    2</span> <span style="color:blue;">using</span> System.Collections.Generic;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    3</span> <span style="color:blue;">using</span> System.Linq;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    4</span> <span style="color:blue;">using</span> System.Text;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    5</span> <span style="color:blue;">using</span> System.Reflection;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    6</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    7</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    8</span> <span style="color:blue;">namespace</span> NMock2.Extensions</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    9</span> {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   10</span>     <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">MockeryExtensions</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   11</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   12</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   13</span>         <span style="color:gray;">///</span><span style="color:green;"> This method will fill all properties of the &#8216;target&#8217; of interface type having a setter</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;/summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;mocks&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;target&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">void</span> FillWithMocks(<span style="color:blue;">this</span> <span style="color: rgb(43, 145, 175);">Mockery</span> mocks, <span style="color:blue;">object</span> target)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>             <span style="color: rgb(43, 145, 175);">Type</span> targetType = target.GetType();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>             <span style="color: rgb(43, 145, 175);">PropertyInfo</span> []properties = target.GetType().GetProperties();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span>             <span style="color:blue;">foreach</span> (<span style="color: rgb(43, 145, 175);">PropertyInfo</span> property <span style="color:blue;">in</span> properties)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span>             {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span>                 <span style="color: rgb(43, 145, 175);">Type</span> ptype = property.PropertyType;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>                 <span style="color:blue;">if</span> (ptype.IsInterface)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>                 {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span>                     <span style="color:blue;">if</span>(targetType.GetMethod(<span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;set_{0}&#8221;</span>, property.Name)) != <span style="color:blue;">null</span>)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>                     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>                         targetType.GetProperty(property.Name).SetValue(target, mocks.NewMock(ptype), <span style="color:blue;">new</span> <span style="color:blue;">object</span>[] { });</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span>                     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>                 }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span>             }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   36</span>         <span style="color:gray;">///</span><span style="color:green;"> This method will fill the properties with names specified in the propertyNames array having a setter</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   37</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;/summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   38</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;mocks&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   39</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;target&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   40</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;propertyNames&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   41</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">void</span> FillWithMocks(<span style="color:blue;">this</span> <span style="color: rgb(43, 145, 175);">Mockery</span> mocks, <span style="color:blue;">object</span> target, <span style="color:blue;">params</span> <span style="color:blue;">string</span>[] propertyNames)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   42</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   43</span>             <span style="color: rgb(43, 145, 175);">Type</span> targetType = target.GetType();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   44</span>             <span style="color:blue;">foreach</span> (<span style="color:blue;">string</span> propertyName <span style="color:blue;">in</span> propertyNames)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   45</span>             {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   46</span>                 <span style="color: rgb(43, 145, 175);">PropertyInfo</span> pInfo = targetType.GetProperty(propertyName);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   47</span>                 <span style="color:blue;">if</span> (pInfo != <span style="color:blue;">null</span> &amp;&amp; targetType.GetMethod(<span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;set_{0}&#8221;</span>, propertyName)) != <span style="color:blue;">null</span>)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   48</span>                 {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   49</span>                     pInfo.SetValue(target, mocks.NewMock(pInfo.PropertyType), <span style="color:blue;">null</span>);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   50</span>                 }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   51</span>                 <span style="color:blue;">else</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   52</span>                 {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   53</span>                     <span style="color:blue;">throw</span> <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">ArgumentException</span>(<span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;the property {0} is not found or does not have a setter&#8221;</span>, pInfo.Name));</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   54</span>                 }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   55</span>             }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   56</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   57</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   58</span> }</p> </div>  <p>So, with this extension method in place, you can go and write your test code in a much compact manner. The following is an example showing one possible use of this method in your NUnit test code.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red0\green128\blue0;\red163\green21\blue21;}??\fs20 \cf1 public\cf0  \cf1 interface\cf0  \cf4 IMyInterface\par ??\cf0     \{\par ??        \cf1 void\cf0  MyMethod(\cf1 string\cf0  name);\par ??    \}\par ??\par ??    \cf1 public\cf0  \cf1 class\cf0  \cf4 MyExampleClass\par ??\cf0     \{\par ??        \cf1 public\cf0  \cf4 IMyInterface\cf0  MyPropertyOne\par ??        \{\par ??            \cf1 get\cf0 ;\par ??            \cf1 set\cf0 ;\par ??        \}\par ??\par ??        \cf1 public\cf0  \cf4 IMyInterface\cf0  MyPropertyTwo\par ??        \{\par ??            \cf1 get\cf0 ;\par ??            \cf1 set\cf0 ;\par ??        \}\par ??\par ??        \cf1 public\cf0  \cf4 IMyInterface\cf0  MyPropertyThree\par ??        \{\par ??            \cf1 get\cf0 ;\par ??            \cf1 set\cf0 ;\par ??        \}\par ??\par ??        \cf1 public\cf0  MyExampleClass()\par ??        \{\par ??\par ??        \}\par ??    \}\par ??\par ??    [\cf4 TestFixture\cf0 ]\par ??    \cf1 public\cf0  \cf1 class\cf0  \cf4 MyExampleClassTest\par ??\cf0     \{\par ??        \cf1 private\cf0  \cf4 MyExampleClass\cf0  _myExampleClass;\par ??        \cf1 private\cf0  \cf4 Mockery\cf0  _mocks;\par ??\par ??        [\cf4 SetUp\cf0 ]\par ??        \cf1 public\cf0  \cf1 void\cf0  Init()\par ??        \{\par ??            _myExampleClass = \cf1 new\cf0  \cf4 MyExampleClass\cf0 ();\par ??            _mocks = \cf1 new\cf0  \cf4 Mockery\cf0 ();\par ??\par ??            \cf5 //This class fills both the properties with mocks\par ??\cf0             _mocks.FillWithMocks(_myExampleClass);\par ??\par ??            \cf5 //This class fills only MyPropertyOne and MyPropertyTwo with mocks\par ??\cf0             _mocks.FillWithMocks(_myExampleClass, \cf6 "MyPropertyOne"\cf0 , \cf6 "MyPropertyTwo"\cf0 );\par ??        \}\par ??    \}} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   83</span>     <span style="color:blue;">public</span> <span style="color:blue;">interface</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   84</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   85</span>         <span style="color:blue;">void</span> MyMethod(<span style="color:blue;">string</span> name);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   86</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   87</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   88</span>     <span style="color:blue;">public</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">MyExampleClass</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   89</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   90</span>         <span style="color:blue;">public</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span> MyPropertyOne</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   91</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   92</span>             <span style="color:blue;">get</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   93</span>             <span style="color:blue;">set</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   94</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   95</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   96</span>         <span style="color:blue;">public</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span> MyPropertyTwo</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   97</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   98</span>             <span style="color:blue;">get</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   99</span>             <span style="color:blue;">set</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  100</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  101</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  102</span>         <span style="color:blue;">public</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span> MyPropertyThree</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  103</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  104</span>             <span style="color:blue;">get</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  105</span>             <span style="color:blue;">set</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  106</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  107</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  108</span>         <span style="color:blue;">public</span> MyExampleClass()</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  109</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  110</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  111</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  112</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  113</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  114</span>     [<span style="color: rgb(43, 145, 175);">TestFixture</span>]</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  115</span>     <span style="color:blue;">public</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">MyExampleClassTest</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  116</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  117</span>         <span style="color:blue;">private</span> <span style="color: rgb(43, 145, 175);">MyExampleClass</span> _myExampleClass;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  118</span>         <span style="color:blue;">private</span> <span style="color: rgb(43, 145, 175);">Mockery</span> _mocks;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  119</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  120</span>         [<span style="color: rgb(43, 145, 175);">SetUp</span>]</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  121</span>         <span style="color:blue;">public</span> <span style="color:blue;">void</span> Init()</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  122</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  123</span>             _myExampleClass = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MyExampleClass</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  124</span>             _mocks = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">Mockery</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  125</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  126</span>             <span style="color:green;">//This call fills all the three properties with mocks</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  127</span>             _mocks.FillWithMocks(_myExampleClass);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  128</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  129</span>             <span style="color:green;">//This call fills only MyPropertyOne and MyPropertyTwo with mocks</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  130</span>             _mocks.FillWithMocks(_myExampleClass, <span style="color: rgb(163, 21, 21);">&#8220;MyPropertyOne&#8221;</span>, <span style="color: rgb(163, 21, 21);">&#8220;MyPropertyTwo&#8221;</span>);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  131</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  132</span>     }</p> </div>  <p>Comments are welcome!</p></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/12/xdocumenttostringwithxmldeclaration-get/">XDocument.ToStringWithXmlDeclaration() - Get the String Representation of XDcoument With Its Xml Declaration</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-12T00:00:00-06:00" pubdate data-updated="true">Aug 12<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>The System.Xml.Linq.XDocument.ToString() produces a serialized string version of the XDocument object. But unfortunately, while doing so, it leaves the xml declaration in the serialized version which may be required in your application.</p>  <p>Again, there is another method called Save that produces the serialized version including xml declaration. So, I think we can write a simple extension method for producing the xml declaration as shown in the following -</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}??\fs20 \cf1 class\cf0  \cf4 Program\par ??\cf0     \{\par ??        \cf1 static\cf0  \cf1 void\cf0  Main(\cf1 string\cf0 [] args)\par ??        \{\par ??\par ??            \cf4 XDocument\cf0  doc = \cf1 new\cf0  \cf4 XDocument\cf0 (\cf1 new\cf0  \cf4 XDeclaration\cf0 (\cf5 "1.0"\cf0 , \cf5 "utf-8"\cf0 , \cf1 null\cf0 ), \cf1 new\cf0  \cf4 XElement\cf0 (\cf5 "root"\cf0 ));\par ??            \cf4 Console\cf0 .WriteLine(doc.ToStringWithXmlDeclaration());\par ??        \}\par ??    \}\par ??\par ??\par ??    \cf1 public\cf0  \cf1 static\cf0  \cf1 class\cf0  \cf4 XDocumentExtensions\par ??\cf0     \{\par ??        \cf1 public\cf0  \cf1 static\cf0  \cf1 string\cf0  ToStringWithXmlDeclaration(\cf1 this\cf0  \cf4 XDocument\cf0  doc)\par ??        \{\par ??            \cf4 StringBuilder\cf0  builder   = \cf1 new\cf0  \cf4 StringBuilder\cf0 ();\par ??            \cf4 StringWriter\cf0  writer     = \cf1 new\cf0  \cf4 StringWriter\cf0 (builder);\par ??            doc.Save(writer);\par ??            writer.Flush();\par ??            \cf1 return\cf0  builder.ToString();\par ??        \}\par ??    \}} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">Program</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>         <span style="color:blue;">static</span> <span style="color:blue;">void</span> Main(<span style="color:blue;">string</span>[] args)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>             <span style="color: rgb(43, 145, 175);">XDocument</span> doc = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XDocument</span>(<span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XDeclaration</span>(<span style="color: rgb(163, 21, 21);">&#8220;1.0&#8221;</span>, <span style="color: rgb(163, 21, 21);">&#8220;utf-8&#8221;</span>, <span style="color:blue;">null</span>), <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XElement</span>(<span style="color: rgb(163, 21, 21);">&#8220;root&#8221;</span>));</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>             <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(doc.ToStringWithXmlDeclaration());</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>     <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">XDocumentExtensions</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">string</span> ToStringWithXmlDeclaration(<span style="color:blue;">this</span> <span style="color: rgb(43, 145, 175);">XDocument</span> doc)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>             <span style="color: rgb(43, 145, 175);">StringBuilder</span> builder   = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StringBuilder</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span>             <span style="color: rgb(43, 145, 175);">StringWriter</span> writer    = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StringWriter</span>(builder);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>             doc.Save(writer);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span>             writer.Flush();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span>             <span style="color:blue;">return</span> builder.ToString();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span>     }</p> </div>  <p>Apart from its purpose, this is also an example use of the Extension Method feature of C# 3.0.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Dan:<br />Didn&#39;t know that. Thanks for sharing.</div>
+</div>
+<div class='comment'>
+<div class='author'>Dan</div>
+<div class='content'>
+You can use also <br /><br />return doc.Declaration.ToString() + doc.ToString();</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Dragon:<br />Thanks for suggesting the improvement.</div>
+</div>
+<div class='comment'>
+<div class='author'>Dragon</div>
+<div class='content'>
+I think better:<br /><br />public static string ToStringWithXmlDeclaration(this XDocument doc)<br />{<br /> StringBuilder builder = new StringBuilder();<br /> using (TextWriter  writer = new  StringWriter(builder))<br /> {<br />  doc.Save(writer);<br /> }<br /> return builder.ToString();<br />}</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/11/simple-wildcard-replacement-on-rendered/">Simple Wildcard Replacement on the Rendered Html of Asp.Net Page</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-11T00:00:00-06:00" pubdate data-updated="true">Aug 11<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>This is a simple solution for implementing wildcard replacements in your asp.net pages. You may use this, if you want to replace some tokens / merge codes in the asp.net generated html by your personalized values. </p>  <p>System.Web.UI.Control has a virtual method called &#8216;Render&#8217; of the following signature - </p>  <p>protected internal virtual void Render(   <br />    HtmlTextWriter writer    <br />)</p>  <p>Since, all your ASP.Net pages and server controls are subclasses of this Control class, you can override this method and manipulate the html that&#8217;s rendered from this control. So, using this method, we will intercept the render method and apply a global replacement on the tokens present in the generated html. The C# code looks like the following one -</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue0;\red255\green255\blue255;\red0\green0\blue255;\red43\green145\blue175;\red163\green21\blue21;}??\fs20     \cf3 protected\cf0  \cf3 override\cf0  \cf3 void\cf0  Render(\cf4 HtmlTextWriter\cf0  writer)\par ??    \{\par ??        \par ??        \cf4 MemoryStream\cf0  stream     = \cf3 new\cf0  \cf4 MemoryStream\cf0 ();\par ??        \cf4 StreamWriter\cf0  memWriter  = \cf3 new\cf0  \cf4 StreamWriter\cf0 (stream);\par ??        \cf4 HtmlTextWriter\cf0  myWriter = \cf3 new\cf0  \cf4 HtmlTextWriter\cf0 (memWriter);\par ??\par ??        \cf3 base\cf0 .Render(myWriter);\par ??        myWriter.Flush();\par ??\par ??        stream.Position = 0;\par ??\par ??        \cf3 string\cf0  renderedHtml = \cf3 new\cf0  \cf4 StreamReader\cf0 (stream).ReadToEnd();\par ??\par ??        renderedHtml = renderedHtml.Replace(\cf5 "$Name$"\cf0 , \cf5 "Sohan"\cf0 );\par ??\par ??        writer.Write(renderedHtml);\par ??        writer.Close();\par ??        myWriter.Close();\par ??        stream.Close();\par ??    \}} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span>     <span style="color:blue;">protected</span> <span style="color:blue;">override</span> <span style="color:blue;">void</span> Render(<span style="color: rgb(43, 145, 175);">HtmlTextWriter</span> writer)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span>         <span style="color: rgb(43, 145, 175);">MemoryStream</span> stream    = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MemoryStream</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>         <span style="color: rgb(43, 145, 175);">StreamWriter</span> memWriter  = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StreamWriter</span>(stream);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>         <span style="color: rgb(43, 145, 175);">HtmlTextWriter</span> myWriter = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">HtmlTextWriter</span>(memWriter);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>         <span style="color:blue;">base</span>.Render(myWriter);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>         myWriter.Flush();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>         stream.Position = 0;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span>         <span style="color:blue;">string</span> renderedHtml = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StreamReader</span>(stream).ReadToEnd();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span>         renderedHtml = renderedHtml.Replace(<span style="color: rgb(163, 21, 21);">&#8220;$Name$&#8221;</span>, <span style="color: rgb(163, 21, 21);">&#8220;Sohan&#8221;</span>);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   36</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   37</span>         writer.Write(renderedHtml);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   38</span>         writer.Close();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   39</span>         myWriter.Close();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   40</span>         stream.Close();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   41</span>     }</p> </div>  <p> </p>  <p>So, the steps are - </p>  <p>1. Intercept the rendering - override the Render method. </p>  <p>2. Get the generated html - invoke the Render method on the base class supplying it a simple memory stream writer. Then read the html from the stream. You can also make use of other TextWriter implementations including StringWriter.</p>  <p>3. Apply your replacements - use simple string.Replace or Regex.Replace for more control. </p>  <p>4. Now, write the replaced content on the original writer. </p>  <p>Hope it helps! </p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Donald Soft Tech</div>
+<div class='content'>
+An ecommerce web site without a good web application is not possible. application development is the backbone of any online business irrespective of the fact whether it is catering to a large, small or medium customer base. There are many good companies in India that make such services easy and affordable, just browse the net and make your pick…<A HREF="http://www.infysolutions.com" REL="nofollow">http://www.infysolutions.com</A></div>
+</div>
+<div class='comment'>
+<div class='author'>Tarok</div>
+<div class='content'>
+this is very nice blog&#8230;<BR/>this is very helpful and attractive biog.<BR/>visit for asp.net help <A HREF="http://asp-net-help.blogspot.com/" REL="nofollow">asp.net help</A></div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/07/log4net-smtpappender-and-sending-emails/">Log4Net SmtpAppender and Sending Emails With Log Messages</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-07T00:00:00-06:00" pubdate data-updated="true">Aug 7<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Since my client asked me if it was possible to generate emails for log entries on an error/fatal level I took a look into the Log4Net SmtpAppender. In your project you may need to implement a similar function and in that case you may use a log4net configuration like the following one- </p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red163\green21\blue21;\red255\green0\blue0;\red0\green0\blue0;}??\fs20 \cf1 \tab <\cf3 appender\cf1  \cf4 name\cf1 =\cf0 "\cf1 SmtpAppender\cf0 "\cf1  \cf4 type\cf1 =\cf0 "\cf1 log4net.Appender.SmtpAppender\cf0 "\cf1 >\par ??\tab \tab <\cf3 to\cf1  \cf4 value\cf1 =\cf0 "\cf1 sohan39@gmail.com\cf0 "\cf1  />\par ??\tab \tab <\cf3 from\cf1  \cf4 value\cf1 =\cf0 "\cf1 me@smsohan.com\cf0 "\cf1  />\par ??\tab \tab <\cf3 Username\cf1  \cf4 value\cf1 =\cf0 "\cf1 me@smsohan.com\cf0 "\cf1 ></\cf3 Username\cf1 >\par ??\tab \tab <\cf3 password\cf1  \cf4 value\cf1 =\cf0 "\cf1 sohan\cf0 "\cf1  ></\cf3 password\cf1 >\par ??\tab \tab <\cf3 authentication\cf1  \cf4 value\cf1 =\cf0 "\cf1 Basic\cf0 "\cf1 ></\cf3 authentication\cf1 >\par ??\tab \tab <\cf3 subject\cf1  \cf4 value\cf1 =\cf0 "\cf1 test logging message from log4net\cf0 "\cf1  />\par ??\tab \tab <\cf3 smtpHost\cf1  \cf4 value\cf1 =\cf0 "\cf1 mail.smsohan.com\cf0 "\cf1  />\par ??\tab \tab <\cf3 bufferSize\cf1  \cf4 value\cf1 =\cf0 "\cf1 512\cf0 "\cf1  />\par ??\tab \tab <\cf3 lossy\cf1  \cf4 value\cf1 =\cf0 "\cf1 true\cf0 "\cf1  />\par ??\tab \tab <\cf3 evaluator\cf1  \cf4 type\cf1 =\cf0 "\cf1 log4net.Core.LevelEvaluator\cf0 "\cf1 >\par ??\tab \tab \tab <\cf3 threshold\cf1  \cf4 value\cf1 =\cf0 "\cf1 INFO\cf0 "\cf1 />\par ??\tab \tab </\cf3 evaluator\cf1 >\par ??\tab \tab <\cf3 layout\cf1  \cf4 type\cf1 =\cf0 "\cf1 log4net.Layout.PatternLayout\cf0 "\cf1 >\par ??\tab \tab \tab <\cf3 conversionPattern\cf1  \cf4 value\cf1 =\cf0 "\cf1 %newline%date [%thread] %-5level %logger [%property\{NDC\}] - %message%newline%newline%newline\cf0 "\cf1  />\par ??\tab \tab </\cf3 layout\cf1 >\par ??\tab </\cf3 appender\cf1 >\par ??\par ??\tab <\cf3 root\cf1 >\par ??\tab \tab <\cf3 level\cf1  \cf4 value\cf1 =\cf0 "\cf1 DEBUG\cf0 "\cf1 />\par ??\tab \tab <\cf3 appender-ref\cf1  \cf4 ref\cf1 =\cf0 "\cf1 LogFileAppender\cf0 "\cf1 />\par ??\tab \tab <\cf3 appender-ref\cf1  \cf4 ref\cf1 =\cf0 "\cf1 SmtpAppender\cf0 "\cf1 />\par ??\tab </\cf3 root\cf1 >} &#8211;>  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   93</span> <span style="color:blue;">    &lt;</span><span style="color: rgb(163, 21, 21);">appender</span><span style="color:blue;"> </span><span style="color:red;">name</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">SmtpAppender</span>&#8221;<span style="color:blue;"> </span><span style="color:red;">type</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">log4net.Appender.SmtpAppender</span>&#8221;<span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   94</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">to</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;&#8221;<span style="color:blue;"> /&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   95</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">from</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;&#8221;<span style="color:blue;"> /&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   96</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">Username</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;&#8221;<span style="color:blue;">&gt;&lt;/</span><span style="color: rgb(163, 21, 21);">Username</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   97</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">password</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;&#8221;<span style="color:blue;"> &gt;&lt;/</span><span style="color: rgb(163, 21, 21);">password</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   98</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">authentication</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">Basic</span>&#8221;<span style="color:blue;">&gt;&lt;/</span><span style="color: rgb(163, 21, 21);">authentication</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   99</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">subject</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">test logging message from log4net</span>&#8221;<span style="color:blue;"> /&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  100</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">smtpHost</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;&#8221;<span style="color:blue;"> /&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  101</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">bufferSize</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">512</span>&#8221;<span style="color:blue;"> /&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  102</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">lossy</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">true</span>&#8221;<span style="color:blue;"> /&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  103</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">evaluator</span><span style="color:blue;"> </span><span style="color:red;">type</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">log4net.Core.LevelEvaluator</span>&#8221;<span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  104</span> <span style="color:blue;">            &lt;</span><span style="color: rgb(163, 21, 21);">threshold</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">INFO</span>&#8221;<span style="color:blue;">/&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  105</span> <span style="color:blue;">        &lt;/</span><span style="color: rgb(163, 21, 21);">evaluator</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  106</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">layout</span><span style="color:blue;"> </span><span style="color:red;">type</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">log4net.Layout.PatternLayout</span>&#8221;<span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  107</span> <span style="color:blue;">            &lt;</span><span style="color: rgb(163, 21, 21);">conversionPattern</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">%newline%date [%thread] %-5level %logger [%property{NDC}] - %message%newline%newline%newline</span>&#8221;<span style="color:blue;"> /&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  108</span> <span style="color:blue;">        &lt;/</span><span style="color: rgb(163, 21, 21);">layout</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  109</span> <span style="color:blue;">    &lt;/</span><span style="color: rgb(163, 21, 21);">appender</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  110</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  111</span> <span style="color:blue;">    &lt;</span><span style="color: rgb(163, 21, 21);">root</span><span style="color:blue;">&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  112</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">level</span><span style="color:blue;"> </span><span style="color:red;">value</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">DEBUG</span>&#8221;<span style="color:blue;">/&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  113</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">appender-ref</span><span style="color:blue;"> </span><span style="color:red;">ref</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">LogFileAppender</span>&#8221;<span style="color:blue;">/&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  114</span> <span style="color:blue;">        &lt;</span><span style="color: rgb(163, 21, 21);">appender-ref</span><span style="color:blue;"> </span><span style="color:red;">ref</span><span style="color:blue;">=</span>&#8221;<span style="color:blue;">SmtpAppender</span>&#8221;<span style="color:blue;">/&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  115</span> <span style="color:blue;">    &lt;/</span><span style="color: rgb(163, 21, 21);">root</span><span style="color:blue;">&gt;</span></p> </div>  <p>I had to use the username and password as my server requires authentication. Now, in case your server don&#8217;t demand authentication, you can avoid using these two nodes as well as the authentication node. You can also specify the port name if your smtp server is not using the default port.</p>  <p>Doing so keeps you posted of the error conditions early since sometimes finding an error entry by periodically checking is missed. Hope this helps someone with similar need.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Good to know that it worked for you!</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+Nice one dewd, worked nicely :-)</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/05/comparing-with-null-in-where-clause-in/">Comparing With NULL in Where Clause Using Linq to SQL</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-05T00:00:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>In SQL Server, a SQL statement like &#8216;NULL=NULL&#8217; evaluates to false. however &#8216;NULL IS NULL&#8217; evaluates to true. So, for NULL values in your database columns, you need to use the &#8216;IS&#8217; operator instead of the regular &#8216;=&#8217; operator.</p>  <p>The problem is, in Linq to SQL, there is no such &#8216;IS&#8217; operator since &#8216;IS&#8217; is already used as a C# language keyword. So, when you are invoking an equality check in your Linq to SQL where clause to a nullable column you need to be alert on this behavior.</p>  <p>For example, take the following sample code that I wrote to demonstrate this topic.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;}??\fs20 \cf1 using\cf0  System;\par ??\cf1 using\cf0  System.Collections.Generic;\par ??\cf1 using\cf0  System.Linq;\par ??\cf1 using\cf0  System.Text;\par ??\cf1 using\cf0  System.IO;\par ??\par ??\cf1 namespace\cf0  ConsoleApplication1\par ??\{\par ??    \cf1 class\cf0  \cf4 Program\par ??\cf0     \{\par ??        \cf1 static\cf0  \cf1 void\cf0  Main(\cf1 string\cf0 [] args)\par ??        \{\par ??            \cf4 MMConfigDataContext\cf0  context = \cf1 new\cf0  \cf4 MMConfigDataContext\cf0 ();\par ??            context.Log = \cf1 new\cf0  \cf4 ConsoleWriter\cf0 ();\par ??\par ??            \cf1 string\cf0  name = \cf1 null\cf0 ;\par ??            \cf1 var\cf0  aff = \cf1 from\cf0  a \cf1 in\cf0  context.Affiliates \par ??                            \cf1 where\cf0  \par ??                            a.CompanyName == name \par ??                            \cf1 select\cf0  a.ID;\par ??            \cf1 var\cf0  aff2 = \cf1 from\cf0  a \cf1 in\cf0  context.Affiliates \cf1 where\cf0  a.CompanyName == \cf1 null\cf0  \cf1 select\cf0  a.ID;\par ??\par ??            aff.ToList();\par ??            aff2.ToList();\par ??        \}\par ??    \}\par ??\par ??    \cf1 class\cf0  \cf4 ConsoleWriter\cf0  : \cf4 TextWriter\par ??\cf0     \{\par ??\par ??        \cf1 public\cf0  \cf1 override\cf0  \cf4 Encoding\cf0  Encoding\par ??        \{\par ??            \cf1 get\cf0  \{ \cf1 return\cf0  \cf4 Encoding\cf0 .UTF8; \}\par ??        \}\par ??\par ??        \cf1 public\cf0  \cf1 override\cf0  \cf1 void\cf0  Write(\cf1 string\cf0  value)\par ??        \{\par ??            \cf1 base\cf0 .Write(value);\par ??            \cf4 Console\cf0 .WriteLine(value);\par ??        \}\par ??\par ??        \cf1 public\cf0  \cf1 override\cf0  \cf1 void\cf0  Write(\cf1 char\cf0 [] buffer, \cf1 int\cf0  index, \cf1 int\cf0  count)\par ??        \{\par ??            \cf1 base\cf0 .Write(buffer, index, count);\par ??            \cf4 Console\cf0 .WriteLine(buffer, index, count);\par ??        \}\par ??    \}\par ??\}\par ??} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    1</span> <span style="color:blue;">using</span> System;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    2</span> <span style="color:blue;">using</span> System.Collections.Generic;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    3</span> <span style="color:blue;">using</span> System.Linq;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    4</span> <span style="color:blue;">using</span> System.Text;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    5</span> <span style="color:blue;">using</span> System.IO;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    6</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    7</span> <span style="color:blue;">namespace</span> ConsoleApplication1</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    8</span> {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    9</span>     <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">Program</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   10</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   11</span>         <span style="color:blue;">static</span> <span style="color:blue;">void</span> Main(<span style="color:blue;">string</span>[] args)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   12</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   13</span>             <span style="color: rgb(43, 145, 175);">MyDataContext</span> context = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MyDataContext</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span>             context.Log = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">ConsoleWriter</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>             <span style="color:blue;">string</span> name = <span style="color:blue;">null</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>             <span style="color:blue;">var</span> aff = <span style="color:blue;">from</span> a <span style="color:blue;">in</span> context.Affiliates </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span>                             <span style="color:blue;">where</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>                             a.CompanyName == name </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>                             <span style="color:blue;">select</span> a.ID;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span>             <span style="color:blue;">var</span> aff2 = <span style="color:blue;">from</span> a <span style="color:blue;">in</span> context.Affiliates <span style="color:blue;">where</span> a.CompanyName == <span style="color:blue;">null</span> <span style="color:blue;">select</span> a.ID;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span>             aff.ToList();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span>             aff2.ToList();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>     <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">ConsoleWriter</span> : <span style="color: rgb(43, 145, 175);">TextWriter</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>         <span style="color:blue;">public</span> <span style="color:blue;">override</span> <span style="color: rgb(43, 145, 175);">Encoding</span> Encoding</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span>             <span style="color:blue;">get</span> { <span style="color:blue;">return</span> <span style="color: rgb(43, 145, 175);">Encoding</span>.UTF8; }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   36</span>         <span style="color:blue;">public</span> <span style="color:blue;">override</span> <span style="color:blue;">void</span> Write(<span style="color:blue;">string</span> value)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   37</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   38</span>             <span style="color:blue;">base</span>.Write(value);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   39</span>             <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(value);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   40</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   41</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   42</span>         <span style="color:blue;">public</span> <span style="color:blue;">override</span> <span style="color:blue;">void</span> Write(<span style="color:blue;">char</span>[] buffer, <span style="color:blue;">int</span> index, <span style="color:blue;">int</span> count)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   43</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   44</span>             <span style="color:blue;">base</span>.Write(buffer, index, count);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   45</span>             <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(buffer, index, count);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   46</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   47</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   48</span> }</p> </div>  <p>In this code, I have attached a sample logger to my DataContext so that all my queries are logged. Now I ran two queries. Lets take a look at the first query and its logger output,</p>  <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>             <span style="color:blue;">string</span> name = <span style="color:blue;">null</span>;</p>  <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>             <span style="color:blue;">var</span> aff = <span style="color:blue;">from</span> a <span style="color:blue;">in</span> context.Affiliates </p>  <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span>                             <span style="color:blue;">where</span> </p>  <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>                             a.CompanyName == name </p>  <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>                             <span style="color:blue;">select</span> a.ID;</p>  <p style="margin: 0px;"> </p>  <p style="margin: 0px;">The logger output after executing this query is, as follows -</p>  <p><span style="color:#008080;">SELECT [t0].[ID]     <br />FROM [dbo].[Affiliates] AS [t0]      <br />WHERE [t0].[CompanyName] = @p0 </span></p>  <p><span style="color:#008080;">&#8211; @p0: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]</span> </p>  <p>So, you see that although a null is assigned in the variable &#8216;name&#8217;, the Linq to SQL generated query uses the &#8216;=&#8217; operator which may lead to undesired results.</p>  <p>However, the second query and its logger output looks like the following -</p>  <p> <span style="color: rgb(43, 145, 175);">  21</span>             <span style="color:blue;">var</span> aff2 = <span style="color:blue;">from</span> a <span style="color:blue;">in</span> context.Affiliates <span style="color:blue;">where</span> a.CompanyName == <span style="color:blue;">null</span> <span style="color:blue;">select</span> a.ID;</p>  <p><span style="color:#408080;">SELECT [t0].[ID]     <br />FROM [dbo].[Affiliates] AS [t0]      <br />WHERE [t0].[CompanyName] IS NULL</span></p>  <p>Here, the generated query uses the &#8216;IS&#8217; operator which is desirable.</p>  <p>In case, you want Linq to SQL to generate the first code using &#8216;IS&#8217; operator, you may use something like the following one - </p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;}??\fs20 \cf1 var\cf0  aff3 = \cf1 from\cf0  a \cf1 in\cf0  context.Affiliates \par ??                       \cf1 where\cf0  \par ??                       ((name == \cf1 null\cf0  &amp;&amp; a.CompanyName == \cf1 null\cf0 )  || (a.CompanyName == name))\par ??                       \cf1 select\cf0  a.ID;} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span> <span style="color:blue;">var</span> aff3 = <span style="color:blue;">from</span> a <span style="color:blue;">in</span> context.Affiliates </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span>            <span style="color:blue;">where</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>            ((name == <span style="color:blue;">null</span> &amp;&amp; a.CompanyName == <span style="color:blue;">null</span>)  || (a.CompanyName == name))</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>            <span style="color:blue;">select</span> a.ID;</p> </div>  <p>This query produces the following SQL code -</p>  <p><span style="color:#408080;">SELECT [t0].[ID]     <br />FROM [dbo].[Affiliates] AS [t0]      <br />WHERE ([t0].[CompanyName] IS NULL) OR ([t0].[CompanyName] = @p0)</span></p>  <p>So, to end, whenever you are writing a where clause on a nullable column using Linq to SQL, make sure you know the consequences and take measures accordingly.</p>  <p>Happy coding!</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Technoverloaded</div>
+<div class='content'>
+If you don&#8217;t know beforehand whether or not the variable &#8220;name&#8221; is null or not, you might want to try the Equals method.<BR/><BR/>For example, in the AdventureWorks database:<BR/><BR/>  var query = from e in Employees<BR/>    where Object.Equals(e.ManagerID, pManagerID)<BR/>    select e.EmployeeID ;<BR/><BR/>If pManagerID == null, then LINQ to SQL generates<BR/><BR/>SELECT [t0].[EmployeeID]<BR/>FROM [HumanResources].[Employee] AS [t0]<BR/>WHERE [t0].[ManagerID] IS NULL<BR/><BR/>but if pManagerID contains a value, e.g. 109, then the SQL generated is<BR/><BR/>SELECT [t0].[EmployeeID]<BR/>FROM [HumanResources].[Employee] AS [t0]<BR/>WHERE ([t0].[ManagerID] IS NOT NULL) AND ([t0].[ManagerID] = @p0)<BR/>&#8211; @p0: Input Int (Size = 0; Prec = 0; Scale = 0) [109]</div>
+</div>
+<div class='comment'>
+<div class='author'>merlin981</div>
+<div class='content'>
+Great article. It is very important for developers new to LINQ to understand these ramifications. Thanks for demonstrating how the underlying code differs based on column type.<BR/><BR/><A HREF="http://blog.linqexchange.com" REL="nofollow">LINQ Exchange - Learn LINQ and Lambda Expressions</A></div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/04/jquery-i-will-consider-using-it-in-my/">JQuery - I Will Consider Using It in My Future Web Project</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-04T00:00:00-06:00" pubdate data-updated="true">Aug 4<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I find the problems with cross-browser issues with Javascript to be bothering at times. Also, I am most annoyed with Javascript because, with Javascript, I need to think about another programming language along with my server side programming. I have a feeling that Javascript codes make the web application harder to test using various automated test frameworks and adds complexities as there are different browsers who interpret the Javascript code in different ways.</p>  <p>As I have always preferred to write only as few lines of Javascript as I can, I found JQuery to be an interesting choice. I have just taken a look into the documentation and wish to use it in a future project.</p>  <p>One thing about JQuery is, the code looks a little hard to read to me in some cases. The use of anonymous methods and callbacks should be standardized and I suggest, its better to write and refer to actual methods instead of the unreadable anonymous methods all around.</p>  <p>You may wish and take a look at JQuery at <a href="http://www.JQuery.com/">http://www.JQuery.com</a> for more!</p></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/08/03/ninject-dependency-injection-framework/">Ninject - Dependency Injection Framework for .Net Objects</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-03T00:00:00-06:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I loved Ninject because</p>  <p>- I don&#8217;t love to write/edit XML documents myself.</p>  <p>- I think Ninject can save a lot of coding and debugging time.</p>  <p>- This is a cool framework :-) with a fun-to-read documentation.</p>  <p>- It uses simple conventions and Attributes for resolving most dependencies behind the scene.</p>  <p>- You can take full advantage to lambda expressions for writing compact codes.</p>  <p>Today, I took a look into this Ninject framework. I have used Spring.Net and Unity in my previous and current projects. But seems like Ninject has the most &#8216;fluent vocabulary&#8217; that lets you develop on most &#8216;fluent interfaces&#8217;.</p>  <p>Take a look at the fun-to-read documentation at <a title="http://dojo.ninject.org/wiki/display/NINJECT/Home" href="http://dojo.ninject.org/wiki/display/NINJECT/Home">http://dojo.ninject.org/wiki/display/NINJECT/Home</a> and enjoy the 20 minutes while you eat the whole document!</p></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/20/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/18/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/09/15/context/">Context</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/change/">Change</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
