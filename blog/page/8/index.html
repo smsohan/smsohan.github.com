@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Most applications I&#8217;ve worked on required some kind of seed data. For example, I&#8217;ve used seed data to create a super admin user so the &hellip;">
+  <meta name="description" content="If your unit test code needs a sleep, its time to refactor it. Ideally, you&#8217;d only need to stub/mock the asynchronous call instead of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/27/unit-testing-asynchronous-side-effects/">Unit Testing and Sleep</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-27T15:01:00-07:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If your unit test code needs a sleep, its time to refactor it. Ideally, you&#8217;d only need to stub/mock the asynchronous call instead of introducing arbitrary sleeps in the test code, because they will eventually fail. Moreover, until it fails, it will slow down your test runner.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -755,111 +791,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/05/design-of-a-mongodb-analytics-database/">Design of a MongoDB Analytics Database</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-05T17:38:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>We built a MongoDB based realtime analytics solution and learned a few things in the process. I would like to share some of our learnings in this post.</p>
-
-<p>When tasked to find a good database for holding realtime analytics data, I was searching through the wisdom of internet to come up with a good choice. At a high level, the database needed to deliver the following:</p>
-
-<ol>
-<li>Atomic counters so that events could be counted fast. For example, count up the Total Sales metric for each sale event.</li>
-<li>Unique sets. For example, unique set of buyers who bought anything today.</li>
-<li>Simple lookups. For example, when a sale happens, it needs to lookup the original price to calculate the profit on the fly.</li>
-<li>Indexing on multiple fields. For example, a product lookup may be by its ID as well as by a combination of other fields.</li>
-<li>Fast at doing 1-4, so it can keep up with the event stream in realtime.</li>
-</ol>
-
-
-<p>It became pretty clear that, the internet was favoring either Redis or MongoDB for such requirements. I did a little spike using both, and settled down on MongoDB. This was becauase, MongoDB had better support for performing lookups and indexing. Also, the document oriented nature of MongoDB suited well with the Object Oriented models, leaning towards a more direct match between the two worlds. Redis is awesome for doing increments and set operations, but it would require some application level handling of OO -> DB interfacing as well as intelligent lookups. So, MongoDB was the winner for the job.</p>
-
-<p>If you&#8217;ve watched the video at <a href="http://www.10gen.com/events/analytics-with-mongodb">the mongodb blog</a> you know it&#8217;s quite straight forward to design a document for holding realtime analytics data.</p>
-
-<blockquote><p>The key design goal is: precopute the metrics in the required aggregation levels.</p></blockquote>
-
-<p>This design goal is applicable to pretty much all reporting/dashboarding projects. Since it&#8217;s common to aggregate different types of data on a dashboard, without precomputing the results, it would test anyone&#8217;s patience before the report is ready. In our case, the dashboard mostly displays data for the day in realtime. So, a simplified text only view would display the following:</p>
-
-<pre>
-###Sunday, August 5, 2012
-
-* Total Sold: 2,500
-* Total Profit: $ 1,345,427
-* Proft Margin: 5.09%
-* Buyers: 311
-* Sellers: 126
-
-####Online
-
-* Total Sold: 400
-* Total Profit: $ 98,762
-* Proft Margin: 7.1%
-* Buyers: 114
-* Sellers: 28
-
-####In Stores
-
-* Total Sold: 2,100
-* Total Profit: $ 124,666,5
-* Proft Margin: 4.91%
-* Buyers: 257
-* Sellers: 110
-</pre>
-
-
-<p>As discussed above, for a faster (and sane!) response time, the data better be precomputed in the database. So, to hold this precomputed data, we have designed a document like the following example:</p>
-
-<pre>
-metric: {
-  event_date: '2010/08/05',
-  channel: 'online',
-  total_sold: 2100,
-  total_buying_price: 112,567,432,
-  total_selling_price: 123,875,127,
-  buyers: ['buyer 1', 'buyer 2'],
-  sellers: ['seller 1', 'seller 2']
-}
-</pre>
-
-
-<p>And there is a document like this for each channel, for each day. This simple document is suitable for producing the desired report. Of course, in the real project, we need more data points in the report as well as aggregation levels beyond just a day and a channel. And you guessed it right, we have a document like this example one for each required aggregation level.</p>
-
-<p>This design has held pretty well for our project. This is simple, there&#8217;s a direct match between what is shown and what is stored. The data is already grouped, so queries simply fetch the documents without needing to perform any major computation on the fly. This model makes it trivial to add a new data point, as well as a new reporting aggregation level.</p>
-
-<p>But the challenge is to make sure we can in fact keep a document like this up-to-date as events happen in realtime without falling behind. Let&#8217;s talk about it in the upcoming post.</p>
-
-<p>If you haven&#8217;t had a chance to read the previous post in this series, here&#8217;s a link to <a href="http://blog.smsohan.com/blog/2012/07/28/deploying-to-TV-screens/">Deploying to TV Screens</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -877,6 +808,10 @@ metric: {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
       </li>
     
@@ -890,10 +825,6 @@ metric: {
     
       <li class="post">
         <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
       </li>
     
   </ul>

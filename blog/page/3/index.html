@@ -9,7 +9,9 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Src: Claudia Dea Most problems are solved inefficiently. Innovation follows when a problem is researched first. I spent a fair amount of time in &hellip;">
+  <meta name="description" content="Recently, we had a production outage for a few minutes due a database
+migration on one of our Ruby on Rails apps. The deployment went fine
+through a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +81,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime/">Ruby on Rails: Database Migration and Downtime</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-03-18T10:20:00-06:00" pubdate data-updated="true">Mar 18<span>th</span>, 2019</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently, we had a production outage for a few minutes due a database
+migration on one of our Ruby on Rails apps. The deployment went fine
+through a few
+stages, but the problem only showed up at the last and the largest
+stage. This is exactly what happened during the deploy process.</p>
+
+<ol>
+<li>New code was deployed. Restart was pending, so the server was still
+running old code.</li>
+<li>Migrations ran.</li>
+<li>One migration removed a column that was used in the old code, but no
+longer used in the new code.</li>
+<li>The next migration was a data migration that inserted one row / user
+to a table. This was a very slow migration, taking 5+ minutes.</li>
+<li>The old code failed because it tried to use a column in the database
+that was no longer there. To make things worse, the column was
+referenced at all page loads within the app.</li>
+<li>The long running migration didn&#8217;t finish because it ran into a
+timeout.</li>
+<li>The servers weren&#8217;t restarted because the migration had failed. So,
+the new code wasn&#8217;t served at all.</li>
+<li>There was no automatic database rollback to restore the system into a good
+state with the old code.</li>
+</ol>
+
+
+<p>The team was able to resolve the issues within the next 5 minutes, but
+it was the worst system outage we&#8217;ve seen in years. For anyone dealing
+with a large Ruby on Rails app, you can use the following
+safeguards to avoid such problems:</p>
+
+<ol>
+<li><strong>Do not remove a column from the database while the current code is
+still using it. Do it at a later release.</strong></li>
+<li>When a deployment fails at the migration step, ensure you have a
+rollback policy so that the system can be automatically restored to a
+known good state.</li>
+<li>Consider data migrations to be a performance problem and always test
+the migrations with relaistic load before production release.</li>
+<li>If possible, run your data migrations seprately from schema
+migrations so that you don&#8217;t incur deployment delays for optional new
+data.</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -813,52 +894,6 @@ accommodating.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/23/rails-please-include-a-js-test-runner/">Rails: Please Include a JS Test Runner</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-03-23T15:34:00-06:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>For an opinionated framework like Ruby on Rails, I expect it to come pre-bundled with a CoffeeScript based test framework and test runner. Here&#8217;s why:</p>
-
-<ul>
-<li><p>Teams don&#8217;t need to waste time deciding which one to use among the mess of Jasmine, Mocha, Expect, Sinon, Chai, Bower, Grunt, Teaspoon, Npm&#8230; you name it.</p></li>
-<li><p>It&#8217;d work better than what&#8217;s out there since the Rails team will focus on clean integration with Rails and will have a much larger user base to collect contribution from.</p></li>
-</ul>
-
-
-<p>I&#8217;d prefer <a href="http://jasmine.github.io/">Jasmine</a> to be the test framework and a runner similar to <a href="https://github.com/modeset/teaspoon">teaspoon</a> that can run the specs both on the command line and on the browser, with asset pipelines enabled.</p>
-
-<p>Rails made a huge promise to test automation by shipping with a nicely structured way to test the ruby code and doing the same for JS would make life better for so many people like me, I believe.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -876,6 +911,10 @@ accommodating.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
       </li>
     
@@ -889,10 +928,6 @@ accommodating.</p>
     
       <li class="post">
         <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
       </li>
     
   </ul>

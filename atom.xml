@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-10-11T17:40:52-06:00</updated>
+  <updated>2020-10-12T10:26:02-06:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Difference Between Managing One Team Vs. Many]]></title>
+    <link href="http://smsohan.com/blog/2020/10/12/managing-one-vs-many-teams/"/>
+    <updated>2020-10-12T10:11:00-06:00</updated>
+    <id>http://smsohan.com/blog/2020/10/12/managing-one-vs-many-teams</id>
+    <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/orchestra.jpg" alt="Orchestra" /></p>
+
+<p><small>Photo credits: Bradley Griffin</small></p>
+
+<blockquote><p>The conductor of an orchestra doesn’t make a sound. He depends for his power on his ability to make others powerful. My job was to awaken possibility in other people. And you know how you find out? You look at their eyes. If their eyes are shining you know you’re doing it. - Benjamin Zander</p></blockquote>
+
+<p>Recently, I’ve talked to a few companies as I was going through a job search process after a long time. One of my interviewers asked me this question: “What’s the difference between managing one team vs. multiple teams?”</p>
+
+<p>I’ve been leading multiple teams for a few years. But, I realized I didn’t have a crisp answer to this question. Now with the benefit of time to think about it, here’s how I see the difference.</p>
+
+<p>My mental model to answer this question is best described around the concept of a team’s mission - the reason for a team to exist in the first place.</p>
+
+<p><strong>A line manager builds and inspires her team to deliver the team’s mission</strong>. A great manager understands and fully commits to the team’s mission herself. She inspires individuals on the team’s mission so that the team creates more impact than the sum of individuals. She also works with her peer line managers on a larger mission.</p>
+
+<p><strong>A manager of multiple teams designs empowered teams to deliver a larger mission</strong>. She hires and leads line managers such that each team takes ownership of a part of the larger mission. Additionally, she creates a team of line managers to foster cross-team innovation.</p>
+
+<p>There are other ways the two jobs differ, such as, one:one with only direct reports vs. skip levels, being strategic vs. tactical, growing leaders vs. individuals, etc. But the main difference is running a team vs. designing teams on more specific missions.</p>
+
+<p>If you organically grew into a manager of multiple teams, you may want to think about how your job is different than before. Even if you aren’t looking for a new job, this exercise will get you clarity about your current job.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Communication Hacks I Learned From Job Interview Feedback]]></title>
@@ -865,58 +892,6 @@ There&#8217;s plenty of art in code out there for everyone to enjoy.</p>
 <p>Now, if you’re a people leader, I’d recommend doing this exercise with your people. You’ll be pleasantly surprised by the outcome.</p>
 
 <p>If you aren’t a people leader, you can write it down for yourself and ask your leader to collaborate on it. This way, when you have a one-on-one, you both will have the same reference document to focus on.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby on Rails: Database Migration and Downtime]]></title>
-    <link href="http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime/"/>
-    <updated>2019-03-18T10:20:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime</id>
-    <content type="html"><![CDATA[<p>Recently, we had a production outage for a few minutes due a database
-migration on one of our Ruby on Rails apps. The deployment went fine
-through a few
-stages, but the problem only showed up at the last and the largest
-stage. This is exactly what happened during the deploy process.</p>
-
-<ol>
-<li>New code was deployed. Restart was pending, so the server was still
-running old code.</li>
-<li>Migrations ran.</li>
-<li>One migration removed a column that was used in the old code, but no
-longer used in the new code.</li>
-<li>The next migration was a data migration that inserted one row / user
-to a table. This was a very slow migration, taking 5+ minutes.</li>
-<li>The old code failed because it tried to use a column in the database
-that was no longer there. To make things worse, the column was
-referenced at all page loads within the app.</li>
-<li>The long running migration didn&#8217;t finish because it ran into a
-timeout.</li>
-<li>The servers weren&#8217;t restarted because the migration had failed. So,
-the new code wasn&#8217;t served at all.</li>
-<li>There was no automatic database rollback to restore the system into a good
-state with the old code.</li>
-</ol>
-
-
-<p>The team was able to resolve the issues within the next 5 minutes, but
-it was the worst system outage we&#8217;ve seen in years. For anyone dealing
-with a large Ruby on Rails app, you can use the following
-safeguards to avoid such problems:</p>
-
-<ol>
-<li><strong>Do not remove a column from the database while the current code is
-still using it. Do it at a later release.</strong></li>
-<li>When a deployment fails at the migration step, ensure you have a
-rollback policy so that the system can be automatically restored to a
-known good state.</li>
-<li>Consider data migrations to be a performance problem and always test
-the migrations with relaistic load before production release.</li>
-<li>If possible, run your data migrations seprately from schema
-migrations so that you don&#8217;t incur deployment delays for optional new
-data.</li>
-</ol>
-
 ]]></content>
   </entry>
   

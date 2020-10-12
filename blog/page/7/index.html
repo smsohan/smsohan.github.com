@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Wanted to share my thoughts on ActiveRecord Callbacks. I&#8217;d like to know your thoughts if you disagree. Please use the comments. Only use them &hellip;">
+  <meta name="description" content="This following list is probably a subset of a bigger one, but I&#8217;ve composed it based on my experience using BackboneJS + Rails on the current &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,146 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/25/practial-challenges-with-client-side-mvc/">Practical API Design Challenges for Client Side MVC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-25T22:40:00-07:00" pubdate data-updated="true">Feb 25<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This following list is probably a subset of a bigger one, but I&#8217;ve composed it based on my experience using BackboneJS + Rails on the current project at work. So, here goes the list:</p>
+
+<h3>Designing Granularity of the API</h3>
+
+<p>Using RESTful API, it makes sense to have separate API methods to repesent each type of resource. However, to construct a meaninful UI for the end user, often time we need to represent multiple resources on the same screen. Let&#8217;s explain this with an example requirement:</p>
+
+<p>As a user I want to see the <strong>emails</strong> using a saved <strong>custom filter</strong></p>
+
+<p>In this case, we would want the UI to show the description of the selected filter, and also the emails matching the filter. Conceptually, <code>CustomFilter</code> and <code>Email</code> are two resources or models, having distinct properties and behaviors. It&#8217;d make sense to have two separate API&#8217;s as follows:</p>
+
+<p><strong>Filter API:</strong>
+GET http://fancy_domain.com/filters/emails_from_boss_about_release</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="err">id:</span> <span class="err">10,</span>
+</span><span class='line'>  <span class="err">filter_name:</span> <span class="err">emails_from_boss_about_release,</span>
+</span><span class='line'>  <span class="err">subject_including:</span> <span class="err">&#39;release&#39;,</span>
+</span><span class='line'>  <span class="err">from:</span> <span class="err">&#39;boss@the_company.com&#39;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Email API:</strong>
+GET http://fancy_domain.com/filters/10/emails</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">[</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="err">subject:</span> <span class="err">&#39;Release</span> <span class="err">note&#39;,</span>
+</span><span class='line'>    <span class="err">from:</span> <span class="nt">&quot;boss@the_company.com&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="err">to:</span> <span class="nt">&quot;sohan@the_company.com&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="err">body:</span> <span class="nt">&quot;&lt;html&gt;.. &lt;/html&gt;&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="err">sent_at:</span> <span class="nt">&quot;20130102040511&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Although this granularity makes good sense as an API, it starts causing issues for typical client side MVC use case.</p>
+
+<blockquote><p>Unless the data from these two API methods are combined on the server side, the client must make two requests.</p></blockquote>
+
+<p>In a real world use, I&#8217;ve seen it&#8217;s more common for the UI to require multiple resources than not. Since, we want our users to get faster response, we try to create API&#8217;s that suit the UI&#8217;s need. So, APIs start getting bloated payloads to match the UI&#8217;s need. This typically results into something like the following:</p>
+
+<p><strong>Filter Email API:</strong>
+GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_emails=true</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="err">id:</span> <span class="err">10,</span>
+</span><span class='line'>  <span class="err">filter_name:</span> <span class="err">&#39;emails_from_boss_about_release&#39;,</span>
+</span><span class='line'>  <span class="err">subject_including:</span> <span class="err">&#39;release&#39;,</span>
+</span><span class='line'>  <span class="err">from:</span> <span class="err">&#39;boss@the_company.com&#39;,</span>
+</span><span class='line'>  <span class="err">emails:</span>
+</span><span class='line'>  <span class="err">[</span>
+</span><span class='line'>    <span class="err">{</span>
+</span><span class='line'>      <span class="err">subject:</span> <span class="err">&#39;Release</span> <span class="err">note&#39;,</span>
+</span><span class='line'>      <span class="err">from:</span> <span class="err">&#39;boss@the_company.com&#39;,</span>
+</span><span class='line'>      <span class="err">to:</span> <span class="err">&#39;sohan@the_company.com&#39;,</span>
+</span><span class='line'>      <span class="err">body:</span> <span class="err">&#39;&lt;html&gt;..</span> <span class="err">&lt;/html&gt;&#39;,</span>
+</span><span class='line'>      <span class="err">sent_at:</span> <span class="err">20130102040511</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="err">]</span>
+</span><span class='line'><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is an example with just two resources. I&#8217;ve seen UI&#8217;s that need more than two resources, and its quite common as well.</p>
+
+<h3>Short/Medium/Long form of Models/Resources</h3>
+
+<p>The view usually renders a subset of all possible attributes associated with a model.</p>
+
+<p>For example, when rendering the <code>WeatherForecast</code> model, in the list view only the minimum and maximum temperature for the day with a short summary of Sunny/Cloudy/Rainy/Snowy are shown. However, when you want to see more, you&#8217;d want to show the hourly variation of the weather with additional data of interest.</p>
+
+<p>This requires the RESTful API to prepare multiple respresentations of a resource to suit the specific UI needs. This can complicate the logic on both the server and client sides, since the code must accommodate different representations for the same model.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -881,42 +1021,6 @@ Instead of this Activ eRecord Query:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/27/unit-testing-asynchronous-side-effects/">Unit Testing and Sleep</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-27T15:01:00-07:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If your unit test code needs a sleep, its time to refactor it. Ideally, you&#8217;d only need to stub/mock the asynchronous call instead of introducing arbitrary sleeps in the test code, because they will eventually fail. Moreover, until it fails, it will slow down your test runner.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -934,6 +1038,10 @@ Instead of this Activ eRecord Query:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
       </li>
     
@@ -947,10 +1055,6 @@ Instead of this Activ eRecord Query:
     
       <li class="post">
         <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a>
       </li>
     
   </ul>
