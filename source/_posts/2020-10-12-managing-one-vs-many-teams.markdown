@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Interview Question: Difference Between Managing One Team Vs. Many"
+title: "Difference Between Managing One Team Vs. Many"
 date: 2020-10-12 10:11
 comments: true
 categories: 
