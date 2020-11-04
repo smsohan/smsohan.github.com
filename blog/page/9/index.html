@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="We built a MongoDB based realtime analytics solution and learned a few things in the process. I would like to share some of our learnings in this &hellip;">
+  <meta name="description" content="In our current project, we have a little Java Bridge, that reads JMS messages from an enterprise service bus (ESB) and pipes it to an ActiveMQ topic &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,44 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/07/deploying-a-java-application-using-capistrano/">Deploying a Java Application Using Capistrano</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-07T20:18:00-06:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In our current project, we have a little Java Bridge, that reads JMS messages from an enterprise service bus (ESB) and pipes it to an ActiveMQ topic. This had to be written in Java, or some flavor of it like JRuby/Scala, because the ESB only allows their signed client libraries to interact with their API.</p>
+
+<p>Since, we were already using Capistrano to deploy our Rails/Nginx app, we wanted to leverage the same tool for deploying the Java Bridge. This would also make maintenance easier, since the same standards is used for deploy locations/log files/roations etc.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -566,43 +604,6 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/10/04/nightly-build-is-warning-or-horror/">Nightly Build Is a Warning (or Horror)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-10-04T00:00:00-06:00" pubdate data-updated="true">Oct 4<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><table cellpadding="0" cellspacing="0" class="tr-caption-container" style="float: right; margin-left: 1em; text-align: right;"><tbody><tr><td style="text-align: center;"><a href="http://farm7.static.flickr.com/6167/6175859290_ebca7ae0e3.jpg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: auto; margin-right: auto;"><img border="0" height="225" src="http://farm7.static.flickr.com/6167/6175859290_ebca7ae0e3.jpg" width="400" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Photo credits:&nbsp;<span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;"><a href="http://www.flickr.com/photos/insidethemagic/" style="color: #0063dc; text-decoration: none;">insidethemagic</a></span></td></tr></tbody></table><br />I think, Nightly build is an anti-pattern for Continuous Integration. If you are integrating continuously, then you shouldn&#8217;t need a nightly build, that would be too discrete :(<br /><br />If you already have a per-commit continuous integration setup, you shouldn&#8217;t need the so called nightly build unless there&#8217;s something bad about the code.<br /><br />Often times, builds taking &gt;10 minutes are put in the bucket of nightly builds.<br />Some people put batch processing related tests under such nightly builds. A colleague told me they used nightly build to clean up resources (disk space, recreate the database etc.) on a nightly build - to ensure the apps worked fine on a fresh state.<br /><blockquote>Under most circumstances, a nighly build means something long running. That in itself can be an indication of poor performance.</blockquote>But what I have seen is, when such nightly builds are broken - they are rarely looked after or cared for. Because, first thing in the morning, who the hell wants to look at that broken nightly build? Even if someone takes a look, since its long running, it might well eat up all morning to actually try/fix/commit changes and see it go green again! Since it takes longer to make the build green, people keep delaying it for later&#8230; meaning<br /><blockquote>it becomes generally acceptable to let the nightly build stay in RED.&nbsp;</blockquote>And once people get used the redness of the nightly build, they start ignoring it, inevitably.<br /><br />So, here&#8217;s what I would do:<br /><blockquote>Avoid nightly builds altogether.<br />Avoid nightly builds altogether.<br />Avoid nightly builds altogether.<br />Otherwise, make one person from the team responsible for the build (rotate people).</blockquote><div><br /></div></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -620,6 +621,10 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
@@ -633,10 +638,6 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
     
       <li class="post">
         <a href="/blog/2020/08/31/change/">Change</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
       </li>
     
   </ul>

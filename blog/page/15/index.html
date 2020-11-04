@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="In a single line, the first semester has been awesome.Some of you already know that I came to Calgary, AB, Canada this fall to start a graduate &hellip;">
+  <meta name="description" content="I am up to a web venture called www.CampZero.com - an online market place for you service providers in Bangladesh. This is somewhat similar in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/12/18/how-is-rails-plugins-helping-me-in/">How Is Rails Plugins Helping Me in Developing CampZero.com?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-18T00:00:00-07:00" pubdate data-updated="true">Dec 18<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I am up to a web venture called www.CampZero.com - an online market place for you service providers in Bangladesh. This is somewhat similar in spirit to classified sites like ebay and craigslist, but the target market it consciously chosen to be the service industry. Anyway, I will go to the point why I picked rails for this project and how it is paying off.<div><br /></div><div>A little background about me. I have some good background on .Net/C# and I developed several projects using this technologies. Also, I have some experience with Rails and developed almost same number of projects as that of .Net. So, I made an informed decision about choosing the Ruby on Rails framework for my project over .Net/C#. Here&#8217;s the rationale:</div><div><br /></div><div><b>Story#1: As a CampZero developer, I want to deploy the system as soon as I am done with a feature.</b></div><div>Solution: Use capistrano to automate the deployment process. It took me less than 30 minutes to setup the automatic one-click deployment. The deployment steps are at a minimum as follows:</div><div><ol><li>Get the latest code from the code repository.</li><li>Create a link to the shared log directory.</li><li>Create a link to the shared assets directory.</li><li>Create a link to the full text search configuration file.</li><li>Migrate the database schema.</li><li>Change the link to the application to the latest code.</li><li>Restart the full text search engine.</li><li>Restart the web server.</li><li>Rollback if any step of 1-8 results in a failure.</li></ol><div>The whole process is triggered by a single line of command &#8221;<b>cap staging deploy:migrations</b>&#8221; and takes less that 3 minutes to complete on an average.</div><div><br /></div><div><b>Story#2: As a guest user of CampZero, I would like to sign up for an account so that I can post an ad and/or rank the service providers.</b></div></div><div>The signup process is actually a three step process as follows:</div><div><ol><li>Create account, with password encrypted.</li><li>Get an email with an activation link.</li><li>Verify email address by clicking an activation link.</li></ol><div>Also, there are several related works as follows:</div><div><ol><li>Login</li><li>Logout</li><li>Reset password</li></ol><div>I used Authlogic for this purpose and it has taken care of all the aspects for me. For emailing I used ActionMailer. The whole job of authentication took no more than 4 hours! Thanks again to Authlogic.</div><div><br /></div><div><span class="Apple-style-span" style="font-weight: bold; ">Story#3: As a user of CampZero, I want to search for service providers using natural text.</span></div><div>The full text search was implemented using Sphinx and Thinking-sphinx. This also comes with default support for paginating lists. So, Thinking sphinx took care of all my search needs. I used the following features:</div><div><ol><li>Search by full text in the service description, title.</li><li>Also search the service provider names and service categories.</li><li>Rank by the ratings.</li><li>Search using English morphology, for example, if searching for &#8216;cars&#8217; it also searches for &#8216;car&#8217;.</li></ol><div>I spent as little as 6 hours to setup and code the whole free text search! The total coding size for search is less than even 15 lines in total!</div><div><br /></div><div><b>Story#4: As a service consumer, I want to rate and write comment on my service providers so that other consumers can make informed decisions.</b></div><div>I used two plugins called, rate-fu and acts as commentable! These plugins are great time savers as well. All the underlying logics for handling ratings and commenting are already there and you merely plug the features in. It took me 5 hours and most of it was due to the UI part!</div><div><br /></div><div>I am convinced that for most web applications now, Ruby on Rails is an automatic best seller. But, of course, my prior experience helped me in getting things done even faster. Lets see how this project makes a business :-)</div></div><div><br /></div></div></div><div><br /></div><div> </div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -442,43 +479,6 @@ We relocated to the northwest section of Calgary, Alberta on the 26th August. I 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/08/19/rambling-stories-from-my-days-code71-my/">Rambling Stories From My Days @ Code71 : My Takehome</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-08-19T00:00:00-06:00" pubdate data-updated="true">Aug 19<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Today is going to be my last day with the Code71 team and this is the last post of <a href="http://smsohan.blogspot.com/search/label/Code71">the series</a> on my Code71 days.<div><br /></div><div>The journey started on June 1, 2006 and now at this moment, I just wanted to summarize my takehome from the last three years&#8217; of work. I will go short, just touching the bits&#8230;</div><div><b>Teaming </b>is at the core of Code71&#8217;s culture. It went beyond teaming just for software development as we met outside for a movie, celebrated even the smallest of personal achievements and shared the excitement of a cricket or tennis match even at midnight from home over phone!</div><div><b>Planning and adapting </b>practice. I have gone through aprroximately 70 sprint planning and 50 sprint retrospect sessions at work. But this scrum habit of inspect and adapt has been engrossed in my personal life as well. I try to maintain a written to-do list with deadlines and look back at times.</div><div><b>Continuous learning. </b>As I worked on different technologies (<b>.Net/RoR</b>) and different domains (<b>Financial/Vehicle dealership/Project management/Web community</b>), I learned to grab new concepts. I developed a learning attitude towards solving a problem and realizing an opportunity.</div><div><b>Happy memories </b>are great as takehome gifts and I feel blessed to have a large array of such memories. Helping the team growing and maturing towards best-practices is itself a happy feeling. And there are those great memories with seeing a start-up client making millions, getting gift card from happy clients on new year&#8230; and of course the team meets at the Code71 dining.</div><div>I will end with <b>a few thanks note </b>here. Thanks to <a href="http://code71.com/AboutCode71/OurTeam/tabid/57/Default.aspx">Nimat</a> and <a href="http://blog.syedrayhan.com/">Syed </a>for believing in my competence and giving me the opportunity to work, lead and learn. (I am really sorry that the I had to turn down the L-1 offer, it really was too late!). Thanks to all of my teammates for your ever smiling faces and support. Thanks to <a href="http://syedraihan.com/">Omar</a>, my first mentor at Code71, for introducing me to the basics and the pathway to continuous learning. A special thanks to Sohel, our office assistant, for his ever enthusiastic service and care. Wishing best of luck to Shaer and his team, you will take the company to the next height inshaAllah.</div><div><br /></div><div>I am going to graduate school at <a href="http://ucalgary.ca/">University of Calgary</a>, Canada this fall to start my MS under <a href="http://ebe.cpsc.ucalgary.ca/Frank.Maurer/">Prof. Frank Maurer</a> and looking forward to it. I hope my experience at Code71 will help me in my future life and who knows, may be someday I will again be a part of the Code71 team!</div><div><br /></div><div><br /></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/16/">&larr; Older</a>
@@ -496,6 +496,10 @@ Today is going to be my last day with the Code71 team and this is the last post 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
@@ -509,10 +513,6 @@ Today is going to be my last day with the Code71 team and this is the last post 
     
       <li class="post">
         <a href="/blog/2020/08/31/change/">Change</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
       </li>
     
   </ul>

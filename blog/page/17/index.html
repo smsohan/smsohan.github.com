@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="To avoid the n+1 problem, you need to use eager loading in ActiveRecord object associations. An easy implementation of eager loading can be done &hellip;">
+  <meta name="description" content="When designing custom exceptions, you may forget about old school OO fundamentals. As a reminder, lets take a look into the following custom &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/04/26/object-oriented-design-in-custom/">Forget Me Not! Object Oriented Design in Custom Exception</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-26T00:00:00-06:00" pubdate data-updated="true">Apr 26<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>When designing custom exceptions, you may forget about old school OO fundamentals. As a reminder, lets take a look into the following custom exception classes.</p> <pre class="brush: rails"><br />StorySaveError<br />StoryDescopeNotAllowedError<br />StoryCompleteError<br />StoryNotFoundError<br />StoryDeleteError<br />StoryDeleteNotAllowedError</pre><p>These exceptions are really useful in my application. But the bad thing is, they all derive from StandardError class, whereas there should be a base class, may be StoryError, which is more meaningful and useful. So, we can have the following-</p><pre class="brush: rails"><br />class StoryError < StandardError<br />end<br />StorySaveError < StoryError<br />StoryDescopeNotAllowedError < StoryError<br />StoryCompleteError < StoryError<br />StoryNotFoundError < StoryError<br />StoryDeleteError < StoryError<br />StoryDeleteNotAllowedError < StoryError</pre><p>With the addition of a base class for all Story related exceptions, I can write cleaner/better code.</p><ul><li>When I am not interested about the specific error, I can just use <code>rescue StoryError</code> to catch &#8216;em all</li><li>I can place a common error handling routine for all Story related exceptions</li><li>I can add new exception types without altering the codes where the specific type of StoryError is insignificant</li></ul><p>From my experience, I found that most people are not cautious about OO when desiging custom exceptions. (because they are exceptions!). Nonetheless, if you follow the OO guides, it will pay off for sure.</p>  </div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, that is another way. Usually, people use ErrorCode to designate such cases. For example, WebException has many error codes in .Net. One code denotes timeout, another denotes network failure and so on.<br />One quick point, I saw you added attr_accessor :message. message is already an attribute of the Exception class, the base class of all Exceptions. So, you need not define a message property again. Its there and you can use it for free!</div>
+</div>
+<div class='comment'>
+<div class='author'>Samiron Paul</div>
+<div class='content'>
+Just sharing a little experience. A situation where user may be failed to delete a task for any of two type of restrictions. But in both case &quot;TaskDeleteNotAllowed&quot; type exception will be raising. Hence it will not be possible to show the exact reason to user. Now instead of being so conservative by creating a new class, we came out in the following way<br /><br />Added a attribute in TaskDeleteNotAllowed:<br />Class TaskDeleteNotAllowed &lt; StandardError<br />    attr_accessor :message<br />end<br /><br />Create an instance of the class while before raising:<br />exception = TaskDeleteNotAllowed.new<br /><br />Setting custom message based on the error occurred and raise that:<br />exception.message = &quot;Task is completed&quot; #or any other message<br />raise exception<br /><br />Of course rescuing the error as following:<br />&#8230;<br />rescue TaskDeleteNotAllowed =&gt; error<br />   #show {error.message} in flash or write in log<br />&#8230;<br />That makes a proper sense to user whenever she fails to delete a task.<br /><br />Anyway, being concerned with OO fundamentals in  designing custom exception handlers is realized again.<br /><br />Thanks for the post</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -534,43 +584,6 @@ I agree.<BR/>Code review should be part of life.<BR/>It increases quality of cod
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/03/22/coment-and-server-push-reverse-ajax/">Comet and Server Push (Reverse Ajax) Technology</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-03-22T00:00:00-06:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>I am re-implementing an ajax based chat system. Presently an ajax request is polled continuously to look for any updates/messages from the user’s browser. However, the plan is to use the server to push the messages to the clients to off-load the server from a huge number of useless ajax calls.</p>  <p>I learned about Comet and found it interesting. You may read about comet <a href="http://en.wikipedia.org/wiki/Comet_%28programming%29" target="_blank">here</a> at WIKI.</p>  <p><a href="http://juggernaut.rubyforge.org/" target="_blank">Juggernaut</a> is a rails plug-in that uses Flash to implement the server push technology. It is simple and it produces RJS script for the client. So, it can be used many other scenarios where a live update is required. of course, chat system is a good place for this.</p>  <p>The installation required a few tweaks as follows:-</p>  <ol>   <li>1. Installed <strong>json_pure</strong> gem instead of json. (gem install json_pure)</li>    <li>2. Installed <strong>EventMachine</strong> gem (gem install eventmachine)</li>    <li>3. Installed juggernaut gem (gem install juggernaut <strong>–-ignore-dependencies</strong>)</li>    <li>4. Modified the C:\ruby\lib\ruby\gems\1.8\specifications\juggernaut-0.5.7.gemspec in places to the following</li> </ol>  <p><span style="font-family:Courier New;"><strong>s.add_runtime_dependency(%q&lt;json_pure&gt;, [&#8220;&gt;= 1.1.1&#8221;])      <br />s.add_development_dependency(%q&lt;hoe&gt;, [&#8220;&gt;= 1.3.1&#8221;])</strong></span></p>  <p><span style="font-family:Courier New;"><strong>s.add_dependency(%q&lt;json_pure&gt;, [&#8220;&gt;= 1.1.1&#8221;])      <br />s.add_dependency(%q&lt;hoe&gt;, [&#8220;&gt;= 1.3.1&#8221;])</strong></span></p>  <p><span style="font-family:Courier New;"><strong>s.add_dependency(%q&lt;json_pure&gt;, [&#8220;&gt;= 1.1.1&#8221;])      <br />s.add_dependency(%q&lt;hoe&gt;, [&#8220;&gt;= 1.3.1&#8221;])</strong></span></p>  <p>since, you do not find the required versions of all the gems, you need to change this checks to get a way.</p>  <p>Then, <a href="http://github.com/maccman/juggernaut_plugin/blob/c3e07a812341f93bb1f90c00b7a125524b07b80a/README" target="_blank">this readme</a> helped me to get started.</p>  <p>Will follow up this post as I work more on this. Have a good day!</p></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -588,6 +601,10 @@ I agree.<BR/>Code review should be part of life.<BR/>It increases quality of cod
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
@@ -601,10 +618,6 @@ I agree.<BR/>Code review should be part of life.<BR/>It increases quality of cod
     
       <li class="post">
         <a href="/blog/2020/08/31/change/">Change</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
       </li>
     
   </ul>

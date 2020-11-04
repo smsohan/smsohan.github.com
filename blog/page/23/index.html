@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Dissection of void Methods with parametersMethods with void return types incur complexities in writing unit tests. So, we need to characterize the &hellip;">
+  <meta name="description" content="I learned that the anonymous types in C# 3.0 has got a good feature that, if you have two anonymous declarations with the same signature, then you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/02/04/c-30-anonymous-types-actual-type/">C# 3.0 Anonymous Types - Actual Type Depends on the Order of the Property Assignnments</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-02-04T00:00:00-07:00" pubdate data-updated="true">Feb 4<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I learned that the anonymous types in C# 3.0 has got a good feature that, if you have two anonymous declarations with the same signature, then you create only one anonymous type and have two instances of the type.<br /><br />So, a code fragment like the following is perfectly valid and passes all compiler warnings/errors-<br /><br />            var anon    = new { FirstName = &#8220;first&#8221;, Age = 21 };<br />            var anon2   = new { FirstName = &#8220;first&#8221;, Age = 26 };<br />           <br />            //this is OK<br />            anon = anon2;<br /><br />Now, lets take a look into the following code fragment-<br /><br />            var anon    = new { FirstName = &#8220;first&#8221;, Age = 21 };<br />            var anon3   = new { Age=16, FirstName = &#8220;first2&#8221;};<br />           <br />            //this doesn&#8217;t compile<br />            anon = anon3;<br /><br />So, its evident that the anonymous types are created on the order of the assignments of the properties. However, from my little experience and understanding, I think if this dependency on the exact order wasn&#8217;t there, then it would make more sense.</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -330,6 +367,10 @@ Up to now, I have figured out that teams trying to behave agile sometimes fall i
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
@@ -343,10 +384,6 @@ Up to now, I have figured out that teams trying to behave agile sometimes fall i
     
       <li class="post">
         <a href="/blog/2020/08/31/change/">Change</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/">When I Applied KonMari to My Calendar</a>
       </li>
     
   </ul>
