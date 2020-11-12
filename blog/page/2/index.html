@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Gone are the days when I used to go to a ton of local developer meetups. After Polyglot YYC, this was the second conference I joined this year. This &hellip;">
+  <meta name="description" content="Source: Audrey on Flickr I think nobody knows how to stitch together an app with full-stack micro-services. I have the following open-questions if &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/11/17/how-about-full-stack-micro-services/">How About Full-Stack Micro-Services?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-11-17T13:47:00-07:00" pubdate data-updated="true">Nov 17<span>th</span>, 2019</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="/images/patched_quilt.jpg" alt="patched quilt" /></p>
+
+<p><small>
+Source: <a href="https://flic.kr/p/pUW8f9">Audrey on Flickr</a>
+</small></p>
+
+<p>I think nobody knows how to stitch together an app with full-stack micro-services. I have the following open-questions if you disagree. Of course, if we could send people to moon, we could solve these problems. But the question is, is it worth and should your team  solve these problems? Especially, for small teams?</p>
+
+<ol>
+<li>How to render the UI from tens of independent micro-services into the same web page?</li>
+<li>How to ensure the JS and CSS libraries are compatible within all of the independent services?</li>
+<li>How to aggregate logs from the services to be able to trace a user / request / transaction?</li>
+<li>How to measure and reduce overall latency and spinner-fatigue?</li>
+<li>Which off-the-shelf framework can be used for achieving the above?</li>
+</ol>
+
+
+<p>Headless micro-services are easy to build, but in many ways are similar to integration over database. It helps scaling teams, but even if you have many teams, I&#8217;d say extract service where it makes sense instead of adopting that model as the default choice.</p>
+
+<p>I suggest being careful about following conference talks and blogs on how cool micro-services are. It may work for big and gig tech. They don&#8217;t always turn a profit! Your small teams are more likely to drown in worthless complexity from a micro-service architecture.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -830,94 +885,6 @@ errors to help diagnose potential system problems.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/04/11/ah/">“Ah, How Good It Is to Be Among People Who Are Reading.”</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2019-04-11T15:29:00-06:00" pubdate data-updated="true">Apr 11<span>th</span>, 2019</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>Rainer Maria Rilke</p></blockquote>
-
-<p>All creators take a deep interest in the creations of others. All
-filmmakers watch a lot of movies, all good writers are also the most
-prolific readers, all artists can talk at length about the smallest
-pieces of art they have seen.</p>
-
-<p>We, software developers, if we want to claim ourselves as the artists of
-this craft, we must be prolific readers of code. There&#8217;s been no better
-time as today. We have immediate access to millions of lines of carefully
-written code out there in the internet. Just like artists of any craft,
-I&#8217;ve had so much fun spending time with my fellow developers that read
-code for the pure joy of learning something new.</p>
-
-<p>Just had so much fun reading <a href="https://github.com/rails/rails/blob/master/activesupport/lib/active_support/core_ext/array/inquiry.rb">this ruby</a>
-code today from the Ruby on Rails project:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Array</span>
-</span><span class='line'>  <span class="c1"># Wraps the array in an +ArrayInquirer+ object, which gives a friendlier way</span>
-</span><span class='line'>  <span class="c1"># to check its string-like contents.</span>
-</span><span class='line'>  <span class="c1">#</span>
-</span><span class='line'>  <span class="c1">#   pets = [:cat, :dog].inquiry</span>
-</span><span class='line'>  <span class="c1">#</span>
-</span><span class='line'>  <span class="c1">#   pets.cat?     # =&gt; true</span>
-</span><span class='line'>  <span class="c1">#   pets.ferret?  # =&gt; false</span>
-</span><span class='line'>  <span class="c1">#</span>
-</span><span class='line'>  <span class="c1">#   pets.any?(:cat, :ferret)  # =&gt; true</span>
-</span><span class='line'>  <span class="c1">#   pets.any?(:ferret, :alligator)  # =&gt; false</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">inquiry</span>
-</span><span class='line'>    <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">ArrayInquirer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The beautify of this rich API is an art. I love it. You may have
-different opinions. But I hope you find your love of art in code.
-There&#8217;s plenty of art in code out there for everyone to enjoy.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -935,6 +902,10 @@ There&#8217;s plenty of art in code out there for everyone to enjoy.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
       </li>
     
@@ -948,10 +919,6 @@ There&#8217;s plenty of art in code out there for everyone to enjoy.</p>
     
       <li class="post">
         <a href="/blog/2020/09/15/context/">Context</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/08/31/change/">Change</a>
       </li>
     
   </ul>

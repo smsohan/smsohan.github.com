@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="I have finally been able to attend a RailsConf, the 2015 edition was my first ever. And I got to say hi to people like @dhh, @wycats, and many more. &hellip;">
+  <meta name="description" content="2016 Highs and lows Baby #2, it&#8217;s a girl Shera, our little daughter, was born this year. She has been happy, healthy, and an absolute source of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/18/annual-letter-to-myself-and-to-the-www/">Annual Letter</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2016-12-18T23:35:00-07:00" pubdate data-updated="true">Dec 18<span>th</span>, 2016</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>2016 Highs and lows</h3>
+
+<h4>Baby #2, it&#8217;s a girl</h4>
+
+<p>Shera, our little daughter, was born this year. She has been happy, healthy, and an absolute source of joy. Almost hard to believe that we somehow sustained the pregnancy period of my wife, while also running after our active toddler son, Shopoth. Such a pleasure to see the two already reaching for one another, cuddling, giggling, and occasionally fighting.</p>
+
+<h4>Canadian Citizenship, eh!</h4>
+
+<p>I&#8217;m very glad and proud to be a Canadian citizen starting this year. I just realized that I spent 21% of my life in Canada already! For those of you that haven&#8217;t been to Canada yet, you should visit some time for it&#8217;s one of the most beautiful places on earth with people of good heart.</p>
+
+<h4>Life &amp; Work, well balanced</h4>
+
+<p>Mostly doing 40-hour work weeks and working from home once / week. The team I&#8217;m managing has built up on solid foundations now. This is super exciting to see motivated people working on challenging projects and consistently delivering quality outcome.</p>
+
+<h4>Personal finances, thumbs-down</h4>
+
+<p>While the return on my experimental investing portfolio has been great, I didn&#8217;t make good on the car-buying decision. Ended up getting into a 4-year lease on a car that has more seats than our living room, and we only really needed it for the summer while we had family with us.</p>
+
+<h4>Health, got lazy</h4>
+
+<p>Honestly, it was a tough year to dedicate time for health. I know you&#8217;re thinking &#8220;it&#8217;s a lame excuse.&#8221; On the bright side, our team won the friendly soccer tournament this summer, and played soccer almost each of the Friday nights starting October. However, I got lazy otherwise. Probably also just too tired from the kids and housework at times.</p>
+
+<h4>Relationships, so-so</h4>
+
+<p>Met some friends and had a few phone calls with friends throughout the year. But, I failed to connect with relatives outside my first family. This is likely a result of being so far physically, but also something that only gets worse unless actively taken care of.</p>
+
+<h4>Remote work, didn&#8217;t work too well</h4>
+
+<p>We spent the first month of 2016 in Bangladesh with family. It was my first time experiment working remotely with a 12 hour timezone difference. It was fun to start. But I could feel the stress of having to stay up till 2-3AM each night and dealing with Internet latency issues. While I had a decent accommodation and a makeshift office arrangement, it got harder to get enough sleep. Next time if I work remotely, I will limit my commitment to midnight.</p>
+
+<h4>Misc. things</h4>
+
+<ol>
+<li>Continued our charity program financing to support education in Bangladesh.</li>
+<li>I didn&#8217;t have any public speaking session in the whole year for the first time in past 10 years.</li>
+<li>Ended up spending too much time on social media for little gain.</li>
+<li>While made some progress towards my PhD thesis, didn&#8217;t submit any paper.</li>
+</ol>
+
+
+<p>There&#8217;s a 2nd post coming about the new year&#8217;s resolution. Come back in a few days.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -555,62 +631,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/18/monolith-vs-micro-services/">Monolith vs Microservices</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-09-18T14:56:00-06:00" pubdate data-updated="true">Sep 18<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Microservices are talk of the town these days. I wanted to share my thoughts on microservices based on some experiments that we are running into at our current project.</p>
-
-<p><img src="/images/minions.jpg" alt="minons" /></p>
-
-<p>SOURCE: <a href="https://www.flickr.com/photos/31366276@N03/9327275207/in/photostream/">https://www.flickr.com/photos/31366276@N03/9327275207/in/photostream/</a></p>
-
-<p>Recently, we deployed a microservice for two-step verification feature on one of our projects. This was a strict business requirement, because having a separate server to store your 2nd-factor authorization provides additional security in case the servers hosting your primary factor are compromised.</p>
-
-<p>We operate on a cloud environment, so spinning up new servers is a simple process. The source code for this whole Ruby on Rails based two-step verification service is no more than a couple hundred lines. So, in theory, it should be very easy to deploy such a service. However, it proved to be a lot of work in the end.</p>
-
-<p>For example, to deploy this service, we actually had to spin <strong>a few servers</strong> for each of our staging and production environments. They also had to be <strong>load balanced</strong> for obvious reasons. They needed their <strong>own database</strong> for the business requirements, which also needed automated <strong>periodic backups</strong>. <strong>Networking and VPN</strong> related configurations as well as <strong>DNS</strong> configurations were also required. <strong>Monitoring</strong> tools had to be configured so we can get alerts in case things were about to fail. <strong>Deployment scripts</strong> had to be written for this service as well.</p>
-
-<blockquote><p>All in all, I&#8217;d say <strong>it took 20x the time to deploy this microservice than writing the code for it</strong>.</p></blockquote>
-
-<p>Really. No kidding.</p>
-
-<p>Since it has been deployed, we didn&#8217;t ship changes as often to this service compared to our main project. This is what I find to be the primary benefit of this approach, since it doesn&#8217;t require as big a regression test during our releases.</p>
-
-<p>However, when things go wrong, our debug efforts are harder since more infrastructural pieces are involved. Considering the additional work required and the value gain, I&#8217;m really not sure if microservices provide any real ROI.</p>
-
-<p>The additional complexity of dealing with many servers as opposed to a larger app may or may not be worth it. I agree with Martin Fowler on the <a href="http://martinfowler.com/bliki/MicroservicePrerequisites.html">prerequisites of microservices</a>. Unless, you have streamlined an automated way to provision new servers with all required parts, it may actually be best for you to keep working on the monolith. It&#8217;s not the end of the world, and you&#8217;ll have more time to spend with the family!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -628,6 +648,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
       </li>
     
@@ -641,10 +665,6 @@
     
       <li class="post">
         <a href="/blog/2020/09/15/context/">Context</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/08/31/change/">Change</a>
       </li>
     
   </ul>

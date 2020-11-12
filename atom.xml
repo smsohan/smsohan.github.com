@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-11-04T11:23:23-07:00</updated>
+  <updated>2020-11-12T11:58:10-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Learn to Get and Give Feedback]]></title>
+    <link href="http://smsohan.com/blog/2020/11/12/learn-to-get-and-give-feedback/"/>
+    <updated>2020-11-12T11:45:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/11/12/learn-to-get-and-give-feedback</id>
+    <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/feedback.jpg" alt="Feedback" /></p>
+
+<p><small>Photo credits to <a href="https://flic.kr/p/2edx7Za">GotCredit</a></small></p>
+
+<p>Here’s a personal story about getting a feedback. For context, English is my second language. I grew up speaking Bangla as my primary language. I learned reading and writing English in school - grammar first. I had only started speaking English much later in my life, in my mid-twenties. So, I often struggle with the informal form of the language. With this context, here’s an excerpt of a one:one chat conversation at work (from memory):</p>
+
+<p><strong>Catherine</strong>: Sohan, I have a question when you have time.<br/>
+<strong>Me</strong>: Shoot me.<br/>
+<strong>Catherine</strong>: Haha. It’s not “shoot me”. I think you mean just “shoot”. When you say “shoot me” it means…</p>
+
+<p>In this case, Catherine genuinely cared and had the courage to share this feedback about my improper use of English. I love getting such direct and timely feedback.</p>
+
+<p>Here, I’m sharing links to some contents that I found to be high quality resources to learn about  feedback. Hope you’ll enjoy.</p>
+
+<ol>
+<li>Radical Candor Talk - <a href="https://www.youtube.com/watch?v=4yODalLQ2lM">The Surprising Secret to Being a Good Boss</a>
+Podcasts</li>
+<li>Podcast: <a href="https://podcasts.apple.com/ca/podcast/ep-7-how-to-get-feedback-from-your-boss/id1188489488?i=1000381196889">How to Get Feedback From Your Boss</a></li>
+<li>Podcast: <a href="https://podcasts.apple.com/ca/podcast/ep-16-take-feedback-like-a-boss/id1188489488?i=1000384606048">Take Feedback Like A Boss</a></li>
+<li>Podcast: <a href="https://podcasts.apple.com/ca/podcast/ep-8-how-to-give-feedback-to-your-boss/id1188489488?i=1000381487680">How to Give Feedback To Your Boss</a></li>
+<li>Book chapter: <a href="https://www.norulesrules.com">Max up Candor: A Circle of Feedback</a></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My YouTube Playlist for Leadership]]></title>
@@ -826,67 +857,6 @@ developers must avoid the noise and provide all context information for
 errors to help diagnose potential system problems.</p>
 
 <p>Happy coding.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[“Ah, how good it is to be among people who are reading.”]]></title>
-    <link href="http://smsohan.com/blog/2019/04/11/ah/"/>
-    <updated>2019-04-11T15:29:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/04/11/ah</id>
-    <content type="html"><![CDATA[<blockquote><p>Rainer Maria Rilke</p></blockquote>
-
-<p>All creators take a deep interest in the creations of others. All
-filmmakers watch a lot of movies, all good writers are also the most
-prolific readers, all artists can talk at length about the smallest
-pieces of art they have seen.</p>
-
-<p>We, software developers, if we want to claim ourselves as the artists of
-this craft, we must be prolific readers of code. There&#8217;s been no better
-time as today. We have immediate access to millions of lines of carefully
-written code out there in the internet. Just like artists of any craft,
-I&#8217;ve had so much fun spending time with my fellow developers that read
-code for the pure joy of learning something new.</p>
-
-<p>Just had so much fun reading <a href="https://github.com/rails/rails/blob/master/activesupport/lib/active_support/core_ext/array/inquiry.rb">this ruby</a>
-code today from the Ruby on Rails project:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Array</span>
-</span><span class='line'>  <span class="c1"># Wraps the array in an +ArrayInquirer+ object, which gives a friendlier way</span>
-</span><span class='line'>  <span class="c1"># to check its string-like contents.</span>
-</span><span class='line'>  <span class="c1">#</span>
-</span><span class='line'>  <span class="c1">#   pets = [:cat, :dog].inquiry</span>
-</span><span class='line'>  <span class="c1">#</span>
-</span><span class='line'>  <span class="c1">#   pets.cat?     # =&gt; true</span>
-</span><span class='line'>  <span class="c1">#   pets.ferret?  # =&gt; false</span>
-</span><span class='line'>  <span class="c1">#</span>
-</span><span class='line'>  <span class="c1">#   pets.any?(:cat, :ferret)  # =&gt; true</span>
-</span><span class='line'>  <span class="c1">#   pets.any?(:ferret, :alligator)  # =&gt; false</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">inquiry</span>
-</span><span class='line'>    <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">ArrayInquirer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The beautify of this rich API is an art. I love it. You may have
-different opinions. But I hope you find your love of art in code.
-There&#8217;s plenty of art in code out there for everyone to enjoy.</p>
 ]]></content>
   </entry>
   

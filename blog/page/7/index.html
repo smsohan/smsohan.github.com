@@ -9,14 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="&#8230; are evil if you expect the randomizer to give you unique values on each call. Here&#8217;s an example: 1
-2
-3
-4
-5
-6
-7
-before(:each) do @user_1 &hellip;">
+  <meta name="description" content="When building a bunch of applications that need to interact with each other, Queues or Message Oriented Middleware services offer some very useful &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +79,66 @@ before(:each) do @user_1 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/03/07/solution-architecting/">Solution Architecting Using Queues?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T14:44:00-07:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>When building a bunch of applications that need to interact with each other, Queues or <a href="http://en.wikipedia.org/wiki/Message-oriented_middleware">Message Oriented Middleware</a> services offer some very useful features. To name a few, you get features like a) <strong>Guaranteed message delivery</strong>, b) <strong>routing</strong>, c) <strong>throttling</strong>, etc., for free. Tools like ActiveMQ, RabbitMQ, MSMQ, JMS servers are tuned and time tested to handle such requirements robustly. I&#8217;ve had good experience with these tools for the happy paths. However, when dealing with unhappy paths, irrespective of the tools you use, it can be quite challenging to design the failovers.</p>
+
+<p>Here&#8217;s a list of the things to consider when designing a solution using Queues:</p>
+
+<h3>Speed of Consumption</h3>
+
+<p>Queues are essentially a producer/consumer or pub/sub system. This means a slower consumption rate results into a pileup of messages. In a high transaction system, millions of records can pile up in the matter of hours - forcing the producer to slow down or messaages being dropped. While architecting a solution, the rates should be measured and tested. Load tests are very useful to avoid such production issues. These issues are generally hard to fix once rolled out.</p>
+
+<h3>Error Paths</h3>
+
+<p>Even when a consumer is keeping up with the producer, chances are some messages cannnot be processed due to errors. If it&#8217;s a network error or some other error external to the system, a simple redelivery from the queue may fix it. But in real life, chances are, this is an application defect. So, a simple retry won&#8217;t make any difference. The application defect needs to be fixed and then, the message needs to be replayed. The solution needs to be designed considering the effect/resolution of the error paths.</p>
+
+<h3>Automated Monitoring</h3>
+
+<p>Automated monitoring is crucial to any Queue in the production system. Without monitoring, the queue may be flooded with unconsumed messages.</p>
+
+<h3>Human Intervention</h3>
+
+<p>When a message cannot be processed by a consumer, chances are, a human intervention will be required to complete/undo the intended operation. For example, if your payment processing application sends out a message on complete, and the shipping processor fails to process it - a human interaction may be required to fulfill the shipping or undo the order. When designing a solution, such edge cases should be identified.</p>
+
+<h3>Deployments</h3>
+
+<p>Typically queues are good in terms of holding the unconsumed messages for disconnected consumers. However, if a consumer has significant downtime between deployments, this can stretch the limits of the queue.</p>
+
+<p>I&#8217;m sure this is not all. These are from my real-life experience only. If you have experiences to share, please use the comments below.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -908,136 +961,6 @@ Instead of this Activ eRecord Query:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/06/the-myth-of-one-assert-per-test/">The Myth of One Assert Per Test</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-06T09:55:00-07:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>TL;DR; It&#8217;s not one <code>assert</code> per test, rather one logical path per test.</p></blockquote>
-
-<p>I find this to be a classical example of how an inappropriate choice of terminology leads to huge confusion. In trying to find the original source of the &#8220;one assertion per test&#8221; quote, google came back only with a bunch of confused blog entries :(</p>
-
-<p>Without much ranting, lets see a code example to start with:</p>
-
-<figure class='code'><figcaption><span>example code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">eligible_credit_card_types</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">annual_income</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">annual_income</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="n">annual_income</span> <span class="o">&gt;</span> <span class="mi">100_000</span>
-</span><span class='line'>    <span class="o">[</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;platinum&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">10_000</span><span class="p">),</span>
-</span><span class='line'>     <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">8_000</span><span class="p">),</span>
-</span><span class='line'>     <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;cashback&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">5_000</span><span class="p">)</span> <span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">elsif</span> <span class="n">annual_income</span> <span class="o">&gt;</span> <span class="mi">50_000</span>
-</span><span class='line'>    <span class="o">[</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">6_000</span><span class="p">),</span>
-</span><span class='line'>    <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;cashback&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">3_000</span><span class="p">)</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">elsif</span> <span class="n">annual_income</span> <span class="o">&gt;</span> <span class="mi">30_000</span>
-</span><span class='line'>    <span class="o">[</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;cashback&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">1_500</span><span class="p">)</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="o">[]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>By saying one logical path per test, I mean I&#8217;d write a total of 4 tests for this method, each covering a logical path. But I really don&#8217;t care about how many assert calls you need in each logical path to express the desired behavior. For example, this is totally fine:</p>
-
-<figure class='code'><figcaption><span>example test</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">context</span> <span class="s1">&#39;#eligible_credit_card_types&#39;</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">it</span> <span class="s1">&#39;returns platinum, gold and cashback for people making over a 100K annually&#39;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="c1">#setup customer, call the method</span>
-</span><span class='line'>    <span class="n">cards</span> <span class="o">=</span> <span class="n">credit_card_authorizer</span><span class="o">.</span><span class="n">eligible_credit_card_types</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">cards</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">3</span>
-</span><span class='line'>    <span class="n">cards</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">type</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="s1">&#39;platinum&#39;</span>
-</span><span class='line'>    <span class="n">cards</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">limit</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">10_000</span>
-</span><span class='line'>    <span class="c1">#same for cards[1], cards[2]</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Of course, this can indeed be converted into a single assertion, if you already had <code>equals</code> method overriden for the credit cards. But, I&#8217;d probably skip adding that code if its just for the sake of writing tests.</p>
-
-<p><img class="right" src="/images/bowling.jpg" width="300" height="550">
-<i>Image taken from mchenrybowl</i></p>
-
-<p>The mechnical thought of &#8220;one assertion per test&#8221; is lame.</p>
-
-<ol>
-<li>If for nothing else, these silly assertions would multipy the running time of your test suite by a factor of digits.</li>
-<li>Doesn&#8217;t provide you any additional coverage or safety.</li>
-<li>As long as each of your tests cover a unique logical path, there&#8217;s only one logical reason why it&#8217;d fail, irrespective of how many assertions you put in there.</li>
-</ol>
-
-
-<p>But, there&#8217;s a but! If you need many asserts per test, the code is probably asking for some refactoring. It indicates that one logical path in your code is touching too many things. Worse, when it calls too many methods that belong to other objects. Testing such a logical path is hard, usually requires a big setup and a bigger assertion. In such cases, breaking down the test into multiple tests may yield some superficial readability of the test, but certainly works around the actual problem in the code without fixing it. Almost always, this indicates long procedural methods and I&#8217;d suggest taking a second look at it to refactor into a more OO code.</p>
-
-<p>Happy Friday!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -1055,6 +978,10 @@ Instead of this Activ eRecord Query:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
       </li>
     
@@ -1068,10 +995,6 @@ Instead of this Activ eRecord Query:
     
       <li class="post">
         <a href="/blog/2020/09/15/context/">Context</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/08/31/change/">Change</a>
       </li>
     
   </ul>

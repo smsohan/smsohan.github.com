@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="From my experience with writing/reading unit tests for years, here&#8217;s a little guideline to keep &#8216;em readable: A unit test needs to fit &hellip;">
+  <meta name="description" content="TL;DR; It&#8217;s not one assert per test, rather one logical path per test. I find this to be a classical example of how an inappropriate choice of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,136 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/12/06/the-myth-of-one-assert-per-test/">The Myth of One Assert Per Test</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-06T09:55:00-07:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>TL;DR; It&#8217;s not one <code>assert</code> per test, rather one logical path per test.</p></blockquote>
+
+<p>I find this to be a classical example of how an inappropriate choice of terminology leads to huge confusion. In trying to find the original source of the &#8220;one assertion per test&#8221; quote, google came back only with a bunch of confused blog entries :(</p>
+
+<p>Without much ranting, lets see a code example to start with:</p>
+
+<figure class='code'><figcaption><span>example code</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">eligible_credit_card_types</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">annual_income</span> <span class="o">=</span> <span class="n">customer</span><span class="o">.</span><span class="n">annual_income</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">if</span> <span class="n">annual_income</span> <span class="o">&gt;</span> <span class="mi">100_000</span>
+</span><span class='line'>    <span class="o">[</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;platinum&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">10_000</span><span class="p">),</span>
+</span><span class='line'>     <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">8_000</span><span class="p">),</span>
+</span><span class='line'>     <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;cashback&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">5_000</span><span class="p">)</span> <span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">elsif</span> <span class="n">annual_income</span> <span class="o">&gt;</span> <span class="mi">50_000</span>
+</span><span class='line'>    <span class="o">[</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">6_000</span><span class="p">),</span>
+</span><span class='line'>    <span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;cashback&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">3_000</span><span class="p">)</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">elsif</span> <span class="n">annual_income</span> <span class="o">&gt;</span> <span class="mi">30_000</span>
+</span><span class='line'>    <span class="o">[</span><span class="no">CreditCard</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">type</span><span class="p">:</span> <span class="s1">&#39;cashback&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="mi">1_500</span><span class="p">)</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="o">[]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By saying one logical path per test, I mean I&#8217;d write a total of 4 tests for this method, each covering a logical path. But I really don&#8217;t care about how many assert calls you need in each logical path to express the desired behavior. For example, this is totally fine:</p>
+
+<figure class='code'><figcaption><span>example test</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">context</span> <span class="s1">&#39;#eligible_credit_card_types&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">it</span> <span class="s1">&#39;returns platinum, gold and cashback for people making over a 100K annually&#39;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="c1">#setup customer, call the method</span>
+</span><span class='line'>    <span class="n">cards</span> <span class="o">=</span> <span class="n">credit_card_authorizer</span><span class="o">.</span><span class="n">eligible_credit_card_types</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">cards</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">3</span>
+</span><span class='line'>    <span class="n">cards</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">type</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="s1">&#39;platinum&#39;</span>
+</span><span class='line'>    <span class="n">cards</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="n">limit</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">10_000</span>
+</span><span class='line'>    <span class="c1">#same for cards[1], cards[2]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course, this can indeed be converted into a single assertion, if you already had <code>equals</code> method overriden for the credit cards. But, I&#8217;d probably skip adding that code if its just for the sake of writing tests.</p>
+
+<p><img class="right" src="/images/bowling.jpg" width="300" height="550">
+<i>Image taken from mchenrybowl</i></p>
+
+<p>The mechnical thought of &#8220;one assertion per test&#8221; is lame.</p>
+
+<ol>
+<li>If for nothing else, these silly assertions would multipy the running time of your test suite by a factor of digits.</li>
+<li>Doesn&#8217;t provide you any additional coverage or safety.</li>
+<li>As long as each of your tests cover a unique logical path, there&#8217;s only one logical reason why it&#8217;d fail, irrespective of how many assertions you put in there.</li>
+</ol>
+
+
+<p>But, there&#8217;s a but! If you need many asserts per test, the code is probably asking for some refactoring. It indicates that one logical path in your code is touching too many things. Worse, when it calls too many methods that belong to other objects. Testing such a logical path is hard, usually requires a big setup and a bigger assertion. In such cases, breaking down the test into multiple tests may yield some superficial readability of the test, but certainly works around the actual problem in the code without fixing it. Almost always, this indicates long procedural methods and I&#8217;d suggest taking a second look at it to refactor into a more OO code.</p>
+
+<p>Happy Friday!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -731,75 +861,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/09/13/lovejs-presentation-at-camug/">LoveJS Presentation at CAMUG</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-13T21:32:00-06:00" pubdate data-updated="true">Sep 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I paired with <a href="http://codecuriosity.com">@TylerMercier</a> as we did a little <a href="http://www.meetup.com/Calgary-Agile-Methods-User-Group/events/79722562/">hands-on demo on writing testable and OO JavaScript</a>.</p>
-
-<p><img src="/images/LoveJS.jpg" alt="Presenting with Tyler" /></p>
-
-<p>This was mostly based on our pairing experience on the current project, but also had things that we learned from our previous web projects. I wanted to share some of the highlights of this session with my readers on this blog:</p>
-
-<p>From experience, I have seen a few charactersitics that make JavaScript coding a real fun. Here&#8217;s a few that stand out:</p>
-
-<blockquote><p>Good JavaScript is Testable and Object Oriented</p></blockquote>
-
-<p>Really simple stuff, but it took me quite a few years to actually start writing OO JavaScript, and more so, to write automated tests that run on CI server. As I often say, the shittiest part of most web projects is its CSS, with its hacks, and the inherent nature of it. And JavaScript is often just as smelly. But if you just start writing OO JavaScript with tests, your code will drive you to a cleaner path simply because bad code makes testing really tough. And with Jasmine, testing JavaScript is super fun. So, we suggested the following toolset:</p>
-
-<ol>
-<li>CoffeeScript</li>
-<li>Jasmine</li>
-<li>PhantomJS</li>
-<li>CI integration</li>
-</ol>
-
-
-<p>The materials related to this session are available online at <a href="http://codecuriosity.com/love_javascript">github</a>.</p>
-
-<p>It was a great turnout, full house, engaged audience, and, asking really good questions. I had a lot of fun doing the hands-on. You know live demos can be daunting, especially when you are writing on a low res screen so people can actually read the projected text. But thanks a lot to Tyler, we had done a couple dry runs of the demo. That helped us a lot in terms of finding the points to transition between us, as well as some muscle memory as we were writing the code live in front of the audience.</p>
-
-<p>But, I also wanted to share a checklist that we should have done as a preparation for this talk. It&#8217;s too bad, we didn&#8217;t do the following, hopefully this will be better next time. Here&#8217;s what I have in my mind:</p>
-
-<ul>
-<li><strong>Audio/video record</strong> the session. So, I can see myself afterwards and find some obvious rooms for improvement.</li>
-<li>Practice using <strong>real projector</strong> so we can find the best theme for the room size. This time I felt some of the text colors weren&#8217;t as readable for the back benchers.</li>
-<li>Never plan for a 50 minute talk when you have a 60 minute slot. Leave <strong>at least 20 minutes slack</strong>. Have a backup plan for an extension in case you are done early. It sucks to cut short or rush to the ending.</li>
-</ul>
-
-
-<p>But in retrospect, I was super impressed with how the session ran. Hopefully, with practice it will only keep getting better.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -817,6 +878,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
       </li>
     
@@ -830,10 +895,6 @@
     
       <li class="post">
         <a href="/blog/2020/09/15/context/">Context</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/08/31/change/">Change</a>
       </li>
     
   </ul>
