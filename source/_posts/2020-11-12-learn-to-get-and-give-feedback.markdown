@@ -18,7 +18,7 @@ Here’s a personal story about getting a feedback. For context, English is my s
 
 In this case, Catherine genuinely cared and had the courage to share this feedback about my improper use of English. I love getting such direct and timely feedback.
 
-Here, I’m sharing links to some contents that I found to be high quality resources to learn about  feedback. Hope you’ll enjoy.
+Here, I’m sharing links to some content that I found to be high quality resources to learn about  feedback. Hope you’ll enjoy.
 
 1. Radical Candor Talk - [The Surprising Secret to Being a Good Boss](https://www.youtube.com/watch?v=4yODalLQ2lM)
 Podcasts
