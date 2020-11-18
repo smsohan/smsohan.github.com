@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="I just installed Juggernaut on my linux box. The installation is simpler than windows. At least it gave me less pain. Just run the following &hellip;">
+  <meta name="description" content="Are you doing code reviews? Thank God, you are. Not? Well, you are not alone. You know, most of your bugs could be killed by reviews. Most of your &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/03/23/designcode-review-now-it-time-to/">Design/Code Review: Now, It&#8217;s Time to Realize!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-23T00:00:00-06:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><strong><span style="color: rgb(0, 128, 0);">Are you doing code reviews?</span></strong></p> <p>Thank God, you are. </p> <p><span style="color: rgb(255, 0, 0);"><strong>Not?</strong></span></p> <p>Well, you are not alone. You know, most of your bugs could be killed by reviews. Most of your technical debts could be paid by reviews. Your team could collectively learn more by reviews&#8230;</p> <p><strong><span style="color: rgb(0, 128, 0);">Now, It&#8217;s time to realize!</span></strong></p> <p>Start now! It&#8217;s simple. I have found the following approach to be useful-</p> <ol> <li>Pair up with one developer. Make it explicit to the team. So, you know who reviews your code.</li> <li>Mix up a junior team member with a senior one, if possible.</li> <li>Have a fixed time, at least 30 minutes for each two weeks to do a team design/code review.</li> <li>Do it in small increments. We did the following-</li></ol> <ul> <ul> <li>Sprint#1: Review variable/method/class/file/folder names only.</li> <li>Sprint#2: #1 + Review if/else blocks, loops.</li> <li>Sprint#3: #2 + Review class responsibilities.</li> <li>Sprint#4: #3 + Review test codes only.</li></ul></ul> <p><strong><span style="color: rgb(0, 128, 0);">The result is really worth</span></strong></p> <p>This first level feedback will help you to eliminate a lot of bugs, help in knowledge transfer and collective learning. Roughly, It takes only 10-15 minutes to review a code written in 3 days. I suggest, keep it simple.</p> <p>One interesting thing is, many times I have found the developer him/herself actually found bugs/mistakes in the code before the reviewer at the time or reviewing.</p> <p><span style="color: rgb(0, 128, 0);"><strong>A reviewer&#8217;s eye will save lot of your time and money.</strong></span></p><p><span style="color: rgb(0, 128, 0);"><strong>Update: Be constructive in your feedback! Example:-</strong></span></p><p style="color: rgb(0, 0, 0);"><span style="font-size:85%;"><strong>Worst: This code is a piece of &#8230;</strong></span></p><p style="color: rgb(0, 0, 0);"><span style="font-size:85%;"><strong>Worse: This code is bad</strong></span></p><p style="color: rgb(0, 0, 0);"><span style="font-size:85%;"><strong>Bad: This code is not good</strong></span></p><p style="color: rgb(0, 0, 0);"><span style="font-size:85%;"><strong>Good: A better way is..</strong></span></p><p style="color: rgb(0, 0, 0);"><span style="font-size:85%;"><strong>Better: We can also do it this way&#8230;</strong></span></p><p><span style="color: rgb(0, 128, 0);"><strong><span style="font-size:85%;"><span style="color: rgb(0, 0, 0);">Best ?</span></span><br /></strong></span></p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, the positiveness or being constructive is very important. Thanks for reminding.</div>
+</div>
+<div class='comment'>
+<div class='author'>Arif</div>
+<div class='content'>
+Nice and summarized post on a extremely useful topic like &#8220;Code Review&#8221;.It can be very effective if done regularly.<br /><br />One attention i would like to draw regarding this.Code reviewers should be constructive and positive about the comments made on the code written by others.If done with a TEAM mentality and positive attitude,Code Review is a great process for the overall quality improvement of  code.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+I agree.<BR/>Code review should be part of life.<BR/>It increases quality of code, the programmer and the reviewer himself.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -483,43 +538,6 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/11/18/delving-into-client-side-capabilities/">Delving Into Client Side Capabilities of ASP.Net Ajax</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>I believe the client side scripting capabilities of ASP.Net Ajax is not utilized by many ASP.Net developers. This is most probably due to the fact that, not many people are aware of it at the first place. Also, since most of the javascripts are rendered secretly (read, not blatantly, which is good), most developers don&#8217;t even feel the existence of the underlying javascript at all.</p>  <p>Two very simple examples of the client side library are given here as examples -</p>  <p>1. Did you know, if you have the following javascript method, it will be automatically called when your page&#8217;s DOM is finished loading?</p>  <pre>function pageLoad(sender, args) {<br />}</pre><br /><br /><p>2. Do you know the following javascript code will add an event handler to catch whenever an asynchronous post back is completed?</p><br /><br /><pre>Sys.WebForms.PageRequestManager.instance.add_endRequest(endRequestHandler)</pre><br /><br /><p>These are just very little glimpses of the big scenario. To uncover more, visit the official MSDN documentation at <a title="http://msdn.microsoft.com/en-au/library/bb398822.aspx" href="http://msdn.microsoft.com/en-au/library/bb398822.aspx">http://msdn.microsoft.com/en-au/library/bb398822.aspx</a> <br /><br />  <br />If you are new to this, I assure, you will have a much better knowledge about ASP.Net Ajax scripting than ever before and can produce better quality javascript for your ASP.Net websites. <br /><br />  <br />Happy digging!</p>  </div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -537,6 +555,10 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
@@ -550,10 +572,6 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
     
       <li class="post">
         <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/09/15/context/">Context</a>
       </li>
     
   </ul>

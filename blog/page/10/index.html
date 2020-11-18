@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="When using static programming languages such as Java, often time I have seen people writing methods that accept Object as a parameter. These methods &hellip;">
+  <meta name="description" content="Across different projects, I have found people taking CSS shortcuts for translating the Photoshopped design templates into HTML. Back in the days, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/11/13/aligning-html-div-inside-another-one/">Aligning an HTML DIV Inside Another One</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-13T00:00:00-07:00" pubdate data-updated="true">Nov 13<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">Across different projects, I have found people taking CSS shortcuts for translating the Photoshopped design templates into HTML. Back in the days, layout used to be all Table based and it was kind of straight forward to fit everything into grid cells. However, with CSS styling the extra flexibility to put elements in any arbitrary layout came extra responsibility - to make sure things still align nicely while being fluid to accommodate different screen resolutions and form factors.<br /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://3.bp.blogspot.com/-21-12O0-QHA/TsBacV3pq_I/AAAAAAAAAXM/aUOql7Yjy8k/s1600/Screen+shot+2011-11-13+at+5.01.16+PM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="34" src="http://3.bp.blogspot.com/-21-12O0-QHA/TsBacV3pq_I/AAAAAAAAAXM/aUOql7Yjy8k/s320/Screen+shot+2011-11-13+at+5.01.16+PM.png" width="320" /></a></div><br /><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://3.bp.blogspot.com/-AEiJnBUw8wA/TsBackj_N-I/AAAAAAAAAXQ/nGFX0AnYL-I/s1600/Screen+shot+2011-11-13+at+5.01.27+PM.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="43" src="http://3.bp.blogspot.com/-AEiJnBUw8wA/TsBackj_N-I/AAAAAAAAAXQ/nGFX0AnYL-I/s320/Screen+shot+2011-11-13+at+5.01.27+PM.png" width="320" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Aligning the child div in red inside a parent div in green using CSS</td></tr></tbody></table><br />Here&#8217;s a quick and dead simple example to create CSS alignment for a div inside another one!<br /><br /><blockquote class="tr_bq">Pro Tip: Use position:relative for the parent div and position:absolute for the child div.</blockquote><br /><script src="https://gist.github.com/1362939.js">  </script>This will make sure the parent is positioned relatively to other elements in the page. However, the absolutely positioned child can be positioned anywhere inside the parent without making the whole layout fixed.<br /><br /><br /></div></div></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks Scott! Almost invariably the most &quot;hacky&quot; part of any web app can be found in its stylesheet. Hope it changes someday, at least for the apps that I will work on!</div>
+</div>
+<div class='comment'>
+<div class='author'>Scott Muc</div>
+<div class='content'>
+Nice, I too learned about the wonderfulness of parent divs being postion:relative and child divs being postion:absolute when I worked at Radio 3. After the eureka moment positioning didn&#39;t seem that hard anymore.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -417,55 +467,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/09/should-you-unit-test-methods-with-lot/">Should You Unit Test Methods With a Lot of Mocking?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-09T00:00:00-06:00" pubdate data-updated="true">Aug 9<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">Well, anytime you have a lot of mocking, it is probably a smell. Particularly, a first smell is violation of the <a href="http://en.wikipedia.org/wiki/Law_of_Demeter">law of demeter</a>. However, we were having discussion about whether or not we should write unit test for something like the following example:<br /><br /><script src="https://gist.github.com/1136189.js">
-  
- </script><br /><br />As you can see, this method actually does a quite important task. It invokes the search method with specific parameters that will determine your search results. Now, we were debating whether or not the example unit test actually brings any value.<br /><br />Here&#8217;s what we have discussed:<br /><b>Pros:</b><br />It confirms that you are actually calling the third party method with the right parameter.<br /><b>Cons:</b><br />The test is too tightly coupled with the implementation, so it will break if something changes inside the method irrespective of its actual output.<br /><br />But we failed to come to an unanimous decision on its usefulness. We all agreed on the point that it definitely needed some integration tests to make sure the search had actually worked.<br /><br />Here are two questions for you:<br /><br /><ol style="text-align: left;"><li>Would you skip the unit test altogether for this method and rely completely on an integration test? Why/Why not?</li>
- <li>If you are to rewrite this code, how would you write this using TDD?</li>
- </ol><br />Looking forward to see your input on this!<br /><br /></div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Isa Goksu</div>
-<div class='content'>
-The first question actually has two aspects. It has a design part, and an implementation part. You have to judge which part we are doing here since you know the actual work there. If it is a design side, you write an integration or a functional test to find out whether wiring is done correctly or not. If it is on the implementation side, you have to write a unit test that verifies the behaviour.<br /><br />What I see from just a little code snippet here is basically you are creating a wrapper/facade for the library, or a delegate or even an anti-corruption layer kinda something. And your wrapper object is basically created in such a way that it looks like a Humble Object (http://xunitpatterns.com/Humble%20Object.html). Therefore I&#39;d go for integration test. If the team you are working on is a distributed team, then you might have some trust and/or communication issues, therefore writing an additional unit test wouldn&#39;t hurt. Then again that&#39;s not necessary.<br /><br />Main thing here is to understand that TDD won&#39;t tell you that you have write unit tests all the time. What TDD say is have a coverage before you operate, and drive your design with this mentality. One thing I like in Ruby community is that they do focus on Specs rather than focusing on unit/integration/functional tests differences. A tool like RSpec or Cucumber is even designed in such a way that they give you tagging support which you can easily mark your test with #requiresDB, #requiresFileAccess, #opensBrowser, etc.. And then you can create multiple builds by using these tags to have prioritized test suites.<br /><br />Second question is probably an obvious one. If I were to re-write using TDD, I&#39;d probably end up having an anti-corruption layer to the library which is designed 1:1 from the actual library, hence not need to be unit tested.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -483,6 +484,10 @@ The first question actually has two aspects. It has a design part, and an implem
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
@@ -496,10 +501,6 @@ The first question actually has two aspects. It has a design part, and an implem
     
       <li class="post">
         <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/09/15/context/">Context</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Recently, I had the following requirements as I was working on CampZero.com - the going to be service marketplace of Bangladesh.Remove all html tags &hellip;">
+  <meta name="description" content="When talking about Search Engine Optimization for your public web pages, you probably try to follow the google guidelines for search engine &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/12/24/sitemap-generator-for-your-rails-app/">Sitemap-generator for Your Rails App and Deployment Solution</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-24T00:00:00-07:00" pubdate data-updated="true">Dec 24<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+When talking about Search Engine Optimization for your public web pages, you probably try to follow the google guidelines for search engine optimization. Its a good one to get started with. For my recent project, <a href="http://www.campzero.com/">www.campzero.com</a>, I read the document and tried to follow the steps. Today, I worked on generating sitemap for www.campzero.com using the following:<ul><li>Installed the site-map generator plugin following this link at <a href="http://aktagon.com/projects/rails/sitemap-generator">Aktagon&#8217;s</a>, <a href="http://github.com/christianhellsten/sitemap-generator">github link</a></li><li>For some reason, probably because of permission issues, my plugin install didn&#8217;t generate the sample sitemap.yml file for me. However, I created the config/sitemap.yml file myself and put the following contents there:</li></ul><pre class="brush: rails">domain: www.campzero.com<br />limit: 5000<br />priority: 1<br />change_frequency: weekly</pre><ul><li>Then, I put the call to the sitemap method as shown in the github documentation. </li><li>Finally, I ran the command <b>rake sitemap:gerenate</b> to generate my sitemap.xml file inside the public folder.</li><li>So far this went well with the local environment. However, when I deployed this code and ran the rake command in my staging environment, it said it was not finding any model with the sitemap method.</li><li>After some debugging, I found that the problem was with the code at the file generator.rb where they put <b>model.methods.include?(&#8216;sitemap_options&#8217;) </b>to see if the model contains a method named sitemap_options. But, at my staging environment, I found that this was returning false although there was this method inside the model. I changed the code to the following so that the include? check is done both for strings and symbols and it worked fine.</li></ul><pre class="brush: rails">if((model.methods.include?(:sitemap_options) || model.methods.include?('sitemap_options')) &amp;&amp; model.sitemap_options != nil)<br />models &lt;&lt; model<br />end</pre><ul><li>Now, I could generate sitemap at my staging environment.</li><li>However, soon I found another issue with deployment, as I want my sitemap file to stay between deployments. So, I had to ensure the sitemap file is generated at a shared place other than the default public folder. I did the following changes to the sitemap_generator_task.rake file:</li></ul><pre class="brush: rails">if defined?(SITEMAP_FILE_PATH)<br />SitemapGenerator::Generator.new(SITEMAP_FILE_PATH).find_models_and_generate<br />else<br />SitemapGenerator::Generator.run<br />end</pre><div><ul><li>I added the constant SITEMAP_FILE_PATH in my config/environments/staging.rb file to get it working.</li><li>Finally, I changed my deployment script to define a symlink from the public folder to the shared file path as follows:</li></ul><div><b>run &#8220;ln -s #{shared_path}/sitemap/sitemap.xml #{release_path}/public/sitemap.xml&#8221;</b></div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -434,43 +471,6 @@ Previously I used a few plugins in RoR projects including <a href="http://scrump
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/09/09/cgi-story-on-agile-scaling-success-on/">The CGI Story on Agile Scaling Success on a Large Project</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-09T00:00:00-06:00" pubdate data-updated="true">Sep 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px; ">This intro is from the presenters:-<br /><blockquote>PAS was a joint venture development initiative by 4 major oil and gas<br />companies and CGI. Devon, Encana, Husky and Talisman joined with CGI to<br />develop a new Production and Revenue Application. Each company put 3 senior<br />business resources on the project. The development component of the PAS<br />initiative cost $35M over 5 years with up to 90 people on the team. This<br />presentation is on how we used Agile to achieve this mammoth undertaking.<br /><br />The product is currently running in production at 5 major oil and gas<br />companies with great reviews. It is also in production for several mid and<br />smaller sized companies. CGI is currently marketing the product.</blockquote>This was my first ever meet with the <a href="http://www.calgaryagile.com/">Calgary agile methods user group, CAMUG</a> and it was a great experience. Off late, I have been looking for my graduate research topic on agile methods, especially around scaling agile beyond a single team and this was just a perfect session for me.</span><div><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;"><br /></span></div><div><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">I noted down a few of their discussed topics that I would like to share with my readers:</span></div><div><ol><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px; ">The project continued in dev mode for 5 years, a $35M project.</span><br /></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px; ">It started with only 3 members and extended to a team of 90 following Scrum+XP.</span><br /></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">The project had 5 sponsoring companies or clients.</span></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">They had 6 teams working in the same sprint cycles.</span></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">In each team, there were significant members from the business working full time with the team onsite and in the same open-space arrangement.</span></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">They had some 3000+ unit tests and also 300+ acceptance test.</span></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">They automated all repetitive tests.</span></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">The had external experts visiting them from time to time. Eric Evans once visited them and helped them getting better grasp on Domain Driven Design.</span></li><li><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;">There had been a $800K and one month deviation from the projected cost and timeline.</span></li></ol><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px; ">They also discussed some issues related to working in a multi-team, multi-client project. I remember the following ones:-</span></div><div><ol><li>They had to balance between features/bug fixes.</li><li>The deployment was taken care of by the respective sponsors, not the teams.</li><li>They had issues with sprint backlog management.</li></ol><div>They highlighted some aspects with great emphasis:-</div><div><ol><li>Open communication is the key to success.</li><li>Onsite and full time real user availability is very important for such a big project.</li><li>Automated tests, partial pair programming and continuous integration is a big plus.</li><li>Staying co-located was really helpful.</li></ol><div>What about scaling beyond?</div><div><ol><li><span class="Apple-style-span" style="font-weight: bold;">I asked them, if they felt it would still be a similar success if there had been 12 teams or even more with 200 people or so. They said, it would be challenging.</span> But in response, they also said, following waterfall would make life much harder with such a big team, if at all it could be a success at the first place! Yes, I also believe this.</li><li>One of the audiences asked if they outsourced a part of the project and the response was &#8216;No&#8217;. CGI has a big team in India with a very high CMM ranking, but the project manager and asst. project manager said, it would be much difficult for differing time zones. Also, it would be difficult to transfer the knowledge as well as replicate the value of onsite client presence. The development manager also added that, the cultural difference between an agile and CMM setup would also been an issue if they had to go for the off-shore team.</li></ol><div>The session was much more eventful than what I could compile. So, if you are anywhere near Calgary and interested about meeting agile practitioners from the industry, lets meet at the next meet! </div></div></div><div><br /></div></div><div><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px; "> </span><br /></div><div><span class="Apple-style-span" style="border-collapse: collapse; font-family: arial; font-size: 13px;"> </span></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/16/">&larr; Older</a>
@@ -488,6 +488,10 @@ Previously I used a few plugins in RoR projects including <a href="http://scrump
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
@@ -501,10 +505,6 @@ Previously I used a few plugins in RoR projects including <a href="http://scrump
     
       <li class="post">
         <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/09/15/context/">Context</a>
       </li>
     
   </ul>

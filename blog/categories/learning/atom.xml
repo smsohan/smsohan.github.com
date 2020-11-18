@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Learning | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/learning/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2020-11-18T11:22:32-07:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Where to Learn: 10 Ways I Do]]></title>
+    <link href="http://smsohan.com/blog/2020/11/18/where-to-learn/"/>
+    <updated>2020-11-18T10:51:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/11/18/where-to-learn</id>
+    <content type="html"><![CDATA[<p><img src="/images/learning.png" alt="learning" /></p>
+
+<p>When talking to people, I'm always interested to know how they learn. This image above shows a view of how I personally learn. Here's some context about the items on the diagram:</p>
+
+<ol>
+<li>Online-courses: I love O'Reilly learning. Their video courses are split into 5 minute lectures. For example, I took their Kotlin course to learn the language.</li>
+<li>Books: Books are great for curated content, but it takes dedicated time. Most of the time, I have one book that I read. Current interest is on leadership and business.</li>
+<li>Hands-on: A lot of people learn by doing. I do the same, but mostly at a hello world level instead of going too deep into new things.</li>
+<li>Podcasts: This is my most passive form of learning, mostly when I'm walking or driving.</li>
+<li>People: I keep in touch with people and ask them about what they are learning.</li>
+<li>Twitter: I admit, I spend too much time on Twitter. But occasionally, people share interesting things.</li>
+<li>YouTube videos: I watch conference talks such as InfoQ, DotNet, Rails, Ruby, Goto, and AWS.</li>
+<li>News: I follow Hacker News mostly for tech and business news. And then there's following stock market news about new business innovations.</li>
+<li>Interviews: I watch inteview shows on YouTube as I'm a big fan of biographical content.</li>
+<li>Open-source: I follow a bunch of open-source projects or just read code from time to time to learn about how the passionate and expert developers craft code.</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

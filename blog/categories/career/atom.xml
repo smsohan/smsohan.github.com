@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Career | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/career/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-11-13T10:04:56-07:00</updated>
+  <updated>2020-11-18T11:22:32-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Where to Learn: 10 Ways I Do]]></title>
+    <link href="http://smsohan.com/blog/2020/11/18/where-to-learn/"/>
+    <updated>2020-11-18T10:51:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/11/18/where-to-learn</id>
+    <content type="html"><![CDATA[<p><img src="/images/learning.png" alt="learning" /></p>
+
+<p>When talking to people, I'm always interested to know how they learn. This image above shows a view of how I personally learn. Here's some context about the items on the diagram:</p>
+
+<ol>
+<li>Online-courses: I love O'Reilly learning. Their video courses are split into 5 minute lectures. For example, I took their Kotlin course to learn the language.</li>
+<li>Books: Books are great for curated content, but it takes dedicated time. Most of the time, I have one book that I read. Current interest is on leadership and business.</li>
+<li>Hands-on: A lot of people learn by doing. I do the same, but mostly at a hello world level instead of going too deep into new things.</li>
+<li>Podcasts: This is my most passive form of learning, mostly when I'm walking or driving.</li>
+<li>People: I keep in touch with people and ask them about what they are learning.</li>
+<li>Twitter: I admit, I spend too much time on Twitter. But occasionally, people share interesting things.</li>
+<li>YouTube videos: I watch conference talks such as InfoQ, DotNet, Rails, Ruby, Goto, and AWS.</li>
+<li>News: I follow Hacker News mostly for tech and business news. And then there's following stock market news about new business innovations.</li>
+<li>Interviews: I watch inteview shows on YouTube as I'm a big fan of biographical content.</li>
+<li>Open-source: I follow a bunch of open-source projects or just read code from time to time to learn about how the passionate and expert developers craft code.</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Learn to Get and Give Feedback]]></title>
@@ -152,89 +177,6 @@ from possibilities of information gap.</li>
 <p> In my opinion, if reference checks are used, they should only be used
  to verify factual information. That too, should be done keeping in mind
  that the information may be outdated, or intentionally biased.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[So you want to be a software developer. Where to start?]]></title>
-    <link href="http://smsohan.com/blog/2017/02/28/so-you-want-to-be-a-software-developer-where-to-start/"/>
-    <updated>2017-02-28T10:40:00-07:00</updated>
-    <id>http://smsohan.com/blog/2017/02/28/so-you-want-to-be-a-software-developer-where-to-start</id>
-    <content type="html"><![CDATA[<p>You didn't go to college to study computer science and you have no
-background on computer programming. You're not quite happy with your
-current job area, and looking forward to something more rewarding and
-exciting. You've heard software development is generally a good area
-and often times people without any prior software background can
-actually get a job. But where do you start?</p>
-
-<p>First, you're thinking in the right direction, and I can assure you that
-if you like making things and have a nack for problem-solving, you can
-learn the skills to become a programmer. Now, let me share a path
-forward from here:</p>
-
-<ol>
-<li><p><strong>Take an online course and learn a programming language</strong>. I'd
-suggest learning the programming language Ruby, using the courses
-offered by <a href="https://www.codeschool.com/learn/ruby">CodeSchool</a></p></li>
-<li><p><strong>Build a demo application</strong>. Here's an idea: Make an app for
-tracking personal expenses so that you can enter all your expenses
-and see reports about your expenses on a weekly / bi-weekly / monthly
-basis by type of expense such as food, transportation, accommodation,
-utility etc.</p></li>
-<li><p><strong>Publish the application to the internet</strong>. Use Heroku to pubish
-your app to the internet and use it for yourself. When things don't
-work as expected, fix bugs or extend the application to better serve
-your needs.</p></li>
-</ol>
-
-
-<p>I'd say spend about <strong>6 months</strong> on the steps 1-3. Once you've an
-application that you're somewhat proud to show to your friends or
-prospective employees, it's a sign that you're progessing. But don't
-apply for jobs just yet. I'd suggest spending another 6 months to learn
-a few more fundamental programming topics:</p>
-
-<ol>
-<li><strong>Algorithms</strong>: Take an online course on basic algorithms to understand
-the different types of algorithmic approaches that can be used to
-solve known problems.</li>
-<li><strong>Data structures</strong>: Take an online course on data structures since you'll
-need to use them on a daily basis and this is one of those topics
-where it'll be hard to learn on the job from no prior background.</li>
-<li><strong>Object oriented concepts</strong>: Take an online course to understand the
-fundamental concepts behind object oriented programming. It takes
-years to master the concepts, but taking a course will greatly help you
-to get the basics right.</li>
-</ol>
-
-
-<p>If you spent a year of your free time (8-10 hours a week), you've now
-acquired the basics that will be required to find a job. Obviously, you
-can squeeze it in a much smaller time window if you dedicate more time
-and already have some background with math / computing skills. But at a
-mimimum, I think it'll take six months for most people to get there.</p>
-
-<p>Now, I'd suggest you to take two bootcamps. The bootcamps are great in
-two ways. First, you get to work with peers and immerse into building
-something. Second, you can judge yourself against the peers to
-understand where you stand against the pros and newbies. Take notes and
-get ready for a second bootcamp. This time, the idea is to understand if
-you've improved since the first bootcamp and able to perform better than
-the first time.</p>
-
-<p>After the bootcamps, if you're feeling positive, it's time to start
-looking for jobs. Make sure to find a job that matches your skills and
-keep an open mind about accepting a job that may not pay top dollars
-yet. If you find a job, and you'll, go ahead and take it. You'll be
-learnig at a fast pace on the job, and if you're good, you'll be
-rewarded accordingly either on the current job or on a new job. The idea
-is to focus on learning on the job, but also off the job to learn topics
-that may not be of interest on the job.</p>
-
-<p>If you followed this plan, I expect you to get your first job as a
-programmer in 1.5-2 years, and get profecient in 4 years. Prepare
-accordingly. May be the 4 years is worth when you consider you'll be
-happier and better rewarded for many more years to come.</p>
 ]]></content>
   </entry>
   

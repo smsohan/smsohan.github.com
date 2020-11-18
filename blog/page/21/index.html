@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="In a typical ASP.Net web form, we have a few controls and also validators associated with the controls. The most common validators are used for &hellip;">
+  <meta name="description" content="Today CodeProject has published an article of mine where I have shown a way to use Log4Net logging to capture your LINQ to SQL class generated log &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/05/14/read-my-article-at-codeproject-on-linq/">Read My Article at CodeProject on LINQ to Log4Net Logging</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-14T00:00:00-06:00" pubdate data-updated="true">May 14<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Today <a href="http://www.codeproject.com/" target="_blank">CodeProject</a> has published an article of mine where I have shown a way to use Log4Net logging to capture your LINQ to SQL class generated log messages. I suggest you all to take a look and comment at <a title="http://www.codeproject.com/KB/linq/LINQ2Log4Net.aspx" href="http://www.codeproject.com/KB/linq/LINQ2Log4Net.aspx" target="_blank">http://www.codeproject.com/KB/linq/LINQ2Log4Net.aspx</a>.</p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -446,43 +483,6 @@ Thanks u so much</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/04/07/logging-linq-to-sql-generated-sql/">Logging the LINQ to SQL Generated SQL Queries/Commands</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-07T00:00:00-06:00" pubdate data-updated="true">Apr 7<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>I was looking for logging solutions for the generated SQL in one of my projects where I am using LINQ to SQL. I found that sometimes the the Exceptions and StackTrace information does not say much about what&#8217;s really causing the problem with LINQ to SQL queries/commands.</p>  <p>To see the actual SQL that&#8217;s generated from LINQ you may write a code like the following-</p>  <blockquote>   <p></p>    <ol>     <li><span style="color: rgb(29, 54, 231);font-family:courier new;">SampleDataContext context = new SampleDataContext();</span> </li>      <li>//You may wish to use any subclass of System.IO.TextWriter in place of Console.out </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">context.Log = Console.Out;</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">Session session = new Session</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">{</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">SessionID = Guid.NewGuid().ToString(),</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">Site = &#8220;Google&#8221;,</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">StartTime = DateTime.Now</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">};</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">context.Sessions.InsertOnSubmit(session);</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">context.SubmitChanges();</span> </li>   </ol> </blockquote>  <p>And when run, a log message like the following will be shown in your console. </p>  <p><span style="color: rgb(6, 125, 189);">INSERT INTO [dbo].[Sessions]([SessionID], [StartTime], [Site], [UserHostAddress]    <br />, [Url], [UserAgent], [UrlReferrer])     <br />VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)     <br />&#8211; @p0: Input VarChar (Size = 36; Prec = 0; Scale = 0) [0522d634-d9e6-43c6-985e-     <br />69c61090b5c4]     <br />&#8211; @p1: Input SmallDateTime (Size = 0; Prec = 0; Scale = 0) [4/7/2008 3:28:02 PM     <br />]     <br />&#8211; @p2: Input VarChar (Size = 6; Prec = 0; Scale = 0) [Google]     <br />&#8211; @p3: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; @p4: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; @p5: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; @p6: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; Context: SqlProvider(Sql2005) Model: AttributedMetaModel Build: 3.5.21022.8</span></p>  <p>Well, I know you guys are not just writing Console Applications like me (!) and need something better to be worthy. You may visit the following links for more-</p>  <ol>   <li>To use Log4Net for capturing the log data, <a href="http://devintelligence.com/blogs/netadventures/archive/2008/01/26/sending-the-linq-to-sql-log-to-log4net.aspx">this</a> is a simple yet useful implementation. </li>    <li>As usual, don&#8217;t forget to take a look at <a href="http://msdn2.microsoft.com/en-us/library/system.data.linq.datacontext.log.aspx">this</a> MSDN page for more on this. </li> </ol></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -500,6 +500,10 @@ Thanks u so much</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
@@ -513,10 +517,6 @@ Thanks u so much</div>
     
       <li class="post">
         <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/09/15/context/">Context</a>
       </li>
     
   </ul>
