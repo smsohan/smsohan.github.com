@@ -20,6 +20,6 @@ I started my developer career 15 years ago at the onset of agile and Scrum. From
 
 **Great demos are inclusive.** The presenter remains humble, acknowledges her team’s effort, and curiously seeks feedback from everyone.
 
-**Great demos are short.**
+**Great demos feel short.**
 
 Now, treat yourself with this captivating [storytelling of Nick Means](https://www.youtube.com/watch?v=2sIzfGzf_50) even if you don’t have 40 minutes of free time. You’ll thank me. I know sprint demos are only 5-10 mins, but you can still put your soul into it. We’ll surely care.
