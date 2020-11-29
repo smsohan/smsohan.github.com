@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-11-18T11:25:24-07:00</updated>
+  <updated>2020-11-28T20:41:55-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tips for Great Developer Demos]]></title>
+    <link href="http://smsohan.com/blog/2020/11/28/tips-for-developer-demos/"/>
+    <updated>2020-11-28T20:33:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/11/28/tips-for-developer-demos</id>
+    <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/demo.jpg" alt="Show and Tell" /></p>
+
+<p><small>Image source: <a href="https://flic.kr/p/5kUqG8">Show and tell - explaining the rain game</a></small></p>
+
+<p>I started my developer career 15 years ago at the onset of agile and Scrum. From my early career, I worked on short sprints where we demoed our work to collect feedback towards the end of each sprint. So, after thousands of demos, I’ve seen enough great ones that I developed a taste for it. I can no longer go back to soulless demos. This post is about a few observations I have about great demos.</p>
+
+<p><strong>Presenters of great demos always tell a story.</strong> The presenter herself had a lot of fun and she has to share her excitement with everyone. It’s contagious, we can’t help but listen. She shows what her team had done and why it matters. She fondly shares what was fun and what was a pain the butt. Her passion drives us to pay attention and take part actively.</p>
+
+<p><strong>Great demos have a memorable punchline.</strong> The presenter lays out the demo in a way that neatly converges to her punchline we can’t forget.</p>
+
+<p><strong>Great demos allow everyone to immerse into the demo.</strong> The presenter takes a pause so the audience can focus on the work of art, and shares her narrative when the audience can truly focus on listening.</p>
+
+<p><strong>Great demos are inclusive.</strong> The presenter remains humble, acknowledges her team’s effort, and curiously seeks feedback from everyone.</p>
+
+<p><strong>Great demos are short.</strong></p>
+
+<p>Now, treat yourself with this captivating <a href="https://www.youtube.com/watch?v=2sIzfGzf_50">storytelling of Nick Means</a> even if you don’t have 40 minutes of free time. You’ll thank me. I know sprint demos are only 5-10 mins, but you can still put your soul into it. We’ll surely care.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Where to Learn: 10 Ways I Do]]></title>
@@ -638,22 +663,6 @@ to revert later.</p>
 <p>I&#8217;m looking forward to the 2020 edition of this event and may even prepare to
 come up with a good idea for the unconference. If you can, please
 join us for the next round.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Micro Design Critic: Microsoft Word vs. Apple Pages]]></title>
-    <link href="http://smsohan.com/blog/2019/05/29/microsoft-word-vs-apple-pages/"/>
-    <updated>2019-05-29T10:44:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/05/29/microsoft-word-vs-apple-pages</id>
-    <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/WordsVsPages.png" alt="MsWordVsApplePages" />
-Showing a Screenshot of Microsoft Word for Mac and Apple Pages</p>
-
-<p>This is what you get by default when you open a blank document on both editors.
-I love that Apple Pages puts a deep focus on the content. If you haven&#8217;t used it, I&#8217;d
-recommend trying it out. I know Microsoft Word has a known face, so
-you&#8217;re likely used to all the distractions that sorrounds the content.
-But, if you can, give Apple Pages a try.</p>
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="With the help of @TylerMercier, and many active users of MvcMailer, we have just released the new API for MvcMailer. This is a summary post capturing &hellip;">
+  <meta name="description" content="In a recent project, we had this requirement to sort a list of items by a concept that is absent in the database schema, but can be derived from &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/11/database-design-sorting-by-computed-fields/">Database Design: Sorting by Concepts on Nullable Fields</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-11T21:05:00-06:00" pubdate data-updated="true">Oct 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In a recent project, we had this requirement to sort a list of items by a concept that is absent in the database schema, but can be derived from other fields. To make it easy to understand, let&#8217;s build an example, simple enough to isolate the topic of interest.</p>
+
+<p>Let&#8217;s say we have a list of locations, stored in a database table as follows:</p>
+
+<pre><code>Locations (location_id (primary key), province_id (NULL), city_id (NOT NULL))
+</code></pre>
+
+<p>And say, we want to present a list of locations sorted by &#8220;address&#8221;. As you see in this example, &#8220;address&#8221; is a concept, not directly present in the database, but can be derived based on province_id and city_id. So, when we say sort by &#8220;address&#8221;, the SQL query may look like the follwing:</p>
+
+<figure class='code'><figcaption><span>query to sort by address</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'>  <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">Locations</span> <span class="k">order</span> <span class="k">by</span> <span class="n">province_id</span><span class="p">,</span> <span class="n">city_id</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, if you take a second look at the schema, you&#8217;ll see the <code>province_id</code> is <code>Nullable</code>. And if you are familiar with SQL, you already know that a <code>NULL</code> does not equal another <code>NULL</code>. So, for rows with <code>province_id = NULL</code>, the secondary sort on city_id has no effect at all. As a result, the expected sort by &#8220;address&#8221; cannot be derived by using this simple <code>order by</code> clause.</p>
+
+<p>There are a few work arounds to it. One obvious workaround is to change the DB schema and make the <code>province_id</code> NOT NULL in favor of a placeholder, for example, &#8220;Not Available&#8221;. This would eliminate the problem altogether. This should be pretty easy to achieve if you have control over the database schema.</p>
+
+<p>But in case this is beyond your control, you&#8217;d have to hack your query and sleep with the noisy butterfly in your stomach. Such a poorman&#8217;s solution would be to put a <code>"case ... when ... else... end..."</code> in the query.</p>
+
+<p>The reason I wanted to share this post is, if your project needs to sort by such a computed concept, here&#8217;s what you should probably:</p>
+
+<ol>
+<li>Say &#8220;No&#8221; to it.</li>
+<li>Change your database to incorporate the concept as a column in some table.</li>
+<li>At the very least, make sure you&#8217;re not sorting on a Nullable field.</li>
+<li>Repeat 1-3 in order.</li>
+</ol>
+
+
+<p>Thanks for reading. Keep crafting good software.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -666,43 +732,6 @@ In my point of view You sure did put a new twist on something that Ive heard so 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/11/18/enterprise-software-projects-oh-yeah/">Enterprise Software Projects: Oh, Yeah!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">I just rolled off my first ever enterprise software project couple of weeks ago. After staying six months on the project and while the memory is still fresh, I thought I would write a retrospect on the project and on my role.<br /><div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-5wSfo6UY1JE/TsdJk-YQvzI/AAAAAAAAAXk/Xy4XWTycW0U/s1600/Screen+shot+2011-11-18+at+11.15.16+PM.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="http://2.bp.blogspot.com/-5wSfo6UY1JE/TsdJk-YQvzI/AAAAAAAAAXk/Xy4XWTycW0U/s1600/Screen+shot+2011-11-18+at+11.15.16+PM.png" /></a></div><br />The program is rather big, I guess it had ~300 people for the last couple or so years. I joined late for the program. So, by the time I went there, a massive amount of work has already been done, meaning a huge learning curve for me. On retrospect, I think I did well :)<br /><br />My team was small, 4-5 people including 3 devs. But we were responsible for really high value enterprise integration work, especially, linking the two most important applications in the program. This was a great place to learn some of the core business domain specific knowledge and I loved it!<br /><br />However, enterprise integration stuff is full of XML messaging and translation. While XSLT works when it works, in our situation we had too much logic and stateful data involved in the translation. So, we had to write a hell lot of custom code for all the XML messaging&#8230; and it sucks! Why?<br /><blockquote class="tr_bq">Service APIs change all the time!&nbsp;</blockquote>I was mostly writing Java at work in this project for the first time in my professional career. This was a big change as well as a good exposure, considering my recent work mostly being in C# and Ruby. &nbsp;In retrospect, I would say, I would rather not use Java, its a great platform but offers your an aging language.<br /><br />Being in the enterprise world means dealing with enterprise service buses, queues, oracle database, weblogic, load balancers, risk and compliance and you name it&#8230; sometimes the complexity of these things seemed to be&nbsp;unnecessarily&nbsp;troublesome, but then again, at times they made sense as well.<br /><br />People factors matter way greater than any other factor in such a big project. In retrospect, I think a hierarchical system often leads to longer meetings, useless communication and less ownership for most people.<br /><br />I will continue this post to a second episode where I will talk about development practices, challenges with multi-project communication, politics and power relations etc. Stay tuned!&nbsp;</div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -720,6 +749,10 @@ In my point of view You sure did put a new twist on something that Ive heard so 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
       </li>
     
@@ -733,10 +766,6 @@ In my point of view You sure did put a new twist on something that Ive heard so 
     
       <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
       </li>
     
   </ul>

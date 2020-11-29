@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="MvcMailer makes me happy as a developer. I find an immense amount of happiness everytime I check the Nuget page of MvcMailer. It&#8217;s so &hellip;">
+  <meta name="description" content="At SourceFire, among other things, we build a cloud based Advanced Malware Protection software. As security products go, we collect a huge amount of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,61 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/02/interesting-user-interaction-data-on-dashboard-widgets/">Interesting User Interaction Data on Dashboard Widgets</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-02T13:03:00-06:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At <a href="http://sourcefire.com">SourceFire</a>, among other things, we build a cloud based Advanced Malware Protection software. As security products go, we collect a huge amount of data about events that happen on the user devices so we can identify and potentially quarantine malicuous events. Security in itself is a big specialized domain, but this post is about a dashboard that we serve as the main point of entry into the big data that we collect from enterprises and consumers.</p>
+
+<p>We were debating about what data to put on the dashboard. The target is to offer a very high level, but an actionable view of the whole enterprise data. In the end we settled down with a list of 7 types of data and decided to use a layout similar to the following.</p>
+
+<p><img src="/images/dashboard_layout.png" alt="Layout" /></p>
+
+<p>I was looking at the metrics this morning to see if our prioritization of the layout tiles made sense to the users and found that</p>
+
+<blockquote><p>the number of clicks on each widget is highly correlated to its relative order in the layout.</p></blockquote>
+
+<p>I am not sure how to interpret this result. It may mean one of:</p>
+
+<ol>
+<li>The ordering of the tiles matches the actual priority of our users.</li>
+<li>Irrespective of the contents, users are more likely to click on data in this order.</li>
+<li>The results are totally random and it&#8217;s more of a coincidence over a correlation.</li>
+</ol>
+
+
+<p>At this point, I feel we need to shuffle the tiles to see if the position has a strong bias on the results. When I get a chance to do this, will post again with my findings.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -834,135 +889,6 @@ Instead of this Activ eRecord Query:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/14/how-much-to-validate/">How Much to Validate?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-14T15:22:00-07:00" pubdate data-updated="true">Dec 14<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Input validation is often required to safe guard against inappropriate use. For example, consider the following API:</p>
-
-<figure class='code'><figcaption><span>TransfersController.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TransfersController</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">from_account_id</span><span class="p">,</span> <span class="n">to_account_id</span><span class="p">,</span> <span class="n">amount</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:from_account_id</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:to_account_id</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:amount</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">from_account</span> <span class="o">=</span> <span class="no">Account</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">from_account_id</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">to_account</span> <span class="o">=</span> <span class="no">Account</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">to_account_id</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="vi">@transfer</span> <span class="o">=</span> <span class="no">Transfer</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">from_account</span><span class="p">,</span> <span class="n">to_account</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">redirect_to</span> <span class="vi">@transfer</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In this case, the API is expecting a <code>from_account_id</code> which we know, can be easily exploited unless a validation is performed on the server. Say, a simple validation would do this:</p>
-
-<figure class='code'><figcaption><span>TransfersController.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TransfersController</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create</span><span class="p">()</span>
-</span><span class='line'>    <span class="c1">#...</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">from_account</span><span class="o">.</span><span class="n">owner</span> <span class="o">==</span> <span class="n">current_user</span>
-</span><span class='line'>      <span class="vi">@transfer</span> <span class="o">=</span> <span class="no">Transfer</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">from_account</span><span class="p">,</span> <span class="n">to_account</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
-</span><span class='line'>      <span class="c1">#...</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">render</span> <span class="ss">:unautorized</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is an absolutely necessary validation to be performed on the server.</p>
-
-<p>However, the validation requirements can be a little relaxed at times. For example, if you know the only client of your API is also your own app, then you may not need to handle all possible validations both in the server and cliend side and come up with fancy errors. When its non-destructive, an invalid request can just be shown the general purpose error page, since this is only for bad users trying to hack the API calls.</p>
-
-<p>For example, lets say we have the following code:</p>
-
-<figure class='code'><figcaption><span>AppointmentsController.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">AppointmentsController</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">show</span>
-</span><span class='line'>    <span class="n">user_id</span><span class="p">,</span> <span class="n">date</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:date</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="vi">@appointments</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">appointments</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Say, by business logic, everyone can see the apointments for any user. Now, the above code will surely fail if any of <code>user_id/date</code> is not provided, or has a bad data. So, its possible to add the validation logic. But if I know I&#8217;m writing the only client that&#8217;s supposed to hit this API using a client side validated request, I&#8217;d just skip the input validation. This is not destructive anyway.</p>
-
-<p>I think it&#8217;s a trade-off between paranoid programming and pragmatic design. As long as I&#8217;m providing expected behavior in the app without opening up a security hole, some validations may be skipped on purpose.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -980,6 +906,10 @@ Instead of this Activ eRecord Query:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
       </li>
     
@@ -993,10 +923,6 @@ Instead of this Activ eRecord Query:
     
       <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
       </li>
     
   </ul>

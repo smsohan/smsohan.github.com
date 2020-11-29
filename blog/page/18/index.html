@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Are you doing code reviews? Thank God, you are. Not? Well, you are not alone. You know, most of your bugs could be killed by reviews. Most of your &hellip;">
+  <meta name="description" content="I am working on ScrumPad chat refactoring now. In rails 2, the named_scope feature works really great for ActiveRecord models. Lets start with the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/03/30/namedscope-real-life-examples-from/">Named_scope : Real Life Examples From ScrumPad</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-30T00:00:00-06:00" pubdate data-updated="true">Mar 30<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I am working on ScrumPad chat refactoring now. In rails 2, the named_scope feature works really great for ActiveRecord models. Lets start with the code first-</p>  <p><strong><span style="color: rgb(0, 128, 0);">The Source Code:</span></strong></p>  <div class="code_div">  <p><span style="font-family:Courier New;"><span style="color: rgb(0, 0, 128);">class</span> <strong><span style="color: rgb(0, 0, 255);">ChatUser</span></strong> &lt; ActiveRecord::Base    <br />belongs_to <span style="color: rgb(128, 0, 0);">:chat</span>    <br />belongs_to <span style="color: rgb(128, 0, 0);">:user</span>    <br />belongs_to <span style="color: rgb(128, 0, 0);">:chat_status, :foreign_key</span> =&gt; &#8220;status_id&#8221; </span></p>  <p><span style="font-family:Courier New;">  named_scope <span style="color: rgb(128, 0, 0);">:closed</span>, lambda {|chat_id| {<span style="color: rgb(128, 0, 0);">:conditions</span> =&gt; [&#8220;status_id = #{ChatStatus::CLOSED} AND chat_id = ? &#8220;, chat_id]}} do    <br />  <span style="color: rgb(0, 0, 128);">def</span> invite()    <br />    each { |chat_user| chat_user.update_attribute(<span style="color: rgb(128, 0, 0);">:status_id</span>, ChatStatus::INVITED) }    <br />  <span style="color: rgb(0, 0, 128);">end</span>    <br /><span style="color: rgb(0, 0, 128);">end</span> </span></p>   <p><span style="font-family:Courier New;">  named_scope <span style="color: rgb(128, 0, 0);">:active_chats</span>, lambda {|user_id| {<span style="color: rgb(128, 0, 0);">:conditions </span>=&gt; [&#8220;user_id = ? AND status_id not in (#{ChatStatus::CLOSED}, #{ChatStatus::LEFT})&#8221;, user_id]}}    <br />named_scope <span style="color: rgb(128, 0, 0);">:with_chat</span>, <span style="color: rgb(128, 0, 0);">:include</span> =&gt; <span style="color: rgb(128, 0, 0);">:chat</span>    <br /><span style="color: rgb(0, 0, 128);">end</span></span>  </p> </div> <p>So, you get an idea about the <span style="font-family:Courier New;">ChatUser</span> class. Its a relation object between user, chat and chat_status with some additional fields.</p>  <p><strong><span style="color: rgb(0, 128, 0);">How am I Using My named_scope?</span></strong></p>  <p><span style="font-family:Courier New;">ChatUser.closed(chat_id)</span></p>  <p>Gives me all the chat users who closed their chat windows for the chat having chat_id.</p>  <p><span style="font-family:Courier New;">ChatUser.closed(chat_id).with_chat</span></p>  <p>Gives me the same objects as previous but eager loads the chat object. So, it saves plenty of database calls when I need to iterate through the chats!</p>  <p><span style="font-family:Courier New;">ChatUser.closed(chat_id).invite()</span></p>  <p>Invites all users to a chat with chat_id if the buddy closed the chat window.</p>  <p><strong><span style="color: rgb(0, 128, 0);">Why named_scope?</span></strong></p>  <ol>   <li>named_scope is not just a syntactic sugar. It generates much less query using WHERE IN clause instead of WHERE = clause. So, reduces the number of calls to a single call. </li>    <li>Chaining the named_scope will generate only a single query for the chain. So, ChatUser.closed(chat_id).with_chat will produce only one query. </li>    <li>You get rid of looping in many cases! It will help you to write concise and clear codes. </li>    <li>When you can divide the objects in your classes in partitions, then you may wish to write the named_scope for partitioning the data. In my example, the :closed named_scope does this. So, I can add methods to this named_scope which actually works for the closed chats. It is kind of dividing your objects into named groups. So, it increases readability. </li> </ol>  <p>Let me know if you have another good example of a real life named_scope in your project.</p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -478,66 +515,6 @@ nice acronym sohan bhai, lets spread the agile IMPACT!!</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/11/18/impact-of-agile-software-development/">IMPACTing for Agile Software Development</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>Well, next time on a dev job interview when someone asks you the question, <em>&#8220;<span style="color:#5b2fdf;">Can you give us a brief idea on agile software development engineering practices?&#8221;</span>,</em> you are probably gonna laugh on your mind and just answer, <strong><span style="color:#355abd;">&#8220;IMPACT!&#8221;</span></strong>. Yes, this is it, compact and right on target!</p>  <p>Today, I came up with this acronym about agile engineering practices and I think its a nice one :-)</p>  <p><span style="font-size:130%;"><span style="color:#404040;"><strong>IMPACT</strong> can be elaborated as follows-</span></span></p>  <table width="659" border="0" cellpadding="2" cellspacing="0"><tbody>     <tr style="background-color: rgb(153, 62, 60);">       <td valign="top" width="49"><span style="font-size:130%;color:#ffffff;">I</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Iterative and Incremental Development</span></td>     </tr>      <tr style="background-color: rgb(192, 80, 77);">       <td valign="top" width="52"><span style="font-size:130%;color:#ffffff;">M</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Merciless Continuous Refactoring</span></td>     </tr>      <tr style="background-color: rgb(153, 62, 60);">       <td valign="top" width="54"><span style="font-size:130%;color:#ffffff;">P</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Peer Code Reviews</span></td>     </tr>      <tr style="background-color: rgb(192, 80, 77);">       <td valign="top" width="57"><span style="font-size:130%;color:#ffffff;">A</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Automated Acceptance Tests</span></td>     </tr>      <tr style="background-color: rgb(153, 62, 60);">       <td valign="top" width="59"><span style="font-size:130%;color:#ffffff;">C</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Continuous Integration</span></td>     </tr>      <tr style="background-color: rgb(192, 80, 77);">       <td valign="top" width="61"><span style="font-size:130%;color:#ffffff;">T</span></td>        <td valign="top" width="58"><span style="font-size:130%;color:#ffffff;"><em>for</em></span></td>        <td valign="top" width="541"><span style="font-size:130%;color:#ffffff;">Test Driven Development</span></td>     </tr>   </tbody></table>  <p>For all you agile folks out there, I hope this <strong>IMPACT</strong> makes sense to you! I have found many people to take agile as a panacea and start getting skeptical as soon as they feel the heat in real life. Well, we all know, there is no free lunch! So, lets get our feet on track and do the first things first. </p>  <p>What are the first things? The answer is, IMPACT, if you really want to create a positive impact out of agile methods.</p>  <p>Comments are welcome!</p></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Thanks!</div>
-</div>
-<div class='comment'>
-<div class='author'>Alexander Beletsky</div>
-<div class='content'>
-I really liked the idea of Impact :) nicely done!</div>
-</div>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Syed,<BR/>Thanks for sharing your idea. I also think peer reviews are applicable to design and user stories.</div>
-</div>
-<div class='comment'>
-<div class='author'>Syed</div>
-<div class='content'>
-Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stories/design/code, and not just code.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -555,6 +532,10 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
       </li>
     
@@ -568,10 +549,6 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
     
       <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
       </li>
     
   </ul>

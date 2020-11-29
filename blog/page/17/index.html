@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="I was talking to a friend of mine, who started a IT start up and working full time with a few others to foster the business. He was telling me- “We &hellip;">
+  <meta name="description" content="As Scrum and Agile processes tell you, do it in small sprints, 2 weeks preferably, and go incremental. Take a small piece at a time and sprint. I &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/06/03/lesson1-going-incremental-is-natural/">Lesson#1: Going Incremental Is Natural!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-03T00:00:00-06:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>As Scrum and Agile processes tell you, do it in small sprints, 2 weeks preferably, and go incremental. Take a small piece at a time and sprint. </p>  <p><a href="http://lh3.ggpht.com/_Gr1ozXzBWpM/SidMvX7yttI/AAAAAAAAAFc/HvBvxUoFJdY/s1600-h/human-evolution-t10176%5B3%5D.jpg"><img title="human-evolution-t10176" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="293" alt="human-evolution-t10176" src="http://lh4.ggpht.com/_Gr1ozXzBWpM/SidMx5T5PoI/AAAAAAAAAFg/0U5KZOhlt7c/human-evolution-t10176_thumb%5B1%5D.jpg?imgmax=800" width="407" border="0" /></a> </p>  <blockquote>   <p><em>I took this image from internet and credits to </em><a href="http://blogs.houstonpress.com/" target="_blank"><em>this site.</em></a></p> </blockquote>  <p>It’s easy to work out the Natural way than to defy it! If you are iterative and incremental, you are reaching towards the right hand side of the image! And to make the evolution faster, I suggest you try out Scrumming with <a href="http://scrumpad.com/" target="_blank">ScrumPad</a>. If you value “teaming” and “delivering” in sprints, <a href="http://scrumpad.com/" target="_blank">ScrumPad</a> will give you the oxygen to breathe while you sprint!</p>  <p>I suggest you follow a routine to iterate. At <a href="http://code71.com/" target="_blank">Code71</a>, we follow the below-</p>  <p><strong>Day 1:</strong> Plan for the next 9 days. Breakdown work items into smaller tasks, estimate at hours for each of the tasks and assign each task to an individual.</p>  <p><strong>Day 8: </strong>Release in test server (shadow version of the real production environment) and collect customer feedback.</p>  <p><strong>Day 9: </strong>Work on customer feedback and go live in production server. Always tag the version that is put in the production following the standard -</p>  <blockquote>   <p>R&lt;ProductReleaseVersion&gt;.S&lt;SprintNumber&gt;.B&lt;BuildNumber&gt;.P&lt;PatchNumber&gt;</p> </blockquote>  <p>This gives us the rollback point when there is any issue in the latest production deploy. Of course, we make sure we do not need to touch on the tags too often!</p>  <p>How are you sprinting? Let me know if you have a suggestion.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>titu</div>
+<div class='content'>
+Very helpful post for the beginner who want to learn about Scrum. In Code71 we are using ScrumPad from it&#39;s 2nd sprint. It helps us to speed up our project work as well as follow the Scrum. Also collaboration part is very helpful to communicate with clients specially for the team who work remotely.</div>
+</div>
+<div class='comment'>
+<div class='author'>Tanvir</div>
+<div class='content'>
+Good post.I think incremental development process plays a pivotal role over waterfall in software industry(for most of our regular projects) nowadays.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -555,43 +605,6 @@ There is also a short book by ScottGu&#8217;s on MVC. You may find the download 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/03/30/namedscope-real-life-examples-from/">Named_scope : Real Life Examples From ScrumPad</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-03-30T00:00:00-06:00" pubdate data-updated="true">Mar 30<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>I am working on ScrumPad chat refactoring now. In rails 2, the named_scope feature works really great for ActiveRecord models. Lets start with the code first-</p>  <p><strong><span style="color: rgb(0, 128, 0);">The Source Code:</span></strong></p>  <div class="code_div">  <p><span style="font-family:Courier New;"><span style="color: rgb(0, 0, 128);">class</span> <strong><span style="color: rgb(0, 0, 255);">ChatUser</span></strong> &lt; ActiveRecord::Base    <br />belongs_to <span style="color: rgb(128, 0, 0);">:chat</span>    <br />belongs_to <span style="color: rgb(128, 0, 0);">:user</span>    <br />belongs_to <span style="color: rgb(128, 0, 0);">:chat_status, :foreign_key</span> =&gt; &#8220;status_id&#8221; </span></p>  <p><span style="font-family:Courier New;">  named_scope <span style="color: rgb(128, 0, 0);">:closed</span>, lambda {|chat_id| {<span style="color: rgb(128, 0, 0);">:conditions</span> =&gt; [&#8220;status_id = #{ChatStatus::CLOSED} AND chat_id = ? &#8220;, chat_id]}} do    <br />  <span style="color: rgb(0, 0, 128);">def</span> invite()    <br />    each { |chat_user| chat_user.update_attribute(<span style="color: rgb(128, 0, 0);">:status_id</span>, ChatStatus::INVITED) }    <br />  <span style="color: rgb(0, 0, 128);">end</span>    <br /><span style="color: rgb(0, 0, 128);">end</span> </span></p>   <p><span style="font-family:Courier New;">  named_scope <span style="color: rgb(128, 0, 0);">:active_chats</span>, lambda {|user_id| {<span style="color: rgb(128, 0, 0);">:conditions </span>=&gt; [&#8220;user_id = ? AND status_id not in (#{ChatStatus::CLOSED}, #{ChatStatus::LEFT})&#8221;, user_id]}}    <br />named_scope <span style="color: rgb(128, 0, 0);">:with_chat</span>, <span style="color: rgb(128, 0, 0);">:include</span> =&gt; <span style="color: rgb(128, 0, 0);">:chat</span>    <br /><span style="color: rgb(0, 0, 128);">end</span></span>  </p> </div> <p>So, you get an idea about the <span style="font-family:Courier New;">ChatUser</span> class. Its a relation object between user, chat and chat_status with some additional fields.</p>  <p><strong><span style="color: rgb(0, 128, 0);">How am I Using My named_scope?</span></strong></p>  <p><span style="font-family:Courier New;">ChatUser.closed(chat_id)</span></p>  <p>Gives me all the chat users who closed their chat windows for the chat having chat_id.</p>  <p><span style="font-family:Courier New;">ChatUser.closed(chat_id).with_chat</span></p>  <p>Gives me the same objects as previous but eager loads the chat object. So, it saves plenty of database calls when I need to iterate through the chats!</p>  <p><span style="font-family:Courier New;">ChatUser.closed(chat_id).invite()</span></p>  <p>Invites all users to a chat with chat_id if the buddy closed the chat window.</p>  <p><strong><span style="color: rgb(0, 128, 0);">Why named_scope?</span></strong></p>  <ol>   <li>named_scope is not just a syntactic sugar. It generates much less query using WHERE IN clause instead of WHERE = clause. So, reduces the number of calls to a single call. </li>    <li>Chaining the named_scope will generate only a single query for the chain. So, ChatUser.closed(chat_id).with_chat will produce only one query. </li>    <li>You get rid of looping in many cases! It will help you to write concise and clear codes. </li>    <li>When you can divide the objects in your classes in partitions, then you may wish to write the named_scope for partitioning the data. In my example, the :closed named_scope does this. So, I can add methods to this named_scope which actually works for the closed chats. It is kind of dividing your objects into named groups. So, it increases readability. </li> </ol>  <p>Let me know if you have another good example of a real life named_scope in your project.</p></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -609,6 +622,10 @@ There is also a short book by ScottGu&#8217;s on MVC. You may find the download 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
       </li>
     
@@ -622,10 +639,6 @@ There is also a short book by ScottGu&#8217;s on MVC. You may find the download 
     
       <li class="post">
         <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/11/communication-hacks-from-interview-feedback/">Communication Hacks I Learned From Job Interview Feedback</a>
       </li>
     
   </ul>
