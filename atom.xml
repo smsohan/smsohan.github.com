@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-12-07T12:16:53-07:00</updated>
+  <updated>2020-12-07T13:29:15-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -71,7 +71,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>A lot of time related code I&#8217;ve seen in real projects is finding a point in time relative to <code>now</code>. Ruby on Rails makes it an absolute joy traveling time by adding time related methods straignt into the <a href="https://api.rubyonrails.org">Integer</a> class, where the code looks just like how we think about time. Sure, Rails uses complex classes such as <code>TimeWithZone</code>, <code>Duration</code>, etc. under the hood, but I&#8217;ve almost never seen those used directly. This is such a stark difference with many other platforms where you have to use pedantic concepts such as <code>TimeSpan</code>, <code>Calendar</code>, <code>GregorianCalendar</code>, etc. The true elegance of time travel API in Ruby on Rails lies in how invisible it is.</p>
+<p>A lot of time related code I&#8217;ve seen in real projects is finding a point in time relative to <code>now</code>. Ruby on Rails makes it an absolute joy traveling time by adding time related methods straight into the <a href="https://api.rubyonrails.org">Integer</a> class, where the code looks just like how we think about time. Sure, Rails uses complex classes such as <code>TimeWithZone</code>, <code>Duration</code>, etc. under the hood, but I&#8217;ve almost never seen those used directly. This is such a stark difference with many other platforms where you have to use pedantic concepts such as <code>TimeSpan</code>, <code>Calendar</code>, <code>GregorianCalendar</code>, etc. The true elegance of time travel API in Ruby on Rails lies in how invisible it is.</p>
 ]]></content>
   </entry>
   
