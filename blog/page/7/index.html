@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="At SourceFire, among other things, we build a cloud based Advanced Malware Protection software. As security products go, we collect a huge amount of &hellip;">
+  <meta name="description" content="This 2006 MSDN article points out some key aspects of designing a multi-tenant database for SaaS applications. As you can read in the article, SaaS &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/04/implementation-challenges-with-with-a-saas-database/">Implementation Challenges With a Multi-Tenant/SaaS Database</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-04T10:29:00-06:00" pubdate data-updated="true">Apr 4<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="right" src="http://farm1.staticflickr.com/21/26445881_7c69777b7b.jpg" width="500" height="353" title="Photo credits to corydalus" alt="climbing"></p>
+
+<p><a href="http://msdn.microsoft.com/en-us/library/aa479086.aspx">This 2006 MSDN article</a> points out some key aspects of designing a multi-tenant database for SaaS applications. As you can read in the article, SaaS databases need to pick one of the following three configurations:</p>
+
+<ol>
+<li>separate databases</li>
+<li>shared database, separate schema and</li>
+<li>shared database, shared schema.</li>
+</ol>
+
+
+<p>A number of factors including economic, security, skillset, etc. contribute to the selection of the best suitable configuration. In this post, from my experience, I&#8217;m sharing the following practical requirements that introduce additional implementation challenges:</p>
+
+<ol>
+<li>Each account needs to have a <strong>maximum allowed space</strong> on the database (economic).</li>
+<li>Data from one account should never be accessible to other accounts (security).</li>
+<li>However, for backend usage, we need the ability to run queries across all accounts.</li>
+</ol>
+
+
+<p><strong>Size limiting is quite hard</strong>. It almost forces the use of separate database/schema per account. Even then,  most databases of today don&#8217;t have a clean mechanism to exert such a hard limit.</p>
+
+<p><strong>Separate databases reduce the chance of cross-account data leaks</strong>. But backend tasks suffer for this. For example, your monthly billing processor needs to generate bill for all accounts. With one database/account, it cannot do one simple query to a single database anymore.</p>
+
+<p>Also, <strong>most ORM libraries don&#8217;t support separate databases</strong> for a single type. For example, to fetch the orders from the database, the ORM library needs to connect to database A for account X, but to database B for account Y and so on. At this point, if possible, you&#8217;ll need to tweak the ORMs a lot or fall back to your own ORM, which as <a href="/blog/2012/11/06/orm-or-not/">I wrote in the past</a>, is almost never a good idea.</p>
+
+<p><strong>Connection pooling is another challenge</strong>. It&#8217;s generally a good practice to use connection pooling, to save the overhead of establishing a connection before every query. With separate databases, and hundreds, if not thousands, of accounts being served from an app server, the connection pool would either have too many or too few connections in it to be useful.</p>
+
+<p>I don&#8217;t know about a clean architecture that&#8217;d address these requirements while not introducing the dev challenges. Please comment if you&#8217;ve any suggestion.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -791,104 +855,6 @@ Instead of this Activ eRecord Query:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/08/hybrid-persistence/">Hybrid Persistence</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-08T15:08:00-07:00" pubdate data-updated="true">Jan 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Often times the business requirements demand for database features that aren&#8217;t easily achievable using a single type of database. And now we have quite a few options to choose from, for example Key Value stores, Document databases, Relational databases etc, each providing some mutually exclusive features from the rest. So, it can be tempting to introduce multiple databases to rip the benefits of each.</p>
-
-<p>But, it comes with a few gotchas that are worth knowing. Here&#8217;s a short list from my recent experience on a project:</p>
-
-<ol>
-<li>No simple way to join data from multiple databases without multiple round trips.</li>
-<li>Deployment is tricky as it adds more infrastructure.</li>
-<li>If data is duplicated, migrations need to address multiple sources.</li>
-</ol>
-
-
-<p>Let&#8217;s explain this with an example. Say, we need to store data for an e-commerce site. Document stores seem to be good candidate for storing the product info, since different products have different data associated with it.</p>
-
-<figure class='code'><figcaption><span>products.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='json'><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="err">id:</span> <span class="err">&#39;4wqrqw4890ipoip&#39;,</span>
-</span><span class='line'>    <span class="err">name:</span> <span class="err">&#39;iPhone</span> <span class="err">5&#39;,</span>
-</span><span class='line'>    <span class="err">color:</span> <span class="err">&#39;Black&#39;,</span>
-</span><span class='line'>    <span class="err">price:</span> <span class="err">&#39;699.99&#39;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">{</span>
-</span><span class='line'>    <span class="err">id:</span> <span class="err">&#39;4wqrqw4890ipoiq&#39;,</span>
-</span><span class='line'>    <span class="err">name:</span> <span class="err">&#39;Fine</span> <span class="err">Sheet&#39;,</span>
-</span><span class='line'>    <span class="err">thread_count:</span> <span class="err">400,</span>
-</span><span class='line'>    <span class="err">size:</span> <span class="err">&#39;Queen&#39;,</span>
-</span><span class='line'>    <span class="err">price:</span> <span class="err">&#39;699.99&#39;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We also need to store transactional data and Relational databases have been successfully used for transactions. So, a simple schema may look like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Sales</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">store_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>With a hybrid persistence approach like this, just beware that implementing simple features as follows will need more roundtrips:</p>
-
-<ol>
-<li>Show the invoice for sale with product <b>name</b>, quantity and price.</li>
-<li>Show all &#8216;Fine Sheets&#8217; that are sold in the &#8216;Brentwood&#8217; store.</li>
-<li>List all products sold today, sorted by <b>name</b>.</li>
-</ol>
-
-
-<p>Hybrid persistence works fine for caching. But whenever your data is split into multiple sources in way that you&#8217;d have to combine the parts from each, it&#8217;s not gonna be fun time. Just so you know.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -906,6 +872,10 @@ Instead of this Activ eRecord Query:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
@@ -919,10 +889,6 @@ Instead of this Activ eRecord Query:
     
       <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
   </ul>

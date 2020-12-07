@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-11-28T20:44:26-07:00</updated>
+  <updated>2020-12-07T12:16:53-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Tribute to Time Travel APIs in Ruby on Rails]]></title>
+    <link href="http://smsohan.com/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/"/>
+    <updated>2020-12-07T10:28:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design</id>
+    <content type="html"><![CDATA[<blockquote><p>Good design is obvious. Great design is transparent. — Joe Sparano</p></blockquote>
+
+<p>Ruby on Rails delighted me all through my career. The community is one with a taste for art, thanks to DHH's ability to write well. He set a  high bar and the community also lives up to it. One API that absolutely blows my mind is how delightful it is to work with date and time in Ruby on Rails. Here are a few examples use cases:</p>
+
+<p>```ruby</p>
+
+<h1>Schedule a report to run at the beginning of next week</h1>
+
+<p>report.run_at = 1.week.from_now.beginning_of_week</p>
+
+<h1>.. or first Friday of next month</h1>
+
+<p>report.run_at = report.run_at.next_occurring(:friday) unless report.run_at.friday?</p>
+
+<h1>.. or beginning of next month</h1>
+
+<p>report.run_at = 1.month.from_now.beginning_of_month</p>
+
+<h1>.. or mid-day tomorrow</h1>
+
+<p>report.run_at = 1.day.from_now.at_midday</p>
+
+<h1>Is today a weekday?</h1>
+
+<p>Time.now.on_weekday?</p>
+
+<h1>.. or a weekend?</h1>
+
+<p>Time.now.on_weekend?</p>
+
+<h1>Book a calendar event for a whole day</h1>
+
+<p>time_off.duration = Time.now.all_day</p>
+
+<h1>.. or find sales in the current quarter</h1>
+
+<p>Sale.where(created_at: Time.now.all_quarter)...
+```</p>
+
+<p>A lot of time related code I've seen in real projects is finding a point in time relative to <code>now</code>. Ruby on Rails makes it an absolute joy traveling time by adding time related methods straignt into the <a href="https://api.rubyonrails.org">Integer</a> class, where the code looks just like how we think about time. Sure, Rails uses complex classes such as <code>TimeWithZone</code>, <code>Duration</code>, etc. under the hood, but I've almost never seen those used directly. This is such a stark difference with many other platforms where you have to use pedantic concepts such as <code>TimeSpan</code>, <code>Calendar</code>, <code>GregorianCalendar</code>, etc. The true elegance of time travel API in Ruby on Rails lies in how invisible it is.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How About Full-Stack Micro-Services?]]></title>
@@ -108,35 +156,6 @@ Outlet Valve -&gt; Inlet Valve: Open
 <p>A few examples to explain this. Client side MVC frameworks on top of a server side MVC framework. Client side URL routing on top of server side URL routing. Persisting data in many different databases.</p>
 
 <p>All these examples have one common theme: they offer some value in exchange of additional complexity, often time the complexity grows with time as future developments happen, eventually costing more than the value gained.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Monolith vs Microservices]]></title>
-    <link href="http://smsohan.com/blog/2014/09/18/monolith-vs-micro-services/"/>
-    <updated>2014-09-18T14:56:00-06:00</updated>
-    <id>http://smsohan.com/blog/2014/09/18/monolith-vs-micro-services</id>
-    <content type="html"><![CDATA[<p>Microservices are talk of the town these days. I wanted to share my thoughts on microservices based on some experiments that we are running into at our current project.</p>
-
-<p><img src="/images/minions.jpg" alt="minons" /></p>
-
-<p>SOURCE: <a href="https://www.flickr.com/photos/31366276@N03/9327275207/in/photostream/">https://www.flickr.com/photos/31366276@N03/9327275207/in/photostream/</a></p>
-
-<p>Recently, we deployed a microservice for two-step verification feature on one of our projects. This was a strict business requirement, because having a separate server to store your 2nd-factor authorization provides additional security in case the servers hosting your primary factor are compromised.</p>
-
-<p>We operate on a cloud environment, so spinning up new servers is a simple process. The source code for this whole Ruby on Rails based two-step verification service is no more than a couple hundred lines. So, in theory, it should be very easy to deploy such a service. However, it proved to be a lot of work in the end.</p>
-
-<p>For example, to deploy this service, we actually had to spin <strong>a few servers</strong> for each of our staging and production environments. They also had to be <strong>load balanced</strong> for obvious reasons. They needed their <strong>own database</strong> for the business requirements, which also needed automated <strong>periodic backups</strong>. <strong>Networking and VPN</strong> related configurations as well as <strong>DNS</strong> configurations were also required. <strong>Monitoring</strong> tools had to be configured so we can get alerts in case things were about to fail. <strong>Deployment scripts</strong> had to be written for this service as well.</p>
-
-<blockquote><p>All in all, I'd say <strong>it took 20x the time to deploy this microservice than writing the code for it</strong>.</p></blockquote>
-
-<p>Really. No kidding.</p>
-
-<p>Since it has been deployed, we didn't ship changes as often to this service compared to our main project. This is what I find to be the primary benefit of this approach, since it doesn't require as big a regression test during our releases.</p>
-
-<p>However, when things go wrong, our debug efforts are harder since more infrastructural pieces are involved. Considering the additional work required and the value gain, I'm really not sure if microservices provide any real ROI.</p>
-
-<p>The additional complexity of dealing with many servers as opposed to a larger app may or may not be worth it. I agree with Martin Fowler on the <a href="http://martinfowler.com/bliki/MicroservicePrerequisites.html">prerequisites of microservices</a>. Unless, you have streamlined an automated way to provision new servers with all required parts, it may actually be best for you to keep working on the monolith. It's not the end of the world, and you'll have more time to spend with the family!</p>
 ]]></content>
   </entry>
   

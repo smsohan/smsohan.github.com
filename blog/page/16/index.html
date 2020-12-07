@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Previously I used a few plugins in RoR projects including ScrumPad. On a more recent work, I found the following plugins to be really useful and &hellip;">
+  <meta name="description" content="I worked on the following story:-&#8220;As a partner, when I visit a project&#8217;s dashboard I want to see five most recently started or updated &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/09/21/showing-unread-postscomments-example-of/">Showing Unread Posts/comments: An Example of Rails ActiveRecord &#8216;Touch&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-21T00:00:00-06:00" pubdate data-updated="true">Sep 21<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I worked on the following story:-<blockquote><div></div><div><span class="Apple-style-span" style="font-weight: bold;">&#8220;As a</span> partner, <span class="Apple-style-span" style="font-weight: bold;">when</span> I visit a project&#8217;s dashboard I <span class="Apple-style-span" style="font-weight: bold;">want</span> to see five most recently started or updated discussion threads with number of unread comments, if any. If any of these are new, I want to see them in a highlighted view. Next, if I open the thread, I want to see all new comments in a highlighted view as well. However, once seen, the threads/comments should no longer be highlighted from the rest.&#8221;</div></blockquote><div></div><div>I used the following steps to implement this.<br /></div><div><br /></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#1: Added a model MessageReadTime (message_id, user_id, last_read_at)</span></div><div><pre class="brush: rails">class Message <br />has_many :messages_read_times <br />end</pre></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#2: Added filters in the messages_controller</span></div><div><pre class="brush: rails">after_filter :update_message_read_time, :only => [:show]<br />def update_message_read_time<br />read_time = MessageReadTime.find_or_create_by_message_id_and_user_id( params[:id], current_user.id)<br />read_time.last_read_at = Time.now<br />read_time.save!<br />end</pre></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#3: Added :touch=>true and unread? function in Comment class</span></div><div><pre class="brush: rails">class Comment<br />..<br />belongs_to :message, :touch => true<br />def unread?(user)<br /> read_time = self.message.message_read_times.find_by_user_id(user_id)<br /> return true unless(read_time)<br /> return read_time.last_read_at < (updated_at || created_at)       end   end</pre></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#4: Added unread_comments method in Message class like this</span></div><div><pre class="brush:rails">class Message<br />...<br />def unread_comments(user)<br />self.comments.collect{|comment| comment.unread?(user) ? comment : nil }.compact<br />end<br /><br />def unread?(user)<br />read_time = self.message_read_times.find_by_user_id(user.id)<br />return true unless read_time<br />return self.updated_at >= read_time.last_read_at<br />end<br />...<br />end</pre></div><div>This is it! If you know a better way to do this, lets discuss in the comments. You are also welcome to share your thoughts/suggestions :-)</div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -473,61 +510,6 @@ This was really a cool way to implement breadcrumb in Rails. Looking forward for
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/06/15/lesson2-pace-your-sprint-rightly/">Lesson#2: Pace Your Sprint Rightly</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-15T00:00:00-06:00" pubdate data-updated="true">Jun 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>In my <a href="http://smsohan.blogspot.com/2009/06/lesson1-going-incremental-is-natural.html" target="_blank">previous post</a>, I said about being incremental. Here come the next thing, being “ITERATIVE”. A prefer the term Sprint than Iteration.</p>  <p>So, once you decided to take small increments, make sure you reach the targets sprinting.</p>  <p><a href="http://lh3.ggpht.com/_Gr1ozXzBWpM/SjX_DmKLDgI/AAAAAAAAAFo/xYRbI8rsbVI/s1600-h/sprint%5B3%5D.jpg"><img title="sprint" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="260" alt="sprint" src="http://lh3.ggpht.com/_Gr1ozXzBWpM/SjX_EyH2GEI/AAAAAAAAAFs/c7e42WMAbEI/sprint_thumb%5B1%5D.jpg?imgmax=800" width="347" border="0" /></a> </p>  <p>I suggest you prepare for sprinting with the right techniques and tools. A few recommendations-</p>  <ol>   <li>Never miss a daily standup meeting. Spend only 2 minutes (or less) per person answering the three questions – what did you do yesterday, what’s on the plate for today and what is blocking the race?</li>    <li>Install visual clues for bringing the under the hood stuffs to daylight. Remember, being able to address the loopholes is the key. The solution usually follows automatically.</li> </ol>  <p>The key concept to internalize is, sprinting is a balance race. You need a good start and keep the momentum to reach the touch line on time. Its a small race and if you fall back, the touch line may seem too far to celebrate.</p>  <p>At Code71, <a href="http://scrumpad.com" target="_blank">ScrumPad</a>, is helping us in sprinting. Our sprints are two week sprints in most projects. We found the team communication holds a key in meeting the deadline. Since, within a sprint, someone of the team may need an unplanned vacation or an issue may arise out of the blue, the team needs to step up and put extra efforts. Again, visual clues help the team in keeping everybody posted timely.</p>  <p>If a team finds it difficult to meet the deadline and find the sprint length to be too small, then what? Should they linger the sprint length? NO. The solution is to even shorten the length. To make sure, the team can plan for short spans with better accuracy. Lingering the sprint length addresses the wrong disease and hence may not solve the problem.</p>  </div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Ashrafuzzaman</div>
-<div class='content'>
-I think 2 week sprint is a good sprint length and appropriate for most of the project.</div>
-</div>
-<div class='comment'>
-<div class='author'>Ashrafuzzaman</div>
-<div class='content'>
-I think, two week sprint is a good sprint length and is appropriate for most of the projects.</div>
-</div>
-<div class='comment'>
-<div class='author'>Tanvir Anowar</div>
-<div class='content'>
-I think for big projects and a big teams sprint lengths also should have to be big enough for a maximum outcome.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/17/">&larr; Older</a>
@@ -545,6 +527,10 @@ I think for big projects and a big teams sprint lengths also should have to be b
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
@@ -558,10 +544,6 @@ I think for big projects and a big teams sprint lengths also should have to be b
     
       <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
   </ul>

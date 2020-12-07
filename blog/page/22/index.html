@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="1. The Monostate Pattern - Another way to look into Singleton and some improvement over singleton issues. Read it Here 2. Another good article on &hellip;">
+  <meta name="description" content="Many a times, if feels great to know about the online users and some more details about them when they are on your website. This article gives you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/09/best-rss-feed-i-have-read-today/">Best RSS Feed I Have Read Today</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-09T00:00:00-06:00" pubdate data-updated="true">Apr 9<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Many a times, if feels great to know about the online users and some more details about them when they are on your website. This article gives you the code example to achieve this in your ASP.Net application.</p>  <p><a title="http://www.aspdotnetfaq.com/Faq/How-to-get-detailed-info-about-all-online-visitors-that-are-currently-browsing-your-ASP-NET-website.aspx" href="http://www.aspdotnetfaq.com/Faq/How-to-get-detailed-info-about-all-online-visitors-that-are-currently-browsing-your-ASP-NET-website.aspx">http://www.aspdotnetfaq.com/Faq/How-to-get-detailed-info-about-all-online-visitors-that-are-currently-browsing-your-ASP-NET-website.aspx</a></p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -421,81 +458,6 @@ I have been using Spring.Net for implementing Dependency Injection in my .Net pr
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/03/11/testing-internal-class-in-net-c/">Testing Internal Class in .Net C#</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-11T00:00:00-06:00" pubdate data-updated="true">Mar 11<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-I have been to a situation where only a small number of classes had been declared as <span style="color: rgb(0, 0, 102);font-family:courier new;">public</span> classes in an assembly. And most of the classes are declared as<span style="color: rgb(0, 0, 153);font-family:courier new;"> internal</span>, because I wanted to expose only the public classes to the consumers of my assembly.<br /><br />However, doing so creates another challenge in testing the <span style="color: rgb(0, 0, 153);font-family:courier new;">internal</span> classes. As we most commonly want our test codes to reside on a separate assembly so that we can leave that assembly out when we are releasing the end product. And the internal access control would makes it difficult to write unit tests for these classes.<br /><br />One workaround to this problem is to keep the test classes in the same assembly so that the test class has access to the internal class. However, to leave out these test classes from release configurations, we need to apply a <span style="font-weight: bold;">conditional compilation</span> for these files.<br /><br />However, this is a pessimistic or short cut solution to the real problem. We actually want to test an internal class from another assembly (the test assembly) and don&#8217;t want to go through reflection or other less intuitive paths.<br /><br />I just found that, adding the following assembly attribute in the AssemblyInfo.cs may do the trick.<br /><span style="font-weight: bold;"><br /><span style="color: rgb(255, 0, 0);font-family:courier new;">[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(&#8220;TestAssemblyName&#8221;)]</span></span><br /><br />Adding this attribute will make the assembly&#8217;s internals visible to the assembly thats specified in the argument.<br /><br />So, once this attribute is added to an assembly, the test assembly treats the internal classes just as other public ones and need not worry about access protection problems.</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Its good to see such an old post still helps people!</div>
-</div>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Thanks a great deal!</div>
-</div>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Thanks @romitch!</div>
-</div>
-<div class='comment'>
-<div class='author'>romitch</div>
-<div class='content'>
-Very helpful. Thanks for the hint</div>
-</div>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-excellent tip!</div>
-</div>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-You are welcome!</div>
-</div>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Thanks worked great in my projects!</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/23/">&larr; Older</a>
@@ -513,6 +475,10 @@ Thanks worked great in my projects!</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
@@ -526,10 +492,6 @@ Thanks worked great in my projects!</div>
     
       <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
   </ul>

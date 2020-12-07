@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-11-28T20:44:26-07:00</updated>
+  <updated>2020-12-07T12:16:53-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Tribute to Time Travel APIs in Ruby on Rails]]></title>
+    <link href="http://smsohan.com/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/"/>
+    <updated>2020-12-07T10:28:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design</id>
+    <content type="html"><![CDATA[<blockquote><p>Good design is obvious. Great design is transparent. — Joe Sparano</p></blockquote>
+
+<p>Ruby on Rails delighted me all through my career. The community is one with a taste for art, thanks to DHH&#8217;s ability to write well. He set a  high bar and the community also lives up to it. One API that absolutely blows my mind is how delightful it is to work with date and time in Ruby on Rails. Here are a few examples use cases:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Schedule a report to run at the beginning of next week</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">week</span><span class="o">.</span><span class="n">from_now</span><span class="o">.</span><span class="n">beginning_of_week</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or first Friday of next month</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">run_at</span><span class="o">.</span><span class="n">next_occurring</span><span class="p">(</span><span class="ss">:friday</span><span class="p">)</span> <span class="k">unless</span> <span class="n">report</span><span class="o">.</span><span class="n">run_at</span><span class="o">.</span><span class="n">friday?</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or beginning of next month</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">month</span><span class="o">.</span><span class="n">from_now</span><span class="o">.</span><span class="n">beginning_of_month</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or mid-day tomorrow</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">from_now</span><span class="o">.</span><span class="n">at_midday</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Is today a weekday?</span>
+</span><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">on_weekday?</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or a weekend?</span>
+</span><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">on_weekend?</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Book a calendar event for a whole day</span>
+</span><span class='line'><span class="n">time_off</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">all_day</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or find sales in the current quarter</span>
+</span><span class='line'><span class="no">Sale</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">created_at</span><span class="p">:</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">all_quarter</span><span class="p">)</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A lot of time related code I&#8217;ve seen in real projects is finding a point in time relative to <code>now</code>. Ruby on Rails makes it an absolute joy traveling time by adding time related methods straignt into the <a href="https://api.rubyonrails.org">Integer</a> class, where the code looks just like how we think about time. Sure, Rails uses complex classes such as <code>TimeWithZone</code>, <code>Duration</code>, etc. under the hood, but I&#8217;ve almost never seen those used directly. This is such a stark difference with many other platforms where you have to use pedantic concepts such as <code>TimeSpan</code>, <code>Calendar</code>, <code>GregorianCalendar</code>, etc. The true elegance of time travel API in Ruby on Rails lies in how invisible it is.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tips for Great Developer Demos]]></title>
@@ -601,68 +663,6 @@ Design Thinking course, Cisco Calgary Office, AB, 2019
 <li><a href="https://www.railsconf.com/2015/">RailsConf</a>, 2015: It was a big opportunity to meet the community and bring some of their practices in-house. For example, we started using <a href="https://www.bugsnag.com">BugSnag</a> after learning about it in the conference.</li>
 </ol>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Polyglot YYC 2019: My First Unconference]]></title>
-    <link href="http://smsohan.com/blog/2019/06/05/polyglot-yyc-2019-my-first-unconference/"/>
-    <updated>2019-06-05T16:49:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/06/05/polyglot-yyc-2019-my-first-unconference</id>
-    <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/polyglot_yyc.png" alt="polyglot_yyc" />
-<sub>
-Source: <a href="https://polyglotyyc.ca">Polyglot YYC</a>
-</sub></p>
-
-<p>This weekend I went to <a href="https://polyglotyyc.ca">Polyglot YYC 2019</a>.
-It&#8217;s a gathering of tech people from around Calgary. The event was open
-to all possible topics, hence the name Polyglot.
-It was the first unconference style meetup I went to and this post
-is a summary of my day.</p>
-
-<p>About the attendees, I don&#8217;t have the official count, but I imagine there were
-close to a hundred people. Quite a few
-people represented the sponsor companies. The sponsors
-advertised for hiring new employees, mostly software engineers. On the
-other hand, I met a few people who joined this venue to talk to prospective employers.
-Some of the attendees were enrolled in a coding bootcamp to switch
-careers. I was quite happy to see the community praising their enthusiasm towards the bootcampers.
-Moreover, I met a few regular tech meetup people after a long time. I used to go to
-all tech meetups I could find in town before having kids, and I felt
-great to be among the self-motivated crowd after a long break.</p>
-
-<p>About the event, I was fascinated by how the unconference took its shape.
-At check-in time, everyone got a couple of forms to write down topics
-of interest, either as a host or a participant. Everyone could vote for five
-such topics. I didn&#8217;t prepare
-beforehand. So, I put up a topic that I&#8217;m presently curios about, &#8220;Writing for Developers&#8221;.
-A handful of people voted for me, but it didn&#8217;t make the cut. I found
-some ideas better than mine and was happy that those got
-voted to the top. In hindsight, I should&#8217;ve proposed the topic of &#8220;Why
-Are You Not Innovating?&#8221;. I did an internal presentation on this topic
-at Cisco and it was generally praised by my colleagues.</p>
-
-<p>My other observation is, between technical and soft-skill related
-topics, I liked the soft-skill ones better. For example, I found the topics on hiring,
-choosing a technical vs. managerial career path to be more interesting than
-the topics such as GraphQL and ReactJS. A few years ago, I&#8217;d
-just choose the technical topics without thinking twice. This is also a
-pattern in my recent blog posts or reading list.</p>
-
-<p>In the hiring session, I saw a positive attitude towards hiring remotes
-and treating them as equals. This is a major mindset shift among the
-community.</p>
-
-<p>In the individual contributor vs. management career path session, the
-attendee list included both kinds as well as people that had transitioned in either
-direction. The one take home message I got from this session was, when
-confused with career choice, individual contributors and managers should take the step to
-switch roles. And if things don&#8217;t work out, it&#8217;s totally possible
-to revert later.</p>
-
-<p>I&#8217;m looking forward to the 2020 edition of this event and may even prepare to
-come up with a good idea for the unconference. If you can, please
-join us for the next round.</p>
 ]]></content>
   </entry>
   

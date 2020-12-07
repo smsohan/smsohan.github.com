@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="As a byproduct of my work on www.campzero.com, I released my first ruby on rails plugin called acts_as_permalinkable on github athttp://github.com/ &hellip;">
+  <meta name="description" content="According to google&#8217;s SEO guideline, its a good idea to provide breadcrumbs to your web contents. This is good in two ways: a) It helps people &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/12/27/added-crummy-to-generate-breadcrumbs/">Added Crummy to Generate Breadcrumbs for CampZero.com</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-27T00:00:00-07:00" pubdate data-updated="true">Dec 27<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+According to google&#8217;s SEO guideline, its a good idea to provide breadcrumbs to your web contents. This is good in two ways: a) It helps people to find path to move up the navigation stack and b) it helps the google and other search engines to get a feel about your web content&#8217;s hierarchical organization.<div>To add this breadcrumbs support, in my application <a href="http://www.campzero.com/">www.campzero.com</a>, a going to be online service marketplace for Bangladesh, I simply used the Crummy plugin. You can take a look at the <a href="http://github.com/zachinglis/crummy/">Crummy plugin at github</a>. It took me less than 10 minutes to find, learn and use this plugin! You can see the plugin in action at the <a href="http://www.campzero.com/service_categories/3-Catering-service-Bangladesh/services">campzero site</a>.</div><div>I recommend this plugin for your Ruby on Rails breadcrumbs needs!</div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -434,43 +471,6 @@ Excellent post.. In my opinion a most intuitive UI is the key for attracting the
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/09/21/showing-unread-postscomments-example-of/">Showing Unread Posts/comments: An Example of Rails ActiveRecord &#8216;Touch&#8217;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-21T00:00:00-06:00" pubdate data-updated="true">Sep 21<span>st</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-I worked on the following story:-<blockquote><div></div><div><span class="Apple-style-span" style="font-weight: bold;">&#8220;As a</span> partner, <span class="Apple-style-span" style="font-weight: bold;">when</span> I visit a project&#8217;s dashboard I <span class="Apple-style-span" style="font-weight: bold;">want</span> to see five most recently started or updated discussion threads with number of unread comments, if any. If any of these are new, I want to see them in a highlighted view. Next, if I open the thread, I want to see all new comments in a highlighted view as well. However, once seen, the threads/comments should no longer be highlighted from the rest.&#8221;</div></blockquote><div></div><div>I used the following steps to implement this.<br /></div><div><br /></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#1: Added a model MessageReadTime (message_id, user_id, last_read_at)</span></div><div><pre class="brush: rails">class Message <br />has_many :messages_read_times <br />end</pre></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#2: Added filters in the messages_controller</span></div><div><pre class="brush: rails">after_filter :update_message_read_time, :only => [:show]<br />def update_message_read_time<br />read_time = MessageReadTime.find_or_create_by_message_id_and_user_id( params[:id], current_user.id)<br />read_time.last_read_at = Time.now<br />read_time.save!<br />end</pre></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#3: Added :touch=>true and unread? function in Comment class</span></div><div><pre class="brush: rails">class Comment<br />..<br />belongs_to :message, :touch => true<br />def unread?(user)<br /> read_time = self.message.message_read_times.find_by_user_id(user_id)<br /> return true unless(read_time)<br /> return read_time.last_read_at < (updated_at || created_at)       end   end</pre></div><div><span class="Apple-style-span" style="font-weight: bold;">Step#4: Added unread_comments method in Message class like this</span></div><div><pre class="brush:rails">class Message<br />...<br />def unread_comments(user)<br />self.comments.collect{|comment| comment.unread?(user) ? comment : nil }.compact<br />end<br /><br />def unread?(user)<br />read_time = self.message_read_times.find_by_user_id(user.id)<br />return true unless read_time<br />return self.updated_at >= read_time.last_read_at<br />end<br />...<br />end</pre></div><div>This is it! If you know a better way to do this, lets discuss in the comments. You are also welcome to share your thoughts/suggestions :-)</div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/16/">&larr; Older</a>
@@ -488,6 +488,10 @@ I worked on the following story:-<blockquote><div></div><div><span class="Apple-
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
@@ -501,10 +505,6 @@ I worked on the following story:-<blockquote><div></div><div><span class="Apple-
     
       <li class="post">
         <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/12/managing-one-vs-many-teams/">Difference Between Managing One Team Vs. Many</a>
       </li>
     
   </ul>
