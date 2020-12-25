@@ -8,7 +8,7 @@ categories: "Career"
 
 ![card](/images/CiscoCard.jpg)
 
-<small>This card is a parting gift from beloved team</small>
+<small>This card is a parting gift from beloved team. (Catherine, I know you made it)</small>
 
 This post is dedicated to my team at Cisco. I put a lot of my passion and care into building and being part of a great team during my time at Cisco, eight amazing years between 2012 to 2020. It was the privilege of a lifetime to be able to learn from and mentor an amazing group of people while building a product together.
 
