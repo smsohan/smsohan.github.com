@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "\"you're unfrogattable\""
+title: "\"you're unfrogettable\""
 date: 2020-12-24 18:39
 comments: true
 categories: "Career"
