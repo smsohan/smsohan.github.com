@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Hello Readers:Wish you all are doing great as the Spring already started :-)Recently my grad courses are keeping me busy with assignments and &hellip;">
+  <meta name="description" content="Well, I didn&#8217;t know this until late. If you are like me, you have often wondered when you saw those unwanted flash messages appearing after a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,76 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/03/31/flashnow-did-you-know/">flash.now - Did You Know?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-31T00:00:00-06:00" pubdate data-updated="true">Mar 31<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Well, I didn&#8217;t know this until late. If you are like me, you have often wondered when you saw those unwanted flash messages appearing after a request, sometimes after ajax requests when you do a redirect, all on a sudden that flash shows up!<br />Well, as you have thought, the Ruby on Rails people have solved this problem way before now. The solution is to wisely use flash.now[] and flash[]. Here are a few tips:<br /><br /><b>Use flash.now[] when you are flashing:</b><br /><br /><ul><li>on ajax requests</li><li>before a call to render :action =&gt; :my_action, as often found in failure cases of create and update actions</li></ul><b>Use flash[] when you are flashing:</b><br /><br /><ul><li>before a redirect_to, often found in the success cases of create and update actions</li></ul><div>In general, use flash.now[] when you don&#8217;t want to carry over the flash to the next http request and flash[] otherwise. The FlashHash class has more detail on this<a href="http://api.rubyonrails.org/classes/ActionController/Flash/FlashHash.html"> at the ruby on rails API page</a>. Hope this helps you to get rid of those annoying and often embarrassing out-of-context flash messages!</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks Severin for your comment and pointing the typo.</div>
+</div>
+<div class='comment'>
+<div class='author'>Severin</div>
+<div class='content'>
+Helpful explanation, thanks!<br /><br />But there&#39;s a little typo: &quot;Use flash.NEW[]&#8230;&quot; should be &quot;Use flash.NOW[]&#8230;&quot;</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Hi Arif, you are welcome. Happy to help :-)</div>
+</div>
+<div class='comment'>
+<div class='author'>Arif</div>
+<div class='content'>
+Nice tips. i think we can utilize it in our project to get rid of some mysterious flash messages :) Thank you.</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+You are welcome Ashif.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Thanks for this nice little useful post&#8230;</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -490,66 +560,6 @@ Recently I had the opportunity to review a ruby on rails code. The project aims 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/01/01/homeend-key-in-macbook-pro-windows/">Home/End Key in Mac ( MacBook Pro ) Windows on Bootcamp</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-01-01T00:00:00-07:00" pubdate data-updated="true">Jan 1<span>st</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-If you are anything like me, you love using the home and end key to quickly move to the start/end of a line of text. But, in Apple MacBook Pro, there is no default home/end key! I searched the internet and found Command + Left/Right to the rescue on OS X.<br /><div>But, then I installed windows 7 on my Mac and it was nightmare to edit without the home/end keys. Today I just found that you can use<b><span style="color: red;"> fn+ Left/Right</span></b> for this purpose! Hurray! It makes my time with Microsoft office and Visual studio much happier, again :-)<br /><div><br /></div></div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Thx a lot.</div>
-</div>
-<div class='comment'>
-<div class='author'>Wraithbone</div>
-<div class='content'>
-Thanks! needed this too! VS2010 is a pain without those 2 keys!</div>
-</div>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-This is amazing!! I am exactly looking for this!! Cheers!</div>
-</div>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-Thank you, helps alot!</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -567,6 +577,10 @@ Thank you, helps alot!</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/24/you-are-unfrogettable/">You are Unfrogattable</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
       </li>
     
@@ -580,10 +594,6 @@ Thank you, helps alot!</div>
     
       <li class="post">
         <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
       </li>
     
   </ul>

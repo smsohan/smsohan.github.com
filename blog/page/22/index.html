@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Many a times, if feels great to know about the online users and some more details about them when they are on your website. This article gives you &hellip;">
+  <meta name="description" content="Many a time when you are just about to write a foreach loop on your IEnumerable&lt;T&gt; object you need to check whether the object is null or &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/12/isnullorempty-handy-extension-method/">IsNullOrEmpty() - a Handy Extension Method for IEnumerable<T></a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-12T00:00:00-06:00" pubdate data-updated="true">Apr 12<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Many a time when you are just about to write a foreach loop on your IEnumerable&lt;T&gt; object you need to check whether the object is null or empty in the following manner</p>  <div><span style="color: rgb(0, 0, 255);">if(myEnumerable != null || myEnumerable.Count() &gt; 0)</span></div>  <div><span style="color: rgb(0, 0, 255);">{</span></div>  <blockquote>   <div><span style="color: rgb(0, 0, 255);">foreach(&lt;type&gt; item in myEnumerable)</span></div>    <div><span style="color: rgb(0, 0, 255);">{</span></div>    <div><span style="color: rgb(0, 0, 255);">&#8230;</span></div>    <div><span style="color: rgb(0, 0, 255);">}</span></div> </blockquote>  <div><span style="color: rgb(0, 0, 255);">}</span></div>  <p>However, with the advent of Extension methods, you can write one custom extension method like the following -</p>  <p><span style="color: rgb(0, 0, 255);">public static class IEnumerableExtensions  <br />  {   <br />      public static bool IsNullOrEmpty&lt;T&gt;(this IEnumerable&lt;T&gt; instance) where T : class   <br />      {   <br />          return instance == null || instance.Count() == 0;   <br />      }   <br />  }</span></p>  <p><span style="color: rgb(0, 0, 255);">So, you may write the following code instead of the code example presented earlier -</span></p>  <div><span style="color: rgb(0, 0, 255);">if(!myEnumerable.IsNullOrEmpty())</span></div>  <div><span style="color: rgb(0, 0, 255);">{</span></div>  <blockquote>   <div><span style="color: rgb(0, 0, 255);">foreach(&lt;type&gt; item in myEnumerable)</span></div>    <div><span style="color: rgb(0, 0, 255);">{</span></div>    <div><span style="color: rgb(0, 0, 255);">&#8230;</span></div>    <div><span style="color: rgb(0, 0, 255);">}</span></div> </blockquote>  <div><span style="color: rgb(0, 0, 255);">}</span></div>  <div><span style="color: rgb(0, 0, 255);"></span></div>  <div><span style="color: rgb(0, 0, 0);">There is simple trick with the Extension Method. That is, extension methods can be invoked even on the objects whose reference is not set to an instance of an object or objects with a null value.</span></div>  <div><span style="color: rgb(0, 0, 0);">So, its perfectly valid to write -</span></div>  <div><span style="color: rgb(0, 0, 255);">List&lt;string&gt; myList = null;</span></div>  <div><span style="color: rgb(0, 0, 255);">Console.WriteLine(&#8220;myList.IsNullOrEmpty = {0}&#8221;, myList.IsNullOrEmpty());</span></div>  <div><span style="color: rgb(0, 0, 0);">because, the IsNullOrEmpty() is an extension method and can be invoked on a null referencing object of its target type.</span></div>  <div><span style="color: rgb(0, 0, 255);"></span></div>  <div><span style="color: rgb(0, 0, 255);"> </span></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -421,43 +458,6 @@ I&#8217;ll add this information to the documentation I&#8217;m currently writing
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/03/15/unity-dependency-injection-framework/">Unity - a Dependency Injection Framework From Microsoft Patterns and Practices</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-15T00:00:00-06:00" pubdate data-updated="true">Mar 15<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-I have been using Spring.Net for implementing Dependency Injection in my .Net projects. Spring is already one of the most known providers of DI in the Java world and a port to .Net actually eased the lives of people like me who are willing to develop unit-testable software.<br /><br />However, with all the happiness enjoyed through Spring.Net, I guess its time to take a look into Unity. I have only started using this and I found it interesting in the sense that its more of .Net flavored with a few attributes and fluent interfaces.<br /><br />I hope to post a few concrete examples on Unity implementation soon. However, you may wish to take a look at <a href="http://www.codeplex.com/unity">http://www.codeplex.com/unity</a> in the meanwhile and let me know your comments on this new application block by Microsoft Patterns and Practices group.</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/23/">&larr; Older</a>
@@ -475,6 +475,10 @@ I have been using Spring.Net for implementing Dependency Injection in my .Net pr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/24/you-are-unfrogettable/">You are Unfrogattable</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
       </li>
     
@@ -488,10 +492,6 @@ I have been using Spring.Net for implementing Dependency Injection in my .Net pr
     
       <li class="post">
         <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
       </li>
     
   </ul>

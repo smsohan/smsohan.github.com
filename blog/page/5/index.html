@@ -9,7 +9,9 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="So, on the 18th of October, 2014, I&#8217;ve completed my goal of running a 100 miles in 50 days and wanted to share some data for my readers. Enjoy! ">
+  <meta name="description" content="Browsers have carefully crafted the alert and confirm dialogs for everyone under really simple APIs as follows: 1
+2
+alert('Failed to send the email. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +81,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/11/20/whats-wrong-with-the-default-alert-rendered-by-the-browser/">What&#8217;s Wrong With the Default Alert Rendered by the Browser?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-20T22:49:00-07:00" pubdate data-updated="true">Nov 20<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Browsers have carefully crafted the alert and confirm dialogs for everyone under really simple APIs as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>alert('Failed to send the email. Check your network connection.');
+</span><span class='line'>confirm('Are you sure you want to delete this email?');</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While writing cross-browser JavaScript is not as painful today, custom implementation of these natively supported dialogs seem to be a <strong>complete waste</strong> of money and time to me. With all the different browsers that we have to support today, including the mobile browsers, it seems a lot of wasted effort in trying to render a custom alert and confirm dialog under any circumstance. I&#8217;ve never implemented one, but if you ever attempted, you probably know how much work it is to get it right and consistent. Here&#8217;s a short list of requirements if you want to build one:</p>
+
+<ol>
+<li>Should work on all browsers.</li>
+<li>Needs to disable all other controls on the website.</li>
+<li>Needs to be on the view port so the user can take an action immediately.</li>
+<li>Should not leak any memory if used repeatedly on a single screen.</li>
+<li>Should be fast.</li>
+</ol>
+
+
+<p>While I&#8217;ve seen some magicians to make these requirements look silly and do a decent job of implementing a custom version of the alert and confirm dialogs, I&#8217;m yet to see one that satisfies all the above essential requirements, and does a better job than the browser&#8217;s native implementations. If you haven&#8217;t looked recently, see the current rendering of the confirm dialogs across different browsers:</p>
+
+<p><img src="/images/safari_confirm.png" alt="Safari" />
+<img src="/images/chrome_confirm.png" alt="Chrome" />
+<img src="/images/firefox_confirm.png" alt="FireFox" />
+<img src="/images/iphone_confirm.png" alt="iPhone" /></p>
+
+<p>If you look carefully, you&#8217;ll see subtle things. For example, did you notice the <strong>nice shadows</strong> around the confirm dialogs rendered on Chrome and Safari? There are live effects on the cancel and ok buttons as well, where you&#8217;ll see a little <strong>shining effect</strong> on the ok button. These are carefully crafted buttons. The Cancel and OK button are perfectly sized for <strong>fat fingers</strong> on the iOS safari. Also, these are <strong>familiar</strong> to the users, so they immediately know what they are clicking on. <strong>Keyboard navigation</strong> works as expected. And lastly. the buttons will change labels based on your <strong>preferred language</strong> settings. All for <strong>free</strong>. Now, try to replicate that on your custom control, across all these browsers and show me how it does any better.</p>
+
+<p>If your sole business is indeed building these custom dialogs, you can probably invest the time and money here. But as far as I&#8217;m concerned, I&#8217;d not put a single $ from my pocket if I was funding a project to either build such custom implementations or using your custom implementation. I&#8217;m aware of the fact that, even if it&#8217;s free and open source, it still requires additional maintenance dollars.</p>
+
+<p>As a user of web, I&#8217;ve never been bothered by the websites that show me these familiar browser rendered alerts and confirms. Were you?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -812,129 +880,6 @@ opinion and examples of configure me not.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/10/08/how-to-introduce-asset-pipeline-for-older-apps/">Introducing Asset Pipeline to Older Apps?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-08T10:12:00-06:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Introducing Asset Pipeline to an old project is quite hard. Most pre-asset pipeline projects used small JavaScript/CSS files that are often scoped to a single page or a part of the application. A typical example is as follows:</p>
-
-<figure class='code'><figcaption><span>login.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="kd">var</span> <span class="nx">isLoginValid</span> <span class="o">=</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_name&#39;</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_password&#39;</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="nx">isLoginValid</span><span class="p">){</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_form&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
-</span><span class='line'>      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, within the scope of the login page this code executes just fine. However, with asset pipeline, if this file is included in the application manifest, then all pages that include the manifest will execute this code on load. This is wasteful and more importantly, may result in unexpected behaviors and conflicts.</p>
-
-<p>To work around this problem, when introducing asset pipeline, the code needs to be wrapped in some method that can be called to initialize it only from the login page. Here&#8217;s an example of the wrapper method:</p>
-
-<figure class='code'><figcaption><span>login.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="nx">App</span><span class="p">.</span><span class="nx">validateLogin</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>      <span class="kd">var</span> <span class="nx">isLoginValid</span> <span class="o">=</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_name&#39;</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_password&#39;</span><span class="p">));</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="nx">isLoginValid</span><span class="p">){</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_form&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
-</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
-</span><span class='line'>        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>  <span class="p">};</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now that the logic is wrapped inside a method, it can be included in all the pages without causing any wasteful execution and risking unexpected outcomes or conflicts. This method can be called from within the login page as shown in the following example:</p>
-
-<figure class='code'><figcaption><span>login.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="nx">App</span><span class="p">.</span><span class="nx">validateLogin</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is of course only a minimum change approach that&#8217;ll get asset pipelines working for an existing app. I&#8217;d recommend refactoring the code to make it testable and adding unit tests as you go.</p>
-
-<p>We have a 4 year old Ruby on Rails project, and now running 3.2 with asset pipelines. It has only one manifest file. We used this simple approach to convert all existing js code and it worked great. Hope it helps when you start upgrading your assets to use the pipelines.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -952,6 +897,10 @@ opinion and examples of configure me not.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/24/you-are-unfrogettable/">You are Unfrogattable</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
       </li>
     
@@ -965,10 +914,6 @@ opinion and examples of configure me not.</p>
     
       <li class="post">
         <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/04/youtube/">My YouTube Playlist for Leadership</a>
       </li>
     
   </ul>
