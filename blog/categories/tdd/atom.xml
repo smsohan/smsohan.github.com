@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-12-24T19:18:16-07:00</updated>
+  <updated>2020-12-24T19:23:08-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -100,7 +100,7 @@ end
 ```
 Of course, this can indeed be converted into a single assertion, if you already had <code>equals</code> method overriden for the credit cards. But, I'd probably skip adding that code if its just for the sake of writing tests.</p>
 
-<p><img class="right" src="/images/bowling.jpg" width="300" height="550">
+<p>{% img right /images/bowling.jpg 300 550%}
 <i>Image taken from mchenrybowl</i></p>
 
 <p>The mechnical thought of "one assertion per test" is lame.</p>
