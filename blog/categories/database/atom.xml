@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Database | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/database/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-12-24T19:23:08-07:00</updated>
+  <updated>2020-12-24T19:27:39-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -18,7 +18,7 @@
     <link href="http://smsohan.com/blog/2013/04/04/implementation-challenges-with-with-a-saas-database/"/>
     <updated>2013-04-04T10:29:00-06:00</updated>
     <id>http://smsohan.com/blog/2013/04/04/implementation-challenges-with-with-a-saas-database</id>
-    <content type="html"><![CDATA[<p>{% img right http://farm1.staticflickr.com/21/26445881_7c69777b7b.jpg 500 353 'Photo credits to corydalus' 'climbing'%}</p>
+    <content type="html"><![CDATA[<p><img class="right" src="http://farm1.staticflickr.com/21/26445881_7c69777b7b.jpg" width="500" height="353" title="Photo credits to corydalus" alt="climbing"></p>
 
 <p><a href="http://msdn.microsoft.com/en-us/library/aa479086.aspx">This 2006 MSDN article</a> points out some key aspects of designing a multi-tenant database for SaaS applications. As you can read in the article, SaaS databases need to pick one of the following three configurations:</p>
 
