@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Many a time when you are just about to write a foreach loop on your IEnumerable&lt;T&gt; object you need to check whether the object is null or &hellip;">
+  <meta name="description" content="1. Well, we have a CI in place and we are also very excited to see a new notification message coming to our email inbox on a commit from our team &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/12/my-today-best-rss-feeds/">My Today&#8217;s Best RSS Feeds</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-12T00:00:00-06:00" pubdate data-updated="true">Apr 12<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>1. Well, we have a CI in place and we are also very excited to see a new notification message coming to our email inbox on a commit from our team members. CruiseControl.Net really made is fun and so easy to be really continuously integrating our projects.</p>  <p>However, I didn&#8217;t know of this cool feature until I read this article. I suggest you all CruiseControl.Net cruisers to take a look -</p>  <p><a title="http://www.sharpregion.com/post/Fun-with-Continuous-Integration-BILTONS.aspx" href="http://www.sharpregion.com/post/Fun-with-Continuous-Integration-BILTONS.aspx">http://www.sharpregion.com/post/Fun-with-Continuous-Integration-BILTONS.aspx</a></p>  <p>2. Good example of how to use Extension methods to save your efforts when it comes to write custom events and event handlers in your app. I suggest you to read this article for .net 3.5 way to ease in creating events and event handlers -</p>  <p><a title="http://www.sharpregion.com/post/Events2c-Generics-and-Extension-Methods.aspx" href="http://www.sharpregion.com/post/Events2c-Generics-and-Extension-Methods.aspx">http://www.sharpregion.com/post/Events2c-Generics-and-Extension-Methods.aspx</a></p>  <p>3. If you are implementing a factory method in your application and not using any dependency injection framework like Spring.Net, Unity you may use this simple code in this link create your light weight object factory easily -</p>  <p><a title="http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=3161731&amp;SiteID=1" href="http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=3161731&amp;SiteID=1">http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=3161731&amp;SiteID=1</a></p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -413,51 +450,6 @@ Recently I was writing unit test for a method of the following signature<br /><b
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/03/16/mock-internal-interface-with-nmock2-use/">Mock Internal Interface With NMock2 - Use InternalsVisibleToAttribute</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-16T00:00:00-06:00" pubdate data-updated="true">Mar 16<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Yesterday I badly needed to create mocks for my internal interfaces. I am using NMock2 as a Mocking framework and found it really difficult to produce Mocks for internal interfaces. After some &#8216;google time&#8217; and investigation I found that you need the following two lines in your AssemblyInfo.cs to achieve this purpose-<br /><br /><span style="font-family:courier new;">[<span style="color: rgb(51, 51, 255);">assembly<span style="color: rgb(0, 0, 0);">:</span></span> <span style="color: rgb(0, 204, 204);">InternalsVisibleTo</span>(<span style="color: rgb(153, 0, 0);">&#8220;Mocks&#8221;</span>)]</span><br /><span style="font-family:courier new;">[<span style="color: rgb(51, 51, 255);">assembly<span style="color: rgb(0, 0, 0);">:</span></span> <span style="color: rgb(0, 204, 204);">InternalsVisibleTo</span>(<span style="color: rgb(153, 0, 0);">&#8220;MockObjects&#8221;</span>)]<br /><br /><span style="font-family:verdana;">Where are the two assemblies? I found that these two assemblies are dynamically created by NMock2 for mocking your interfaces.</span><br /><br /><span style="font-family:verdana;">To find out the truth yourself, just put a breakpoint and watch the value of the following line-<br /><br /></span><span style="color: rgb(0, 204, 204);">AppDomain</span>.CurrentDomain.GetAssemblies()<br /><br /><span style="font-family:verdana;">You should see the two assemblies in the list of the assemblies in the current application domain.</span><br /><br /><span style="font-family:verdana;">I found it interesting. I wish someone of you might find it useful too!</span><br /><br /><span style="font-family:verdana;">Note: You may still need to add InternalsVisibleTo attribute for your test assembly with the above two declarations.</span><br /></span></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Urs</div>
-<div class='content'>
-I&#8217;ll add this information to the documentation I&#8217;m currently writing for NMock2 (http://sourceforge.net/projects/nmock2/)<BR/><BR/>Happy mocking<BR/>Urs</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/23/">&larr; Older</a>
@@ -475,6 +467,10 @@ I&#8217;ll add this information to the documentation I&#8217;m currently writing
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
@@ -488,10 +484,6 @@ I&#8217;ll add this information to the documentation I&#8217;m currently writing
     
       <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
   </ul>

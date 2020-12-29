@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="In doing rails unit testing, sometime you need to assert the equality between two float objects in the following fashion assert_equal 32.8, &hellip;">
+  <meta name="description" content="For an explanation of Pair Programming, please visit this wiki entry. Good I am pair programming on the ScrumPad project now and the feeling in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/04/09/pair-programming-how-am-i-feeling/">Pair Programming: How Am I Feeling?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-09T00:00:00-06:00" pubdate data-updated="true">Apr 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p><strong>For an explanation of Pair Programming, please visit <a href="http://en.wikipedia.org/wiki/Pair_programming" target="_blank">this wiki entry</a>.</strong></p>  <p><strong><span style="color:#008000;">Good</span></strong></p>  <p>I am pair programming on the ScrumPad project now and the feeling in general is good. I have this perception is the work quality is better than doing alone. Also, the amount of time wasted to find small issues are now much reduced. Overall, its good.</p>  <p><strong><span style="color:#008000;">Productivity Increased</span></strong></p>  <p>I definitely found the productivity boosted by a factor of 1.5 at least. May be this is specific to my case, as I am working on a mid scale refactoring task. We worked on two user stories so far and completed the stories in 1.5 times faster compared to the individual estimates. We are doing estimation on a regular basis and the variance between estimation and actual hours are less than 5% as we see in the last 17 sprints in this project.</p>  <p><strong><span style="color:#008000;">Disclaimer</span></strong></p>  <p>I am yet new to this practice and not in a position to draw a conclusion yet. However, I believe our open space set-up and strong team culture helped us a lot to start this pair programming.</p>  <p>Are you pairing? Please, share your feelings and suggestions.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Arif, Thanks for the comment. Yes, you are right. I also believe for certain routine (at least regular) jobs, pair programming will be more of an overhead than an advantage. But, when it comes to significant parts with high impact on issues/opportunities, Pair programming is surely worth.</div>
+</div>
+<div class='comment'>
+<div class='author'>Arif</div>
+<div class='content'>
+Pair programming can play a vital role in reducing the bug rates and improving the overall quality of the code.I think every software project team should practice pair programming at least in the architecturally significant parts of the project.Pairing reduces defect rates during the final stage (deadline hours) of the project.Thanks for raising this significant issue.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -478,56 +528,6 @@ Yes, this is a nice example of power of regular expression. <A HREF="http://supp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/12/23/solution-to-javascript-file-include/">Solution to JavaScript File Include Problem From ASP.Net MasterPage</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-12-23T00:00:00-07:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>You can include javascript files using a simple script tag. However, you will soon discover that, when you are using this master page from content pages that are at different levels in folder hierarchy then the script files will be missing at some cases. This is due to the fact that, script file paths are referenced relative to the content page and NOT to the master page. As a result, despite having the correct include wrt the master page, your content pages may still miss the scripts!</p>  <p>The solution is simple. Add this following line (of course, replacing the sample values with your own ones) to your master page&#8217;s page load method to add the script tag through code instead of through markup.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red163\green21\blue21;}??\fs20 \cf1 this\cf0 .Page.ClientScript.RegisterClientScriptInclude(\cf4 "YourKey"\cf0 , ResolveUrl(\cf4 "~/Scripts/myscript.js"\cf0 );} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color:blue;">this</span>.Page.ClientScript.RegisterClientScriptInclude(<span style="color: rgb(163, 21, 21);">&#8220;YourKey&#8221;</span>, ResolveUrl(<span style="color: rgb(163, 21, 21);">&#8221;~/Scripts/myscript.js&#8221;</span>);</p>    <p style="margin: 0px;"> </p>    <p style="margin: 0px;">Hope it saves you from the pain of adding a common js file into each of your content pages.</p> </div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Thank you Yoann for your comment. I will check your solution.</div>
-</div>
-<div class='comment'>
-<div class='author'>Yoann</div>
-<div class='content'>
-You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Place Holder which is runat=&#8221;server&#8221; so relative url works.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -545,6 +545,10 @@ You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Plac
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
@@ -558,10 +562,6 @@ You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Plac
     
       <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
   </ul>

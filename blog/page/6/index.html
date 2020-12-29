@@ -9,7 +9,8 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Introducing Asset Pipeline to an old project is quite hard. Most pre-asset pipeline projects used small JavaScript/CSS files that are often scoped to &hellip;">
+  <meta name="description" content="Configuration in software provides a method to build systems that can
+adapt to different configurations. For example, if a website&#8217;s language &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,91 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/03/configure-me-not/">Configure Me Not</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-03T21:29:00-07:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Configuration in software provides a method to build systems that can
+adapt to different configurations. For example, if a website&#8217;s language and
+date/currency formats are configurable, then it can be configured to
+support multiple languages and regional formats. Configuration makes it
+possible to deliver such features without needing a log of change in the
+application source code.</p>
+
+<p>However, this notion of flexibility that configuration provides can be a trap at times. I&#8217;ve a definition of configurable as follows:</p>
+
+<blockquote><p>A configurable must have at least two configurations.</p></blockquote>
+
+<p>This is another way of saying YAGNI. But I find this to be more specific
+than YAGNI, as it quantifies and makes it apparent.</p>
+
+<p>Here are a few examples to illustrate my definition.</p>
+
+<ol>
+<li><p> <strong>Custom interfaces with a single implementation.</strong></p>
+
+<p> Interfaces are often times thought as a configurable component, as a new
+ implementation can be used in place of an old one without changing the
+ code that uses it.</p>
+
+<p> Except, if your interface only ever have one implementation, this
+ provides a false notion of flexibility. In practice, I&#8217;ve seen for most
+ custom interfaces, a new implementation almost always needs a change in
+ the original interface which doesn&#8217;t really make it configurable
+ anymore.</p></li>
+<li><p><strong>Default arguments in methods that are never passed a non-default
+value.</strong></p>
+
+<p> Default arguments are great, as they often times simplify the common
+ case. However, if a method with a default argument is never called
+ with a non-default value, it&#8217;s simply not worth using a default argument. Use a local variable instead.</p></li>
+<li><p><strong>Configuration key value pairs where there&#8217;s only one value.</strong></p>
+
+<p> Since magic numbers and hardcoded strings are bad, it&#8217;s tempting to use
+ the configuration file to hold such values. However, if there&#8217;s only one
+ such value, it&#8217;s probably a constant and not a configurable object.</p></li>
+<li><p><strong>Exhaustively validating method parameters against all possible but unused values.</strong></p>
+
+<p> If you&#8217;re writing a method that&#8217;s only gonna be called from another
+ method in your project, you probably know what you&#8217;re passing to the
+ method. Validating for different negative inputs to such methods provide
+ a sense of robustness without really adding any value to it.</p></li>
+</ol>
+
+
+<p>Hoping, the definition makes sense. Would love to hear your
+opinion and examples of configure me not.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1000,112 +1086,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/19/unconventional-conventions/">Unconventional Conventions</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-19T09:33:00-06:00" pubdate data-updated="true">Apr 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>JavaScript has been reborn, thanks to <a href="http://jquery.com">jQuery</a> to begin this epic and wonderful march. These days, we have a huge influx of micro to macro frameworks, all providing some well curated set of features. Every now and then I try to get a glimpse of the new and hot stuff so when time comes, I can make an informed decision on what to use and why.</p>
-
-<p>This post is about my recent attempt at learning <a href="http://angularjs.org/">AngularJS</a> and <a href="http://emberjs.com/">EmberJS</a>. Client-side MVC and/or single page apps need some core features as follows:</p>
-
-<ol>
-<li>URL routing</li>
-<li>Rendering views</li>
-<li>Read/write data from/to the backend server</li>
-</ol>
-
-
-<p>Both AngularJS and EmberJS offer these and some additional features, most notably, <a href="http://emberjs.com/guides/object-model/bindings/">two-way data binding</a>, so a change in the JavaScript object reflects on the rendered view and vice versa. But, to be honest, I think they overstretched the framework N miles to the north of where it should be. Let me explain with an example:</p>
-
-<p>Conventions are good when they offer an easy mental model. For example using the following router mapping:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">Router</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;favorites&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>it would match <code>favorites</code> with a <code>App.FavoritesRoute</code> based on the names. It&#8217;s an easy enough pattern to recognize and remember. However, I find it&#8217;s too far fetched in the following example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">App</span><span class="p">.</span><span class="nx">FavoritesRoute</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Route</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-</span><span class='line'>  <span class="nx">model</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1">// the model is an Array of all of the posts</span>
-</span><span class='line'>    <span class="k">return</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Post</span><span class="p">.</span><span class="nx">find</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>My mental model is challenged in a few ways here:</p>
-
-<ol>
-<li>Route has a <code>model</code> hook - which, by conventional usage, I can&#8217;t seem to recognize as a pattern.</li>
-<li><code>App.Post.find()</code> entails an <code>Ember.ArrayController</code>, one provided by the framework. Here, a router is producing a <code>Controller</code> in disguise from the <code>model</code> hook.</li>
-</ol>
-
-
-<p>I&#8217;m sure with repeated usage, I&#8217;d be able to use these conventions without much of a problem. But on a pure API design/Architecture perspective, I think it&#8217;d make more sense to remove such unconventional conventions.</p>
-
-<p>To be honest, I&#8217;ve attempted the EmberJS guides for the 3rd time now, in less than a month, and I feel lost in so many conventions. I have had similar experience with learning AngularJS as well.</p>
-
-<p>With AngularJS, I was first a bit skeptical about all the custom tags that you&#8217;d introduce when using AngularJS. But after giving it a go, it sort of made sense as a trade-off between less code and manageable clutters. But I got really uncomfortable with the likes of the following:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;phones&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;li</span> <span class="na">ng-repeat=</span><span class="s">&quot;phone in phones | filter:query&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="nt">&lt;/li&gt;</span>
-</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>While it offers a snappy filtering experience and some declarative code, it feels too far stretched again. The convention around <code>$scope</code>, and a few other oddities as you&#8217;ll see in this <a href="http://www.egghead.io/video/NnB2NBtoeAY">EggHead.io $scope vs scope tutorial</a> can be quite a stress on the brain.</p>
-
-<p>To conclude, I personally like both frameworks and think they offer some great features over their counterparts, but it&#8217;d make sense in a later version to pick conventions where it&#8217;s truly conventional over an imposed one with lots of foreign concepts.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -1123,6 +1103,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
@@ -1136,10 +1120,6 @@
     
       <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
   </ul>

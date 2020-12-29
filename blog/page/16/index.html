@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="If you are like me, with little creativity with UI (!), on a new project you always start with a simple layout, banner followed by a row of menu and &hellip;">
+  <meta name="description" content="Ever since I started working in the software industry, as a freelancer or representing a company, I found the most challenging part of a remote &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/10/17/communicating-tools-for-working-on/">Communicating Tools for Working on Remote Projects</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-10-17T00:00:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Ever since I started working in the software industry, as a freelancer or representing a company, I found the most challenging part of a remote software development project is &#8220;Communication&#8221;. In agile setup, collaboration plays a leading role to be effective and efficient.<div><br /><div>By communication, I mean the following:-<div><ol><li>Getting the spec as intended by the client.</li><li>Asking specific questions on time.</li><li>Status update about progress, blocks and forthcoming events.</li><li>Getting feedback as intended by the client.</li><li>Making specific suggestions with rationale to the client.</li></ol><div>I am listing a few tools that I used and recommend others to use.</div><div><ol><li><b>A note pad:</b> I write down small bullet points as soon as I find a question/suggestion/idea.</li><li><b>Voice chat/telephone call:</b> It should be #1 preference. Its real time and most speedy after face-to-face. I use Skype for my voice calls and sometimes my phone as well.</li><li><b>IM</b>: I use GoogleTalk most of the time if it works with client. Otherwise, I just use the one that my client uses most frequently.</li><li><b>Collaboration tool: </b>I use <a href="http://scrumpad.com/">ScrumPad.com</a>. Post my messages, people get email notification and can directly reply on that notification. This way the collaboration is all captured in ScrumPad and we can also keep using Email.</li><li><b>A wire framing/drawing tool: </b>Sometimes a small sketch/piece of drawing may greatly ease the communication hurdle. I use MS Visio at times. However, I also use scanned copies of hand drawings and annotations. It works. However, I am looking for a good web based wire framing tool and I believe it will off-load a lot of decision confusions.</li><li><b>Desktop sharing tool: </b>Screen capture and desktop sharing also works for me. I use LogMeIn and Xing. These tools offer first class feedback capturing capability from remote clients.</li></ol><div>I also try to follow some general rules:</div><div><ol><li>Always have a prioritized list of points that I want to discuss.</li><li>Be on time.</li><li>Never stay disconnected for more than 3 business days.</li></ol><div>I am sure out-sourcing will keep growing in the coming days, not only for its low cost but also for the fact that they are getting smarter and equally competent as people who charge many folds compared to them. I also anticipate a lot of out-sourcing job will go to individuals or 2/3 person groups, may be not from fortune 500 companies, but there are still other unfortunate millions of companies who will need such small teams. If you plan to work remotely, I am sure you will need some of the above tools, and if you are already in the business and think you have other good tools, please share with me.</div></div></div></div></div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -468,43 +505,6 @@ Thanks for these great tips. Sometimes only following the naming convention can 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/07/16/rails-modeling-guide1-right-structure/">Rails Modeling Guide#1: Right Structure of a Ruby on Rails Model</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-16T00:00:00-06:00" pubdate data-updated="true">Jul 16<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p> </p> <p><a href="http://lh6.ggpht.com/_Gr1ozXzBWpM/Sl8_GY9tjZI/AAAAAAAAAF4/mXyyvZf0TqE/s1600-h/30MAR4U%5B3%5D.jpg"><img style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" height="273" alt="30MAR4U" src="http://lh4.ggpht.com/_Gr1ozXzBWpM/Sl8_KZGni7I/AAAAAAAAAF8/iPeKlLA9_j8/30MAR4U_thumb%5B1%5D.jpg?imgmax=800" width="105" border="0" /></a> </p> <p>Rails models are no exception compared to the super models! You are in the business if and only if you got a good physical structure and can stick to it for years&#8230;</p> <p>At <a href="http://www.code71.com/" target="_blank">Code71</a>, we are keeping our rails models attractive following a few guidelines. I will be posting these guidelines in a series and here goes the first one - about the physical structure of the ruby on rails models.</p> <p>We keep the following order consistent in our models:- </p><ol> <li>CONSTANTS</li> <li>has_one, has_many, belongs_to, has_and_belongs_to relations in dependency order</li> <li>plug-ins initialization (acts_as_tree, acts_as_state_machine etc.)</li> <li>validates_presence_of</li> <li>validates_uniqueness_of </li> <li>validates_numericality_of</li> <li>validates_format_of</li> <li>custom_validations</li> <li>named_scopes grouped by related purposes</li> <li>active record hooks (after_initialize, before_create, after_create, &#8230;) in execution order in the format (after_initialize [:assign_default_state, :sanitize_content] )</li> <li><strong>protected</strong></li> <li>hook method implementations according to execution order</li> <li><strong>public</strong></li> <li>constructor</li> <li>class methods in alphabetic order</li> <li>other methods alphabetically or grouped if related</li> <li><strong>protected</strong></li> <li>methods alphabetically or grouped if related</li> <li><strong>private</strong></li> <li>self methods in alphabetic order or similar methods in a group<br />other methods in alphabetic order or similar methods in a group<br /></li></ol> <p><strong><span style="color:#004000;">Rule</span></strong></p> <p>No method gets code real estate over 20 lines. If needed, one/more private methods are used.</p> <p><strong><span style="color:#004000;">How is this helping us?</span></strong></p> <ol> <li>We are absolutely sure where to look for a method or where to write a new method.</li> <li>The code base is really consistent.</li> <li>The unit test methods also follow the same order, which makes managing the test suite easy.</li></ol> <p>More to come later this week. Stay tuned!</p></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/17/">&larr; Older</a>
@@ -522,6 +522,10 @@ Thanks for these great tips. Sometimes only following the naming convention can 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
@@ -535,10 +539,6 @@ Thanks for these great tips. Sometimes only following the naming convention can 
     
       <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
   </ul>

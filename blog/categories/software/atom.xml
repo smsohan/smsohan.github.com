@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-12-24T22:06:12-07:00</updated>
+  <updated>2020-12-29T15:54:16-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 1: Delightfulness]]></title>
+    <link href="http://smsohan.com/blog/2020/12/26/software-artchitecture-part-1/"/>
+    <updated>2020-12-26T15:07:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/12/26/software-artchitecture-part-1</id>
+    <content type="html"><![CDATA[<p><em>"I want to be an architect"</em> - is a common career goal I hear during one:one meetings and annual reviews with my team members. Honestly, I'm writing this series of blog posts to bring some clarity and structure into my own thoughts, and hopefully to scale my time. You can even say, I'm open-sourcing my mentorship on the topic of software archtecture. My sincere hope is, this series helps my team or anyone who wants to systematically learn and improve their software design skills.</p>
+
+<p>My mental model of a software architect as a system is as follows:</p>
+
+<pre>
+                 _________
+                |         |
+Requirements -> |         |
+                |         |
+ Environment -> |Architect| -> "Delightful" System Design
+                |         |
+      People -> |         |
+                |_________|
+</pre>
+
+
+<p>That is, they produce the most delightful system design as the ouput from three inputs: business requirements, the environment that surrounds the system, and the people that are involved with the system. The main phrase to remember is <strong>"the most delightful"</strong> - because this is what makes the architect's job so much fun and appealing.</p>
+
+<p>First, I recommend reading the book <a href="https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654">The Design of Everyday Things</a> to learn how design impacts us everyday. It's a fun and must read for anyone involved in any kind of design.</p>
+
+<p>Next, I recommend reading the book <a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515/ref=sr_1_1?crid=EH17W0BAL06D&amp;dchild=1&amp;keywords=don%27t+make+me+think&amp;qid=1609281299&amp;s=books&amp;sprefix=don%27t+make+%2Cstripbooks-intl-ship%2C200&amp;sr=1-1">Don't Make Me Think</a> to learn about how to know if your design is delightful.</p>
+
+<p>I prefer the word delightfulness over usability or customer obsession because the former sets a high bar. I hope you also internalize the goal of designing the most delightful systems and settle for nothing less, why should you?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What We Learned About Feature Flags in Five Years]]></title>

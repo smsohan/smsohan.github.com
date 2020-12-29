@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="I find the MongoDB API is abusing JSON in a really bad way. JSON is probably a good format for storing the documents in MongoDB, but using JSON for &hellip;">
+  <meta name="description" content="The question is, should we use the third-party ActiveRecord Query Enhancers like SearchLogic/Squeel/MetaSearch? Quoting from Squeel&#8217;s Github &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/21/on-activerecord-query-enhancers/">On ActiveRecord Query Enhancers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-21T16:43:00-07:00" pubdate data-updated="true">Jan 21<span>st</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The question is, should we use the third-party ActiveRecord Query Enhancers like SearchLogic/Squeel/MetaSearch?</p>
+
+<p>Quoting from <a href="https://github.com/ernie/squeel">Squeel&#8217;s Github README</a> page,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Squeel</span> <span class="n">lets</span> <span class="n">you</span> <span class="n">rewrite</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Article</span><span class="o">.</span><span class="n">where</span> <span class="o">[</span><span class="s1">&#39;created_at &gt;= ?&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">.</span><span class="n">weeks</span><span class="o">.</span><span class="n">ago</span><span class="o">]</span>
+</span><span class='line'><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">as</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">Article</span><span class="o">.</span><span class="n">where</span><span class="p">{</span><span class="n">created_at</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="o">.</span><span class="n">weeks</span><span class="o">.</span><span class="n">ago</span><span class="p">}</span>
+</span><span class='line'><span class="no">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">good</span> <span class="n">thing</span><span class="o">.</span> <span class="no">If</span> <span class="n">you</span> <span class="n">don</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">agree</span><span class="p">,</span> <span class="no">Squeel</span> <span class="n">might</span> <span class="ow">not</span> <span class="n">be</span> <span class="k">for</span> <span class="n">you</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At work, we are migrating a Rails 3.0 project into Rails 3.2. We used MetaSearch in the project quite extensively and now discussing if using Squeel (successor of MetaSearch for newer Rails versions) would be a good decision. I recognized there are good points on both sides of the debate and wanted to capture the list here for a reference.</p>
+
+<h3>You&#8217;d want to use such enhancers because:</h3>
+
+<ol>
+<li>They extend the basic AR API to provide a DSL. For example, Squeel provides you an API so you can write the following:
+<code>User.where{ country != "USA" &amp;&amp; drives_truck == true }</code>
+Instead of this Activ eRecord Query:
+<code>User.where('country &lt;> ? &amp;&amp; drives_truck = ? ', 'USA', true)</code></li>
+<li>They write complex join statements, including outer joins and joining multiple tables, for you using a shorthand. e.g. <code>User.where{company_name_eq 'Coders'}</code></li>
+<li>They support negative logic (not equal, not in) and OR SQL queries that would require raw String queries using ActiveRecord API.</li>
+<li>They provide fancy operations such as <code>User.where{name_or_address_contains 'scott'}</code> that would require some raw String when using AR directly.</li>
+</ol>
+
+
+<h3>You&#8217;d avoid using these enhancers because:</h3>
+
+<ol>
+<li>You think that using String is just fine over using a Hash with hardcoded symbols anyway.</li>
+<li>As new versions of AR are released, there&#8217;s little guarantee the third-party API will still be compatible.</li>
+<li>You are concerned about adding another pile of abstractions and magic on top of ActiveRecord.</li>
+</ol>
+
+
+<p>Please share if you prefer one over another and if you do, please let us know why.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -854,87 +935,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/10/25/development-environments-and-dependencies-hell/">Development Environments and Dependency Hell</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-25T21:51:00-06:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>It used to be pretty straight forward to get up and running with a Rails app. You&#8217;d expect something like the following:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git@blah/blah.git
-</span><span class='line'><span class="nb">cd </span>blah
-</span><span class='line'>bundle
-</span><span class='line'>rake db:migrate
-</span><span class='line'>rails s
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If the project is using rvm and bundler, the ruby versions and gem depdendencies are all taken care of. So far life is good this way.</p>
-
-<p>But it starts getting complicated. For example, your project probably uses MySQL and no matter what, I can&#8217;t remeber all the c libraries that are pre-requisites for the mysql2 gem to actually install successfully. If it uses Nokogiri, get another hit of all the who-knows-what libxml2* libraries that need to be there. Another gem quite commonly used is rmagick with similar c depdencies. Every time I hit these road blocks, I feel so helpless for:</p>
-
-<ul>
-<li>I have no idea what is required</li>
-<li>Someone on StackOverflow has a magical solution</li>
-<li>The solution will work on one unix distro but won&#8217;t on others</li>
-</ul>
-
-
-<p>This starts getting even more complicated as you start adding external project depdendencies. For example, your project will probably need some Queueing, Caching, Emailing, SOA integration etc. And even if you have very good tests, it&#8217;s likely that you&#8217;d want to manually test to see if your project holds up when integrated to other projects. It&#8217;s best to have all these third-party products in your dev box for obvious reasons. But its also super hard to keep everything in sync, because</p>
-
-<ul>
-<li>You&#8217;d have to automate the installation of all the third-party products in your dev box</li>
-<li>Find a mechanism to update the third-party projects as they change</li>
-</ul>
-
-
-<p>To tackle these problems, teams often use Chef/Puppet/Powershell/Vagrant etc. infrastructure automation tools. In practice, I&#8217;m yet to find a project where these tools would just work in a single pass. For example, it would miss one package or the other, sometimes it would fail at halfway, sometimes it would get you pretty close but almost never I have seen it to work on a single pass. I find this to be a recurring problem, faced by almost all dev teams.</p>
-
-<h2>One solution I think may work is as follows:</h2>
-
-<pre><code>1. Teams from each project writes their own bootstrap scripts, so others can just use it
-2. The bootstrap script runs on a CI server and fails a commit if it breaks the bootstrap
-3. Nobody runs a manual command ever for bootstrapping the dev machines
-</code></pre>
-
-<p>I&#8217;m yet to try this approach in practice. But too many times I&#8217;ve seen there&#8217;s only one/couple people writing the bootstrapping scripts for all projects. Also, nobody really finds the issues until a new dev box needs bootstrapping. A CI server would be a big push to keep it green all the time. And finally, everytime a one-off command is run for bootstrapping, a little part of automation opportunity is missed.</p>
-
-<p>If you&#8217;ve had success with these problems, please share. I&#8217;d really like to learn from you and hopefully implement some of your proven practices/principles.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -952,6 +952,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
@@ -965,10 +969,6 @@
     
       <li class="post">
         <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/12/learn-to-get-and-give-feedback/">Learn to Get and Give Feedback</a>
       </li>
     
   </ul>
