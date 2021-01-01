@@ -6,7 +6,7 @@ comments: true
 categories: "Software Architecture"
 ---
 
-To be an architect, you'll have to be a leader. And, to be a leader, you'll have to be able to understand peopole and create an influence on them. So, focusing on the people involved with a system is a pre-requisite for designing systems that delight them.
+To be an architect, you'll have to be a leader. And, to be a leader, you'll have to be able to understand people and create an influence on them. So, focusing on the people involved with a system is a pre-requisite for designing systems that delight them.
 
 ![How To Win Friends And Influence People](/images/DaleCarnegieBook.png)
 
