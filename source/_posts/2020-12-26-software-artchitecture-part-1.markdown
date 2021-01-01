@@ -21,7 +21,7 @@ Requirements -> |         |
                 |_________|
 </pre>
 
-That is, they produce the most delightful system design as the ouput from three inputs: business requirements, the environment that surrounds the system, and the people that are involved with the system. The main phrase to remember is **"the most delightful"** - because this is what makes the architect's job so much fun and appealing.
+That is, they produce the most delightful system design as the output from three inputs: business requirements, the environment that surrounds the system, and the people that are involved with the system. The main phrase to remember is **"the most delightful"** - because this is what makes the architect's job so much fun and appealing.
 
 First, I recommend reading the book [The Design of Everyday Things](https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654) to learn how design impacts us everyday. It's a fun and must read for anyone involved in any kind of design.
 
