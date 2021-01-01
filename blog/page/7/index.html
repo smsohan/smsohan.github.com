@@ -9,7 +9,10 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="JavaScript has been reborn, thanks to jQuery to begin this epic and wonderful march. These days, we have a huge influx of micro to macro frameworks, &hellip;">
+  <meta name="description" content="Yesterday, couple of my friends and I were discussing about a CoffeeScript topic. In short, given the following code in CoffeeScript: 1
+2
+3
+class Cat &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,137 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/30/microoptimization-trap/">MicroOptimization Trap</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-30T11:24:00-06:00" pubdate data-updated="true">Apr 30<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday, couple of my friends and I were discussing about a CoffeeScript topic. In short, given the following code in CoffeeScript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='coffeescript'><span class='line'><span class="k">class</span> <span class="nx">Cat</span>
+</span><span class='line'>  <span class="nv">type: </span><span class="o">-&gt;</span> <span class="s">&#39;cat&#39;</span>
+</span><span class='line'>  <span class="nv">meow: </span><span class="o">-&gt;</span> <span class="s">&#39;meow meow mee..ow&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The compiler produces this in JavaScript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Cat</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;cat&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">meow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;meow meow mee..ow&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">})();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you see here, the prototype method definitions use the prefix <code>Cat.prototype</code> repeatedly. Which could be compressed using closure as follows:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Cat</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">function</span> <span class="nx">Cat</span><span class="p">()</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">Cat</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">p</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;cat&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">p</span><span class="p">.</span><span class="nx">meow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="s1">&#39;meow meow mee..ow&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">Cat</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">})();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This closure form is for sure less bloated than the one produced by CoffeeScript. And on IE7, each <code>Cat.prototype</code> lookup takes about a microsecond, so, the closure form quite literally yields a micro-second-optimization! When one zooms into such micro-optimizations, other bigger fishes are easily missed.</p>
+
+<p>For example, even though the output is a little bloated from the CoffeeScript compiler, the CS source code is rediculously simpler/shorter even for this tiny example. But that&#8217;s not the only reason why one would use CS. If for nothing else, CS produces lint JavaScript for free. I&#8217;m not saying one has to use CoffeeScript, but this serves as an example scenario. When making a decision, a tunnel-vision into the micro-optimization may as well be a trap.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -830,42 +964,6 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/24/rejecting-because-it-didnt-work-last-time/">Rejecting Because It Didn&#8217;t Work Last Time</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-24T11:09:00-07:00" pubdate data-updated="true">Jan 24<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&#8230; is as right as &#8220;the weather will be bad today because it wasn&#8217;t any good yesterday&#8221;.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -883,6 +981,10 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
       </li>
     
@@ -896,10 +998,6 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
     
       <li class="post">
         <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
       </li>
     
   </ul>
@@ -951,7 +1049,7 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2020 - SM Sohan -
+  Copyright &copy; 2021 - SM Sohan -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

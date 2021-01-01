@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2020-12-29T15:54:16-07:00</updated>
+  <updated>2021-01-01T11:38:11-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 2: People]]></title>
+    <link href="http://smsohan.com/blog/2020/12/30/software-architecture-part-2-people/"/>
+    <updated>2020-12-30T21:03:00-07:00</updated>
+    <id>http://smsohan.com/blog/2020/12/30/software-architecture-part-2-people</id>
+    <content type="html"><![CDATA[<p>To be an architect, you'll have to be a leader. And, to be a leader, you'll have to be able to understand peopole and create an influence on them. So, focusing on the people involved with a system is a pre-requisite for designing systems that delight them.</p>
+
+<p><img src="/images/DaleCarnegieBook.png" alt="How To Win Friends And Influence People" /></p>
+
+<p><small>Photo credits to <a href="https://flic.kr/p/N7J52S">Alan O'Rourke</a></small></p>
+
+<p>For this topic, I want you to read and internaize the ideas from the book <a href="https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034/ref=sr_1_1?dchild=1&amp;keywords=Dale+Carnegie&amp;qid=1609523629&amp;s=books&amp;sr=1-1">How to Win Fiends and Influence People</a> by Dale Carnegie. Honestly, it's a fun read for anyone, not just for the aspiring architect. But an architect must be able to listen with empathy and clearly share her ideas. She needs to truly appreciate diverse opinion because it's common that a delightful system can be designed in many ways, and she's likely to have her blindspots. Moreover, she needs exceptional conflict-resolution skills to create a safe space so the best ideas win irrespective of where it comes from.</p>
+
+<p>I know some of you may be getting impatient because you want to learn hardcore software architecture and I'm not talking anything technical yet. If you can hold your patience and bear with me, we'll get there soon enough. I have what I think an exciting curriculum where I'll be teaching hardcore software design topics using many well-known open-source products. My goal is to set you up for success as an architect, and these softcore topics are of the highest proirity in my curriculum. The small number of great architects I've enjoyed working with have won me over by their people skills. All the other architects may have been technically genius, but lacked people skills to appreciate the essence of a delightful system.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 1: Delightfulness]]></title>
@@ -34,7 +51,7 @@ Requirements -> |         |
 </pre>
 
 
-<p>That is, they produce the most delightful system design as the ouput from three inputs: business requirements, the environment that surrounds the system, and the people that are involved with the system. The main phrase to remember is <strong>"the most delightful"</strong> - because this is what makes the architect's job so much fun and appealing.</p>
+<p>That is, they produce the most delightful system design as the output from three inputs: business requirements, the environment that surrounds the system, and the people that are involved with the system. The main phrase to remember is <strong>"the most delightful"</strong> - because this is what makes the architect's job so much fun and appealing.</p>
 
 <p>First, I recommend reading the book <a href="https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654">The Design of Everyday Things</a> to learn how design impacts us everyday. It's a fun and must read for anyone involved in any kind of design.</p>
 
@@ -153,27 +170,6 @@ Outlet Valve -&gt; Inlet Valve: Open
 
 
 <p>Do you know any? Do these requirements make sense?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[All Talk No Show: Software Architecture]]></title>
-    <link href="http://smsohan.com/blog/2019/08/02/all-talk-no-show-software-architecture/"/>
-    <updated>2019-08-02T08:46:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/08/02/all-talk-no-show-software-architecture</id>
-    <content type="html"><![CDATA[<p>We have a problem with software architecture. Let's face it. Find the architecture diagrams of the products you're working on and answer these questions:</p>
-
-<ol>
-<li>Did you find it?</li>
-<li>Does everyone in your team know where to find it?</li>
-<li>Is it up-to-date?</li>
-<li>Can you see how this system scales, handles failover, monitors performance, or how it's secured?</li>
-<li>Can you see how it evolved over time?</li>
-<li>Can you train a new team-member using this diagram?</li>
-</ol>
-
-
-<p>This is the first micro-post of a series of such as I aim to build a compelling case for fundamentally changing software architecture diagrams.</p>
 ]]></content>
   </entry>
   

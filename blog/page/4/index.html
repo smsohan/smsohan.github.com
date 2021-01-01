@@ -9,9 +9,9 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Finally, I defended my PhD thesis yesterday. Family, friends, and
-colleagues are all sending their wishes, and it feels great to have
-crossed this &hellip;">
+  <meta name="description" content="Past few months at work we&#8217;re trying to revamp our CI infra. This has
+been a migration from a Jenkins cluster to GoCD.
+This post is a result of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +81,68 @@ crossed this &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/10/10/headless-ci/">Headless CI</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2018-10-10T08:02:00-06:00" pubdate data-updated="true">Oct 10<span>th</span>, 2018</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Past few months at work we&#8217;re trying to revamp our CI infra. This has
+been a migration from a <a href="https://jenkins.io">Jenkins</a> cluster to <a href="https://www.gocd.org">GoCD</a>.
+This post is a result of my frustrations with the state of CI in the age of Git/GitHub.</p>
+
+<p>With Pull Requests, or a form of pre-merge review process, it&#8217;s common
+to leverage a few automated checks alongside our human peers to remove
+potentially breaking changes from being merged into the repo. These
+changes typically require a CI server and often multiple CI
+jobs/pipelines to check test run / coverage results, linting, or any other policy
+that can be automatically enforced.</p>
+
+<p>This is where you need to integrate your GitHub/what have you with your
+GoCD or the likes. And it&#8217;s a time consuming task for any complicated
+project. You essentially, setup pipelines that are somewhat duplicate
+to be executed pre and post merge. The more I think about, the more it
+feels like the whole CI process should be a headless one, and deeply
+embedded within the code repo. This would save unneccessary hassles such
+as setting up user accounts / notifications across multiple systems,
+navigating between web interfaces to see important logs when things
+fail etc.</p>
+
+<p>I like the direction <a href="https://about.gitlab.com/features/gitlab-ci-cd/">GitLab</a> is taking.
+They have made CI part of GitLab UI so you can see the code and its
+build status in the same place. I&#8217;d like other CI environments to do the
+same, or at least be a little app/plugin that you can add on top of GitHub - to
+blend within the GitHub experience such that it doesn&#8217;t feel like a
+foreign object.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -799,52 +861,6 @@ accommodating.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/02/2015/">2015</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-02T23:36:00-07:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is a much shorter new year post. 2014 was the year of focusing on health, soft-skills, Haskell, social contribution and PhD in addition to typical everyday stuff. Hoping 2015 will be the year of:</p>
-
-<blockquote><p>reconnecting with friends and relatives</p>
-
-<p>perfection</p></blockquote>
-
-<p>While Facebook and Twitter make it easy to browse through my friends&#8217; photos and status updates, I feel quite reluctant to interact on these media. Also, this passive mode of keeping in touch sucks, since my friends are largely unaware of the fact that I still care. So, 2015 will be the year when I regularly call people, and talk to them on the phone/skype/in person.</p>
-
-<p>Perfection. On most occasions I&#8217;m happy if something I tried yielded just enough. 2015, I&#8217;ll strive for perfection beyond just enough.</p>
-
-<p>Wishing everyone a joyful 2015, Happy new year.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -862,6 +878,10 @@ accommodating.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
       </li>
     
@@ -875,10 +895,6 @@ accommodating.</p>
     
       <li class="post">
         <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a>
       </li>
     
   </ul>
@@ -930,7 +946,7 @@ accommodating.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2020 - SM Sohan -
+  Copyright &copy; 2021 - SM Sohan -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
