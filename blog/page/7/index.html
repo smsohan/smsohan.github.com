@@ -9,10 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Yesterday, couple of my friends and I were discussing about a CoffeeScript topic. In short, given the following code in CoffeeScript: 1
-2
-3
-class Cat &hellip;">
+  <meta name="description" content="After spending about 6 months on this new project using BackboneJS, and spending some hours learning AngularJS and EmberJS, my realization at this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +79,58 @@ class Cat &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/07/simplicity-and-client-side-mvc/">Simplicity and Client-Side MVC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-07T08:56:00-06:00" pubdate data-updated="true">May 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After spending about 6 months on this new project using BackboneJS, and spending some hours learning AngularJS and EmberJS, my realization at this point is:</p>
+
+<blockquote><p>Use Client-Side MVC very Selectively.</p></blockquote>
+
+<p>Sometimes on a single page of your app, you need to offer a lot of interactions, each scoped to a small part of the page only. In such cases Client-Side MVC offers some neat features. I&#8217;ll try to share my perspective with some concrete examples where I&#8217;d say yes/no to Client-Side MVC.</p>
+
+<ol>
+<li>Build a Calendar page - Yes.</li>
+<li>Build a Master/Detail view - No.</li>
+<li>Build a Credit Card Payment Form - No.</li>
+<li>Build a Story Wall like Trello - Yes.</li>
+<li>Build an Airport Departures/Arrivals display - No.</li>
+<li>Build a Search form - No.</li>
+</ol>
+
+
+<p>As you see here, I suggest using it only when a lot of Client-Side interactions can happen, with little server side data requests.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -802,168 +851,6 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/07/activerecord-callbacks/">Are ActiveRecord Callbacks Any Good?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-07T09:04:00-07:00" pubdate data-updated="true">Feb 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Wanted to share my thoughts on ActiveRecord Callbacks. I&#8217;d like to know your thoughts if you disagree. Please use the comments.</p>
-
-<ul>
-<li>Only use them when the behavior is <b>must have</b> under all situations, including your tests. For example, we know email addresses are case-insensitive. So no matter what, we may always want to store a lower cased version in the db.</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Good</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:downcase_email</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">downcase_email</span>
-</span><span class='line'>    <span class="n">email</span><span class="o">.</span><span class="n">downcase!</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Never use them otherwise. A couple of classic examples that I consider as bad:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Bad: Sends email, probably not required under all situations such as when creating via migrations, tests etc.</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:welcome</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">welcome</span>
-</span><span class='line'>    <span class="no">WelcomeMailer</span><span class="o">.</span><span class="n">welcome</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span><span class="o">.</span><span class="n">deliver</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#Bad: Interacts with external components</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:setup_orientation</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">setup_orientation</span>
-</span><span class='line'>    <span class="no">OrientationMessageQueue</span><span class="o">.</span><span class="n">enque</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>A common problem with the callbacks is, there are some handy methods that skip the callbacks. For example, consider the following:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span>User.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Careful</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:update_coordinates</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">update_coordinates</span>
-</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="no">Geo</span><span class="o">.</span><span class="n">find_coordinates</span><span class="p">(</span><span class="n">zip_code</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#works fine</span>
-</span><span class='line'><span class="n">sohan</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;Sohan&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">sohan</span><span class="o">.</span><span class="n">zip_code</span> <span class="o">=</span> <span class="s1">&#39;33333&#39;</span>
-</span><span class='line'><span class="n">sohan</span><span class="o">.</span><span class="n">save!</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#doesn&#39;t fire the callback</span>
-</span><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">update_all</span><span class="p">({</span><span class="n">zip_code</span><span class="p">:</span> <span class="s1">&#39;33333&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">zip_code</span><span class="p">:</span> <span class="s1">&#39;55555&#39;</span><span class="p">})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you&#8217;re using the callbacks, I&#8217;d emphasize again, only use when you are absolutely sure the desired behavior applies under all contexts.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -981,6 +868,10 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -994,10 +885,6 @@ GET http://fancy_domain.com/filters/emails_from_boss_about_release?include_email
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

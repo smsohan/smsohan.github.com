@@ -9,8 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Yes to ORM, No to custom queries. Here&#8217;s a bullet list: You&#8217;d probably end up writing your own ORM anyway.
-Doing so, you&#8217;d spend a &hellip;">
+  <meta name="description" content="Most applications I&#8217;ve worked on required some kind of seed data. For example, I&#8217;ve used seed data to create a super admin user so the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +79,172 @@ Doing so, you&#8217;d spend a &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/23/seed-data-in-a-rails-project/">Seed Data in a Rails Project</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-23T13:18:00-07:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most applications I&#8217;ve worked on required some kind of seed data. For example, I&#8217;ve used seed data to create a super admin user so the site can actually be used upon a fresh install. Some other common cases include things like, list of credit card types, names of countries/states etc. This post is about some ideas to manage thsese seed data in a Ruby on Rails project.</p>
+
+<h3>Where to put the seed data?</h3>
+
+<p>I think you have 2 choices to pick from.</p>
+
+<ol>
+<li>db/seeds.rb</li>
+<li>db/migrate/2342423424_some_migration.rb</li>
+</ol>
+
+
+<p>I prefer having it in the seeds.rb whenever possible since this is the obvious place for it. But I&#8217;ve often put them in migrations as well. There are trade-offs associated with both.</p>
+
+<p>Migrations only run once. This means, &#8220;double/miltiple seeding&#8221; is not a concern at all. So, you can write a migration with some seeding command as follows:</p>
+
+<figure class='code'><figcaption><span>Migration CreateUsers</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">name</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">email</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">encrypted_password</span>
+</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">password_salt</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">create_super_admin_user</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_super_admin_user</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works great. It creates the super user and by virtue of migrations, it only ever creates one super admin.</p>
+
+<p>The caveat with this approach is, if you change certain things later, then this migration will fail to run. For example, say we added a required field to user as follows:</p>
+
+<figure class='code'><figcaption><span>User</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">User</span>
+</span><span class='line'>    <span class="n">validates</span> <span class="ss">:age</span><span class="p">,</span> <span class="n">presence</span><span class="p">:</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, if you run the migration on a freshly checked out code, it will fail due to this validation. One workaround is to fix the code in this migration. But for people that already ran the migrations, and likely your production environment already did so, this has no effect. At this point, it starts getting complicated and some band-aid solutions are usually implemented.</p>
+
+<p>On the other hand, if you are using db/seeds.rb for seed data, you&#8217;d have to make sure its idempotent. So, a rerun should not create a 2nd copy of the objects. As a start, your code could be like this:</p>
+
+<figure class='code'><figcaption><span>db/seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">if</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this in place, you can easily incorporate the change for the new validation as follows:</p>
+
+<figure class='code'><figcaption><span>db/seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">super_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">super_user</span> <span class="o">&amp;&amp;</span> <span class="n">super_user</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">blank?</span>
+</span><span class='line'>    <span class="n">super_user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">age</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">age</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This would work for people who already had a super user and also for people that just got a fresh copy of the code.</p>
+
+<blockquote><p>So, I prefer putting data in seeds.rb with idempotency.</p></blockquote>
+
+<p>In addition to handling such cases, it also makes it easy for anyone to take glance at the seed data in one place.</p>
+
+<h3>How to handle large amount of seed data?</h3>
+
+<p>When you have more than a handful of data to seed, I&#8217;d recommend tidying up your db/seeds.rb into a more manageable structure. Here&#8217;s how I&#8217;d do it:</p>
+
+<figure class='code'><figcaption><span>File organization</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  |- app
+</span><span class='line'>  |- db
+</span><span class='line'>    - seeds.rb
+</span><span class='line'>    |- seeds
+</span><span class='line'>      - users.rb
+</span><span class='line'>      - credit_card_types.rb
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With this structure in place, you can turn you seeds.rb into a simple manifesto file as follows:</p>
+
+<figure class='code'><figcaption><span>seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;seeds/users&#39;</span>
+</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;seeds/credit_card_types&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This will help you keeping things organized and hopefully give you a happier solution to the seed data problem.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -695,94 +860,6 @@ metric: {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/28/deploying-to-TV-screens/">Deploying to TV Screens</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-28T15:28:00-06:00" pubdate data-updated="true">Jul 28<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Off late, I am working on a project to render real time business data with interesting visualizations, so people can feel the pulse of the business. For the last couple of months, I have been planning to write a detailed post about it. But after a few false starts, I am finally settling on smaller posts, telling a small part of the story each time.</p>
-
-<blockquote><p>So, have you ever worked on a web application that is primarily viewed through 55&#8221;+ 1080p TV screens?</p></blockquote>
-
-<p>We are showing real time business data, aggregated from multiple data sources as they are happening. The screens are gonna be mounted on the wall, like as you&#8217;d see in the airports. And it needs to be running 24x7</p>
-
-<p>This introduces an interesting deployment challenge:</p>
-
-<blockquote><p>How would you reload the screen every time you re-deploy the app?</p></blockquote>
-
-<p>A regular web app is interactive. So, when we re-deploy the app, the users typically get the latest version as soon as they reload the page or navigate through the app. However, in an airport like setting, where information is displayed across many screens, and typically no-one is clicking it, the app needs to be aware of updates and reload itself to achieve the same. This is essential, for example, if there&#8217;s an API change on the server side, the HTML/Javascript/CSS must be in sync to be able render it.</p>
-
-<p><img src="http://farm1.staticflickr.com/65/212623519_eae543d64c.jpg" alt="Airport displays" /></p>
-
-<p>Photo credits to  5mal5</p>
-
-<p>The app itself uses JSON API calls to render the live data. Each screen is somewhat like a single page app, using multiple AJAX calls to render different parts of the screen, showing different data. The API calls are all funneled through a single Javascript module. The module looks like the following (showing a simplified version for brevity):</p>
-
-<div><script src='https://gist.github.com/3194417.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-
-
-<p>If you have noticed here, there&#8217;s an extra check inside the success callback. To begin with, the page remembers the server token on reload. So, whenever there&#8217;s a new token, it refreshes the page. Since all API calls are funneled through this module, this becomes a no-brainer to support new screens/API calls.</p>
-
-<p>Our API&#8217;s respond with a server token, which is guaranteed to:</p>
-
-<ol>
-<li>Remain same for each server deployment, and</li>
-<li>Change whenever there&#8217;s a new deployment.</li>
-</ol>
-
-
-<p>However, we still need to make sure the server token indeed ensures these two essential properties. With a little trick, this becomes trivial. For our app, we are using Capistrano to deploy our Ruby on Rails project. For those new to Capistrano, it uses a timestamped directory for each deploy, symlinking it to the current. So, it looks somewhat like the following:</p>
-
-<div><script src='https://gist.github.com/3194484.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-
-
-<p>Every Ruby on Rails app also comes with a little method, Rails.root that returns the full path to the directory of the current deployment. So, in this example scenario, we get the following:</p>
-
-<p>Rails.root #==&gt; /app/realtime/releases/20120729083021</p>
-
-<p>Since every deployment will be a new timestamp, this method ensures a unique token for each deployment. That&#8217;s all we need for the api module to be aware of new deployments and auto refreshes. Here&#8217;s an example controller/action (again, simplified for brevity):</p>
-
-<div><script src='https://gist.github.com/3194430.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-
-
-<p>I liked the organic nature of this technique. It is harvesting on the available tools. Although the examples in this post show Ruby/Rails as an example, I am sure the same techniques can be applied to other technologies with the same simplicity.</p>
-
-<p>Before I conclude, I would share one limitation of this technique here. Since the page reload happens on a shared api module, the reload needs to be generic, without requiring any special knowledge about the pages to reload. This pretty much means, a page needs to be able to reconstruct itself entirely from it&#8217;s URL. Requiring any Javascript state beyond the URL, would probably require API specific handling to reload, killing the advantage of this technique. But the good news is, its always a good practice to rely solely on the URL to construct a page.</p>
-
-<p>Thanks a ton if you&#8217;ve followed all the way. Stay tuned for the upcoming posts, where I will be telling the story of handling multiple API calls on a page, highlighting data changes and some other interesting bits about a real time dashboard.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -800,6 +877,10 @@ metric: {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -813,10 +894,6 @@ metric: {
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="1. If using LINQ gives you a great feeling, then I suggest you to read this post (to make it feel even better) where you learn about a less used &hellip;">
+  <meta name="description" content="I have found that, I have written codes like the following one in my projects before now at some places. string myString = someString == null ? &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/16/stringgetvalueordefault-simple/">string.GetValueOrDefault() - a Simple Extension Method</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-16T00:00:00-06:00" pubdate data-updated="true">Apr 16<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I have found that, I have written codes like the following one in my projects before now at some places.</p>  <p><span style="font-family:Courier New;color:#000080;">string myString = someString == null ? string.Empty : someString;</span></p>  <p>However, with the advent of extension methods in C# 3.0 (.Net 3.5), I have a better way of achieving this goal in my projects. So, I just wrote an extension method as the following one-</p>  <p><span style="font-family:Courier New;color:#000080;">public static class StringExtensions   <br />   {    <br />       public static string GetValueOrDefault(this string instance)    <br />       {    <br />           return instance == null ? string.Empty : instance;    <br />       }    <br />   }</span></p>  <p><span style="font-family:verd;color:#3c3c3c;">Well, I have just borrowed the name of the method from the Nullable type and think this name means its purpose to the fullest!</span></p>  <p>However, with this addition, I can now rewrite my code example as the following one-</p>  <p><span style="font-family:Courier New;color:#000080;">string myString = someString.GetValueOrDefault();</span></p>  <p><span style="font-family:Courier New;color:#000080;">Happy coding!</span></p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -413,43 +450,6 @@ Today I have appeared at the MCTS Exam # 70-528 (Web Based Client Development) a
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/03/20/solution-to-problem-with-creating-mocks/">A Solution to the Problem With Creating Mocks for Interfaces With Generic Methods With NMock</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-20T00:00:00-06:00" pubdate data-updated="true">Mar 20<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-I was so happy with NMock to see how it can dynamically generate mocks of interfaces and also gives me a fluent interface to write expectations and everything it does to help me in unit testing!<br /><br />However, I could not generate dynamic mocks for interfaces with Generic methods and it kept showing me the &#8216;TypeLoadException&#8217; on and on. My interface looks like the following -<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">interface </span>IObjectFactory</span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    T    GetObject</span><t><span style="font-family:courier new;">(<span style="color: rgb(51, 51, 255);">string </span>id);</span><br /><span style="font-family:courier new;">}</span><br /><br />As I failed to create a mock implementation of this interface using NMock, I just wrote a mock implementation myself, which looks like the following<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">class </span><span style="color: rgb(51, 204, 255);">MockObjectFactory</span>: <span style="color: rgb(51, 204, 255);">IObjectFactory</span></span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span><span style="color: rgb(51, 204, 255);">Type </span>RequestedObjectType;</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span>string RequestedObjectId;</span><br /><span style="font-family:courier new;">    public T    GetObject</span><t><span style="font-family:courier new;">(string id)</span><br /><span style="font-family:courier new;">        {</span><br /><span style="font-family:courier new;">                RequestedObjectType = typeof(T);</span><br /><span style="font-family:courier new;">        RequestedObjectId = id;</span><br /><span style="font-family:courier new;">        return new Mockery().NewMock</span><t><span style="font-family:courier new;">();</span><br /><span style="font-family:courier new;">    }</span><br /><span style="font-family:courier new;">}</span><br /><br /><br />And in my test code, just injected the above mock implementation of the IObjectFactory where needed. So, although NMock cannot handle mocking of this type of an interface now, you can actually create a mock implementation and use NMock inside the implementation to help you.</t></t></t></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/23/">&larr; Older</a>
@@ -467,6 +467,10 @@ I was so happy with NMock to see how it can dynamically generate mocks of interf
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -480,10 +484,6 @@ I was so happy with NMock to see how it can dynamically generate mocks of interf
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

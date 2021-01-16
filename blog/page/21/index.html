@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="For a few days, I have been trying a lot to understand why people would be using RESTful instead of the standard SOAP based Web Services. I thought &hellip;">
+  <meta name="description" content="Usually static variables holds the same value for all the threads running at the same AppDommain. However, in a multithreaded scenario, you may need &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/06/10/threadstatic-cool-attribute-to-thread/">[ThreadStatic] - a Cool Attribute to Thread Safe Static Members</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-06-10T00:00:00-06:00" pubdate data-updated="true">Jun 10<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Usually static variables holds the same value for all the threads running at the same AppDommain. However, in a multithreaded scenario, you may need to add thread safe behavior to your static members so that the value of a static member is same inside only a single thread and across multiple threads the value can be different. In this way you may attain a thread specific or thread scoped storage to use in your application. One example is, in Log4Net you need to use ThreadContext class to store the values to be logged that are thread specific.</p>  <p>.Net framework has a smart and easy way of achieving it through the use of ThreadStaticAttribute class. When you apply this attribute to your static members, it will take care of the thread safety. So, from a sample C# code like the following one, you may define thread safe static members.</p>  <p> </p>  <p></p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}??\fs20 \cf1 class\cf0  \cf4 Program\par ??\cf0     \{\par ??        [\cf4 ThreadStatic\cf0 ]\par ??        \cf1 private\cf0  \cf1 static\cf0  \cf1 int\cf0 ? x;\par ??\par ??        \cf1 static\cf0  \cf1 void\cf0  Main(\cf1 string\cf0 [] args)\par ??        \{\par ??            \cf4 Thread\cf0  [] threads = \cf1 new\cf0  \cf4 Thread\cf0 [5];\par ??            \cf1 for\cf0  (\cf1 int\cf0  i = 0; i < initial     =" \{1\}" x =" (\cf1" after       =" \{1\}">  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    9</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">Program</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   10</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   11</span>         [<span style="color: rgb(43, 145, 175);">ThreadStatic</span>]</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   12</span>         <span style="color:blue;">private</span> <span style="color:blue;">static</span> <span style="color:blue;">int</span>? x;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   13</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span>         <span style="color:blue;">static</span> <span style="color:blue;">void</span> Main(<span style="color:blue;">string</span>[] args)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>             <span style="color: rgb(43, 145, 175);">Thread</span> [] threads = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">Thread</span>[5];</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>             <span style="color:blue;">for</span> (<span style="color:blue;">int</span> i = 0; i &lt; threads.Length; i++)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span>             {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>                 threads[i] = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">Thread</span>(<span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">ParameterizedThreadStart</span>(<span style="color: rgb(43, 145, 175);">Program</span>.Run));</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>                 threads[i].Start(i);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span>             }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span>             <span style="color: rgb(43, 145, 175);">Console</span>.Read();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">void</span> Run(<span style="color:blue;">object</span> i)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span>             <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(<span style="color: rgb(163, 21, 21);">&#8220;From Thread {0}: Initial    = {1}&#8221;</span>, i, x);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>             x = (<span style="color:blue;">int</span>)i;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>             <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(<span style="color: rgb(163, 21, 21);">&#8220;From Thread {0}: After       = {1}&#8221;</span>, i, x);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span>             <span style="color: rgb(43, 145, 175);">Thread</span>.Sleep(1000);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span>     }</p> </div>  <p>The output of this code is-</p>  <p> <a href="http://lh6.ggpht.com/sohan39/SE9kdtZEm0I/AAAAAAAAAC4/6NSlxQeNUos/s1600-h/image%5B3%5D.png"><img style="border: 0px none ;" alt="image" src="http://lh6.ggpht.com/sohan39/SE9kiG2eWvI/AAAAAAAAAC8/lu854e6xQWc/image_thumb%5B1%5D.png?imgmax=800" width="269" border="0" height="144" /></a></p>  <p>From the output its evident that each of the threads sees the initial value to be a null although in some other thread it may have been initialized to some value. So, the thread safety is achieve as easily as shown in the above example.</p>  <p>Have fun with ThreadStatic!</p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -446,43 +483,6 @@ Thanks u so much</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/04/16/stringgetvalueordefault-simple/">string.GetValueOrDefault() - a Simple Extension Method</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-16T00:00:00-06:00" pubdate data-updated="true">Apr 16<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>I have found that, I have written codes like the following one in my projects before now at some places.</p>  <p><span style="font-family:Courier New;color:#000080;">string myString = someString == null ? string.Empty : someString;</span></p>  <p>However, with the advent of extension methods in C# 3.0 (.Net 3.5), I have a better way of achieving this goal in my projects. So, I just wrote an extension method as the following one-</p>  <p><span style="font-family:Courier New;color:#000080;">public static class StringExtensions   <br />   {    <br />       public static string GetValueOrDefault(this string instance)    <br />       {    <br />           return instance == null ? string.Empty : instance;    <br />       }    <br />   }</span></p>  <p><span style="font-family:verd;color:#3c3c3c;">Well, I have just borrowed the name of the method from the Nullable type and think this name means its purpose to the fullest!</span></p>  <p>However, with this addition, I can now rewrite my code example as the following one-</p>  <p><span style="font-family:Courier New;color:#000080;">string myString = someString.GetValueOrDefault();</span></p>  <p><span style="font-family:Courier New;color:#000080;">Happy coding!</span></p></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -500,6 +500,10 @@ Thanks u so much</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -513,10 +517,6 @@ Thanks u so much</div>
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Private methods, when used meaningfully, are a great tool for writing beautiful object oriented code. But as many other things in life, excess of &hellip;">
+  <meta name="description" content="Photo credits to&nbsp;Esteban CavricoI was working on a web project that lets you delete some records using Ajax. The following is just an example, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/23/hardcoded-urls-in-javascript-are-too/">Hardcoded URLs in Javascript Are Too Slippery</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-23T00:00:00-06:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://farm3.static.flickr.com/2728/4182189627_ba036b02c8.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="448" src="http://farm3.static.flickr.com/2728/4182189627_ba036b02c8.jpg" width="500" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Photo credits to&nbsp;<span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;"><a href="http://www.flickr.com/photos/36179943@N00/" style="color: #0063dc; text-decoration: none;">Esteban Cavrico</a></span></td></tr></tbody></table><br /><br /><div dir="ltr" style="text-align: left;" trbidi="on">I was working on a web project that lets you delete some records using Ajax. The following is just an example, but you might be familiar with a similar code already:<br /><br /><script src="https://gist.github.com/1237981.js">  </script><br />This code used to work when the DELETE endpoint was indeed under &#8216;/blog/posts&#8217;. However, at some point a developer wants to remove the &#8216;/blog&#8217; from all the endpoints to put them directly under &#8216;/posts&#8217;! You can see, in such cases it is very hard to catch the bug that would be caused by the faulty JS code.<br /><br />Here&#8217;s a quick recommendation:<br /><blockquote>Don&#8217;t hardcode the URLs (or anything that is actually a server configuration) inside your JS.&nbsp;</blockquote>This is a code smell, as its duplicating code. But its also dangerous, because its hard to catch/fix these defects since they can be buried deep under an untested Javascript file. Instead feed this data from your server side code and you&#8217;ll mitigate risk that way.<br /><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -470,43 +507,6 @@ Sure, the constructors are methods too.. but they should not do anything more ex
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/11/avoid-duplication-in-config-files/">Avoid Duplication in Config Files</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-11T00:00:00-06:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Any kind of configuration file, be it an ugly xml file or a prettier yml or properties file, its been a source of frustration to me. Here&#8217;s a list of few such pain points:<br /><br /><ol><li>There are two config keys that point to the same value. e.g. db_username=master, data_source_user=master</li><li>There are two config keys for urls that point to the same domain, but different paths. e.g. market.com/cameras and market.com/undies</li><li>Config entries with placeholders. e.g. weather_url= weather.com/%s or weather_url= weather.com/%s/hourly</li><li>Config entries with default values that should not default to anything.</li><li>Config entries that are required but don&#8217;t fail the application deployment when not set.</li></ol><br />Are you having to deal with similar pain points? Some more?</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -524,6 +524,10 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -537,10 +541,6 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Code review, as any other review process, can often be an attack on someone&#8217;s ego and incite anger and frustration. Being both on sending and &hellip;">
+  <meta name="description" content="Any kind of configuration file, be it an ugly xml file or a prettier yml or properties file, its been a source of frustration to me. Here&#8217;s a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/11/avoid-duplication-in-config-files/">Avoid Duplication in Config Files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-11T00:00:00-06:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Any kind of configuration file, be it an ugly xml file or a prettier yml or properties file, its been a source of frustration to me. Here&#8217;s a list of few such pain points:<br /><br /><ol><li>There are two config keys that point to the same value. e.g. db_username=master, data_source_user=master</li><li>There are two config keys for urls that point to the same domain, but different paths. e.g. market.com/cameras and market.com/undies</li><li>Config entries with placeholders. e.g. weather_url= weather.com/%s or weather_url= weather.com/%s/hourly</li><li>Config entries with default values that should not default to anything.</li><li>Config entries that are required but don&#8217;t fail the application deployment when not set.</li></ol><br />Are you having to deal with similar pain points? Some more?</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -484,43 +521,6 @@ Hi!<br /><br />Thirst of all, thank you for a brilliant package! It&#39;s simple
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/01/07/c-named-parameters-can-be-very-useful/">C# Named Parameters Can Be Very Useful</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-07T00:00:00-07:00" pubdate data-updated="true">Jan 7<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Think about the following code example:<br /><span class="Apple-style-span" style="color: blue; font-family: 'Courier New', Courier, monospace;">htmlHelper.InputHelper(InputType.CheckBox, name, &#8220;true&#8221;, true /* useViewData */, false /* isChecked */, true /* setId */, false /* isExplicitValue */, htmlAttributes);</span><br />This line is taken from the source code of ASP.NET MVC, or to be more specific its a line from the InputExtension class. I think the intent of the original developer is clear:<br />Add comment next to arguments so that one can easily read the method call without getting lost in a who&#8217;s who since there are quite some arguments to pass.<br />To learn more about named parameters using C#, you can visit <a href="http://weblogs.asp.net/scottgu/archive/2010/04/02/optional-parameters-and-named-arguments-in-c-4-and-a-cool-scenario-w-asp-net-mvc-2.aspx">this post</a> by ScottGu.</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -538,6 +538,10 @@ Think about the following code example:<br /><span class="Apple-style-span" styl
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -551,10 +555,6 @@ Think about the following code example:<br /><span class="Apple-style-span" styl
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

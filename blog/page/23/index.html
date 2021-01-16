@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Recently I was writing unit test for a method of the following signatureinterface ICache{ void Insert(string key, object value, DateTime &hellip;">
+  <meta name="description" content="I was so happy with NMock to see how it can dynamically generate mocks of interfaces and also gives me a fluent interface to write expectations and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/20/solution-to-problem-with-creating-mocks/">A Solution to the Problem With Creating Mocks for Interfaces With Generic Methods With NMock</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-20T00:00:00-06:00" pubdate data-updated="true">Mar 20<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+I was so happy with NMock to see how it can dynamically generate mocks of interfaces and also gives me a fluent interface to write expectations and everything it does to help me in unit testing!<br /><br />However, I could not generate dynamic mocks for interfaces with Generic methods and it kept showing me the &#8216;TypeLoadException&#8217; on and on. My interface looks like the following -<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">interface </span>IObjectFactory</span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    T    GetObject</span><t><span style="font-family:courier new;">(<span style="color: rgb(51, 51, 255);">string </span>id);</span><br /><span style="font-family:courier new;">}</span><br /><br />As I failed to create a mock implementation of this interface using NMock, I just wrote a mock implementation myself, which looks like the following<br /><br /><span style="font-family:courier new;"><span style="color: rgb(51, 51, 255);">class </span><span style="color: rgb(51, 204, 255);">MockObjectFactory</span>: <span style="color: rgb(51, 204, 255);">IObjectFactory</span></span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span><span style="color: rgb(51, 204, 255);">Type </span>RequestedObjectType;</span><br /><span style="font-family:courier new;">    <span style="color: rgb(51, 51, 255);">    public </span>string RequestedObjectId;</span><br /><span style="font-family:courier new;">    public T    GetObject</span><t><span style="font-family:courier new;">(string id)</span><br /><span style="font-family:courier new;">        {</span><br /><span style="font-family:courier new;">                RequestedObjectType = typeof(T);</span><br /><span style="font-family:courier new;">        RequestedObjectId = id;</span><br /><span style="font-family:courier new;">        return new Mockery().NewMock</span><t><span style="font-family:courier new;">();</span><br /><span style="font-family:courier new;">    }</span><br /><span style="font-family:courier new;">}</span><br /><br /><br />And in my test code, just injected the above mock implementation of the IObjectFactory where needed. So, although NMock cannot handle mocking of this type of an interface now, you can actually create a mock implementation and use NMock inside the implementation to help you.</t></t></t></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -467,43 +504,6 @@ I learned that the anonymous types in C# 3.0 has got a good feature that, if you
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2007/12/02/unit-testing-void-methods-part-1/">Unit Testing Void Methods - Part 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2007-12-02T00:00:00-07:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2007</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">             </p> <p class="western" style="margin-bottom: 0.14in;" lang="">Dissection of <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New,monospace;"><span style="color: rgb(0, 0, 255);">void</span> </span></span></span>Methods without parameters<br /><br />Methods with void return types incur complexities in writing unit tests. So, we need to characterize the void methods to make sure we have guards against the odds for testability.<br /><br />A typical void method without any parameter looks like the following<br /><br /></p>   <p class="western" style="margin-bottom: 0in; line-height: 100%;">        <span style="font-family:Courier New,monospace;"><span style="font-size:85%;"><span style="font-family:Courier New,monospace;"><span style="color: rgb(0, 0, 255);">public</span> <span style="color: rgb(0, 0, 255);">void</span> DoSomething()</span><br />{</span></span><br />             <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New,monospace;"><span style="color: rgb(0, 128, 0);">//1.modifies some member variables</span></span></span></span><br />             <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New,monospace;"><span style="color: rgb(0, 0, 255);">this</span>.someMemberVariable = 10;</span></span></span></p>  <p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">                <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New,monospace;"><span style="color: rgb(0, 128, 0);">//2.Calls methods of the same class or other classes</span></span></span></span><br /> <span style="font-family:Courier New,monospace;"><span style="font-size:85%;">someClass.SomeOtherMethod(someArg);</span></span></p> <p class="western" style="margin-bottom: 0.14in;" lang="">               <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New,monospace;"><span style="color: rgb(0, 128, 0);">//3.Sometimes throws exception<br /><span style="color: rgb(0, 0, 0);">}</span></span></span></span></span></p><p class="western" style="margin-bottom: 0.14in;" lang=""><br />So, we need to make sure we can test all the activities performed by such a method. The following are the illustrative examples showing the unit test solutions case by case<br /><br />a. To test a method that modifies a member variable we need to write assertions on the member variables accessors. If this is a private member without a getter method then we will overlook it for the same reason as we discard the testing of private members</p><p class="western" style="margin-bottom: 0.14in;" lang=""><span style="font-style: italic; color: rgb(51, 102, 102);">Note: Examples coming up shortly.</span><br /></p><p class="western" style="margin-bottom: 0.14in;" lang="">b. If this method calls a method from this class, we need to make sure that the called method is tested. If the called method belongs to anther class then, we can use dependency injection to use a mock for this method or make sure this method is testable.<br /></p><p class="western" style="margin-bottom: 0.14in; color: rgb(51, 102, 102); font-style: italic;" lang="">Note: Examples coming up shortly.</p>c. If a method throws exception on some certain conditions, we can test for that exception with the appropriate conditions.<br /><br /><span style="color: rgb(51, 153, 153); font-style: italic;">Note: Examples coming up shortly.</span></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/24/">&larr; Older</a>
@@ -521,6 +521,10 @@ I learned that the anonymous types in C# 3.0 has got a good feature that, if you
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -534,10 +538,6 @@ I learned that the anonymous types in C# 3.0 has got a good feature that, if you
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

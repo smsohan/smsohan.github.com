@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Naming conventions play an important role to the software&#8217;s overall architecture. It is not a rocket science, still, it may lead to unhappy &hellip;">
+  <meta name="description" content="Sighs! Back then, on Friday, May 26, 2006, I was a final year undergrad student at CSE, BUET. I was looking for a part-time software dev job &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/08/08/rambling-stories-from-my-days-code71/">Rambling Stories From My Days @ Code71 : Startup Days</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-08-08T00:00:00-06:00" pubdate data-updated="true">Aug 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Sighs!</p>  <p>Back then, on Friday, May 26, 2006, I was a final year undergrad student at <a href="http://www.buet.ac.bd/cse">CSE, BUET</a>. I was looking for a part-time software dev job opportunity and found a little one page advert for a student job at asha-technologies (lately renamed as <a href="http://code71.com/" target="_blank">Code71</a>). Visited their website and thought it might be worth giving a try!</p>  <p>As usual, I was interviewed over phone and enjoyed a long 2 hour interview on premise. I found it really inspiring and gained more interest towards the job after this session. I started waiting for a response… but was pretty certain about a positive one!</p>  <p>Good things happen in quick successions in our lives. Agree?</p>  <p>I agree. Because I just started a soul-journey with my soul-mate, Shahana, on the March of 2006. Then got the job offer on the 26th of May! Couldn’t be happier. A job for me during that time was just beyond its compensation, it was an inspiration, opportunity to see the real world and being part of something bigger than myself.</p>  <p><img height="214" src="http://photos-g.ak.fbcdn.net/photos-ak-snc1/v3755/201/25/559702037/n559702037_2367230_3471408.jpg" width="222" /></p>  <p><em>Photo taken at Chhera dip (The Torn Island), St. Martins, Bangladesh. The last photograph taken with my first digital camera bought from my first month’s Salary!</em></p>  <p>I started my job on the 1st of June, 2006 at Asha-technologies. Asha-tech was still to find an office and <a href="http://syedraihan.com/" target="_blank">Omar</a> asked to meet him at his home office! That’s how it all started. We met a few times a week at Omar’s home until we moved to our office at the green building of green square at green road, Dhaka on the first of July.</p>  <p>Asha-tech signed up a client before it was even formed! So, once we moved into the office, we were building our first asha-tech product, an online loan financing gateway. We were enthusiastic about agile scrum/xp practices from the first day at office. The result was found in just less than 3 months. We rolled out our first release of the product. It was really a happy start. A fantastic start for a start-up. The client started generating revenue in less than 3 months of project inception!</p>  <p>The office setup was a small but adequate enough for our team. We installed long backup UPS (2 hours * 5 computers), A/C, IPS and dedicated internet connection with Wi-Fi. The work environment was full of fun. We were going for an outing to a team event every month and even more often going to delicious buffet places. We played table football and bowling… every time had a record breaking score and a new winner. We went swimming and believe me, <a href="http://syedraihan.com/" target="_blank">Omar</a> is as good a swimmer as he is a master in software technology. He would go to swimming with a flipper and flip like professional swimmers. He can even swim without using his hands/legs at all, lying side-on and in all such actions… I learned swimming keeping heads down and the easy way of breathing from him! Thanks!</p>  <p>Technologically we were maturing as well. Started using XPlanner for managing our project, attended daily standup meetings and started doing TDD. I won’t claim we got everything right at the first try… but, we were trying consistently, improving bit by bit… to this day.</p>  <p>For the most part, I was enjoying my job and became used to the pressure of a job + undergraduate studies. I said, good things happen in close succession. Another proof here! My first term final result with this job was a 4.0/4.0. I never scored 4.0 in a term before this nor had a 20+ hour/week job alongside my studies. </p>  <p>I strongly believe, my job taught me the attitude towards work, “plan, act and retrospect”. After over three years, I would suggest any new entrant in the software industry to start a career with passion. Its fun with passion. Its a win everyday with passion.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Fuad Omar</div>
+<div class='content'>
+Yes!Lot&#39;s of learning and fun and&#8230; of course, memory! Wish you all the best onward :-)</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -517,71 +562,6 @@ Really useful.<br />And a clean way to reuse query.<br />Thanks for shearing</di
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/04/15/implementing-template-method-in-rails/">Implementing Template Method in Rails Controllers Using Module and Mixin</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-15T00:00:00-06:00" pubdate data-updated="true">Apr 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>All rails controllers are subclasses of the ApplicationController class. A typical controller class declaration will look like the following-</p> <pre class="brush: ruby;">class LoginController &lt; ApplicationController<br />#the actions go here<br />end</pre><p>With this basic information, I would like to state the problem first.</p><br /><strong><span style="color:#008000;">The Problem/Job in Hand</span></strong><br /><p>Add an action switch_project to all the controllers (&gt; 20) of the <a href="http://www.ScrumPad.com/" target="_blank">ScrumPad</a> code base. The implementations of the switch_project method will be same for all the controllers only other than the fact that, the switching destination will be different.</p><br /><strong><span style="color:#008000;">Analysis</span></strong><br /><p>Placing the switch_project action in the ApplicationController would be the best option. But, the methods of application controller are not accessible as actions. So, the following won’t work</p><br /><pre class="brush: rails">class ApplicationController<br /> def switch_project<br />   if(is_valid_switch?)<br />     logger.debug(“A switch is taking place”)<br />     destination = get_destination(new_project_id)<br />     redirect_to destination<br />   end<br /> end<br />end</pre><p>if you hit http://server/login/switch_project you will get a server side error. However, if you instead place the <code>switch_project</code> inside the <code>LoginController</code>, it will work fine. But, of course at a cost. You need to copy/paste this method 20+ times as there are 20+ controllers with the same need! Horrible!</p><br /><p>Again, as I said, the <code>get_destination(new_project_id)</code> is the only part that will be different for each of the controllers. So, we definitely find a template method here.</p><br /><strong><span style="color:#008000;">The Solution</span></strong><br /><p>If you need an introduction about Module and Mixin in Ruby, please read <a href="http://www.rubycentral.com/pickaxe/tut_modules.html" target="_blank">here at ruby-doc</a>. We are going to use Mixin to implement the desired solution, efficiently.<br /><br />So, I put the <code>switch_project</code> method in a module called, <code>ProjectSwitchModule</code> inside a new file at app/controllers/project_switch_module.rb like this-</p><br /><pre class="brush: rails;">module ProjectSwitchModule<br /> def switch_project<br />   if(is_valid_switch?)<br />     logger.debug(“A switch is taking place”)<br />     destination = get_destination(new_project_id)<br />     redirect_to destination<br />   end<br /> end<br /> def is_valid_switch?<br />   #I determine if the switch is valid at this method and return boolean<br /> end<br />end</pre><p>To make it available to all my controllers, I include this module in just in the <code>ApplicationController</code> in the following way-</p><br /><pre class="brush: rails;">require ‘project_switch_module’<br />class ApplicationController<br /> include ProjectSwitchModule<br />end</pre><br /><p>Also, to provide controller specific implementation of the get_destination(project_id) method, I am just writing this method in each of the controllers in the following way-</p><br /><pre class="brush: rails">class LoginController<br /> private<br /> def get_destination(project_id)<br />   #custom destination logic for LoginController<br /> end<br />end<br />class MessageController<br /> private<br /> def get_destination(project_id)<br />   #custom destination logic for MessageController<br /> end<br />end</pre><p>Now, if I invoke <a href="http://server/login/switch_project">http://server/login/switch_project</a> or <a href="http://server/message/switch_project">http://server/message/switch_project</a> I will get the result of the switch_project action. So, this gives us an elegant way to follow design patterns for efficient implementation. It will save a lot of my time in future when I need to change the switch_project method, since I just need to change at a single place instead of 20s.</p><br /><strong><span style="color:#008000;">Afterthoughts</span></strong><br /><p>If, for a controller the switch_project needs to be different from the template at the module, it is achieved simply by overriding the switch_project inside the controller. No worries!</p><br /><p>I will appreciate any feedback on this article.</p></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Yes, in Ruby code block is a good way to implement templates. In most inumerator related templates, the library made extensive use of code blocks.</div>
-</div>
-<div class='comment'>
-<div class='author'>Ashrafuzzaman</div>
-<div class='content'>
-Module and Mixin is an interesting way of implementing template.<br />&#8220;Code Block&#8221; can be one other alternative way.</div>
-</div>
-<div class='comment'>
-<div class='author'>Arif</div>
-<div class='content'>
-Very good example of code reuse and single point of change.Thanks</div>
-</div>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Thanks for your comment!</div>
-</div>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-good post.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -599,6 +579,10 @@ good post.</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -612,10 +596,6 @@ good post.</div>
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-01-04T09:27:18-07:00</updated>
+  <updated>2021-01-16T11:10:02-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[What Drives Me?]]></title>
+    <link href="http://smsohan.com/blog/2021/01/16/what-drives-me/"/>
+    <updated>2021-01-16T11:05:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/01/16/what-drives-me</id>
+    <content type="html"><![CDATA[<p>First, working with good people on a good purpose. Then, moving fast and delivering incrementally. Then, a good business case. And finally, a reasonably modern tech stack.</p>
+
+<p>Other things such as pay, promotion and prestige are important, but it doesn’t drive me like the above.</p>
+
+<p>This content is suitable for Twitter, but putting it here for long term retention. I want to look back after a few years to see how timeless this drivers are for me.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 2: People]]></title>
@@ -592,46 +605,6 @@ Photo credits to <a href="https://flic.kr/p/9yJU3j">Michael Newton</a>
 
 
 <p>There are reusable libraries and services such as <a href="https://launchdarestkly.com">LaunchDarkly</a> that provide rich APIs and user interfaces for feature flags. At this point, even with all the aforementioned concepts, our custom implementation of feature flag is quite straight-forward and easy to evolve. It has been a key ingredient for our frequent iterative deployments with 6 teams working on diverse features in parallel on the same product.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Software Architecture is all about Ugly Boxes and Lines - My Wishlist]]></title>
-    <link href="http://smsohan.com/blog/2019/08/10/software-architecture-is-all-aboout-ugly-boxes-and-lines/"/>
-    <updated>2019-08-10T20:28:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/08/10/software-architecture-is-all-aboout-ugly-boxes-and-lines</id>
-    <content type="html"><![CDATA[<p>In my last post, I claimed <a href="http://smsohan.com/blog/2019/08/02/all-talk-no-show-software-architecture/">software architecture is all talk and no show</a>. When we have a visible one, it&#8217;s a bunch of poorly drawn boxes and lines. I don&#8217;t have a problem with boxes or lines, but I do like beautiful drawings.</p>
-
-<p>Despite many standards, we still mostly use  whiteboard drawing of boxes and lines for sharing software design as we build new systems or introduce new team members. Where it sucks is the lack of evolution and context of the rest of the system that&#8217;s not drawn on the board.</p>
-
-<p>A digital repro of software architecture diagrams often happen in PowerPoint or similar tools that allow us to draw boxes and lines. This process is so rough that people just give up.</p>
-
-<p>At work, I have been using <a href="http://www.websequencediagrams.com">WebSequenceDiagram</a>. While it&#8217;s still not an eye-candy, I like the fact that you can draw a diagram from using plain text. Consider this as an input to create the accompanying diagram:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>title Toilet Flush System
-</span><span class='line'>User -&gt; Flush Lever: Push
-</span><span class='line'>Flush Lever -&gt; Outlet Valve: Open
-</span><span class='line'>Outlet Valve -&gt; Toilet Bowl: Water
-</span><span class='line'>Outlet Valve -&gt; Inlet Valve: Open</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="http://smsohan.com/images/Toilet_Flush_System.png" alt="Sequence Diagram" /></p>
-
-<p>While this text to sequence diagram is a great achievement for a tool, I don&#8217;t see such tools for software architecture diagrams. Here&#8217;s my wishlist of features that I&#8217;d want in a software architecture tool:</p>
-
-<ol>
-<li><strong>Text input</strong>. Allows us to easily create the diagrams and use all the version control features.</li>
-<li><strong>Map like UX</strong>: Allows us to easily transition between higher and lower level components.</li>
-<li><strong>Beautiful</strong>.</li>
-</ol>
-
-
-<p>Do you know any? Do these requirements make sense?</p>
 ]]></content>
   </entry>
   

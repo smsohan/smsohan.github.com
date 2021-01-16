@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="For the last few months, I am on the lookout for a really good syntax highlighter that helps me to post blogs on all the programming languages in a &hellip;">
+  <meta name="description" content="All rails controllers are subclasses of the ApplicationController class. A typical controller class declaration will look like the following- class &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/04/15/implementing-template-method-in-rails/">Implementing Template Method in Rails Controllers Using Module and Mixin</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-15T00:00:00-06:00" pubdate data-updated="true">Apr 15<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>All rails controllers are subclasses of the ApplicationController class. A typical controller class declaration will look like the following-</p> <pre class="brush: ruby;">class LoginController &lt; ApplicationController<br />#the actions go here<br />end</pre><p>With this basic information, I would like to state the problem first.</p><br /><strong><span style="color:#008000;">The Problem/Job in Hand</span></strong><br /><p>Add an action switch_project to all the controllers (&gt; 20) of the <a href="http://www.ScrumPad.com/" target="_blank">ScrumPad</a> code base. The implementations of the switch_project method will be same for all the controllers only other than the fact that, the switching destination will be different.</p><br /><strong><span style="color:#008000;">Analysis</span></strong><br /><p>Placing the switch_project action in the ApplicationController would be the best option. But, the methods of application controller are not accessible as actions. So, the following won’t work</p><br /><pre class="brush: rails">class ApplicationController<br /> def switch_project<br />   if(is_valid_switch?)<br />     logger.debug(“A switch is taking place”)<br />     destination = get_destination(new_project_id)<br />     redirect_to destination<br />   end<br /> end<br />end</pre><p>if you hit http://server/login/switch_project you will get a server side error. However, if you instead place the <code>switch_project</code> inside the <code>LoginController</code>, it will work fine. But, of course at a cost. You need to copy/paste this method 20+ times as there are 20+ controllers with the same need! Horrible!</p><br /><p>Again, as I said, the <code>get_destination(new_project_id)</code> is the only part that will be different for each of the controllers. So, we definitely find a template method here.</p><br /><strong><span style="color:#008000;">The Solution</span></strong><br /><p>If you need an introduction about Module and Mixin in Ruby, please read <a href="http://www.rubycentral.com/pickaxe/tut_modules.html" target="_blank">here at ruby-doc</a>. We are going to use Mixin to implement the desired solution, efficiently.<br /><br />So, I put the <code>switch_project</code> method in a module called, <code>ProjectSwitchModule</code> inside a new file at app/controllers/project_switch_module.rb like this-</p><br /><pre class="brush: rails;">module ProjectSwitchModule<br /> def switch_project<br />   if(is_valid_switch?)<br />     logger.debug(“A switch is taking place”)<br />     destination = get_destination(new_project_id)<br />     redirect_to destination<br />   end<br /> end<br /> def is_valid_switch?<br />   #I determine if the switch is valid at this method and return boolean<br /> end<br />end</pre><p>To make it available to all my controllers, I include this module in just in the <code>ApplicationController</code> in the following way-</p><br /><pre class="brush: rails;">require ‘project_switch_module’<br />class ApplicationController<br /> include ProjectSwitchModule<br />end</pre><br /><p>Also, to provide controller specific implementation of the get_destination(project_id) method, I am just writing this method in each of the controllers in the following way-</p><br /><pre class="brush: rails">class LoginController<br /> private<br /> def get_destination(project_id)<br />   #custom destination logic for LoginController<br /> end<br />end<br />class MessageController<br /> private<br /> def get_destination(project_id)<br />   #custom destination logic for MessageController<br /> end<br />end</pre><p>Now, if I invoke <a href="http://server/login/switch_project">http://server/login/switch_project</a> or <a href="http://server/message/switch_project">http://server/message/switch_project</a> I will get the result of the switch_project action. So, this gives us an elegant way to follow design patterns for efficient implementation. It will save a lot of my time in future when I need to change the switch_project method, since I just need to change at a single place instead of 20s.</p><br /><strong><span style="color:#008000;">Afterthoughts</span></strong><br /><p>If, for a controller the switch_project needs to be different from the template at the module, it is achieved simply by overriding the switch_project inside the controller. No worries!</p><br /><p>I will appreciate any feedback on this article.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Yes, in Ruby code block is a good way to implement templates. In most inumerator related templates, the library made extensive use of code blocks.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+Module and Mixin is an interesting way of implementing template.<br />&#8220;Code Block&#8221; can be one other alternative way.</div>
+</div>
+<div class='comment'>
+<div class='author'>Arif</div>
+<div class='content'>
+Very good example of code reuse and single point of change.Thanks</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+Thanks for your comment!</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+good post.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -498,51 +563,6 @@ I agree.<BR/>Code review should be part of life.<BR/>It increases quality of cod
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/02/22/working-on-data-warehouse-project/">Working on a Data Warehouse Project</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-22T00:00:00-07:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>I have been busy for the last month as we, at <a href="http://code71.com/" target="_blank">Code71</a>, rolled out the first release of the Business Intelligence project for <a href="http://www.vuenu.com/" target="_blank">Vuneu Media</a>. I will give you a brief on my project here so that you can follow my coming posts.</p>  <p>The used vehicle dealers buy their vehicles from different Auctions across the country. When making a buy decision, they try to find answer to these questions-</p>  <ol>   <li>What vehicles are customers buying?</li>    <li>How much it costs to get those from Auctions?</li>    <li>How many of these are receiving cash advances and by which lenders?</li>    <li>What is my potential gross profit if I deal a vehicle?</li>    <li>Where can I find the vehicles in Auctions?</li> </ol>  <p>So, we are getting the information from data vendors. Since, the amount of data is really large (nearly 10 million rows per month in total) for human manipulation, we are adding real value to the business by providing software intelligence. We developed the technology to put the pieces together and make it handy for the dealers.</p>  <p>We are using the following software/technologies:-</p>  <ol>   <li>SQL Server 2008, 64 Bit, Standard Edition.</li>    <li>SQL Server Integration Service.</li>    <li>SQL Server Reporting Service.</li>    <li>ASP.Net, C#, WCF.</li>    <li>SQL Server Analysis Service (is in the pipeline, not used yet!)</li>    <li>Windows Server 2008, 64 Bit.</li> </ol>  <p>I came across a number of innovations as well as issues at each step of the project. The database schema design was itself a challenge since data come from different vendors in various formats and granularities.</p>  <p>Here, I will start with an issue resulting from the <strong>“64 bit”</strong> SQL Server limitations-</p>  <p>SQL Server 64 bit versions include Integration Services, but it lacks support for some components. One such is, Microsoft Jet Driver. We use this driver to load data from Excel files.</p>  <p>To load Excel data using SSIS, you have the following options:-</p>  <p>1. Locate Program Files (x86)\Microsoft SQL Server\90\DTS\Binn\DTExec.exe. Then use this with your options. You can take a look at the command arguments by invoking DTExec –? This way you can run the SSIS packages using command line.</p>  <p>2. Using the SQL Server Agent Job is rather simple. Just Create/edit your job step having the Excel, then select Use 32 Bit in the Options/Execution Options tab. It will automatically use the 32 bit version of DTExec.</p>  <p>3. If you are using the IDE, you can turn of 64 bit by un-checking the Use 64 Bit Runtime at the Project Properties &gt; Debugging.</p>  <p>More information on 64 bit SQL Server related issues are <a href="http://msdn.microsoft.com/en-us/library/ms141766%28SQL.90%29.aspx" target="_blank">here at MSDN.</a></p>  <p>Also, I got help from <a href="http://blog.n-technologies.be/post/2008/08/26/Import-Excel-files-with-SQL-Server-Integration-Services-on-a-64-bit-server.aspx" target="_blank">Blog N-Technologies</a>.</p></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Tanvir Anowar</div>
-<div class='content'>
-good post.keep it up.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -560,6 +580,10 @@ good post.keep it up.</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -573,10 +597,6 @@ good post.keep it up.</div>
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

@@ -9,8 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="&#8230; is as right as &#8220;the weather will be bad today because it wasn&#8217;t any good yesterday&#8221;.
-">
+  <meta name="description" content="Wanted to share my thoughts on ActiveRecord Callbacks. I&#8217;d like to know your thoughts if you disagree. Please use the comments. Only use them &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +79,168 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/07/activerecord-callbacks/">Are ActiveRecord Callbacks Any Good?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-07T09:04:00-07:00" pubdate data-updated="true">Feb 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Wanted to share my thoughts on ActiveRecord Callbacks. I&#8217;d like to know your thoughts if you disagree. Please use the comments.</p>
+
+<ul>
+<li>Only use them when the behavior is <b>must have</b> under all situations, including your tests. For example, we know email addresses are case-insensitive. So no matter what, we may always want to store a lower cased version in the db.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Good</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:downcase_email</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">downcase_email</span>
+</span><span class='line'>    <span class="n">email</span><span class="o">.</span><span class="n">downcase!</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Never use them otherwise. A couple of classic examples that I consider as bad:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>user.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Bad: Sends email, probably not required under all situations such as when creating via migrations, tests etc.</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:welcome</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">welcome</span>
+</span><span class='line'>    <span class="no">WelcomeMailer</span><span class="o">.</span><span class="n">welcome</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span><span class="o">.</span><span class="n">deliver</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#Bad: Interacts with external components</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:setup_orientation</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">setup_orientation</span>
+</span><span class='line'>    <span class="no">OrientationMessageQueue</span><span class="o">.</span><span class="n">enque</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>A common problem with the callbacks is, there are some handy methods that skip the callbacks. For example, consider the following:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span>User.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Careful</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">before_save</span> <span class="ss">:update_coordinates</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">update_coordinates</span>
+</span><span class='line'>    <span class="nb">self</span><span class="o">.</span><span class="n">coordinates</span> <span class="o">=</span> <span class="no">Geo</span><span class="o">.</span><span class="n">find_coordinates</span><span class="p">(</span><span class="n">zip_code</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#works fine</span>
+</span><span class='line'><span class="n">sohan</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s1">&#39;Sohan&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">sohan</span><span class="o">.</span><span class="n">zip_code</span> <span class="o">=</span> <span class="s1">&#39;33333&#39;</span>
+</span><span class='line'><span class="n">sohan</span><span class="o">.</span><span class="n">save!</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#doesn&#39;t fire the callback</span>
+</span><span class='line'><span class="no">User</span><span class="o">.</span><span class="n">update_all</span><span class="p">({</span><span class="n">zip_code</span><span class="p">:</span> <span class="s1">&#39;33333&#39;</span><span class="p">},</span> <span class="p">{</span><span class="n">zip_code</span><span class="p">:</span> <span class="s1">&#39;55555&#39;</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;re using the callbacks, I&#8217;d emphasize again, only use when you are absolutely sure the desired behavior applies under all contexts.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -756,172 +917,6 @@ Instead of this Activ eRecord Query:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/11/23/seed-data-in-a-rails-project/">Seed Data in a Rails Project</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-23T13:18:00-07:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Most applications I&#8217;ve worked on required some kind of seed data. For example, I&#8217;ve used seed data to create a super admin user so the site can actually be used upon a fresh install. Some other common cases include things like, list of credit card types, names of countries/states etc. This post is about some ideas to manage thsese seed data in a Ruby on Rails project.</p>
-
-<h3>Where to put the seed data?</h3>
-
-<p>I think you have 2 choices to pick from.</p>
-
-<ol>
-<li>db/seeds.rb</li>
-<li>db/migrate/2342423424_some_migration.rb</li>
-</ol>
-
-
-<p>I prefer having it in the seeds.rb whenever possible since this is the obvious place for it. But I&#8217;ve often put them in migrations as well. There are trade-offs associated with both.</p>
-
-<p>Migrations only run once. This means, &#8220;double/miltiple seeding&#8221; is not a concern at all. So, you can write a migration with some seeding command as follows:</p>
-
-<figure class='code'><figcaption><span>Migration CreateUsers</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">u</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">name</span>
-</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">email</span>
-</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">encrypted_password</span>
-</span><span class='line'>      <span class="n">u</span><span class="o">.</span><span class="n">password_salt</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">create_super_admin_user</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">create_super_admin_user</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This works great. It creates the super user and by virtue of migrations, it only ever creates one super admin.</p>
-
-<p>The caveat with this approach is, if you change certain things later, then this migration will fail to run. For example, say we added a required field to user as follows:</p>
-
-<figure class='code'><figcaption><span>User</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">class</span> <span class="nc">User</span>
-</span><span class='line'>    <span class="n">validates</span> <span class="ss">:age</span><span class="p">,</span> <span class="n">presence</span><span class="p">:</span> <span class="kp">true</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, if you run the migration on a freshly checked out code, it will fail due to this validation. One workaround is to fix the code in this migration. But for people that already ran the migrations, and likely your production environment already did so, this has no effect. At this point, it starts getting complicated and some band-aid solutions are usually implemented.</p>
-
-<p>On the other hand, if you are using db/seeds.rb for seed data, you&#8217;d have to make sure its idempotent. So, a rerun should not create a 2nd copy of the objects. As a start, your code could be like this:</p>
-
-<figure class='code'><figcaption><span>db/seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">if</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>With this in place, you can easily incorporate the change for the new validation as follows:</p>
-
-<figure class='code'><figcaption><span>db/seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="n">super_user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">super_user</span> <span class="o">&amp;&amp;</span> <span class="n">super_user</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">blank?</span>
-</span><span class='line'>    <span class="n">super_user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">age</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">age</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nb">name</span><span class="p">:</span> <span class="s1">&#39;SuperAdmin&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="s1">&#39;super@mysite.com&#39;</span><span class="p">,</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This would work for people who already had a super user and also for people that just got a fresh copy of the code.</p>
-
-<blockquote><p>So, I prefer putting data in seeds.rb with idempotency.</p></blockquote>
-
-<p>In addition to handling such cases, it also makes it easy for anyone to take glance at the seed data in one place.</p>
-
-<h3>How to handle large amount of seed data?</h3>
-
-<p>When you have more than a handful of data to seed, I&#8217;d recommend tidying up your db/seeds.rb into a more manageable structure. Here&#8217;s how I&#8217;d do it:</p>
-
-<figure class='code'><figcaption><span>File organization</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>  |- app
-</span><span class='line'>  |- db
-</span><span class='line'>    - seeds.rb
-</span><span class='line'>    |- seeds
-</span><span class='line'>      - users.rb
-</span><span class='line'>      - credit_card_types.rb
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>With this structure in place, you can turn you seeds.rb into a simple manifesto file as follows:</p>
-
-<figure class='code'><figcaption><span>seeds.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;seeds/users&#39;</span>
-</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;seeds/credit_card_types&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This will help you keeping things organized and hopefully give you a happier solution to the seed data problem.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -939,6 +934,10 @@ Instead of this Activ eRecord Query:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -952,10 +951,6 @@ Instead of this Activ eRecord Query:
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>

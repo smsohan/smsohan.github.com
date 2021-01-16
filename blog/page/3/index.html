@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="We have a problem with software architecture. Let&#8217;s face it. Find the architecture diagrams of the products you&#8217;re working on and answer &hellip;">
+  <meta name="description" content="In my last post, I claimed software architecture is all talk and no show. When we have a visible one, it&#8217;s a bunch of poorly drawn boxes and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/08/10/software-architecture-is-all-aboout-ugly-boxes-and-lines/">Software Architecture Is All About Ugly Boxes and Lines - My Wishlist</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2019-08-10T20:28:00-06:00" pubdate data-updated="true">Aug 10<span>th</span>, 2019</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In my last post, I claimed <a href="/blog/2019/08/02/all-talk-no-show-software-architecture/">software architecture is all talk and no show</a>. When we have a visible one, it&#8217;s a bunch of poorly drawn boxes and lines. I don&#8217;t have a problem with boxes or lines, but I do like beautiful drawings.</p>
+
+<p>Despite many standards, we still mostly use  whiteboard drawing of boxes and lines for sharing software design as we build new systems or introduce new team members. Where it sucks is the lack of evolution and context of the rest of the system that&#8217;s not drawn on the board.</p>
+
+<p>A digital repro of software architecture diagrams often happen in PowerPoint or similar tools that allow us to draw boxes and lines. This process is so rough that people just give up.</p>
+
+<p>At work, I have been using <a href="http://www.websequencediagrams.com">WebSequenceDiagram</a>. While it&#8217;s still not an eye-candy, I like the fact that you can draw a diagram from using plain text. Consider this as an input to create the accompanying diagram:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>title Toilet Flush System
+</span><span class='line'>User -&gt; Flush Lever: Push
+</span><span class='line'>Flush Lever -&gt; Outlet Valve: Open
+</span><span class='line'>Outlet Valve -&gt; Toilet Bowl: Water
+</span><span class='line'>Outlet Valve -&gt; Inlet Valve: Open</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/Toilet_Flush_System.png" alt="Sequence Diagram" /></p>
+
+<p>While this text to sequence diagram is a great achievement for a tool, I don&#8217;t see such tools for software architecture diagrams. Here&#8217;s my wishlist of features that I&#8217;d want in a software architecture tool:</p>
+
+<ol>
+<li><strong>Text input</strong>. Allows us to easily create the diagrams and use all the version control features.</li>
+<li><strong>Map like UX</strong>: Allows us to easily transition between higher and lower level components.</li>
+<li><strong>Beautiful</strong>.</li>
+</ol>
+
+
+<p>Do you know any? Do these requirements make sense?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -872,96 +939,6 @@ data.</li>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/01/01/lessons-from-grad-school-how-to-solve-problems/">What I Learned From Grad School About Innovation?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2019-01-01T21:41:00-07:00" pubdate data-updated="true">Jan 1<span>st</span>, 2019</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/rainy_window.jpg" alt="Rainy Window" />
-Src: <a href="https://www.flickr.com/photos/135366503@N05/37679462784/in/photolist-ZpB6y5-28NKP8E-21mUGBf-mJ8sJi-dA7xDZ-UdX4Sq-5ehEYh-fNkDrG-brYpmu-9eSLDP-28NeivR-9KdSJj-djvWb-9k7gFt-7bu7NN-96uRTr-ebzYQE-XwTQqZ-8YpBk3-8sh7H7-acFTXV-83835a-Mhinqo-pxFRHu-bX4YHn">Claudia Dea</a></p>
-
-<blockquote><p>Most problems are solved inefficiently. Innovation follows when a problem is researched first.</p></blockquote>
-
-<p>I spent a fair amount of time in grad school. First, sixteen months on my MSc, and then another forty eight months on my PhD program. Also, I worked as a pro software engineer for 20 hours/week during my MSc days and then full-time during the PhD days. It was quite an undertaking, but I survived and now claiming my bragging rights :-)</p>
-
-<p>This post is about a general problem-solving approach that I internalized as the most valuable lesson from my grad school days. I hope you find it useful.
-I&#8217;ll try and explain the concept using a personal story. Here you go.</p>
-
-<p>Recently, I was discussing plans for the near future with my wife, Shahana. She&#8217;s an engineer. In the past, Shahana worked in the telecom industry as a network planner for a few years. Then, she decided to take an extended maternity leave to stay with our two little kids, Shopoth and Shera. Now, honestly, she&#8217;s had enough and seriously contemplating a return to work. Except, she&#8217;s unsure about what career to choose that she&#8217;d really enjoy.</p>
-
-<p>Given this vague problem of finding a new career, she felt lost for a while. As a true supportive husband, I decided to be her man and gave her an earful!</p>
-
-<p>Silly jokes apart, we decided to set the <strong>context</strong> first by asking and answering the following questions:</p>
-
-<ol>
-<li><strong>Why</strong> is she looking for a new career?</li>
-<li><strong>Why not</strong> remain in the old career?</li>
-<li><strong>What</strong> new career options exist?</li>
-<li><strong>Where</strong> are the opportunities?</li>
-<li><strong>Who</strong> knows more about those?</li>
-<li><strong>How</strong> does she get a job in the preferred area?</li>
-</ol>
-
-
-<p>After spending a few days of research, she developed a very clear <strong>understanding of the problem</strong> and the initial vagueness of the situation was mostly wiped clean resulting in a few clear <strong>constraints</strong>. From a job portal, Shahana then <strong>listed available</strong> job requirements from a number of open positions matching her criteria. After consolidation of the requirements, the <strong>gap</strong> was clear. It was obvious that she&#8217;d need to <strong>develop essential new</strong> skills to qualify for the jobs. As she acquires the new skills, she already knows the <strong>evaluation</strong>. If this doesn&#8217;t work, she can <strong>repeat</strong> the same process to either <strong>improve</strong> her chances or choose an <strong>alternate</strong> career path entirely.</p>
-
-<p>This was a direct application of the problem-solving framework that I learned from grad school. Here&#8217;s a nerdy version of the framework:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  Given a problem
-</span><span class='line'>    1. Ask the Wh questions -&gt; list constraints
-</span><span class='line'>    2. Research -&gt; list existing solutions
-</span><span class='line'>    3. Is the problem already solved? -&gt; If yes, stop
-</span><span class='line'>    4. Innovate, fill in the gaps.
-</span><span class='line'>    5. Evaluate</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In real life, most problems are deceptive. We think we already know the best solution based on our past experience and go straight to #4 leaving all other parts out. Even if going straight to #4 is actually a wise move, it only becomes an innovation with a tiny impact, as it doesn&#8217;t become available at step 3 for others to leverage.</p>
-
-<p>A large number of problems can be solved at step 3, by leveraging a solution or a mix of multiple solutions that already exist. Even when problems get past step 3, it&#8217;s highly likely that the gap is smaller than the extent of the whole problem. So, an innovation can focus only on solving the gap, which offers speed and intelligent reuse.</p>
-
-<p>This post is so prosaic already. But if you&#8217;re still with me, I&#8217;ll make it even more textbook like by giving you a couple of practice problems. Go ahead and apply my 5-step problem solving approach:</p>
-
-<ol>
-<li>Jane is a musician, a prodigy so to speak. She&#8217;s been invited to talk about music as a therapy. She&#8217;s not good at speaking, but this is a big opportunity. What does she do?</li>
-<li>Mike is a young startup CEO. He&#8217;s very good at business and technology. He needs a lawyer to take care of the legal matters. How does he hire the best lawyer possible?</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -979,6 +956,10 @@ I&#8217;ll try and explain the concept using a personal story. Here you go.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
@@ -992,10 +973,6 @@ I&#8217;ll try and explain the concept using a personal story. Here you go.</p>
     
       <li class="post">
         <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a>
       </li>
     
   </ul>
