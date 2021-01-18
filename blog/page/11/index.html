@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Photo credits to&nbsp;Esteban CavricoI was working on a web project that lets you delete some records using Ajax. The following is just an example, &hellip;">
+  <meta name="description" content="Often times, applications cannot get rid of the database records for business rules. For example, if you are a cable TV provider, you might have a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/28/perils-of-soft-delete/">The Perils of Soft Delete</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-28T00:00:00-06:00" pubdate data-updated="true">Sep 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Often times, applications cannot get rid of the database records for business rules. For example, if you are a cable TV provider, you might have a customer calling you to stop the National Geographic Channel subscription from next month.&nbsp;Ideally you would like to delete this record, but you can&#8217;t do it until the effective date:( If you delete it, the next invoice will not be able to charge for this channel, although it&#8217;s still being used.<br /><br />In such scenarios, its common to fall back to a soft delete model. As an example, here&#8217;s a little code:<br /><br /><script src="https://gist.github.com/1249283.js">  </script><br />This code looks simple and harmless at a first sight. But, as you develop your app, you&#8217;ll run into a lot of issues from this. Here&#8217;s a short list:<br /><ol style="text-align: left;"><li>You need to take care of cascading soft delete, for example, cancelling a customer&#8217;s subscription needs to cascade down to all channels and other objects under it.</li><li>Whenever, you are listing the current subscriptions of a customer, you need to filter out the ended ones.</li><li>You need to figure out a strategy to periodically clean the ended subscriptions so that your database is not filled with outdated data.</li><li>If you have a business key used as a primary key as well, you will be in trouble if an ended subscription is restarted.</li><li>Your code will eventually have a lot of if-else blocks to apply changes to only on active objects.</li></ol>So, what is the solution? Its best to avoid them as much as possible. Richard Dingwall has <a href="http://richarddingwall.name/2009/11/20/the-trouble-with-soft-delete/">a detailed blog post</a> on some alternative techniques to avoid soft-delete. But if you have to have soft delete, as shown in the example, its worth remembering the aforementioned points.<br /><div><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -470,43 +507,6 @@ Sure, the constructors are methods too.. but they should not do anything more ex
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/22/how-to-annoy-your-customer-learn-from/">How to Annoy Your Customers? Learn From GoDaddy Account Status Email</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-22T00:00:00-06:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody><tr><td style="text-align: center;"><a href="http://3.bp.blogspot.com/-0DN9O0Y4w3I/TinJW3lhP5I/AAAAAAAAAVw/Xn2pmjJjXbE/s1600/Screenshot-1.png" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="560" src="http://3.bp.blogspot.com/-0DN9O0Y4w3I/TinJW3lhP5I/AAAAAAAAAVw/Xn2pmjJjXbE/s640/Screenshot-1.png" width="640" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Just looking at this screenshot alone, what do you think it is?</td></tr></tbody></table>I have a few domains registered with GoDaddy. I went with them, because at that time, I didn&#8217;t know of another renowned provider. But they have always been the best of producing the most confusing ever user interface. The account status email is one step ahead in that same direction.<br /><br />This is how it starts:<br /><br />At the top right corner, it says July 2011, in grayed out font! A deliberate attempt to de-emphasize the statement period!<br /><br />Just below the date, there is a fake input box and a button labeled Go. This is an image and if you click it, it will actually open a new page instead of asking for user input right inside the search box. This is just following the theory of most surprise (as opposed to <a href="http://en.wikipedia.org/wiki/Principle_of_least_astonishment">principle of least surprise</a>)!<br /><br />Next, in red background, they welcome me by saying, Welcome, S. M. Sohan! Customer Number: ### wtf? Customer Number? Do I give a shit what my customer number is? Why is the welcome grouped together with search and contact? How are these related?<br /><br />Then it says, Log in to your account on <b>our secure website</b> to view <b>your most recent account</b> statement. What does this mean? Does it mean, this statement is not recent? Is this not secure?<br /><br />Then it says, Summary of your account as of 7/21/2011<b>**</b>. That f&#8217;ing footnote will tell you that, the information may not reflect recent changes! What? Is this good enough till 7/21? If not, why do you even send this bullshit to me?<br /><br />Then it has 4 boxes side by side. The first one, <b>Messages</b> has Alerts: No, Notification(s): Yes. <b>View now</b> is a button to their site. How stupid is this? Why bother saying alerts &#8220;No&#8221;? If you know I have notifications, why not put it right here? Why are you confused about notification&#8221;(s)&#8221; - you should know if its just one (notification) or more (notifications). How lazy is that?<br /><br />Items Expiring is the other funny one. It says, Domain names: No. Then it says renew now. What? You&#8217;re saying nothing is expiring. Why on earth I would renew something?<br /><br />Then it takes almost 50% of the screen for asking me to contact with them through a number of channels including Facebook. Really? Facebook fan of GoDaddy? Crazy people!<br /><br />In the end, they don&#8217;t care putting a note of thanks, let alone personalize it with the name of an actual person. Isn&#8217;t it rude to end an email this way?<br /><br />Now, with all these hammerings - as if it fell short of creating enough fun, it says, More for You: followed by tens of fine print links to things that don&#8217;t matter at all to me. Oh boy! you are awesome!<br /><br />I am not a designer by any means. However, I think, even I can design a better version than this crap. Here&#8217;s my version in a screen mockup.<br /><br /><div class="separator" style="clear: both; text-align: center;"></div><div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-T-ySiJT4c-s/TinOUi2YfRI/AAAAAAAAAV0/zXKeZxR2wIM/s1600/Screenshot-2.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="330" src="http://2.bp.blogspot.com/-T-ySiJT4c-s/TinOUi2YfRI/AAAAAAAAAV0/zXKeZxR2wIM/s400/Screenshot-2.png" width="400" /></a></div><br /><br /><br /><br /><br /></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -524,6 +524,10 @@ Sure, the constructors are methods too.. but they should not do anything more ex
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
       </li>
     
@@ -537,10 +541,6 @@ Sure, the constructors are methods too.. but they should not do anything more ex
     
       <li class="post">
         <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
       </li>
     
   </ul>

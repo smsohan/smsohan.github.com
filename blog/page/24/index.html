@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Dissection of void Methods without parametersMethods with void return types incur complexities in writing unit tests. So, we need to characterize &hellip;">
+  <meta name="description" content="Dissection of void Methods with parametersMethods with void return types incur complexities in writing unit tests. So, we need to characterize the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2007/12/02/unit-testing-void-methods-part-2/">Unit Testing Void Methods - Part 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2007-12-02T00:00:00-07:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2007</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">             </p> <p class="western" style="margin-bottom: 0.14in;" lang="">        Dissection of <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#0000ff;">void</span></span></span></span> Methods with parameters<br /><br />Methods with void return types incur complexities in writing unit tests. So, we need to characterize the void methods to make sure we have guards against the odds for testability.<br />For example, the following is a void method with parameters<br /></p><p class="western" style="margin-bottom: 0in; line-height: 100%;">        <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> DoSomething(SomeType obj, SomeOtherType objOther)</span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">         <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">{</span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //1.modifies some member variables</span></span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#0000ff;">    this</span>.someMemberVariable = 10;</span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //2.Calls methods of the same class or other classes</span></span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">             <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">    someOtherClass.SomeOtherMethod(someArg);</span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //3.Sometimes throws exception</span></span></span></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;" lang="">             <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">   <br /></span></span></p>  <p class="western" style="margin-bottom: 0in; line-height: 100%;">            <span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">    //4.Modifies call by reference type argument objects</span></span></span></span></p> <p class="western" style="margin-bottom: 0in; line-height: 100%;">       <span style="font-family:Courier New, monospace;"><span style="font-size:85%;">obj.SomeProperty = objOther.GetResultOfSomeAction();</span></span></p><p class="western" style="margin-bottom: 0in; line-height: 100%;"><span style="font-family:Courier New, monospace;"><span style="font-size:85%;">    objOther.DeleteSomething();</span></span><br /></p><p class="western" style="margin-bottom: 0.14in;" lang=""><span lang=""><span style="font-size:85%;"><span style="font-family:Courier New, monospace;"><span style="color:#008000;">}</span></span></span></span></p><br /><p class="western" style="margin-bottom: 0.14in;" lang="">Unit test examples for all the scenarios other than 4 are discussed in Part -1 of this article.<br /></p>d. In such cases, the unit test assertions are made to test against the expected value of the supplied argument objects after the method is invoked.<br /><p class="western" style="margin-bottom: 0.14in;" lang=""><br /></p><p class="western" style="margin-bottom: 0.14in;" lang=""><br /></p><p class="western" style="margin-bottom: 0.14in;" lang=""><br /></p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -293,6 +330,10 @@ Up to now, I have figured out that teams trying to behave agile sometimes fall i
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
       </li>
     
@@ -306,10 +347,6 @@ Up to now, I have figured out that teams trying to behave agile sometimes fall i
     
       <li class="post">
         <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-01-16T11:14:10-07:00</updated>
+  <updated>2021-01-18T10:00:32-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -14,15 +14,40 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 3: Writing]]></title>
+    <link href="http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing/"/>
+    <updated>2021-01-17T17:36:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing</id>
+    <content type="html"><![CDATA[<p>An architect first needs to write for herself, and then for her team. Let me explain a bit.</p>
+
+<p>An architect takes the trio of requirements, people, and environment, and does her research to design the most delightful system. In her research process, she uses her past experience as well as the experience of others. Even a moderately complex system design involves a lot of trade-offs without clear winners. For example, given that there are tens of different databases one can choose, how can she recommend a specific one? Only a clear mind can produce a logically sound write-up. So, in the process of writing and rewriting her design rationale, an architect can strengthen the soundness of her own logic behind the choices made. This is also known as covering one&#8217;s ass.</p>
+
+<p>Secondly, an architect is a busy person and can&#8217;t scale her time if she has to personally explain her design rationale to everyone. In fact, as she&#8217;s designing the system and making certain assumptions, she must seek feedback from the team to help her find alternatives or blind-spots. Writing scales infinitely (e.g. J.K. Rowling), and after all, an architect must use a scalable system for herself, right?</p>
+
+<iframe type="text/html" widdatth="336" height="550" frameborder="0" allowfullscreen style="max-width:100%" src="https://read.amazon.ca/kp/card?asin=B07NPN5HTP&preview=inline&linkCode=kpe&ref_=cm_sw_r_kb_dp_TRBbGbF1JZ1FB" ></iframe>
+
+
+
+
+<iframe type="text/html" width="336" height="550" frameborder="0" allowfullscreen style="max-width:100%" src="https://read.amazon.ca/kp/card?asin=B0090RVGW0&preview=inline&linkCode=kpe&ref_=cm_sw_r_kb_dp_cGBbGb41JPT2Z" ></iframe>
+
+
+<p>In this episode, I have two all time great books to recommend, <a href="https://www.amazon.com/Elements-Style-William-Strunk-Jr/dp/194564401X">The Elements of Style</a> and <a href="https://www.amazon.com/Writing-Well-Classic-Guide-Nonfiction/dp/0060891548/ref=sr_1_1?crid=2CX22WLYQMRQ4&amp;dchild=1&amp;keywords=on+writing+well&amp;qid=1610987519&amp;s=books&amp;sprefix=on+writing+%2Cstripbooks-intl-ship%2C194&amp;sr=1-1">On Writing Well</a>. If you want learn to write with a fascinating biographic story, I loved <a href="https://www.amazon.com/Writing-Memoir-Craft-Stephen-King/dp/1982159375/ref=pd_sbs_4?pd_rd_w=c3cVk&amp;pf_rd_p=3ec6a47e-bf65-49f8-80f7-0d7c7c7ce2ca&amp;pf_rd_r=4C1CJMPXT72EZ2Z0ZXAB&amp;pd_rd_r=8c477446-3402-4789-8332-0b508abb7812&amp;pd_rd_wg=TmVYV&amp;pd_rd_i=1982159375&amp;psc=1">On Writing (A Memoir of the Craft)</a> by Stephen King. Do yourself a favor and get these books. Even if you are a native English speaker, I recommend you reading these books to make your writing interesting. As you can imagine, these books on writing are fun read, it&#8217;d be quite an irony otherwise.</p>
+
+<p>As promised before, this is my last soft-skill related post in the software architecture series. Only a few senior engineers will break the glass ceiling and become an architect. Fewer will become a great architect. All the great ones I&#8217;ve met had exemplary soft-skills.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[What Drives Me?]]></title>
     <link href="http://smsohan.com/blog/2021/01/16/what-drives-me/"/>
     <updated>2021-01-16T11:05:00-07:00</updated>
     <id>http://smsohan.com/blog/2021/01/16/what-drives-me</id>
-    <content type="html"><![CDATA[<p>First, working with good people on a good purpose. Then, moving fast and delivering incrementally. Then, a good business case. And finally, a reasonably modern tech stack.</p>
+    <content type="html"><![CDATA[<p>First, working with good people for a good purpose. Then, moving fast and delivering incrementally. Then, a good business case. And finally, a reasonably modern tech-stack.</p>
 
 <p>Other things, such as pay, promotion and prestige are important, but it doesn’t drive me like the above.</p>
 
-<p>This content is suitable for Twitter post, but putting it here for long term retention. I want to look back after a few years to see how timeless this drivers are for me.</p>
+<p>This content is suitable for a Twitter post, but putting it here for long term retention. I want to look back after a few years to see how timeless this drivers are for me.</p>
 ]]></content>
   </entry>
   
@@ -568,43 +593,6 @@ Source: <a href="https://flic.kr/p/pUW8f9">Audrey on Flickr</a>
 <p>One thing to note is, even for talks that could be more engaging, I still learned quite a few new things.</p>
 
 <p>Beyond the talks, I like going to conferences as it opens the opportunity to meet new people and some known faces. In hindsight, had I known about this event before the talks were finalized, we&#8217;d have submitted a few proposals from Cisco. Looking forward to the next round for an opportunity to share some innovative work we&#8217;re doing at Cisco.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[What We Learned About Feature Flags in Five Years]]></title>
-    <link href="http://smsohan.com/blog/2019/08/13/what-we-learned-about-feature-flag-in-five-years/"/>
-    <updated>2019-08-13T21:56:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/08/13/what-we-learned-about-feature-flag-in-five-years</id>
-    <content type="html"><![CDATA[<p>Looking at our git logs from <a href="https://www.cisco.com/c/en/us/products/security/amp-for-endpoints/index.html">Cisco AMP for Endpoints</a> Console, I see that we introduced feature flags back in January, 2014. The reason I got interested in it is because even after all these years of use, today I had to build a new concept on our feature flag code. If you&#8217;re already using feature flags or thinking about adding feature flags to your project, this experience report may be helpful.</p>
-
-<p><img src="http://smsohan.com/images/switchboard.jpg" alt="switchboard" /></p>
-
-<p><small>
-Photo credits to <a href="https://flic.kr/p/9yJU3j">Michael Newton</a>
-</small></p>
-
-<p>Back in 2014, we were growing as a team, but wanted to keep working on a single shared code. We perceived  that the productivity gain of multiple teams working on a shared code would outweigh cross-team dependency issues. As we started working on multiple features in parallel, mostly independent with different release dates, we saw unfinished work on one feature was blocking the release of a completed one. After some research, we decided to introduce feature flags in our code.</p>
-
-<p>First, we read <a href="https://martinfowler.com/bliki/FeatureToggle.html">Martin Fowler&#8217;s</a> article on this topic as a guideline. Today, <strong>we have 195 feature flags in production</strong>. Over time, we have extended the use of feature flags with new concepts and I wanted to document it here for everyone. Fowler&#8217;s blog also published a more <a href="https://martinfowler.com/articles/feature-toggles.html">detailed and updated post</a> later. The taxomony used here is different from Fowler&#8217;s because I find the following to be more relevant for our product.</p>
-
-<ol>
-<li><strong>Database stored</strong>: We store the feature flags in the main database so that the features can be toggled without needing a code deployment.</li>
-<li><strong>Cached</strong>: Feature flag lookups are cached for performance.</li>
-<li><strong>Temporary vs. permanent</strong>: We mark some feature flags as temporary when the primary goal is to incrementally release code to production. Temporary feature flags are regularly cleaned once the feature is complete. 13/195 currently used feature flags are marked temporary.</li>
-<li><strong>Self-serve</strong>: We tag some feature flags as self-serve where users need to opt-in to use the feature.</li>
-<li><strong>Limited availability</strong>: For self-serve feature flags, we tag some features as limited availability. It allows us to release self-serve features to selected customers.</li>
-<li><strong>Globally enabled</strong>: We have a mechanism to globally enable or disable a feature flag. 131/195 feature flags are currently marked globally enabled. This number varies by deployed environments.</li>
-<li><strong>Enabled for all, but</strong>: We have a mechanism for enabling a feature flag for all but some specific targets.</li>
-<li><strong>Multi-target</strong>: Sometimes we attach a single feature flag to multiple domain objects such as tenant, user, subscription tier, etc.</li>
-<li><strong>Hierarchical</strong>: We use a fallback mechanism for feature check. For example, the check if a user have file upload permission, we check it for the specific user, then fall back to the tenant it belongs to, and finally fall back to the feature itself being globally enabled.</li>
-<li><strong>Code generator</strong>: We use a single-command code generator to introduce a new feature flag to our code. It takes care of the database migration, seed entry, and code references.</li>
-<li><strong>Circuit-breaker</strong>: For integration with external services, we&#8217;ve used feature flags as a circuit-breaker to gracefully handle third-party downtime.</li>
-<li><strong>Environment-flags</strong>. We deploy the product to multiple geographic environments, including a private cloud model. Certain features behave differently based on the deployment. Using feature flags make it easy to develop and test such differences before deploying to each target environment.</li>
-</ol>
-
-
-<p>There are reusable libraries and services such as <a href="https://launchdarestkly.com">LaunchDarkly</a> that provide rich APIs and user interfaces for feature flags. At this point, even with all the aforementioned concepts, our custom implementation of feature flag is quite straight-forward and easy to evolve. It has been a key ingredient for our frequent iterative deployments with 6 teams working on diverse features in parallel on the same product.</p>
 ]]></content>
   </entry>
   

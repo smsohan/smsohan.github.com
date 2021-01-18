@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-01-16T11:14:10-07:00</updated>
+  <updated>2021-01-18T10:00:32-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 3: Writing]]></title>
+    <link href="http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing/"/>
+    <updated>2021-01-17T17:36:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing</id>
+    <content type="html"><![CDATA[<p>An architect first needs to write for herself, and then for her team. Let me explain a bit.</p>
+
+<p>An architect takes the trio of requirements, people, and environment, and does her research to design the most delightful system. In her research process, she uses her past experience as well as the experience of others. Even a moderately complex system design involves a lot of trade-offs without clear winners. For example, given that there are tens of different databases one can choose, how can she recommend a specific one? Only a clear mind can produce a logically sound write-up. So, in the process of writing and rewriting her design rationale, an architect can strengthen the soundness of her own logic behind the choices made. This is also known as covering one's ass.</p>
+
+<p>Secondly, an architect is a busy person and can't scale her time if she has to personally explain her design rationale to everyone. In fact, as she's designing the system and making certain assumptions, she must seek feedback from the team to help her find alternatives or blind-spots. Writing scales infinitely (e.g. J.K. Rowling), and after all, an architect must use a scalable system for herself, right?</p>
+
+<iframe type="text/html" widdatth="336" height="550" frameborder="0" allowfullscreen style="max-width:100%" src="https://read.amazon.ca/kp/card?asin=B07NPN5HTP&preview=inline&linkCode=kpe&ref_=cm_sw_r_kb_dp_TRBbGbF1JZ1FB" ></iframe>
+
+
+
+
+<iframe type="text/html" width="336" height="550" frameborder="0" allowfullscreen style="max-width:100%" src="https://read.amazon.ca/kp/card?asin=B0090RVGW0&preview=inline&linkCode=kpe&ref_=cm_sw_r_kb_dp_cGBbGb41JPT2Z" ></iframe>
+
+
+<p>In this episode, I have two all time great books to recommend, <a href="https://www.amazon.com/Elements-Style-William-Strunk-Jr/dp/194564401X">The Elements of Style</a> and <a href="https://www.amazon.com/Writing-Well-Classic-Guide-Nonfiction/dp/0060891548/ref=sr_1_1?crid=2CX22WLYQMRQ4&amp;dchild=1&amp;keywords=on+writing+well&amp;qid=1610987519&amp;s=books&amp;sprefix=on+writing+%2Cstripbooks-intl-ship%2C194&amp;sr=1-1">On Writing Well</a>. If you want learn to write with a fascinating biographic story, I loved <a href="https://www.amazon.com/Writing-Memoir-Craft-Stephen-King/dp/1982159375/ref=pd_sbs_4?pd_rd_w=c3cVk&amp;pf_rd_p=3ec6a47e-bf65-49f8-80f7-0d7c7c7ce2ca&amp;pf_rd_r=4C1CJMPXT72EZ2Z0ZXAB&amp;pd_rd_r=8c477446-3402-4789-8332-0b508abb7812&amp;pd_rd_wg=TmVYV&amp;pd_rd_i=1982159375&amp;psc=1">On Writing (A Memoir of the Craft)</a> by Stephen King. Do yourself a favor and get these books. Even if you are a native English speaker, I recommend you reading these books to make your writing interesting. As you can imagine, these books on writing are fun read, it'd be quite an irony otherwise.</p>
+
+<p>As promised before, this is my last soft-skill related post in the software architecture series. Only a few senior engineers will break the glass ceiling and become an architect. Fewer will become a great architect. All the great ones I've met had exemplary soft-skills.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 2: People]]></title>
@@ -134,42 +159,6 @@ Source: <a href="https://flic.kr/p/pUW8f9">Audrey on Flickr</a>
 <p>Headless micro-services are easy to build, but in many ways are similar to integration over database. It helps scaling teams, but even if you have many teams, I'd say extract service where it makes sense instead of adopting that model as the default choice.</p>
 
 <p>I suggest being careful about following conference talks and blogs on how cool micro-services are. It may work for big and gig tech. They don't always turn a profit! Your small teams are more likely to drown in worthless complexity from a micro-service architecture.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Software Architecture is all about Ugly Boxes and Lines - My Wishlist]]></title>
-    <link href="http://smsohan.com/blog/2019/08/10/software-architecture-is-all-aboout-ugly-boxes-and-lines/"/>
-    <updated>2019-08-10T20:28:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/08/10/software-architecture-is-all-aboout-ugly-boxes-and-lines</id>
-    <content type="html"><![CDATA[<p>In my last post, I claimed <a href="/blog/2019/08/02/all-talk-no-show-software-architecture/">software architecture is all talk and no show</a>. When we have a visible one, it's a bunch of poorly drawn boxes and lines. I don't have a problem with boxes or lines, but I do like beautiful drawings.</p>
-
-<p>Despite many standards, we still mostly use  whiteboard drawing of boxes and lines for sharing software design as we build new systems or introduce new team members. Where it sucks is the lack of evolution and context of the rest of the system that's not drawn on the board.</p>
-
-<p>A digital repro of software architecture diagrams often happen in PowerPoint or similar tools that allow us to draw boxes and lines. This process is so rough that people just give up.</p>
-
-<p>At work, I have been using <a href="http://www.websequencediagrams.com">WebSequenceDiagram</a>. While it's still not an eye-candy, I like the fact that you can draw a diagram from using plain text. Consider this as an input to create the accompanying diagram:</p>
-
-<p><code>
-title Toilet Flush System
-User -&gt; Flush Lever: Push
-Flush Lever -&gt; Outlet Valve: Open
-Outlet Valve -&gt; Toilet Bowl: Water
-Outlet Valve -&gt; Inlet Valve: Open
-</code></p>
-
-<p><img src="/images/Toilet_Flush_System.png" alt="Sequence Diagram" /></p>
-
-<p>While this text to sequence diagram is a great achievement for a tool, I don't see such tools for software architecture diagrams. Here's my wishlist of features that I'd want in a software architecture tool:</p>
-
-<ol>
-<li><strong>Text input</strong>. Allows us to easily create the diagrams and use all the version control features.</li>
-<li><strong>Map like UX</strong>: Allows us to easily transition between higher and lower level components.</li>
-<li><strong>Beautiful</strong>.</li>
-</ol>
-
-
-<p>Do you know any? Do these requirements make sense?</p>
 ]]></content>
   </entry>
   
