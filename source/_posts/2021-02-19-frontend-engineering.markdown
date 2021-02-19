@@ -24,7 +24,7 @@ However, I think it's a short-sighted view. Let me make my point here.
 use Google Maps on your browser or natively on the phone. You can embed
 Google Maps within your own app on these platforms as well. You can ask
 Google Maps to give you navigation direction for walking, biking,
-driving, or ask it show realtime transit and traffic infomation. If you
+driving, or ask it to show realtime transit and traffic infomation. If you
 take a detour, it'll show you new directions on the fly. You can see the
 map view, or the 3D view, or a camera view of a location. At night, you
 can see the dark-mode. It'll show you how many lanes you have on a road,
