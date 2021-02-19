@@ -45,8 +45,15 @@ products and obsessing about delighting millions or billions of users,
 you can have a very rewarding and fast-paced career in frontend
 engineering.
 
-Modern frontend engineering is complex, but it's powered by sleek
+Most of your engineering knowledge is transferrable, irrespective of
+what part of the stack you work on. After all, you'll learn to work with
+people, delight customers, build systems that are robust, scalable,
+secure, compliant, testable... So, you can move into a different part of
+the stack at will as long as your foundation is strong.
+
+Modern frontend engineering is complex, but it's powered by innovative
 tools. Most of the tooling is open-source and the community is
 vibrant with lots of conferences and meetups around the world. As a
-highly impactful frontend engineer, you can truly
-differentiate yourself from the masses.
+frontend engineer, you can create an outsized impact and differentiate 
+yourself from the masses.
+
