@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-02-19T09:42:23-07:00</updated>
+  <updated>2021-02-19T09:46:29-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -36,7 +36,7 @@ engineering, yada yada&#8230;</p>
 use Google Maps on your browser or natively on the phone. You can embed
 Google Maps within your own app on these platforms as well. You can ask
 Google Maps to give you navigation direction for walking, biking,
-driving, or ask it show realtime transit and traffic infomation. If you
+driving, or ask it to show realtime transit and traffic infomation. If you
 take a detour, it&#8217;ll show you new directions on the fly. You can see the
 map view, or the 3D view, or a camera view of a location. At night, you
 can see the dark-mode. It&#8217;ll show you how many lanes you have on a road,
