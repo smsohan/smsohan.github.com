@@ -27,7 +27,7 @@ Google Maps to give you navigation direction for walking, biking,
 driving, or ask it show realtime transit and traffic infomation. If you
 take a detour, it'll show you new directions on the fly. You can see the
 map view, or the 3D view, or a camera view of a location. At night, you
-can see the night-mode. It'll show you how many lanes you have on a road,
+can see the dark-mode. It'll show you how many lanes you have on a road,
 and how fast you can legally go, in realtime. It'll let you share your location in
 realtime with your buddy. You can search using your voice and it'll also 
 give you turn by turn voice guidance. Let's not mention avoiding
