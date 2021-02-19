@@ -11,8 +11,7 @@ hear this concern from some of my team members. More specifically,
 here's a paraphrased version of what I hear:
 
 > "I talked to my friends in software and they told me it's better to work
-> on the backend or full-stack to have a fast-tracked career in the
-> software industry"
+> on the backend or full-stack to have a fast-tracked career."
 
 First, I do agree that there are generally more full-stack or backend
 engineering jobs than purely frontend jobs. I also agree that there's a
@@ -46,7 +45,7 @@ products and obsessing about delighting millions or billions of users,
 you can have a very rewarding and fast-paced career in frontend
 engineering.
 
-Modern froentend engineering is complex, but it's powered by sleek
+Modern frontend engineering is complex, but it's powered by sleek
 tools. Most of the tooling is open-source and the community is
 vibrant with lots of conferences and meetups around the world. As a
 highly impactful frontend engineer, you can truly
