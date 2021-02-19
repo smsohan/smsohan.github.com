@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Just looking at this screenshot alone, what do you think it is?I have a few domains registered with GoDaddy. I went with them, because at that time &hellip;">
+  <meta name="description" content="Yes, if your constructor does something meaningful. This is just like another method and should be treated equally for unit testsing purpose. Here&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/07/26/should-you-write-unit-tests-for/">Constructors Are Methods, Too!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-26T00:00:00-06:00" pubdate data-updated="true">Jul 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br />Yes, if your constructor does something meaningful. This is just like another method and should be treated equally for unit testsing purpose. Here&#8217;s an example that should need unit test:<br /><script src="https://gist.github.com/1107355.js">  </script><br />It looks simple, so testing it should be simple, too. I would only skip the default constuctors, as long as they don&#8217;t do anything interesting.</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Alexander Beletsky</div>
+<div class='content'>
+Sure, the constructors are methods too.. but they should not do anything more except internal initialization.<br /><br />I had a little habbit to put additional logic inside constructor, to be possible to write something like<br /><br />= new DoSomethingClass(x, y);<br /><br />I&#39;m getting rid of that also because of bad testability. Instead of that I write now:<br /><br />var smth = new DoSomethingClass(x, y);<br />smth.DoIt();</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -426,43 +471,6 @@ I didn&#8217;t even notice this little trick! As long as I didn&#8217;t have to 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/01/14/social-helpers-in-aspnet-mvc3-facebook/">Social Helpers in ASP.Net MVC3 (Facebook, Twitter, Gravatar Etc.)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-14T00:00:00-07:00" pubdate data-updated="true">Jan 14<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-This site shows the examples!<br /><a href="http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site">http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site</a><br /><br />Now, the social links and buttons are no longer from a third-party source, its straight from Microsoft. I don&#8217;t know if this is first-party or second-party :p</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -480,6 +488,10 @@ This site shows the examples!<br /><a href="http://www.asp.net/webmatrix/tutoria
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
@@ -493,10 +505,6 @@ This site shows the examples!<br /><a href="http://www.asp.net/webmatrix/tutoria
     
       <li class="post">
         <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
   </ul>

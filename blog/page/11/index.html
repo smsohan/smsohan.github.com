@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Often times, applications cannot get rid of the database records for business rules. For example, if you are a cable TV provider, you might have a &hellip;">
+  <meta name="description" content="Photo credits:&nbsp;insidethemagicI think, Nightly build is an anti-pattern for Continuous Integration. If you are integrating continuously, then &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/10/04/nightly-build-is-warning-or-horror/">Nightly Build Is a Warning (or Horror)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-04T00:00:00-06:00" pubdate data-updated="true">Oct 4<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><table cellpadding="0" cellspacing="0" class="tr-caption-container" style="float: right; margin-left: 1em; text-align: right;"><tbody><tr><td style="text-align: center;"><a href="http://farm7.static.flickr.com/6167/6175859290_ebca7ae0e3.jpg" imageanchor="1" style="clear: right; margin-bottom: 1em; margin-left: auto; margin-right: auto;"><img border="0" height="225" src="http://farm7.static.flickr.com/6167/6175859290_ebca7ae0e3.jpg" width="400" /></a></td></tr><tr><td class="tr-caption" style="text-align: center;">Photo credits:&nbsp;<span class="Apple-style-span" style="border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 18px;"><a href="http://www.flickr.com/photos/insidethemagic/" style="color: #0063dc; text-decoration: none;">insidethemagic</a></span></td></tr></tbody></table><br />I think, Nightly build is an anti-pattern for Continuous Integration. If you are integrating continuously, then you shouldn&#8217;t need a nightly build, that would be too discrete :(<br /><br />If you already have a per-commit continuous integration setup, you shouldn&#8217;t need the so called nightly build unless there&#8217;s something bad about the code.<br /><br />Often times, builds taking &gt;10 minutes are put in the bucket of nightly builds.<br />Some people put batch processing related tests under such nightly builds. A colleague told me they used nightly build to clean up resources (disk space, recreate the database etc.) on a nightly build - to ensure the apps worked fine on a fresh state.<br /><blockquote>Under most circumstances, a nighly build means something long running. That in itself can be an indication of poor performance.</blockquote>But what I have seen is, when such nightly builds are broken - they are rarely looked after or cared for. Because, first thing in the morning, who the hell wants to look at that broken nightly build? Even if someone takes a look, since its long running, it might well eat up all morning to actually try/fix/commit changes and see it go green again! Since it takes longer to make the build green, people keep delaying it for later&#8230; meaning<br /><blockquote>it becomes generally acceptable to let the nightly build stay in RED.&nbsp;</blockquote>And once people get used the redness of the nightly build, they start ignoring it, inevitably.<br /><br />So, here&#8217;s what I would do:<br /><blockquote>Avoid nightly builds altogether.<br />Avoid nightly builds altogether.<br />Avoid nightly builds altogether.<br />Otherwise, make one person from the team responsible for the build (rotate people).</blockquote><div><br /></div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -462,51 +499,6 @@ Yes, I often halt at whether I am doing it wright anytime I use &#39;unless&#39;
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/26/should-you-write-unit-tests-for/">Constructors Are Methods, Too!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-26T00:00:00-06:00" pubdate data-updated="true">Jul 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><br />Yes, if your constructor does something meaningful. This is just like another method and should be treated equally for unit testsing purpose. Here&#8217;s an example that should need unit test:<br /><script src="https://gist.github.com/1107355.js">  </script><br />It looks simple, so testing it should be simple, too. I would only skip the default constuctors, as long as they don&#8217;t do anything interesting.</div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Alexander Beletsky</div>
-<div class='content'>
-Sure, the constructors are methods too.. but they should not do anything more except internal initialization.<br /><br />I had a little habbit to put additional logic inside constructor, to be possible to write something like<br /><br />= new DoSomethingClass(x, y);<br /><br />I&#39;m getting rid of that also because of bad testability. Instead of that I write now:<br /><br />var smth = new DoSomethingClass(x, y);<br />smth.DoIt();</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -524,6 +516,10 @@ Sure, the constructors are methods too.. but they should not do anything more ex
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
@@ -537,10 +533,6 @@ Sure, the constructors are methods too.. but they should not do anything more ex
     
       <li class="post">
         <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
   </ul>

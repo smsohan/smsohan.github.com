@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Career | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/career/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-01-18T10:05:50-07:00</updated>
+  <updated>2021-02-19T09:37:54-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Can I Have a Career as a Frontend Engineer?]]></title>
+    <link href="http://smsohan.com/blog/2021/02/19/frontend-engineering/"/>
+    <updated>2021-02-19T08:27:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/02/19/frontend-engineering</id>
+    <content type="html"><![CDATA[<p>In my current role at Microsoft, I'm working on a UI SDK product. I
+hear this concern from some of my team members. More specifically,
+here's a paraphrased version of what I hear:</p>
+
+<blockquote><p>"I talked to my friends in software and they told me it's better to work
+on the backend or full-stack to have a fast-tracked career in the
+software industry"</p></blockquote>
+
+<p>First, I do agree that there are generally more full-stack or backend
+engineering jobs than purely frontend jobs. I also agree that there's a
+general perception that frontend is easy / bunch of scripts / not real
+engineering, yada yada...</p>
+
+<p>However, I think it's a short-sighted view. Let me make my point here.</p>
+
+<p><strong>Let's imagine the UI and UX of a familiar product, Google Maps.</strong> You can
+use Google Maps on your browser or natively on the phone. You can embed
+Google Maps within your own app on these platforms as well. You can ask
+Google Maps to give you navigation direction for walking, biking,
+driving, or ask it show realtime transit and traffic infomation. If you
+take a detour, it'll show you new directions on the fly. You can see the
+map view, or the 3D view, or a camera view of a location. At night, you
+can see the night-mode. It'll show you how many lanes you have on a road,
+and how fast you can legally go, in realtime. It'll let you share your location in
+realtime with your buddy. You can search using your voice and it'll also
+give you turn by turn voice guidance. Let's not mention avoiding
+toll-free roads, u-turns, etc.</p>
+
+<p><strong>I hope you see the engineering challenge I see in the above
+paragraph.</strong>
+Very few engineers I know can architect a system such as Google Maps.
+Since a lot of the engineers choose the path of backend engineering,
+it's incredibly hard to find frontend engineers who can pull high impact
+projects. If you consider yourself above
+average, and you probably are if you're reading this blog, you should
+not follow the path of the average. Instead, if you like building visual
+products and obsessing about delighting millions or billions of users,
+you can have a very rewarding and fast-paced career in frontend
+engineering.</p>
+
+<p>Modern froentend engineering is complex, but it's powered by sleek
+tools. Most of the tooling is open-source and the community is
+vibrant with lots of conferences and meetups around the world. As a
+highly impactful frontend engineer, you can truly
+differentiate yourself from the masses.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA["you're unfrogettable"]]></title>
@@ -109,35 +162,6 @@
 <p><strong>Standup comedies, biography, soccer, politics, investment, tech, leadership, Netflix, movies, and similar topics</strong> are cool. Sorry, not much of a Hockey or Basket Ball fan. Mostly a passive music listener and happy to listen whatever is on radio or a YouTube playlist.</p>
 
 <p>If you have a similar list, I'd be happy to read and respect it. Please send along.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Internal Trainings]]></title>
-    <link href="http://smsohan.com/blog/2019/06/27/internal-trainings/"/>
-    <updated>2019-06-27T13:31:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/06/27/internal-trainings</id>
-    <content type="html"><![CDATA[<p><img src="/images/design_thinking.jpg" alt="design_thinking" /></p>
-
-<p><small>
-Design Thinking course, Cisco Calgary Office, AB, 2019
-</small></p>
-
-<p>One benefit of working at Cisco is access to the many learning and development resources. Our learning and development org arranges hundreds of courses throughout the year. Moreover, we have a reimbursement program for external courses, conferences, books, and subscriptions to online learning programs and publications.</p>
-
-<p>In the past 6 years, I have immensely benefitted from these resources. Here's a list of the learning resources I've used.</p>
-
-<ol>
-<li><a href="https://learning.oreilly.com">Safari books online</a>, aka O'Reilly learning: In the past 3 years, have taken 3 online trainings and 7 books on this platform so far.</li>
-<li>Design thinking, 2019: A two-day course taught by consultants about how to apply the principles of design thinking to communicate and derive solutions to complex problems.</li>
-<li>Mindfulness, 2019: A 5-week program taught by consultants, with one hour per week, where I learned about staying mindful and effective at work amid all the chaos that surrounds it.</li>
-<li><a href="http://tufte.com">Tufte one-day course</a>, 2019: Attended a course taught by Edward Tufte on data visualization and learned about the principles that make compelling data visualization.</li>
-<li><a href="https://www.sans.org/course/hacker-techniques-exploits-incident-handling">SANS incident response</a>, 2018: A packed week-long program where I learned to think like a hacker by learning about and then hacking some interesting vulnerabilities in systems.</li>
-<li><a href="https://dcloud-cms.cisco.com/demo_news/cisco-r00tcamp-lab-v1">Cisco R00tcamp</a>, 2017: A packed week-long program where I learned hands-on pen-testing techniques to build more secure software.</li>
-<li><a href="https://www.cisco.com/c/en/us/products/security/threat-hunting-workshop.html">Cisco threat-hunting</a>, 2017: A daylong course to find root case that triggered a security threat using integrated Cisco tools, including the product I build with our team.</li>
-<li><a href="https://www.railsconf.com/2015/">RailsConf</a>, 2015: It was a big opportunity to meet the community and bring some of their practices in-house. For example, we started using <a href="https://www.bugsnag.com">BugSnag</a> after learning about it in the conference.</li>
-</ol>
-
 ]]></content>
   </entry>
   

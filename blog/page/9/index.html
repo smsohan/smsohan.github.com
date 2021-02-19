@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="If your unit test code needs a sleep, its time to refactor it. Ideally, you&#8217;d only need to stub/mock the asynchronous call instead of &hellip;">
+  <meta name="description" content="From my experience with writing/reading unit tests for years, here&#8217;s a little guideline to keep &#8216;em readable: A unit test needs to fit &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/28/readable-unit-tests/">Readable Unit Tests</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-28T10:10:00-07:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From my experience with writing/reading unit tests for years, here&#8217;s a little guideline to keep &#8216;em readable:</p>
+
+<ol>
+<li>A unit test needs to fit entirely (including setups) on a screen without scrolling.</li>
+<li>It is OK to have a little bit of duplication in unit tests for readability.</li>
+<li>Avoid nesting of contexts beyond 2 levels. Instead, use methods to setup and flatten.</li>
+<li>Do not use if/else/loops in a unit test.</li>
+<li>If your test needs too much setup/mocking/stubbing, time to refactor the code.</li>
+</ol>
+
+
+<p>A simple readable unit test is only achievable when the code itself is simple. Adhereing to these guideline will probably make the code simpler as a direct impact!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -753,44 +800,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/07/deploying-a-java-application-using-capistrano/">Deploying a Java Application Using Capistrano</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-07T20:18:00-06:00" pubdate data-updated="true">Aug 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In our current project, we have a little Java Bridge, that reads JMS messages from an enterprise service bus (ESB) and pipes it to an ActiveMQ topic. This had to be written in Java, or some flavor of it like JRuby/Scala, because the ESB only allows their signed client libraries to interact with their API.</p>
-
-<p>Since, we were already using Capistrano to deploy our Rails/Nginx app, we wanted to leverage the same tool for deploying the Java Bridge. This would also make maintenance easier, since the same standards is used for deploy locations/log files/roations etc.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -808,6 +817,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
@@ -821,10 +834,6 @@
     
       <li class="post">
         <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
   </ul>

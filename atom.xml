@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-01-18T10:05:50-07:00</updated>
+  <updated>2021-02-19T09:37:54-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Can I Have a Career as a Frontend Engineer?]]></title>
+    <link href="http://smsohan.com/blog/2021/02/19/frontend-engineering/"/>
+    <updated>2021-02-19T08:27:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/02/19/frontend-engineering</id>
+    <content type="html"><![CDATA[<p>In my current role at Microsoft, I&#8217;m working on a UI SDK product. I
+hear this concern from some of my team members. More specifically,
+here&#8217;s a paraphrased version of what I hear:</p>
+
+<blockquote><p>&#8220;I talked to my friends in software and they told me it&#8217;s better to work
+on the backend or full-stack to have a fast-tracked career in the
+software industry&#8221;</p></blockquote>
+
+<p>First, I do agree that there are generally more full-stack or backend
+engineering jobs than purely frontend jobs. I also agree that there&#8217;s a
+general perception that frontend is easy / bunch of scripts / not real
+engineering, yada yada&#8230;</p>
+
+<p>However, I think it&#8217;s a short-sighted view. Let me make my point here.</p>
+
+<p><strong>Let&#8217;s imagine the UI and UX of a familiar product, Google Maps.</strong> You can
+use Google Maps on your browser or natively on the phone. You can embed
+Google Maps within your own app on these platforms as well. You can ask
+Google Maps to give you navigation direction for walking, biking,
+driving, or ask it show realtime transit and traffic infomation. If you
+take a detour, it&#8217;ll show you new directions on the fly. You can see the
+map view, or the 3D view, or a camera view of a location. At night, you
+can see the night-mode. It&#8217;ll show you how many lanes you have on a road,
+and how fast you can legally go, in realtime. It&#8217;ll let you share your location in
+realtime with your buddy. You can search using your voice and it&#8217;ll also
+give you turn by turn voice guidance. Let&#8217;s not mention avoiding
+toll-free roads, u-turns, etc.</p>
+
+<p><strong>I hope you see the engineering challenge I see in the above
+paragraph.</strong>
+Very few engineers I know can architect a system such as Google Maps.
+Since a lot of the engineers choose the path of backend engineering,
+it&#8217;s incredibly hard to find frontend engineers who can pull high impact
+projects. If you consider yourself above
+average, and you probably are if you&#8217;re reading this blog, you should
+not follow the path of the average. Instead, if you like building visual
+products and obsessing about delighting millions or billions of users,
+you can have a very rewarding and fast-paced career in frontend
+engineering.</p>
+
+<p>Modern froentend engineering is complex, but it&#8217;s powered by sleek
+tools. Most of the tooling is open-source and the community is
+vibrant with lots of conferences and meetups around the world. As a
+highly impactful frontend engineer, you can truly
+differentiate yourself from the masses.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 3: Writing]]></title>
@@ -564,35 +617,6 @@ Source: <a href="https://flic.kr/p/pUW8f9">Audrey on Flickr</a>
 <p>Headless micro-services are easy to build, but in many ways are similar to integration over database. It helps scaling teams, but even if you have many teams, I&#8217;d say extract service where it makes sense instead of adopting that model as the default choice.</p>
 
 <p>I suggest being careful about following conference talks and blogs on how cool micro-services are. It may work for big and gig tech. They don&#8217;t always turn a profit! Your small teams are more likely to drown in worthless complexity from a micro-service architecture.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Notes from The VoxxedDays Banff, 2019]]></title>
-    <link href="http://smsohan.com/blog/2019/09/23/notes-from-the-voxxeddays-banff/"/>
-    <updated>2019-09-23T15:10:00-06:00</updated>
-    <id>http://smsohan.com/blog/2019/09/23/notes-from-the-voxxeddays-banff</id>
-    <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/voxxed_banff.png" alt="VoxxedDaysBanff2019" /></p>
-
-<p>Gone are the days when I used to go to a ton of local developer meetups. After <a href="http://smsohan.com/blog/2019/06/05/polyglot-yyc-2019-my-first-unconference/">Polyglot YYC</a>, this was the second conference I joined this year. This was a 50/50 event for me in terms of like vs. dislike. Here goes my notes:</p>
-
-<p>Ix-Chel Ruiz presented the keynote to start the day. Her storytelling style reminded me of WWII movies, where a lot of cloudy and gloomy scene keep getting darker and darker, ending with a deep sense of sadness. Ix-Chel used quotes from the likes of <a href="https://en.wikipedia.org/wiki/Scott_Galloway_(professor)">Prof. Galloway</a> and Elon Musk to tell a story about how the modern tech is creeping into our private lives. I wish she had prepared for the keynote a little better. She paced it so slowly yet ran out of the material half-way through the slot. In a way I liked the early finish because I just wanted to feel optimistic about the future.</p>
-
-<p>The stunning view of Banff landscape brightened up the mood a bit:</p>
-
-<p><img src="http://smsohan.com/images/banff.jpg" alt="banff" /></p>
-
-<p>There were 4 other talks on the same day and I liked the talk on <a href="https://vuejs.org">Vue.js</a> and <a href="https://vuetifyjs.com/en/">Vuetify</a> by <a href="https://www.davepaquette.com">Dave Paquette</a>. Since, I use VueJS at work, it was easier to relate to. Dave showed us how he&#8217;s using Vue.js to render a real-time collaborative UI for complex seating requirements at <a href="https://www.flyovercanada.com">FlyOver Canada</a>.</p>
-
-<p>Among other talks, there was one on data management for machine learning and another one on Kotlin, I liked these  talks but didn&#8217;t fully relate with the topics.</p>
-
-<p>There was a talk on using Kafka for geo-fencing applications. The presenter could&#8217;ve spent more time on the parts of kafka that makes it a compelling case for using in geo-fencing applications. Instead, he delved into the code, java, and jar files.</p>
-
-<p>There was another talk on using <a href="https://eventstore.org">EventStore</a> for event sourcing. The presenters set the story saying that they had an opportunity to try new technologies while rewriting a &#8220;monolithic&#8221; application and they used EventStore with &#8220;multi-services&#8221; to implement it so it&#8217;s easier to evolve the system. I&#8217;d love to see some evidence of the desired outcome, that&#8217;d be motivating. But in the end it was about the &#8220;how&#8221; instead of the &#8220;why&#8221;.</p>
-
-<p>One thing to note is, even for talks that could be more engaging, I still learned quite a few new things.</p>
-
-<p>Beyond the talks, I like going to conferences as it opens the opportunity to meet new people and some known faces. In hindsight, had I known about this event before the talks were finalized, we&#8217;d have submitted a few proposals from Cisco. Looking forward to the next round for an opportunity to share some innovative work we&#8217;re doing at Cisco.</p>
 ]]></content>
   </entry>
   

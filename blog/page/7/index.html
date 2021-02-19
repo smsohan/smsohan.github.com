@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Most applications I&#8217;ve worked on at some point required that &#8216;Export&#8217; feature so people would be able to play with the data using &hellip;">
+  <meta name="description" content="Following the previous post, I decided to spin off a little ruby gem for you folks. Get streamy_csv, and write only your application code while it&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/10/released-streamy-csv-gem/">Released Streamy_csv Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-10T08:38:00-06:00" pubdate data-updated="true">May 10<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Following the <a href="/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails/">previous post</a>, I decided to spin off a little ruby gem for you folks. Get streamy_csv, and write only your application code while it&#8217;ll do the boilerplate work for you.</p>
+
+<p>In a nutshell, with this gem in your application, all you need to do is this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Class</span> <span class="no">ExportsController</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">stream_csv</span><span class="p">(</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span> <span class="no">MyModel</span><span class="o">.</span><span class="n">header_row</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">rows</span><span class="o">|</span>
+</span><span class='line'>      <span class="no">MyModel</span><span class="o">.</span><span class="n">find_each</span> <span class="k">do</span> <span class="o">|</span><span class="n">my_model</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">rows</span> <span class="o">&lt;&lt;</span> <span class="n">my_model</span><span class="o">.</span><span class="n">to_csv_row</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Find more at <a href="https://github.com/smsohan/streamy_csv">https://github.com/smsohan/streamy_csv</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -856,63 +923,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/02/27/random-data-in-tests/">Random Data in Tests</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-27T15:24:00-07:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&#8230; are evil if you expect the randomizer to give you unique values on each call.</p>
-
-<p>Here&#8217;s an example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
-</span><span class='line'>  <span class="vi">@user_1</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s2">&quot;email-</span><span class="si">#{</span><span class="no">Random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">@example.com&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1"># the following will fail intermittently if you have a unique validation on User#email</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="vi">@user_2</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="s2">&quot;email-</span><span class="si">#{</span><span class="no">Random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="si">}</span><span class="s2">@example.com&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It&#8217;s a timebomb, use it, it will haunt you later. Be sane, stop using random numbers in tests like this.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -930,6 +940,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
@@ -943,10 +957,6 @@
     
       <li class="post">
         <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/24/you-are-unfrogettable/">&#8220;you&#8217;re unfrogettable&#8221;</a>
       </li>
     
   </ul>
