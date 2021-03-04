@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Following the previous post, I decided to spin off a little ruby gem for you folks. Get streamy_csv, and write only your application code while it&# &hellip;">
+  <meta name="description" content="It has a very steep learning curve, but yields a superb productivity boost once you&#8217;ve learned it. Check out my demo of the wizard that we&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,109 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/14/angularjs-is-very-productive-and-cool/">AngularJS Is Very Productive, and Cool Too!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-14T13:10:00-06:00" pubdate data-updated="true">Jun 14<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It has a very steep learning curve, but yields a superb productivity boost once you&#8217;ve learned it. Check out <a href="http://smsohan.com/angular_wizard/">my demo of the wizard</a> that we&#8217;ll discuss next.</p>
+
+<p>AngularJS works by extending HTML to produce declarative UI code and eliminating the need for a lot of boilerplate code. For example, the mental model of a wizard can be expressed using the following HTML:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;wizard title="Flight Search"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;step title="Search"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;/step&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  &lt;step title="Select a flight"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;/step&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  &lt;step title="Select a return flight"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;/step&gt;
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  &lt;step title="Checkout"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;/step&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;step title="Confirm purchase"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;/step&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;step title="Receipt"&gt;
+</span><span class='line'>
+</span><span class='line'>  &lt;/step&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;/wizard&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With AngularJS, one can write exactly this markup with the help of two custom directives, <code>widget</code> and <code>step</code>. This declarative UI code makes it very easy to read. In addition to this, the two way data binding capabilities of AngularJS makes it very productive as we don&#8217;t need to write a bunch of references to the DOM nodes and render the nodes as the data changes. For a working example, check the source code of the demo and if you are like me, you&#8217;ll love to see how simple it is.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -863,66 +966,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/07/solution-architecting/">Solution Architecting Using Queues?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-07T14:44:00-07:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When building a bunch of applications that need to interact with each other, Queues or <a href="http://en.wikipedia.org/wiki/Message-oriented_middleware">Message Oriented Middleware</a> services offer some very useful features. To name a few, you get features like a) <strong>Guaranteed message delivery</strong>, b) <strong>routing</strong>, c) <strong>throttling</strong>, etc., for free. Tools like ActiveMQ, RabbitMQ, MSMQ, JMS servers are tuned and time tested to handle such requirements robustly. I&#8217;ve had good experience with these tools for the happy paths. However, when dealing with unhappy paths, irrespective of the tools you use, it can be quite challenging to design the failovers.</p>
-
-<p>Here&#8217;s a list of the things to consider when designing a solution using Queues:</p>
-
-<h3>Speed of Consumption</h3>
-
-<p>Queues are essentially a producer/consumer or pub/sub system. This means a slower consumption rate results into a pileup of messages. In a high transaction system, millions of records can pile up in the matter of hours - forcing the producer to slow down or messaages being dropped. While architecting a solution, the rates should be measured and tested. Load tests are very useful to avoid such production issues. These issues are generally hard to fix once rolled out.</p>
-
-<h3>Error Paths</h3>
-
-<p>Even when a consumer is keeping up with the producer, chances are some messages cannnot be processed due to errors. If it&#8217;s a network error or some other error external to the system, a simple redelivery from the queue may fix it. But in real life, chances are, this is an application defect. So, a simple retry won&#8217;t make any difference. The application defect needs to be fixed and then, the message needs to be replayed. The solution needs to be designed considering the effect/resolution of the error paths.</p>
-
-<h3>Automated Monitoring</h3>
-
-<p>Automated monitoring is crucial to any Queue in the production system. Without monitoring, the queue may be flooded with unconsumed messages.</p>
-
-<h3>Human Intervention</h3>
-
-<p>When a message cannot be processed by a consumer, chances are, a human intervention will be required to complete/undo the intended operation. For example, if your payment processing application sends out a message on complete, and the shipping processor fails to process it - a human interaction may be required to fulfill the shipping or undo the order. When designing a solution, such edge cases should be identified.</p>
-
-<h3>Deployments</h3>
-
-<p>Typically queues are good in terms of holding the unconsumed messages for disconnected consumers. However, if a consumer has significant downtime between deployments, this can stretch the limits of the queue.</p>
-
-<p>I&#8217;m sure this is not all. These are from my real-life experience only. If you have experiences to share, please use the comments below.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -940,6 +983,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
@@ -953,10 +1000,6 @@
     
       <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
       </li>
     
   </ul>

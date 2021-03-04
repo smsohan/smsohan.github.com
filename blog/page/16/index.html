@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="I am up to a web venture called www.CampZero.com - an online market place for you service providers in Bangladesh. This is somewhat similar in &hellip;">
+  <meta name="description" content="Recently, I had the following requirements as I was working on CampZero.com - the going to be service marketplace of Bangladesh.Remove all html tags &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/12/22/how-to-strip-html-tags-truncate-and/">How to Strip Html Tags, Truncate and Highlight Texts in Ruby on Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T00:00:00-07:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Recently, I had the following requirements as I was working on CampZero.com - the going to be service marketplace of Bangladesh.<div><ol><li>Remove all html tags other than hyperlinks and new lines from a html fragment</li><li>Truncate the text to show only first 200 characters of the text and append ellipsis (&#8230;) in case the text was truncated.</li><li>Highlight an array of words in the text to show the search query worlds that matched</li></ol><div>The first one, getting rid of all but hyperlinks and new lines was achieved by the following code:</div><pre class="brush: rails"><br />&lt;%= sanitize my_html_text, :tags => %w(br a) %&gt;<br /></pre><div>Next, to truncate the text, I simply used the following:</div><div><pre class="brush: rails"><br />&lt;%= truncate my_sanitized_text, :length => 200 %&gt;<br /></pre></div><div>Lastly, to highlight my search query words, I did the following</div><pre class="brush: rails"><br />#in the controller<br />@query_words = params[:query] ? params[:query].split(/\W/) : ''<br />#in the view</pre></div><div><div>In reality, I chained the above thee methods as shown below:</div><div><pre class="brush: rails">&lt;%= highlight(truncate(sanitize(my_html_text, :tags => %w(br a)), :length => 200), @query_words) %&gt;</pre></div><div>These methods and their siblings are great as time savers. Rails makes the web development fun by including this as built in methods. For reference, you can check the link at <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/SanitizeHelper.html#M001620">SanitizeHelper</a> and <a href="http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html">TextHelper</a></div><div>Happy railing!</div></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -434,51 +471,6 @@ Previously I used a few plugins in RoR projects including <a href="http://scrump
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/09/06/new-home-at-calgary-and-starting-days/">A New Home at Calgary and Starting Days</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-09-06T00:00:00-06:00" pubdate data-updated="true">Sep 6<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-We relocated to the northwest section of Calgary, Alberta on the 26th August. I am new to this part of the world and traveling to this opposite time zone (GMT+6 to GMT-6) took around 33 hours. Did you ever take a flight on Qatar? Not? I recommend it. They offer best foods for your south asian delight. My route was Dhaka - Doha - London - Calgary. I enjoyed the trip (don&#8217;t tell anyone, I was a bit scared when traveling over the Atlantic :-))<div><br /></div><div>The city of Calgary is really eye soothing green during this season. The little homes and lawns look fabulous in my eyes. People here celebrate the summer in style, you will see large family camping vans every now and then. So far the people here are also very friendly and welcoming towards new comers. It has been a good experience and hopefully coming days will be even better!</div><div><br /></div><div>On the 4th, I attended the graduate orientation program and met a lot of people. It was nice to know that the University of Calgary is equipped with all amenities required for an excellent graduate education. I am looking forward to use my free pass to the swimming pool! It&#8217;ll be fun!</div><div><br /></div><div>I met my supervisor, Frank, and also people at my Lab. My next duty will be to select a topic for my research by the end of this year. But the earlier it is selected, the better it is. Let me know if you have a good idea on your heads around agile software process/tools or digital tabletops.</div><div><br /></div><div>My upcoming posts will be a mix of my graduate studies and my software related works. Also, I will be TAing and wish to share some of my teaching experience as well. Stay tuned!</div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-@Mighty Reviewer, Thanks for your comment.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/17/">&larr; Older</a>
@@ -496,6 +488,10 @@ We relocated to the northwest section of Calgary, Alberta on the 26th August. I 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
@@ -509,10 +505,6 @@ We relocated to the northwest section of Calgary, Alberta on the 26th August. I 
     
       <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Today is going to be my last day with the Code71 team and this is the last post of the series on my Code71 days.The journey started on June 1, 2006 &hellip;">
+  <meta name="description" content="We relocated to the northwest section of Calgary, Alberta on the 26th August. I am new to this part of the world and traveling to this opposite time &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/09/06/new-home-at-calgary-and-starting-days/">A New Home at Calgary and Starting Days</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-09-06T00:00:00-06:00" pubdate data-updated="true">Sep 6<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+We relocated to the northwest section of Calgary, Alberta on the 26th August. I am new to this part of the world and traveling to this opposite time zone (GMT+6 to GMT-6) took around 33 hours. Did you ever take a flight on Qatar? Not? I recommend it. They offer best foods for your south asian delight. My route was Dhaka - Doha - London - Calgary. I enjoyed the trip (don&#8217;t tell anyone, I was a bit scared when traveling over the Atlantic :-))<div><br /></div><div>The city of Calgary is really eye soothing green during this season. The little homes and lawns look fabulous in my eyes. People here celebrate the summer in style, you will see large family camping vans every now and then. So far the people here are also very friendly and welcoming towards new comers. It has been a good experience and hopefully coming days will be even better!</div><div><br /></div><div>On the 4th, I attended the graduate orientation program and met a lot of people. It was nice to know that the University of Calgary is equipped with all amenities required for an excellent graduate education. I am looking forward to use my free pass to the swimming pool! It&#8217;ll be fun!</div><div><br /></div><div>I met my supervisor, Frank, and also people at my Lab. My next duty will be to select a topic for my research by the end of this year. But the earlier it is selected, the better it is. Let me know if you have a good idea on your heads around agile software process/tools or digital tabletops.</div><div><br /></div><div>My upcoming posts will be a mix of my graduate studies and my software related works. Also, I will be TAing and wish to share some of my teaching experience as well. Stay tuned!</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Mighty Reviewer, Thanks for your comment.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -514,51 +559,6 @@ we thought of scrum so many times and couldn&#39;t organize ourselves&#8230; :(<
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/05/13/unit-test-actioncontroller-filters/">Unit/Functional Test Rails ActionController Filters Following DRY</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-13T00:00:00-06:00" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>At <a href="http://scrumpad.com/" target="_blank">ScrumPad</a> most of our controllers are bounded by filters for authentication/authorization. Some filters apply to all actions in a controller while others apply to only a few or leave out only a few. However, since we are following TDD, we need to test the filter is invoked before each of the desired action. This makes the test code MOIST (not DRY)!</p><p><span style="color: rgb(0, 128, 0);"><strong>Example of Moist Code:</strong></span></p>  <p><span style="color: rgb(0, 128, 0);"><span style="color: rgb(0, 0, 0);">The following example only captures two test methods. However, if you have 30 controllers like ours and on an average 5 filters at each, you will possibly find many such duplicates making your test code so moist that it becomes shabby!</span><strong> </strong></span></p>  <pre class="brush: rails">class SomeController<br />before_filter :authenticate<br />before_filter :restrict_invalid_role<br />end<br />class SomeControllerTest<br />def test_index_redirects_without_login<br />get :index<br />assert_redirected_to :controller=&gt;:login, :action=&gt;:login<br />end<br />def test_index_redirects_without_valid_role<br />login_as(:invalid_role)<br />get :index<br />assert_redirected_to :controller=&gt;:exception, :action=&gt;:not_allowed<br />end<br />end</pre><br /><strong><span style="color: rgb(0, 128, 0);">Example of DRY Code:</span></strong><br />I came up with the following implementation to help us with unit testing the before filters. The assumption is, if your filter is invoked, it will work fine. And we are testing the filter only once. The following code is written at the end of the test/test_helper.rb.<br /><pre class="brush: rails">class ActionController::TestCase<br />##example: should_apply_before_filter_to_actions(:authenticate, [:index, :new])<br />def should_apply_before_filter_to_actions(before_filter_name, actions)<br />if(actions.nil? or actions.empty?)<br />  assert false<br />end<br />filter = find_maching_before_filter(before_filter_name)<br />actions.each do |action|<br />  assert_before_filter_applied(filter, action)<br />end<br />end<br />##example: should_apply_before_filter_to_action(:authenticate, :index)<br />def should_apply_before_filter_to_action(before_filter_name, action)<br />filter = find_maching_before_filter(before_filter_name)<br />assert_before_filter_applied(filter, action)<br />end<br /><br />##example: should_not_apply_before_filter_to_actions(:authenticate, [:index, :new])<br />def should_not_apply_before_filter_to_actions(before_filter_name, actions)<br />if(actions.nil? or actions.empty?)<br />  assert false<br />end<br />filter = find_maching_before_filter(before_filter_name)<br />actions.each do |action|<br />  assert_before_filter_not_applied(filter, action)<br />end<br />end<br /><br />##example: should_not_apply_before_filter_to_action(:authenticate, :index)<br />def should_not_apply_before_filter_to_action(before_filter_name, action)<br />filter = find_maching_before_filter(before_filter_name)<br />assert_before_filter_not_applied(filter, action)<br />end<br /><br />##example: should_apply_before_filters([:authenticate, :session_expiry])<br />def should_apply_before_filters(before_filter_names)<br />if(before_filter_names.nil? or before_filter_names.empty?)<br />  assert false, "No Before Filter is Passed"<br />end<br />before_filter_names.each {|filter| should_apply_before_filter(filter)}<br />end<br /><br />##example: should_apply_before_filter(:authenticate)<br />def should_apply_before_filter(before_filter_name)<br />filter = find_maching_before_filter(before_filter_name)<br />if(filter.nil?)<br />  assert false, "no matching filter found for #{before_filter_name}"<br />end<br />assert filter.options.empty?, "the filter #{before_filter_name} has only/except options and does not apply to all actions"<br />end<br /><br />private<br />#finds the matching BeforeFilter object<br />def find_maching_before_filter(before_filter_name)<br />filters = @controller.class.filter_chain()<br />if !filters.nil?<br />  filters.each do |filter|<br />    if(filter.is_a?(ActionController::Filters::BeforeFilter) and filter.method == before_filter_name)<br />      return filter<br />    end<br />  end<br />end<br />return nil<br />end<br /><br />#asserts a single BeforeFilter is applied on a single action<br />def assert_before_filter_applied(filter, action)<br />if(filter.nil? or action.nil?)<br />  assert false<br />end<br /><br />if(filter.options.empty?)<br />  assert true<br />  return<br />end<br />if(!filter.options[:only].nil?)<br />  assert filter.options[:only].include?(action.to_s)<br />end<br />if(!filter.options[:except].nil?)<br />  assert !filter.options[:except].include?(action.to_s)<br />end<br />end<br /><br />#asserts a single BeforeFilter is not applied on a single action<br />def assert_before_filter_not_applied(filter, action)<br />if(filter.nil? or action.nil?)<br />  assert false<br />end<br /><br />if(filter.options.empty?)<br />  assert false<br />end<br /><br />if(!filter.options[:except].nil?)<br />  assert filter.options[:except].include?(action.to_s)<br />end<br />if(!filter.options[:only].nil?)<br />  assert !filter.options[:only].include?(action.to_s)<br />end<br />end<br />end</pre>Now my test code looks like the following-<br /><pre class="brush: rails">  def test_filters<br />should_apply_before_filters(:authenticate, :restrict_invalid_role)<br />end </pre>I can use the other methods as well to get finer control if the before_filter is applied using :only or :except options. And I can use these helper methods across all my controller test classes, making the whole point of testing filters really neat and short.<br /><p>If you are familiar with shoulda tests, you will find the above code following shoulda like naming conventions. I found the above code to strip a lot of your efforts, since you eliminate all test codes that safeguard your filters.</p>Hope it helps someone with similar need.</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>a_ludi</div>
-<div class='content'>
-Thank you for your code base! This is quite useful to me, too. And probably to many others.<br /><br />I&#39;ve refactored your code a little:<br /><br />http://pastebin.com/ybuAPfbF<br /><br />Furthermore, I would advise to put this code into the test_helper.rb file, so all your tests can use it. Then you have to declare all methods except the assert* methods as private. The assert* methods should be public.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -576,6 +576,10 @@ Thank you for your code base! This is quite useful to me, too. And probably to m
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
@@ -589,10 +593,6 @@ Thank you for your code base! This is quite useful to me, too. And probably to m
     
       <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
       </li>
     
   </ul>

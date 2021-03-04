@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-02-19T09:55:18-07:00</updated>
+  <updated>2021-03-04T10:10:52-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 4 - Redis]]></title>
+    <link href="http://smsohan.com/blog/2021/03/04/architecture-redis/"/>
+    <updated>2021-03-04T09:39:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/03/04/architecture-redis</id>
+    <content type="html"><![CDATA[<p>Welcome back into the Software Architecture series. I know at least a few people from my team are following, and that's a great encouragement.</p>
+
+<p>For today's post, let's focus on learning from a very popular and commonly used open-source project called <a href="http://redis.io">Redis</a>. To the developers, Redis is a
+dead simple key-value store with a super simple API as follows:</p>
+
+<p>```bash</p>
+
+<p>$ set today 'Thursday'
+OK</p>
+
+<p>$ get today
+Thursday</p>
+
+<p>$ set temp 20
+OK</p>
+
+<p>$ incr temp
+21</p>
+
+<p>$ incrby temp 3
+24</p>
+
+<p>$ get temp
+24
+```</p>
+
+<p>Of course Redis has more advanced features, but not too many. I think Redis is a delightful system. It's fun to use and has a reputation for being incredibly fast and scalable. I'm going to recommend you to spend some time on <a href="https://docs.redislabs.com/latest/rs/concepts/">Redis architecture</a> and see if you can understand the concepts to confidently answer the following questions:</p>
+
+<ol>
+<li>Why is Redis so fast?</li>
+<li>What can you do to prevent data loss when using Redis?</li>
+<li>How does Redis distribute its data to multiple nodes?</li>
+<li>What happens when you add a new node to a Redis cluster?</li>
+<li>What happens when you remove a node from a Redis cluster?</li>
+<li>How does Redis allow you to have an even distribution of the data in your cluster?</li>
+<li>How can you build resilience using Redis when a whole datacenter fails?</li>
+<li>How does a Redis client discover which Redis server to go to?</li>
+<li>How do you know if you have enough capacity in your Redis cluster?</li>
+<li>How does Redis provide end-to-end encryption?</li>
+<li>If a Redis cluster dies, how can you restore it?</li>
+<li>What metrics would you use to monitor if your Redis cluster is healthy?</li>
+</ol>
+
+
+<p>My plan is to introduce you to a bunch of open-source systems like Redis and ask similar questions. The idea is, after going through a few of these systems, you'll start to see patterns and trade-offs for each. Being familiar with real-world systems and seeing the patterns in use, I hope you'll be able pick and choose the patterns that best fit your system requirements, environment, and people.</p>
+
+<p>Happy learning!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 3: Writing]]></title>
@@ -131,34 +186,6 @@ Requirements -> |         |
 ```</p>
 
 <p>A lot of time related code I've seen in real projects is finding a point in time relative to <code>now</code>. Ruby on Rails makes it an absolute joy traveling time by adding time related methods straight into the <a href="https://api.rubyonrails.org">Integer</a> class, where the code looks just like how we think about time. Sure, Rails uses complex classes such as <code>TimeWithZone</code>, <code>Duration</code>, etc. under the hood, but I've almost never seen those used directly. This is such a stark contrast with many other platforms where you have to use pedantic concepts such as <code>TimeSpan</code>, <code>Calendar</code>, <code>GregorianCalendar</code>, etc. The true elegance of time travel API in Ruby on Rails lies in how invisible it is.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How About Full-Stack Micro-Services?]]></title>
-    <link href="http://smsohan.com/blog/2019/11/17/how-about-full-stack-micro-services/"/>
-    <updated>2019-11-17T13:47:00-07:00</updated>
-    <id>http://smsohan.com/blog/2019/11/17/how-about-full-stack-micro-services</id>
-    <content type="html"><![CDATA[<p><img src="/images/patched_quilt.jpg" alt="patched quilt" /></p>
-
-<p><small>
-Source: <a href="https://flic.kr/p/pUW8f9">Audrey on Flickr</a>
-</small></p>
-
-<p>I think nobody knows how to stitch together an app with full-stack micro-services. I have the following open-questions if you disagree. Of course, if we could send people to moon, we could solve these problems. But the question is, is it worth and should your team  solve these problems? Especially, for small teams?</p>
-
-<ol>
-<li>How to render the UI from tens of independent micro-services into the same web page?</li>
-<li>How to ensure the JS and CSS libraries are compatible within all of the independent services?</li>
-<li>How to aggregate logs from the services to be able to trace a user / request / transaction?</li>
-<li>How to measure and reduce overall latency and spinner-fatigue?</li>
-<li>Which off-the-shelf framework can be used for achieving the above?</li>
-</ol>
-
-
-<p>Headless micro-services are easy to build, but in many ways are similar to integration over database. It helps scaling teams, but even if you have many teams, I'd say extract service where it makes sense instead of adopting that model as the default choice.</p>
-
-<p>I suggest being careful about following conference talks and blogs on how cool micro-services are. It may work for big and gig tech. They don't always turn a profit! Your small teams are more likely to drown in worthless complexity from a micro-service architecture.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-02-19T09:55:18-07:00</updated>
+  <updated>2021-03-04T10:10:52-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 4 - Redis]]></title>
+    <link href="http://smsohan.com/blog/2021/03/04/architecture-redis/"/>
+    <updated>2021-03-04T09:39:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/03/04/architecture-redis</id>
+    <content type="html"><![CDATA[<p>Welcome back into the Software Architecture series. I know at least a few people from my team are following, and that's a great encouragement.</p>
+
+<p>For today's post, let's focus on learning from a very popular and commonly used open-source project called <a href="http://redis.io">Redis</a>. To the developers, Redis is a
+dead simple key-value store with a super simple API as follows:</p>
+
+<p>```bash</p>
+
+<p>$ set today 'Thursday'
+OK</p>
+
+<p>$ get today
+Thursday</p>
+
+<p>$ set temp 20
+OK</p>
+
+<p>$ incr temp
+21</p>
+
+<p>$ incrby temp 3
+24</p>
+
+<p>$ get temp
+24
+```</p>
+
+<p>Of course Redis has more advanced features, but not too many. I think Redis is a delightful system. It's fun to use and has a reputation for being incredibly fast and scalable. I'm going to recommend you to spend some time on <a href="https://docs.redislabs.com/latest/rs/concepts/">Redis architecture</a> and see if you can understand the concepts to confidently answer the following questions:</p>
+
+<ol>
+<li>Why is Redis so fast?</li>
+<li>What can you do to prevent data loss when using Redis?</li>
+<li>How does Redis distribute its data to multiple nodes?</li>
+<li>What happens when you add a new node to a Redis cluster?</li>
+<li>What happens when you remove a node from a Redis cluster?</li>
+<li>How does Redis allow you to have an even distribution of the data in your cluster?</li>
+<li>How can you build resilience using Redis when a whole datacenter fails?</li>
+<li>How does a Redis client discover which Redis server to go to?</li>
+<li>How do you know if you have enough capacity in your Redis cluster?</li>
+<li>How does Redis provide end-to-end encryption?</li>
+<li>If a Redis cluster dies, how can you restore it?</li>
+<li>What metrics would you use to monitor if your Redis cluster is healthy?</li>
+</ol>
+
+
+<p>My plan is to introduce you to a bunch of open-source systems like Redis and ask similar questions. The idea is, after going through a few of these systems, you'll start to see patterns and trade-offs for each. Being familiar with real-world systems and seeing the patterns in use, I hope you'll be able pick and choose the patterns that best fit your system requirements, environment, and people.</p>
+
+<p>Happy learning!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 3: Writing]]></title>
@@ -120,64 +175,6 @@ Photo credits to <a href="https://flic.kr/p/9yJU3j">Michael Newton</a>
 
 
 <p>There are reusable libraries and services such as <a href="https://launchdarestkly.com">LaunchDarkly</a> that provide rich APIs and user interfaces for feature flags. At this point, even with all the aforementioned concepts, our custom implementation of feature flag is quite straight-forward and easy to evolve. It has been a key ingredient for our frequent iterative deployments with 6 teams working on diverse features in parallel on the same product.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Configure Me Not]]></title>
-    <link href="http://smsohan.com/blog/2013/11/03/configure-me-not/"/>
-    <updated>2013-11-03T21:29:00-07:00</updated>
-    <id>http://smsohan.com/blog/2013/11/03/configure-me-not</id>
-    <content type="html"><![CDATA[<p>Configuration in software provides a method to build systems that can
-adapt to different configurations. For example, if a website's language and
-date/currency formats are configurable, then it can be configured to
-support multiple languages and regional formats. Configuration makes it
-possible to deliver such features without needing a log of change in the
-application source code.</p>
-
-<p>However, this notion of flexibility that configuration provides can be a trap at times. I've a definition of configurable as follows:</p>
-
-<blockquote><p>A configurable must have at least two configurations.</p></blockquote>
-
-<p>This is another way of saying YAGNI. But I find this to be more specific
-than YAGNI, as it quantifies and makes it apparent.</p>
-
-<p>Here are a few examples to illustrate my definition.</p>
-
-<ol>
-<li><p> <strong>Custom interfaces with a single implementation.</strong></p>
-
-<p> Interfaces are often times thought as a configurable component, as a new
- implementation can be used in place of an old one without changing the
- code that uses it.</p>
-
-<p> Except, if your interface only ever have one implementation, this
- provides a false notion of flexibility. In practice, I've seen for most
- custom interfaces, a new implementation almost always needs a change in
- the original interface which doesn't really make it configurable
- anymore.</p></li>
-<li><p><strong>Default arguments in methods that are never passed a non-default
-value.</strong></p>
-
-<p> Default arguments are great, as they often times simplify the common
- case. However, if a method with a default argument is never called
- with a non-default value, it's simply not worth using a default argument. Use a local variable instead.</p></li>
-<li><p><strong>Configuration key value pairs where there's only one value.</strong></p>
-
-<p> Since magic numbers and hardcoded strings are bad, it's tempting to use
- the configuration file to hold such values. However, if there's only one
- such value, it's probably a constant and not a configurable object.</p></li>
-<li><p><strong>Exhaustively validating method parameters against all possible but unused values.</strong></p>
-
-<p> If you're writing a method that's only gonna be called from another
- method in your project, you probably know what you're passing to the
- method. Validating for different negative inputs to such methods provide
- a sense of robustness without really adding any value to it.</p></li>
-</ol>
-
-
-<p>Hoping, the definition makes sense. Would love to hear your
-opinion and examples of configure me not.</p>
 ]]></content>
   </entry>
   

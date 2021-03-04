@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="In our current project, we have a little Java Bridge, that reads JMS messages from an enterprise service bus (ESB) and pipes it to an ActiveMQ topic &hellip;">
+  <meta name="description" content="I paired with @TylerMercier as we did a little hands-on demo on writing testable and OO JavaScript. This was mostly based on our pairing experience &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/13/lovejs-presentation-at-camug/">LoveJS Presentation at CAMUG</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-13T21:32:00-06:00" pubdate data-updated="true">Sep 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I paired with <a href="http://codecuriosity.com">@TylerMercier</a> as we did a little <a href="http://www.meetup.com/Calgary-Agile-Methods-User-Group/events/79722562/">hands-on demo on writing testable and OO JavaScript</a>.</p>
+
+<p><img src="/images/LoveJS.jpg" alt="Presenting with Tyler" /></p>
+
+<p>This was mostly based on our pairing experience on the current project, but also had things that we learned from our previous web projects. I wanted to share some of the highlights of this session with my readers on this blog:</p>
+
+<p>From experience, I have seen a few charactersitics that make JavaScript coding a real fun. Here&#8217;s a few that stand out:</p>
+
+<blockquote><p>Good JavaScript is Testable and Object Oriented</p></blockquote>
+
+<p>Really simple stuff, but it took me quite a few years to actually start writing OO JavaScript, and more so, to write automated tests that run on CI server. As I often say, the shittiest part of most web projects is its CSS, with its hacks, and the inherent nature of it. And JavaScript is often just as smelly. But if you just start writing OO JavaScript with tests, your code will drive you to a cleaner path simply because bad code makes testing really tough. And with Jasmine, testing JavaScript is super fun. So, we suggested the following toolset:</p>
+
+<ol>
+<li>CoffeeScript</li>
+<li>Jasmine</li>
+<li>PhantomJS</li>
+<li>CI integration</li>
+</ol>
+
+
+<p>The materials related to this session are available online at <a href="http://codecuriosity.com/love_javascript">github</a>.</p>
+
+<p>It was a great turnout, full house, engaged audience, and, asking really good questions. I had a lot of fun doing the hands-on. You know live demos can be daunting, especially when you are writing on a low res screen so people can actually read the projected text. But thanks a lot to Tyler, we had done a couple dry runs of the demo. That helped us a lot in terms of finding the points to transition between us, as well as some muscle memory as we were writing the code live in front of the audience.</p>
+
+<p>But, I also wanted to share a checklist that we should have done as a preparation for this talk. It&#8217;s too bad, we didn&#8217;t do the following, hopefully this will be better next time. Here&#8217;s what I have in my mind:</p>
+
+<ul>
+<li><strong>Audio/video record</strong> the session. So, I can see myself afterwards and find some obvious rooms for improvement.</li>
+<li>Practice using <strong>real projector</strong> so we can find the best theme for the room size. This time I felt some of the text colors weren&#8217;t as readable for the back benchers.</li>
+<li>Never plan for a 50 minute talk when you have a 60 minute slot. Leave <strong>at least 20 minutes slack</strong>. Have a backup plan for an extension in case you are done early. It sucks to cut short or rush to the ending.</li>
+</ul>
+
+
+<p>But in retrospect, I was super impressed with how the session ran. Hopefully, with practice it will only keep getting better.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -567,43 +636,6 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/11/01/using-instanceof-is-mostly-code-smell/">Using Instanceof Is Mostly a Code Smell</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-01T00:00:00-06:00" pubdate data-updated="true">Nov 1<span>st</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">When using static programming languages such as Java, often time I have seen people writing methods that accept Object as a parameter. These methods typically don&#8217;t really work on any Object, but works with multiple types of classes that don&#8217;t have any common base class. Here&#8217;s an example of such a method:<br /><br /></div><script src="https://gist.github.com/1332622.js"></script>As you can see in this example, the <code>process</code> method actually expects one of <code>CleanFloor</code> or <code>LaunchRocket</code> instances. However, since the two don&#8217;t have a common subclass, it falls back to an Object type. And that results in the smelly code as you see in the example.<br /><br />An ideal solution would be to change the design of the classes so that you can either use a common base class or a generic method. But if you can&#8217;t just do that<br /><br /><blockquote class="tr_bq">Get rid of the instanceof anyway!</blockquote><br />However, this doesn&#8217;t need to be smelly. Turning to basics of OO programming concepts, you will recall that there&#8217;s this thing called method overloading that is specifically there to solve this very problem.<br /><br /><script src="https://gist.github.com/1332647.js">  </script>It seems so obvious in this example that you might question, why someone would use the former code? Well, I have seen quite a few of them and if you search for instanceof in your Java project, I won&#8217;t be surprised if you see a few code fragments that match the former example. </div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -621,6 +653,10 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
@@ -634,10 +670,6 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
     
       <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="When designing custom exceptions, you may forget about old school OO fundamentals. As a reminder, lets take a look into the following custom &hellip;">
+  <meta name="description" content="At ScrumPad most of our controllers are bounded by filters for authentication/authorization. Some filters apply to all actions in a controller while &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/05/13/unit-test-actioncontroller-filters/">Unit/Functional Test Rails ActionController Filters Following DRY</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-13T00:00:00-06:00" pubdate data-updated="true">May 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>At <a href="http://scrumpad.com/" target="_blank">ScrumPad</a> most of our controllers are bounded by filters for authentication/authorization. Some filters apply to all actions in a controller while others apply to only a few or leave out only a few. However, since we are following TDD, we need to test the filter is invoked before each of the desired action. This makes the test code MOIST (not DRY)!</p><p><span style="color: rgb(0, 128, 0);"><strong>Example of Moist Code:</strong></span></p>  <p><span style="color: rgb(0, 128, 0);"><span style="color: rgb(0, 0, 0);">The following example only captures two test methods. However, if you have 30 controllers like ours and on an average 5 filters at each, you will possibly find many such duplicates making your test code so moist that it becomes shabby!</span><strong> </strong></span></p>  <pre class="brush: rails">class SomeController<br />before_filter :authenticate<br />before_filter :restrict_invalid_role<br />end<br />class SomeControllerTest<br />def test_index_redirects_without_login<br />get :index<br />assert_redirected_to :controller=&gt;:login, :action=&gt;:login<br />end<br />def test_index_redirects_without_valid_role<br />login_as(:invalid_role)<br />get :index<br />assert_redirected_to :controller=&gt;:exception, :action=&gt;:not_allowed<br />end<br />end</pre><br /><strong><span style="color: rgb(0, 128, 0);">Example of DRY Code:</span></strong><br />I came up with the following implementation to help us with unit testing the before filters. The assumption is, if your filter is invoked, it will work fine. And we are testing the filter only once. The following code is written at the end of the test/test_helper.rb.<br /><pre class="brush: rails">class ActionController::TestCase<br />##example: should_apply_before_filter_to_actions(:authenticate, [:index, :new])<br />def should_apply_before_filter_to_actions(before_filter_name, actions)<br />if(actions.nil? or actions.empty?)<br />  assert false<br />end<br />filter = find_maching_before_filter(before_filter_name)<br />actions.each do |action|<br />  assert_before_filter_applied(filter, action)<br />end<br />end<br />##example: should_apply_before_filter_to_action(:authenticate, :index)<br />def should_apply_before_filter_to_action(before_filter_name, action)<br />filter = find_maching_before_filter(before_filter_name)<br />assert_before_filter_applied(filter, action)<br />end<br /><br />##example: should_not_apply_before_filter_to_actions(:authenticate, [:index, :new])<br />def should_not_apply_before_filter_to_actions(before_filter_name, actions)<br />if(actions.nil? or actions.empty?)<br />  assert false<br />end<br />filter = find_maching_before_filter(before_filter_name)<br />actions.each do |action|<br />  assert_before_filter_not_applied(filter, action)<br />end<br />end<br /><br />##example: should_not_apply_before_filter_to_action(:authenticate, :index)<br />def should_not_apply_before_filter_to_action(before_filter_name, action)<br />filter = find_maching_before_filter(before_filter_name)<br />assert_before_filter_not_applied(filter, action)<br />end<br /><br />##example: should_apply_before_filters([:authenticate, :session_expiry])<br />def should_apply_before_filters(before_filter_names)<br />if(before_filter_names.nil? or before_filter_names.empty?)<br />  assert false, "No Before Filter is Passed"<br />end<br />before_filter_names.each {|filter| should_apply_before_filter(filter)}<br />end<br /><br />##example: should_apply_before_filter(:authenticate)<br />def should_apply_before_filter(before_filter_name)<br />filter = find_maching_before_filter(before_filter_name)<br />if(filter.nil?)<br />  assert false, "no matching filter found for #{before_filter_name}"<br />end<br />assert filter.options.empty?, "the filter #{before_filter_name} has only/except options and does not apply to all actions"<br />end<br /><br />private<br />#finds the matching BeforeFilter object<br />def find_maching_before_filter(before_filter_name)<br />filters = @controller.class.filter_chain()<br />if !filters.nil?<br />  filters.each do |filter|<br />    if(filter.is_a?(ActionController::Filters::BeforeFilter) and filter.method == before_filter_name)<br />      return filter<br />    end<br />  end<br />end<br />return nil<br />end<br /><br />#asserts a single BeforeFilter is applied on a single action<br />def assert_before_filter_applied(filter, action)<br />if(filter.nil? or action.nil?)<br />  assert false<br />end<br /><br />if(filter.options.empty?)<br />  assert true<br />  return<br />end<br />if(!filter.options[:only].nil?)<br />  assert filter.options[:only].include?(action.to_s)<br />end<br />if(!filter.options[:except].nil?)<br />  assert !filter.options[:except].include?(action.to_s)<br />end<br />end<br /><br />#asserts a single BeforeFilter is not applied on a single action<br />def assert_before_filter_not_applied(filter, action)<br />if(filter.nil? or action.nil?)<br />  assert false<br />end<br /><br />if(filter.options.empty?)<br />  assert false<br />end<br /><br />if(!filter.options[:except].nil?)<br />  assert filter.options[:except].include?(action.to_s)<br />end<br />if(!filter.options[:only].nil?)<br />  assert !filter.options[:only].include?(action.to_s)<br />end<br />end<br />end</pre>Now my test code looks like the following-<br /><pre class="brush: rails">  def test_filters<br />should_apply_before_filters(:authenticate, :restrict_invalid_role)<br />end </pre>I can use the other methods as well to get finer control if the before_filter is applied using :only or :except options. And I can use these helper methods across all my controller test classes, making the whole point of testing filters really neat and short.<br /><p>If you are familiar with shoulda tests, you will find the above code following shoulda like naming conventions. I found the above code to strip a lot of your efforts, since you eliminate all test codes that safeguard your filters.</p>Hope it helps someone with similar need.</div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>a_ludi</div>
+<div class='content'>
+Thank you for your code base! This is quite useful to me, too. And probably to many others.<br /><br />I&#39;ve refactored your code a little:<br /><br />http://pastebin.com/ybuAPfbF<br /><br />Furthermore, I would advise to put this code into the test_helper.rb file, so all your tests can use it. Then you have to declare all methods except the assert* methods as private. The assert* methods should be public.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -547,43 +592,6 @@ I agree.<BR/>Code review should be part of life.<BR/>It increases quality of cod
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/03/22/juggernaut-on-linux/">Juggernaut on Linux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-03-22T00:00:00-06:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>I just installed Juggernaut on my linux box. The installation is simpler than windows. At least it gave me less pain.</p>  <p>Just run the following commands-</p>  <ol>   <li>gem install json</li>    <li>gem install activemachine</li>    <li>gem install juggernaut</li>    <li>juggernaut –g juggernaut.yml</li>    <li>juggernaut –c juggernaut.yml</li> </ol>  <p>I got a little pain regarding the g++ compiler that is required to build the <strong>activemachine</strong>. I did not have it installed in my Amazon EC2 instance and after some searches, I could install it using the following-</p>  <p><strong>apt-get install g++</strong></p>  <p><strong><span style="color:#ff0000;">IMPORTANT!!</span></strong></p>  <p>Well, it was fine if I could end here! However, I found that this installation stopped my MySQL service and changed the <strong>/etc/mysql/my.cnf</strong> file. So, an attempt to start the MySQL was successful only after I removed the # comment from the line log_bin = blah blah blah…</p>  <p>So, if you are using Redhat Enterprise 5.0, you may find it useful. If you are using Amazon EC2, you will find it useful too. I do not know about other distros, but may be something similar will be there (at least hopefully)!</p></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -601,6 +609,10 @@ I agree.<BR/>Code review should be part of life.<BR/>It increases quality of cod
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
@@ -614,10 +626,6 @@ I agree.<BR/>Code review should be part of life.<BR/>It increases quality of cod
     
       <li class="post">
         <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a>
       </li>
     
   </ul>

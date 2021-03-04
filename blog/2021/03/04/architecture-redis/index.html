@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Software Architecture - Topic 4 - Redis - Sohan's Blog</title>
+  <meta name="author" content="SM Sohan">
+
+  
+  <meta name="description" content="Welcome back into the Software Architecture series. I know at least a few people from my team are following, and that&#8217;s a great encouragement. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://smsohan.com/blog/2021/03/04/architecture-redis/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="" rel="alternate" title="Sohan's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37549931-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body    class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Sohan's Blog</a></h1>
+  
+    <h2>Things I'm Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:smsohan.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/home">Home</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/lifeline">Lifeline!</a></li>
+  <li><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call me Sohan!</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Software Architecture - Topic 4 - Redis</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2021-03-04T09:39:00-07:00" pubdate data-updated="true">Mar 4<span>th</span>, 2021</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Welcome back into the Software Architecture series. I know at least a few people from my team are following, and that&#8217;s a great encouragement.</p>
+
+<p>For today&#8217;s post, let&#8217;s focus on learning from a very popular and commonly used open-source project called <a href="http://redis.io">Redis</a>. To the developers, Redis is a
+dead simple key-value store with a super simple API as follows:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">set </span>today <span class="s1">&#39;Thursday&#39;</span>
+</span><span class='line'>OK
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>get today
+</span><span class='line'>Thursday
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span><span class="nb">set </span>temp 20
+</span><span class='line'>OK
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>incr temp
+</span><span class='line'>21
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>incrby temp 3
+</span><span class='line'>24
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>get temp
+</span><span class='line'>24
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Of course Redis has more advanced features, but not too many. I think Redis is a delightful system. It&#8217;s fun to use and has a reputation for being incredibly fast and scalable. I&#8217;m going to recommend you to spend some time on <a href="https://docs.redislabs.com/latest/rs/concepts/">Redis architecture</a> and see if you can understand the concepts to confidently answer the following questions:</p>
+
+<ol>
+<li>Why is Redis so fast?</li>
+<li>What can you do to prevent data loss when using Redis?</li>
+<li>How does Redis distribute its data to multiple nodes?</li>
+<li>What happens when you add a new node to a Redis cluster?</li>
+<li>What happens when you remove a node from a Redis cluster?</li>
+<li>How does Redis allow you to have an even distribution of the data in your cluster?</li>
+<li>How can you build resilience using Redis when a whole datacenter fails?</li>
+<li>How does a Redis client discover which Redis server to go to?</li>
+<li>How do you know if you have enough capacity in your Redis cluster?</li>
+<li>How does Redis provide end-to-end encryption?</li>
+<li>If a Redis cluster dies, how can you restore it?</li>
+<li>What metrics would you use to monitor if your Redis cluster is healthy?</li>
+</ol>
+
+
+<p>My plan is to introduce you to a bunch of open-source systems like Redis and ask similar questions. The idea is, after going through a few of these systems, you&#8217;ll start to see patterns and trade-offs for each. Being familiar with real-world systems and seeing the patterns in use, I hope you&#8217;ll be able pick and choose the patterns that best fit your system requirements, environment, and people.</p>
+
+<p>Happy learning!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">SM Sohan</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2021-03-04T09:39:00-07:00" pubdate data-updated="true">Mar 4<span>th</span>, 2021</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/architecture/'>Architecture</a>, <a class='category' href='/blog/categories/software/'>Software</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2021/02/19/frontend-engineering/" title="Previous Post: Can I Have a Career as a Frontend Engineer?">&laquo; Can I Have a Career as a Frontend Engineer?</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>LinkedIn Profile</h1>
+  <p>
+    <a href="http://www.linkedin.com/in/sohan">SM Sohan</a>
+  </p>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/smsohan">@smsohan</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'smsohan',
+            count: ,
+            skip_forks: ,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2021 - SM Sohan -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
