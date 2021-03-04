@@ -45,7 +45,7 @@ products and obsessing about delighting millions or billions of users,
 you can have a very rewarding and fast-paced career in frontend
 engineering.
 
-Most of your engineering knowledge is transferrable, irrespective of
+**Most of your engineering knowledge is transferrable,** irrespective of
 what part of the stack you work on. After all, you'll learn to work with
 people, delight customers, build systems that are robust, scalable,
 secure, compliant, testable... So, you can move into a different part of
