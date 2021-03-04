@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-03-04T10:10:52-07:00</updated>
+  <updated>2021-03-04T10:13:23-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -18,7 +18,7 @@
     <link href="http://smsohan.com/blog/2021/03/04/architecture-redis/"/>
     <updated>2021-03-04T09:39:00-07:00</updated>
     <id>http://smsohan.com/blog/2021/03/04/architecture-redis</id>
-    <content type="html"><![CDATA[<p>Welcome back into the Software Architecture series. I know at least a few people from my team are following, and that&#8217;s a great encouragement.</p>
+    <content type="html"><![CDATA[<p>Welcome back to the Software Architecture series. I know at least a few people from my team are following, and that&#8217;s a great encouragement.</p>
 
 <p>For today&#8217;s post, let&#8217;s focus on learning from a very popular and commonly used open-source project called <a href="http://redis.io">Redis</a>. To the developers, Redis is a
 dead simple key-value store with a super simple API as follows:</p>
