@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Architecture | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/architecture/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-03-04T10:13:23-07:00</updated>
+  <updated>2021-03-04T10:31:20-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -44,7 +44,7 @@ OK</p>
 24
 ```</p>
 
-<p>Of course Redis has more advanced features, but not too many. I think Redis is a delightful system. It's fun to use and has a reputation for being incredibly fast and scalable. I'm going to recommend you to spend some time on <a href="https://docs.redislabs.com/latest/rs/concepts/">Redis architecture</a> and see if you can understand the concepts to confidently answer the following questions:</p>
+<p>Of course Redis has more advanced features, but not too many. I think Redis is a delightful system. It's fun to use and has a reputation for being incredibly fast and scalable. I'm going to recommend you to spend some time on <a href="https://docs.redislabs.com/latest/rs/concepts/">Redis architecture</a> and see if you understand the concepts to confidently answer the following questions:</p>
 
 <ol>
 <li>Why is Redis so fast?</li>
