@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-04-23T10:54:07-06:00</updated>
+  <updated>2021-04-23T11:02:04-06:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -48,7 +48,7 @@ is responsible for aggregating data that spans multiple nodes?</p>
 <p>If you followed the Redis post, what would you say are the top 3 architectural differences between MongoDB and Redis? Can you reason about the why behind the
 differences?</p>
 
-<p>Based on MongoDB's architecture, where do you see a potential bottleneck that can affect scaling a MongoDB cluster? What options do you have to workaround?</p>
+<p>Based on MongoDB's architecture, where do you see a potential bottleneck that can affect scaling a MongoDB cluster? What can you do to workaround the limitations?</p>
 ]]></content>
   </entry>
   
