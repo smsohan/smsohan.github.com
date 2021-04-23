@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="I was taking a look into the fresh ActiveModel module of Rails 3 as of github revision #100644. Here is what I learned:Learned about new feature &hellip;">
+  <meta name="description" content="All on a sudden, this thing popped up in my mind. What we are calling Ruby on Rails, is this actually &#8220;Ruby&#8221; on &#8220;Rails&#8221; or &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/03/09/ruby-on-rails-or-rails-on-ruby/">Ruby on Rails or Rails on Ruby?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-09T00:00:00-07:00" pubdate data-updated="true">Mar 9<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+All on a sudden, this thing popped up in my mind. What we are calling Ruby on Rails, is this actually &#8220;Ruby&#8221; on &#8220;Rails&#8221; or the other way around? Is this upside down? Here&#8217;s my mental picture of the RoR framework:<br /><div class="separator" style="clear: both; text-align: center;"><a href="http://farm1.static.flickr.com/86/239456671_8eb4cc1e15.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="480" src="http://farm1.static.flickr.com/86/239456671_8eb4cc1e15.jpg" width="640" /></a></div><div class="separator" style="clear: both; text-align: center;">Image credits to <a href="http://www.flickr.com/photos/thefoologs/">Foo Fighter</a>&nbsp;on Flickr(creative commons)</div><br /><ol><li>Ruby is a self-sustained language. As a language this is completely ignorant of the Rails Framework. So, I think there is no dependency from Ruby to Rails.</li><li>Rails is a framework built using Ruby as a language. So, there is a strict dependency from Rails to Ruby.</li></ol><div>What do you think? Would you call it &#8220;Rails on Ruby&#8221; or &#8220;Ruby on Rails&#8221;? I see a point of agreement for the ones who want to call it RoR, no damage done :-)</div><div><br /></div><div>Lets see how this &#8220;on&#8221; preposition works for other language/platform pairs:</div><div><ul><li>Java on Struts vs&nbsp;Struts on Java</li><li>PHP on Cake vs&nbsp;Cake on PHP</li><li>C# on .Net vs&nbsp;.Net on C#</li></ul><div>Confused? Well, then you can use RoR for now!</div></div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+I like the way you put it :-) &quot;Rails are those things that trains moves on&quot;, taking literal meaning in this way would mean something very different for &quot;ruby&quot;!</div>
+</div>
+<div class='comment'>
+<div class='author'>Anonymous</div>
+<div class='content'>
+I think you&#39;ve messed it up ;). Rails isn&#39;t a framework. Ruby on Rails is. So it is not Ruby (language) on Rails (framework). Rails are those things that trains moves on. So Ruby on Rails means (at least for me) something like &quot;accelerated ruby with a lot of constrains&quot;. And this is a name of a framework. Rails on Ruby would be something like: &quot;this poor guy Ruby takes those heavy rails on his shoulders and walks in pain with it&quot;</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -500,43 +550,6 @@ According to google&#8217;s SEO guideline, its a good idea to provide breadcrumb
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/12/24/sitemap-generator-for-your-rails-app/">Sitemap-generator for Your Rails App and Deployment Solution</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-24T00:00:00-07:00" pubdate data-updated="true">Dec 24<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-When talking about Search Engine Optimization for your public web pages, you probably try to follow the google guidelines for search engine optimization. Its a good one to get started with. For my recent project, <a href="http://www.campzero.com/">www.campzero.com</a>, I read the document and tried to follow the steps. Today, I worked on generating sitemap for www.campzero.com using the following:<ul><li>Installed the site-map generator plugin following this link at <a href="http://aktagon.com/projects/rails/sitemap-generator">Aktagon&#8217;s</a>, <a href="http://github.com/christianhellsten/sitemap-generator">github link</a></li><li>For some reason, probably because of permission issues, my plugin install didn&#8217;t generate the sample sitemap.yml file for me. However, I created the config/sitemap.yml file myself and put the following contents there:</li></ul><pre class="brush: rails">domain: www.campzero.com<br />limit: 5000<br />priority: 1<br />change_frequency: weekly</pre><ul><li>Then, I put the call to the sitemap method as shown in the github documentation. </li><li>Finally, I ran the command <b>rake sitemap:gerenate</b> to generate my sitemap.xml file inside the public folder.</li><li>So far this went well with the local environment. However, when I deployed this code and ran the rake command in my staging environment, it said it was not finding any model with the sitemap method.</li><li>After some debugging, I found that the problem was with the code at the file generator.rb where they put <b>model.methods.include?(&#8216;sitemap_options&#8217;) </b>to see if the model contains a method named sitemap_options. But, at my staging environment, I found that this was returning false although there was this method inside the model. I changed the code to the following so that the include? check is done both for strings and symbols and it worked fine.</li></ul><pre class="brush: rails">if((model.methods.include?(:sitemap_options) || model.methods.include?('sitemap_options')) &amp;&amp; model.sitemap_options != nil)<br />models &lt;&lt; model<br />end</pre><ul><li>Now, I could generate sitemap at my staging environment.</li><li>However, soon I found another issue with deployment, as I want my sitemap file to stay between deployments. So, I had to ensure the sitemap file is generated at a shared place other than the default public folder. I did the following changes to the sitemap_generator_task.rake file:</li></ul><pre class="brush: rails">if defined?(SITEMAP_FILE_PATH)<br />SitemapGenerator::Generator.new(SITEMAP_FILE_PATH).find_models_and_generate<br />else<br />SitemapGenerator::Generator.run<br />end</pre><div><ul><li>I added the constant SITEMAP_FILE_PATH in my config/environments/staging.rb file to get it working.</li><li>Finally, I changed my deployment script to define a symlink from the public folder to the shared file path as follows:</li></ul><div><b>run &#8220;ln -s #{shared_path}/sitemap/sitemap.xml #{release_path}/public/sitemap.xml&#8221;</b></div></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/16/">&larr; Older</a>
@@ -554,6 +567,10 @@ When talking about Search Engine Optimization for your public web pages, you pro
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
@@ -567,10 +584,6 @@ When talking about Search Engine Optimization for your public web pages, you pro
     
       <li class="post">
         <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Welcome back to the Software Architecture series. I know at least a few people from my team are following, and that&#8217;s a great encouragement. &hellip;">
+  <meta name="description" content="Continuing on this architecture series of posts. Similar to the post on Redis, this time let&#8217;s focus on another hugely popular distributed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2021-04-23T10:19:00-06:00" pubdate data-updated="true">Apr 23<span>rd</span>, 2021</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Continuing on this architecture series of posts. Similar to the <a href="/blog/2021/03/04/architecture-redis/">post on Redis</a>, this time let&#8217;s focus on another hugely popular distributed database
+called <a href="https://www.mongodb.com">MongoDB</a>. If you aren&#8217;t familiar with MongoDB, it&#8217;s a distributed database that allows you to store and query humongous amounts of JSON-like data.</p>
+
+<p>To get an overview of MongoDB and its architecture, you can watch the following YouTube video:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oH-gQ4JdXQc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<p>Of course, you can also download the <a href="https://www.mongodb.com/collateral/mongodb-architecture-guide">official architecture guide</a> to learn more.
+Let&#8217;s focus on rationale behind MongoDB&#8217;s architectural decisions. You can find answers to all of the following questions
+if you went through the guide or the video. But my goal is get you to think about the why behind the decisions.</p>
+
+<p>MongoDB has databases and collections. While collections are conceptually parallel to tables in traditional relational databases, MongoDB doesn&#8217;t impose
+any restrictions on the schema of a collection. Can you think of reasons behind this decision? What trade-offs come to your mind? For example,
+not having a schema allows you to store anything within a collection, essentially reducing the need for schema migrations on very large databases.
+But at the same time, it may complicate consumption of the data. What other trade-offs can you think of?</p>
+
+<p>MongoDB uses a router named Mongos and needs config servers to route queries when data is sharded into multiple partitions. What benefits and challenges do you see with the addition of this router component?</p>
+
+<p>MongoDB requires you to have uneven number of replicas to deal with failover when a new primary node needs to be elected. How do you judge this design decision?</p>
+
+<p>By design, MongoDB allows you to choose a write concern at write time to allow you to balance your need in the <a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP</a> triangle. Can you explain what you must do
+ to ensure you&#8217;ll not lose data is 2 out of 3 of your replica servers were to go corrupt?</p>
+
+<p>MongoDB allows you to run complex map reduce queries in the form of aggregate pipelines. In a distributed database, which component within the MongoDB ecosystem
+is responsible for aggregating data that spans multiple nodes?</p>
+
+<p>If you followed the Redis post, what would you say are the top 3 architectural difference between MongoDB and Redis? Can you reason about the why behind the
+differences?</p>
+
+<p>Based on MongoDB&#8217;s architecture, where do you see a potential bottleneck that can affect scaling a MongoDB cluster? What options do you have to work around?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -642,58 +708,6 @@ Requirements -> |         |
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2020/11/18/where-to-learn/">Where to Learn: 10 Ways I Do</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2020-11-18T10:51:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2020</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/learning.png" alt="learning" /></p>
-
-<p>When talking to people, I&#8217;m always interested to know how they learn. This image above shows a view of how I personally learn. Here&#8217;s some context about the items on the diagram:</p>
-
-<ol>
-<li>Online-courses: I love O&#8217;Reilly learning. Their video courses are split into 5 minute lectures. For example, I took their Kotlin course to learn the language.</li>
-<li>Books: Books are great for curated content, but it takes dedicated time. Most of the time, I have one book that I read. Current interest is on leadership and business.</li>
-<li>Hands-on: A lot of people learn by doing. I do the same, but mostly at a hello world level instead of going too deep into new things.</li>
-<li>Podcasts: This is my most passive form of learning, mostly when I&#8217;m walking or driving.</li>
-<li>People: I keep in touch with people and ask them about what they are learning.</li>
-<li>Twitter: I admit, I spend too much time on Twitter. But occasionally, people share interesting things.</li>
-<li>YouTube videos: I watch conference talks such as InfoQ, DotNet, Rails, Ruby, Goto, and AWS.</li>
-<li>News: I follow Hacker News mostly for tech and business news. And then there&#8217;s following stock market news about new business innovations.</li>
-<li>Interviews: I watch inteview shows on YouTube as I&#8217;m a big fan of biographical content.</li>
-<li>Open-source: I follow a bunch of open-source projects or just read code from time to time to learn about how the passionate and expert developers craft code.</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -709,6 +723,10 @@ Requirements -> |         |
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
@@ -722,10 +740,6 @@ Requirements -> |         |
     
       <li class="post">
         <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
   </ul>

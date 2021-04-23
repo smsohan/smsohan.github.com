@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Creating an instance of an internal class using Spring.Net is a little tricky. I know that, you can achieve this by adding an InternalsVisibleTo &hellip;">
+  <meta name="description" content="I was looking for logging solutions for the generated SQL in one of my projects where I am using LINQ to SQL. I found that sometimes the the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/07/logging-linq-to-sql-generated-sql/">Logging the LINQ to SQL Generated SQL Queries/Commands</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-07T00:00:00-06:00" pubdate data-updated="true">Apr 7<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>I was looking for logging solutions for the generated SQL in one of my projects where I am using LINQ to SQL. I found that sometimes the the Exceptions and StackTrace information does not say much about what&#8217;s really causing the problem with LINQ to SQL queries/commands.</p>  <p>To see the actual SQL that&#8217;s generated from LINQ you may write a code like the following-</p>  <blockquote>   <p></p>    <ol>     <li><span style="color: rgb(29, 54, 231);font-family:courier new;">SampleDataContext context = new SampleDataContext();</span> </li>      <li>//You may wish to use any subclass of System.IO.TextWriter in place of Console.out </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">context.Log = Console.Out;</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">Session session = new Session</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">{</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">SessionID = Guid.NewGuid().ToString(),</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">Site = &#8220;Google&#8221;,</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">StartTime = DateTime.Now</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">};</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">context.Sessions.InsertOnSubmit(session);</span> </li>      <li><span style="color: rgb(29, 54, 231);font-family:courier new;">context.SubmitChanges();</span> </li>   </ol> </blockquote>  <p>And when run, a log message like the following will be shown in your console. </p>  <p><span style="color: rgb(6, 125, 189);">INSERT INTO [dbo].[Sessions]([SessionID], [StartTime], [Site], [UserHostAddress]    <br />, [Url], [UserAgent], [UrlReferrer])     <br />VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)     <br />&#8211; @p0: Input VarChar (Size = 36; Prec = 0; Scale = 0) [0522d634-d9e6-43c6-985e-     <br />69c61090b5c4]     <br />&#8211; @p1: Input SmallDateTime (Size = 0; Prec = 0; Scale = 0) [4/7/2008 3:28:02 PM     <br />]     <br />&#8211; @p2: Input VarChar (Size = 6; Prec = 0; Scale = 0) [Google]     <br />&#8211; @p3: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; @p4: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; @p5: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; @p6: Input VarChar (Size = 0; Prec = 0; Scale = 0) [Null]     <br />&#8211; Context: SqlProvider(Sql2005) Model: AttributedMetaModel Build: 3.5.21022.8</span></p>  <p>Well, I know you guys are not just writing Console Applications like me (!) and need something better to be worthy. You may visit the following links for more-</p>  <ol>   <li>To use Log4Net for capturing the log data, <a href="http://devintelligence.com/blogs/netadventures/archive/2008/01/26/sending-the-linq-to-sql-log-to-log4net.aspx">this</a> is a simple yet useful implementation. </li>    <li>As usual, don&#8217;t forget to take a look at <a href="http://msdn2.microsoft.com/en-us/library/system.data.linq.datacontext.log.aspx">this</a> MSDN page for more on this. </li> </ol></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -467,43 +504,6 @@ hi sohan bhai,<BR/>nice to see you on blog, you have a lot of nice posts.<BR/>an
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/02/13/preserve-ownership-mode-and-other/">Preserve Ownership, Mode and Other Attributes While Copying in Linux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-02-13T00:00:00-07:00" pubdate data-updated="true">Feb 13<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-I dare not say, I am savvy at Linux :-)<br /><br />Recently, I ran into a problem where I found that upon executing a copy command, my source and destination files had different permissions and attributes (i-nodes), but I badly needed the permissions to be preserved in the destination files/folders. The following command will preserve the attributes -<br /><br /><span style="font-weight: bold; color: rgb(0, 0, 153);font-family:courier new;">cp -p source destination</span><source><span style="font-weight: bold; color: rgb(0, 0, 153);font-family:courier new;"> </span><destination><br /><br />here, the switch p (-p) does the trick, it preserves the permissions, modes and other attributes to resemble the source.<br /><br />Hope this helps some of you with similar needs!</destination></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/24/">&larr; Older</a>
@@ -521,6 +521,10 @@ I dare not say, I am savvy at Linux :-)<br /><br />Recently, I ran into a proble
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
@@ -534,10 +538,6 @@ I dare not say, I am savvy at Linux :-)<br /><br />Recently, I ran into a proble
     
       <li class="post">
         <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-03-04T10:31:20-07:00</updated>
+  <updated>2021-04-23T10:51:40-06:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 5 - MongoDB]]></title>
+    <link href="http://smsohan.com/blog/2021/04/23/architecture-mongodb/"/>
+    <updated>2021-04-23T10:19:00-06:00</updated>
+    <id>http://smsohan.com/blog/2021/04/23/architecture-mongodb</id>
+    <content type="html"><![CDATA[<p>Continuing on this architecture series of posts. Similar to the <a href="http://smsohan.com/blog/2021/03/04/architecture-redis/">post on Redis</a>, this time let&#8217;s focus on another hugely popular distributed database
+called <a href="https://www.mongodb.com">MongoDB</a>. If you aren&#8217;t familiar with MongoDB, it&#8217;s a distributed database that allows you to store and query humongous amounts of JSON-like data.</p>
+
+<p>To get an overview of MongoDB and its architecture, you can watch the following YouTube video:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oH-gQ4JdXQc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<p>Of course, you can also download the <a href="https://www.mongodb.com/collateral/mongodb-architecture-guide">official architecture guide</a> to learn more.
+Let&#8217;s focus on rationale behind MongoDB&#8217;s architectural decisions. You can find answers to all of the following questions
+if you went through the guide or the video. But my goal is get you to think about the why behind the decisions.</p>
+
+<p>MongoDB has databases and collections. While collections are conceptually parallel to tables in traditional relational databases, MongoDB doesn&#8217;t impose
+any restrictions on the schema of a collection. Can you think of reasons behind this decision? What trade-offs come to your mind? For example,
+not having a schema allows you to store anything within a collection, essentially reducing the need for schema migrations on very large databases.
+But at the same time, it may complicate consumption of the data. What other trade-offs can you think of?</p>
+
+<p>MongoDB uses a router named Mongos and needs config servers to route queries when data is sharded into multiple partitions. What benefits and challenges do you see with the addition of this router component?</p>
+
+<p>MongoDB requires you to have uneven number of replicas to deal with failover when a new primary node needs to be elected. How do you judge this design decision?</p>
+
+<p>By design, MongoDB allows you to choose a write concern at write time to allow you to balance your need in the <a href="https://en.wikipedia.org/wiki/CAP_theorem">CAP</a> triangle. Can you explain what you must do
+ to ensure you&#8217;ll not lose data is 2 out of 3 of your replica servers were to go corrupt?</p>
+
+<p>MongoDB allows you to run complex map reduce queries in the form of aggregate pipelines. In a distributed database, which component within the MongoDB ecosystem
+is responsible for aggregating data that spans multiple nodes?</p>
+
+<p>If you followed the Redis post, what would you say are the top 3 architectural difference between MongoDB and Redis? Can you reason about the why behind the
+differences?</p>
+
+<p>Based on MongoDB&#8217;s architecture, where do you see a potential bottleneck that can affect scaling a MongoDB cluster? What options do you have to work around?</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 4 - Redis]]></title>
@@ -638,33 +677,6 @@ Requirements -> |         |
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Working With Me]]></title>
-    <link href="http://smsohan.com/blog/2020/02/08/working-with-me/"/>
-    <updated>2020-02-08T12:38:00-07:00</updated>
-    <id>http://smsohan.com/blog/2020/02/08/working-with-me</id>
-    <content type="html"><![CDATA[<p>Since I commonly work with a diverse group of people, this post is a way for me to broadcast some quick tricks that may help our working relationship. When we work together, let&#8217;s do this:</p>
-
-<p><strong>Trust</strong> is only earned when it&#8217;s mutual. Let&#8217;s work with this shared belief.</p>
-
-<p><strong>Context</strong> is everything. Most importantly, show me <strong>why</strong> we need to work on something. If the answer isn&#8217;t clear in your mind, we can work together to build a crisp context.</p>
-
-<p><strong>Solutions</strong> for problems you&#8217;re raising. Ideally, you&#8217;ve already thought about a few solutions with some measure of feasibility for each, and you come with an open mind. I know you care about the problem only if you spent some time thinking about a few solutions.</p>
-
-<p><strong>Clarity</strong> between your evidence and assumptions. Assumptions are often essential to move ahead, but treating assumptions as evidence can be harmful.</p>
-
-<p><strong>Output</strong> is the focus, our egos aren&#8217;t. That said, let&#8217;s be mutually respectful.</p>
-
-<p><strong>Time</strong> is managed. Let&#8217;s manage our expectations given the time we have. Blaming the shortage of time shows a lack of skill.</p>
-
-<p><strong>Writing</strong> is a great thought exercise and good write-up scales infinitely. Let&#8217;s write and rewrite our thoughts, specially when we&#8217;re unclear about those.</p>
-
-<p><strong>Standup comedies, biography, soccer, politics, investment, tech, leadership, Netflix, movies, and similar topics</strong> are cool. Sorry, not much of a Hockey or Basket Ball fan. Mostly a passive music listener and happy to listen whatever is on radio or a YouTube playlist.</p>
-
-<p>If you have a similar list, I&#8217;d be happy to read and respect it. Please send along.</p>
 ]]></content>
   </entry>
   

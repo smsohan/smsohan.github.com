@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Source: Audrey on Flickr I think nobody knows how to stitch together an app with full-stack micro-services. I have the following open-questions if &hellip;">
+  <meta name="description" content="Since I commonly work with a diverse group of people, this post is a way for me to broadcast some quick tricks that may help our working relationship &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,60 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2020/02/08/working-with-me/">Working With Me</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2020-02-08T12:38:00-07:00" pubdate data-updated="true">Feb 8<span>th</span>, 2020</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Since I commonly work with a diverse group of people, this post is a way for me to broadcast some quick tricks that may help our working relationship. When we work together, let&#8217;s do this:</p>
+
+<p><strong>Trust</strong> is only earned when it&#8217;s mutual. Let&#8217;s work with this shared belief.</p>
+
+<p><strong>Context</strong> is everything. Most importantly, show me <strong>why</strong> we need to work on something. If the answer isn&#8217;t clear in your mind, we can work together to build a crisp context.</p>
+
+<p><strong>Solutions</strong> for problems you&#8217;re raising. Ideally, you&#8217;ve already thought about a few solutions with some measure of feasibility for each, and you come with an open mind. I know you care about the problem only if you spent some time thinking about a few solutions.</p>
+
+<p><strong>Clarity</strong> between your evidence and assumptions. Assumptions are often essential to move ahead, but treating assumptions as evidence can be harmful.</p>
+
+<p><strong>Output</strong> is the focus, our egos aren&#8217;t. That said, let&#8217;s be mutually respectful.</p>
+
+<p><strong>Time</strong> is managed. Let&#8217;s manage our expectations given the time we have. Blaming the shortage of time shows a lack of skill.</p>
+
+<p><strong>Writing</strong> is a great thought exercise and good write-up scales infinitely. Let&#8217;s write and rewrite our thoughts, specially when we&#8217;re unclear about those.</p>
+
+<p><strong>Standup comedies, biography, soccer, politics, investment, tech, leadership, Netflix, movies, and similar topics</strong> are cool. Sorry, not much of a Hockey or Basket Ball fan. Mostly a passive music listener and happy to listen whatever is on radio or a YouTube playlist.</p>
+
+<p>If you have a similar list, I&#8217;d be happy to read and respect it. Please send along.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -631,260 +685,6 @@ But, if you can, give Apple Pages a try.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/05/23/exception-handling-anti-patterns/">Exception Handling Anti-patterns</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2019-05-23T10:25:00-06:00" pubdate data-updated="true">May 23<span>rd</span>, 2019</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/confusing_road_sign.jpg" alt="confusing road sign" /></p>
-
-<p><sub>
-Source: <a href="https://www.flickr.com/photos/foilman/2803261256/in/photolist-5gHrUC-5YEVYt-ocZHz7-2bDb3w8-aCGGSo-cB9opW-dUUDRS-6qbnVw-ppkgWu-cYsKjw-4HSS8t-aAJCk5-XBWQ5q-cYsKDA-NNefT4-p8HF-bfJwPB-6SibT9-ubSQL-mvaYX-7uNS7V-473w41-HABo5-5SL6FL-2f4rrkN-SazHLx-2eaMrNW-2eaMsbQ-24J1WkB-24CQREz-24CQR5g-bvyvt7-RvjAiK-6asxLk-9zRJ1e-6zLy6Z-9yuCpf-24FpgMX-95dVq3-hERZkd-4JKe8s-hESYoP-hESYnX-4oPtJ8-6gvogb-5skgvk-4Pu7Hp-8AmdYp-2t55t-24FpgYt">Henry Burrows</a>
-</sub></p>
-
-<p>Whenever faced with a production issue, I find exceptions to be an extremely useful
-information source. A careful look at an
-exeption has often led to quick discovery
-of the source of a trouble. On the flip side, I have also
-faced a lot of chaotic debugging sessions because of poor exception handling.
-Here, I present the common anti-patterns that I recommend fixing while
-reviewing pull-requests. Most programmers are already familiar with the mechanics of exception
-handling. Yet, I see these anti-patterns everyday.</p>
-
-<p>I primarily see these anti-patterns to be control-flow or logging related as shown below:</p>
-
-<h2>Control-flow Anti-patterns</h2>
-
-<p><strong>Unhandled.</strong> When an exception is unhandled, if often results in a
-clueless user experience for the end user as well as the developer.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">notify</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">email!</span> <span class="c1">#May fail due to configuration, network, or authentication</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Catch-all.</strong> With catch-all errors, it&#8217;s often difficult to quickly detect the
-original problem. For the same reason, the end users don&#8217;t get specific
-and actionable error messages.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save!</span> <span class="c1">#May fail due to database issues</span>
-</span><span class='line'><span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">error</span>
-</span><span class='line'>  <span class="c1"># handle</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>If-else Exceptions.</strong> Exceptions mean something unexpected took
-place. If-else is used for logical known code paths. For example, when
-accepting an API request, invalid input data is often a known logical
-path. Using exceptions for it will trigger false alarms.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save!</span>
-</span><span class='line'><span class="k">rescue</span> <span class="no">ValidationError</span> <span class="o">=&gt;</span> <span class="n">error</span>
-</span><span class='line'>  <span class="n">log_exception</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Wrapped Exception.</strong> A new exception is raised hiding the original exception. In such cases,
-if the exception is handled by the caller, <strong>critical context information
-is lost</strong> since the orignal stacktrace is no longer available.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save!</span> <span class="c1">#May fail due to database issues</span>
-</span><span class='line'><span class="k">rescue</span> <span class="no">SaveError</span> <span class="o">=&gt;</span> <span class="n">error</span>
-</span><span class='line'>  <span class="k">raise</span> <span class="no">CustomSaveError</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;Failed to save the post&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Useless Custom Exception.</strong> Introducing a new exception type when a pre-defined exception suits just
-fine.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">text</span><span class="p">:)</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="kp">nil</span>
-</span><span class='line'>    <span class="c1">#Could just use pre-defined ArgumentError</span>
-</span><span class='line'>    <span class="k">raise</span> <span class="no">EmptyTextException</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;Text can&#39;t be empty&quot;</span><span class="p">)</span>   <span class="k">end</span>
-</span><span class='line'>  <span class="c1">#...</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Leaky Handler.</strong> Handling an error without cleaning system resources such as file
-handles, open network connections, can cause cascading system outage.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="c1">#Will leak this file handle if read succeeds, but write fails</span>
-</span><span class='line'>  <span class="n">file</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/some/new.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;some text&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">rescue</span> <span class="no">FileNotFoundError</span><span class="p">,</span> <span class="no">FileSaveError</span> <span class="o">=&gt;</span> <span class="n">error</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">raise</span> <span class="n">error</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Logging Anti-Patterns</h2>
-
-<p><strong>Silent Handler.</strong> Makes it very difficult to debug problems.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save!</span> <span class="c1">#May fail due to database issues</span>
-</span><span class='line'><span class="k">rescue</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Debug-only Handler.</strong> Similar to silent handler since most production apps run in non-debug
-log level.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save!</span> <span class="c1">#May fail due to database issues</span>
-</span><span class='line'><span class="k">rescue</span> <span class="no">SaveError</span> <span class="o">=&gt;</span> <span class="n">error</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">.</span><span class="n">debug</span> <span class="s2">&quot;failed to save post </span><span class="si">#{</span><span class="n">error</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">error</span><span class="o">.</span><span class="n">backtrace</span><span class="o">.</span><span class="n">join</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Custom Message-only Handler.</strong> Some exception handlers only log a custom
-message leaving the details of the exceptions. As a result, critical
-information is lost that can be very useful for debugging.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save!</span> <span class="c1">#May fail due to database issues</span>
-</span><span class='line'><span class="k">rescue</span> <span class="no">SaveError</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">.</span><span class="n">warn</span> <span class="s2">&quot;failed to save post&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Message-only Handler.</strong> Without Stacktrace, it gets very difficult to trace the root of a
-problem since often times exception handlers wrap a few lines of code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">email</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">email</span>
-</span><span class='line'>  <span class="n">post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">comment</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</span><span class='line'><span class="k">rescue</span> <span class="no">NotFoundError</span> <span class="o">=&gt;</span> <span class="n">error</span> <span class="c1"># Could happen in line 2 or 4</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">.</span><span class="n">warn</span> <span class="s2">&quot;failed to save post </span><span class="si">#{</span><span class="n">error</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>Sneaky Handler.</strong> Some exception handlers return nil or a value.
-The caller can&#8217;t distinguish between a successful vs. exception case and
-fails in subsequent steps.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>  <span class="n">post</span><span class="o">.</span><span class="n">save!</span> <span class="c1">#May fail due to database issues</span>
-</span><span class='line'><span class="k">rescue</span> <span class="no">SaveError</span> <span class="o">=&gt;</span> <span class="n">error</span>
-</span><span class='line'>  <span class="n">log</span><span class="o">.</span><span class="n">warn</span> <span class="s2">&quot;failed to save post </span><span class="si">#{</span><span class="n">error</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">error</span><span class="o">.</span><span class="n">backtrace</span><span class="o">.</span><span class="n">join</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">null</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There are times when you intentionally have to use some of these
-anti-patterns. But those are rare. It&#8217;s critical for the developers to
-think about the information that&#8217;d help in swiftly debugging a production problem. As such,
-developers must avoid the noise and provide all context information for
-errors to help diagnose potential system problems.</p>
-
-<p>Happy coding.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -902,6 +702,10 @@ errors to help diagnose potential system problems.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
@@ -915,10 +719,6 @@ errors to help diagnose potential system problems.</p>
     
       <li class="post">
         <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
   </ul>

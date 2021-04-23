@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="TL;DR; It&#8217;s not one assert per test, rather one logical path per test. I find this to be a classical example of how an inappropriate choice of &hellip;">
+  <meta name="description" content="I like the idea of learning one new programming language every year. This is also mentioned at The Pragmatic Programmer Book. I&#8217;m now looking &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/12/12/what-programming-language-should-i-learn-in-2013/">What Programming Language Should I Learn in 2013?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T16:11:00-07:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I like the idea of learning one new programming language every year. This is also mentioned at <a href="http://pragprog.com/book/tpp/the-pragmatic-programmer">The Pragmatic Programmer Book</a>. I&#8217;m now looking for a new language to learn.</p>
+
+<p>In 2011, I learned <a href="http://research.microsoft.com/en-us/um/cambridge/projects/fsharp/">F#</a>, my first functional programming language experience. It&#8217;s a really nice language, especially if you&#8217;re familiar with the .Net class library and the windows development echo system in general. This was really fun, learned the basic concepts and building blocks of functional languages.</p>
+
+<p>The direct impact of F# is, even if I&#8217;m not using F#, I&#8217;m consciously using the concepts in other languages. For example, Ruby comes with a handful of functional style methods in its <a href="http://www.ruby-doc.org/core-1.9.3/Array.html">Array/Enumerable API</a>, and so does UnderscoreJS. Not just that, I&#8217;m always watching for opporunities to reduce side-effects, use delayed execution and pass around blocks when it makes sense. Learning F# has improved my Ruby/JavaScript/C# coding as a direct result. One disclaimer here, I&#8217;ve failed to grasp the true concepts of <a href="" title="http://en.wikipedia.org/wiki/Monad_(category_theory)">Category Theory and Monads</a>, although I understand how to use these.</p>
+
+<p>I also learned ObjectiveC in 2011 while working on a project with ThoughtWorks. This was fun, apart from the frustrations with the IDE. As a language, I actually liked it quite a lot, the way they handle dynamic message passing while still giving you compile errors looked really innovative to me. I believe there&#8217;s a lot of room for me to learn more about ObjectiveC and Cocoa framework in general. Please let me know if there&#8217;s a good open source project where I can see professional level ObjectiveC code.</p>
+
+<p>2012 was my year of learning JavaScript. Don&#8217;t get me wrong, I&#8217;ve been writing JavaScript for some time now, but I think I really learned the language in 2012. Thanks to the influx of micro libraries, as well as their coolness, and seriousness. CoffeeScript made me immensely happy, too. Started writing a JavaScript book with <a href="http://isagoksu.com/">Isa Goksu</a>, too bad we didn&#8217;t get far with it :(</p>
+
+<p>I&#8217;m yet to pick a new language for 2013. Any suggestion? Or, what are you learning in 2013?</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -744,123 +790,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/10/02/mvcmailer-new-api/">MvcMailer New API</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-02T10:23:00-06:00" pubdate data-updated="true">Oct 2<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>With the help of <a href="http://codecuriosity.com/">@TylerMercier</a>, and many active users of MvcMailer, we have just released the new API for MvcMailer. This is a summary post capturing the work and lessons learned in the process.</p>
-
-<p>The bulk of the work has been done on removing hard dependencies on dll files for 3rd party libraries in favor of NuGet packages. For example, we used NUnit, for running our tests. Instead of referencing the dlls directly, we are now using the NuGet package. This will help the contributors to get up and running with the source code without having to worry about the depedencies being in the right place.</p>
-
-<p>NuGet command line also added a dependency as a Nuget package!</p>
-
-<p>But this cleanup is not gonna be directly visible to the users of MvcMailer. If you install MvcMailer today, you should see a few changes as follows:</p>
-
-<ol>
-<li>MvcMailer now uses T4Scaffolding 1.0.7 instead of the older version that was causing issue with ASP.NET MVC 4.</li>
-<li>MvcMailer package is now exclusively for ASP.NET MVC 4. And a new package MvcMailer3 is published for ASP.NET MVC3. After looking into options, we found this was probably the best way to release an upgrade, while still remaining compatible with MVC3.</li>
-<li>The MailerBase has a sweet new API. The old API still works, but I&#8217;d highly discourage using it. This is how it&#8217;d look:</li>
-</ol>
-
-
-<figure class='code'><figcaption><span>Example code showing old API</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">class</span> <span class="nc">WelcomeMailer</span> <span class="p">:</span> <span class="n">MailerBase</span><span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">public</span> <span class="n">MailMessage</span> <span class="nf">Welcome</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kt">var</span> <span class="n">mailMessage</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MailMessage</span><span class="p">(){</span><span class="n">Subject</span> <span class="p">=</span> <span class="err">&#39;</span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="n">world</span><span class="p">!</span><span class="err">&#39;</span><span class="p">};</span>
-</span><span class='line'>    <span class="n">mailMessage</span><span class="p">.</span><span class="n">To</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;hello@example.com&quot;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">PopulateBody</span><span class="p">(</span><span class="n">mailMessage</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">Welcome</span><span class="err">&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="n">mailMessage</span><span class="p">;</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you see here, the old API would require you to initialize your own <code>MailMessage</code>, set some parameters to it and then hand it over to MailerBase so it can render the view into its body.</p>
-
-<p>We found it would be nice to reverse this workflow using lambdas. So, there&#8217;s a new populate method, that will call you back with an already instantiated <code>MvcMailMessage</code> object so you can set its properties as required. <code>MvcMailMessage</code> is an extension of <code>MailMessage</code> from the core .Net library, with new properties added so you can specify the <code>ViewName, MasterName, LinkedResources</code> etc.</p>
-
-<p>So, with this new API, the code from above will look like the following:</p>
-
-<figure class='code'><figcaption><span>Example code with the new API</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">class</span> <span class="nc">WelcomeMailer</span> <span class="p">:</span> <span class="n">MailerBase</span><span class="p">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">public</span> <span class="n">MvcMailMessage</span> <span class="nf">Welcome</span><span class="p">(){</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="nf">Populate</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">Subject</span> <span class="p">=</span> <span class="err">&#39;</span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="n">world</span><span class="p">!</span><span class="err">&#39;</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">ViewName</span> <span class="p">=</span> <span class="err">&#39;</span><span class="n">Welcome</span><span class="err">&#39;</span><span class="p">;</span>
-</span><span class='line'>      <span class="n">x</span><span class="p">.</span><span class="n">To</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;hello@example.com&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>As you see here, the new API provides a nice way get rid of some of the repiting parts of your mailer code. This API is available on both MvcMailer3 and MvcMailer.</p>
-
-<p>We&#8217;d like to hear your feedback on this new API. Thank you for using MvcMailer.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -878,6 +807,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
@@ -891,10 +824,6 @@
     
       <li class="post">
         <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/12/30/software-architecture-part-2-people/">Software Architecture - Topic 2: People</a>
       </li>
     
   </ul>
