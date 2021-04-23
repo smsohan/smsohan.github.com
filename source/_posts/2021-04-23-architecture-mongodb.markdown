@@ -24,15 +24,15 @@ But at the same time, it may complicate consumption of the data. What other trad
 
 MongoDB uses a router named Mongos and needs config servers to route queries when data is sharded into multiple partitions. What benefits and challenges do you see with the addition of this router component?
 
-MongoDB requires you to have uneven number of replicas to deal with failover when a new primary node needs to be elected. How do you judge this design decision?
+MongoDB requires you to have an uneven number of replicas to deal with failover when a new primary node needs to be elected. How do you judge this design decision?
 
 By design, MongoDB allows you to choose a write concern at write time to allow you to balance your need in the [CAP](https://en.wikipedia.org/wiki/CAP_theorem) triangle. Can you explain what you must do
  to ensure you'll not lose data is 2 out of 3 of your replica servers were to go corrupt?
 
-MongoDB allows you to run complex map reduce queries in the form of aggregate pipelines. In a distributed database, which component within the MongoDB ecosystem
+MongoDB allows you to run complex map-reduce queries in the form of aggregate pipelines. In a distributed database, which component within the MongoDB ecosystem
 is responsible for aggregating data that spans multiple nodes?
 
-If you followed the Redis post, what would you say are the top 3 architectural difference between MongoDB and Redis? Can you reason about the why behind the
+If you followed the Redis post, what would you say are the top 3 architectural differences between MongoDB and Redis? Can you reason about the why behind the
 differences?
 
 Based on MongoDB's architecture, where do you see a potential bottleneck that can affect scaling a MongoDB cluster? What options do you have to work around?
