@@ -35,4 +35,4 @@ is responsible for aggregating data that spans multiple nodes?
 If you followed the Redis post, what would you say are the top 3 architectural differences between MongoDB and Redis? Can you reason about the why behind the
 differences?
 
-Based on MongoDB's architecture, where do you see a potential bottleneck that can affect scaling a MongoDB cluster? What options do you have to work around?
+Based on MongoDB's architecture, where do you see a potential bottleneck that can affect scaling a MongoDB cluster? What options do you have to workaround?
