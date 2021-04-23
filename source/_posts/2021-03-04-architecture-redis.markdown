@@ -6,7 +6,7 @@ comments: true
 categories: "Software Architecture"
 ---
 
-Welcome back into the Software Architecture series. I know at least a few people from my team are following, and that's a great encouragement.
+Welcome back to the Software Architecture series. I know at least a few people from my team are following, and that's a great encouragement.
 
 For today's post, let's focus on learning from a very popular and commonly used open-source project called [Redis](http://redis.io). To the developers, Redis is a
 dead simple key-value store with a super simple API as follows:
@@ -32,7 +32,7 @@ $ get temp
 24
 ```
 
-Of course Redis has more advanced features, but not too many. I think Redis is a delightful system. It's fun to use and has a reputation for being incredibly fast and scalable. I'm going to recommend you to spend some time on [Redis architecture](https://docs.redislabs.com/latest/rs/concepts/) and see if you can understand the concepts to confidently answer the following questions:
+Of course Redis has more advanced features, but not too many. I think Redis is a delightful system. It's fun to use and has a reputation for being incredibly fast and scalable. I'm going to recommend you to spend some time on [Redis architecture](https://docs.redislabs.com/latest/rs/concepts/) and see if you understand the concepts to confidently answer the following questions:
 
 1. Why is Redis so fast?
 2. What can you do to prevent data loss when using Redis?
