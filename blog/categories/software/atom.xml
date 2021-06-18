@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-04-23T11:02:04-06:00</updated>
+  <updated>2021-06-18T15:57:50-06:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Software Architecture - Topic 6 - Slack and Microsoft Teams]]></title>
+    <link href="http://smsohan.com/blog/2021/06/18/architecture-realtime/"/>
+    <updated>2021-06-18T15:23:00-06:00</updated>
+    <id>http://smsohan.com/blog/2021/06/18/architecture-realtime</id>
+    <content type="html"><![CDATA[<p>Most applications have a request-response based single-channel data-flow. In such systems, human or software triggered requests are served by software provided responses. For example, when you make your DuckDuckGo search, you initiate a request and their server produces a response back to you. Realtime multiplayer systems are quite different because the pattern of information flow is more complex, often being a two-way or many-to-many data flow, with strict latency constraints. For example, when you chat with a bunch of friends, or join them for a video call, the data-flow is quite different than when you watch a YouTube video.</p>
+
+<p>I found two great talks from the folks at Slack about "How Slack Works" and "Scaling Slack". The nice thing about these two talks is they are presented one year apart, and it gives a great view into the challenges with designing a realtime multiplayer system in the first place, and then evolving the design to meet scaling needs. To an aspiring architect, these two talks can provide a real-life example of thinking in terms of evolutionary architecture as a vital tool to strike a balance between upfront and just in time design.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WE9c9AZe-DY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_M-oHxknfnI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<p>I also recommend you to check the architecture of Microsoft Teams. The contrast between Slack and Teams design will show you the stark difference between the two approaches. The key difference between the two is Slack was built from scratch, and Teams was built on top of a whole bunch of existing services such as Skype, OneDrive, Sharepoint, etc. As a result of different organizational dynamics, the two products are quite unique in their architecture even though there's a major overlap of features offered by both.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I33pQ9PUHNc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<p>Once you get a chance to watch these talks, I recommend taking some time to think about the main conceptual design elements of realtime multiplayer systems. For example, patterns of many-to-many communication channels, low latency data-flow, security and access control, etc.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 5 - MongoDB]]></title>
@@ -146,37 +172,6 @@ OK</p>
 <p>For this topic, I want you to read and internalize the ideas from the book <a href="https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034/ref=sr_1_1?dchild=1&amp;keywords=Dale+Carnegie&amp;qid=1609523629&amp;s=books&amp;sr=1-1">How to Win Friends and Influence People</a> by Dale Carnegie. Honestly, it's a fun read for anyone, not just for the aspiring architect. But an architect must be able to listen with empathy and clearly share her ideas. She needs to truly appreciate diverse opinion because it's common that a delightful system can be designed in many ways, and she's likely to have her blind spots. Moreover, she needs exceptional conflict-resolution skills to create a safe space so the best ideas win irrespective of where it comes from.</p>
 
 <p>I know some of you may be getting impatient because you want to learn hardcore software architecture and I'm not talking anything technical yet. If you can hold your patience and bear with me, we'll get there soon enough. I have what I think an exciting curriculum where I'll be teaching hardcore software design topics using many well-known open-source products. My goal is to set you up for success as an architect, and these softcore topics are of the highest priority in my curriculum. The small number of great architects I've enjoyed working with have won me over by their people skills. All the other architects may have been technically genius, but lacked people skills to appreciate the essence of a delightful system, let alone designing one.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Software Architecture - Topic 1: Delightfulness]]></title>
-    <link href="http://smsohan.com/blog/2020/12/26/software-artchitecture-part-1/"/>
-    <updated>2020-12-26T15:07:00-07:00</updated>
-    <id>http://smsohan.com/blog/2020/12/26/software-artchitecture-part-1</id>
-    <content type="html"><![CDATA[<p><em>"I want to be an architect"</em> - is a common career goal I hear during one:one meetings and annual reviews with my team members. Honestly, I'm writing this series of blog posts to bring some clarity and structure into my own thoughts, and hopefully to scale my time. You can even say, I'm open-sourcing my mentorship on the topic of software archtecture. My sincere hope is, this series helps my team or anyone who wants to systematically learn and improve their software design skills.</p>
-
-<p>My mental model of a software architect as a system is as follows:</p>
-
-<pre>
-                 _________
-                |         |
-Requirements -> |         |
-                |         |
- Environment -> |Architect| -> "Delightful" System Design
-                |         |
-      People -> |         |
-                |_________|
-</pre>
-
-
-<p>That is, they produce the most delightful system design as the output from three inputs: business requirements, the environment that surrounds the system, and the people that are involved with the system. The main phrase to remember is <strong>"the most delightful"</strong> - because this is what makes the architect's job so much fun and appealing.</p>
-
-<p>First, I recommend reading the book <a href="https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654">The Design of Everyday Things</a> to learn how design impacts us everyday. It's a fun and must read for anyone involved in any kind of design.</p>
-
-<p>Next, I recommend reading the book <a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515/ref=sr_1_1?crid=EH17W0BAL06D&amp;dchild=1&amp;keywords=don%27t+make+me+think&amp;qid=1609281299&amp;s=books&amp;sprefix=don%27t+make+%2Cstripbooks-intl-ship%2C200&amp;sr=1-1">Don't Make Me Think</a> to learn about how to know if your design is delightful.</p>
-
-<p>I prefer the word delightfulness over usability or customer obsession because the former sets a high bar. I hope you also internalize the goal of designing the most delightful systems and settle for nothing less, why should you?</p>
 ]]></content>
   </entry>
   

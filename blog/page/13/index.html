@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Thanks to 365+ downloads of the MvcMailer NuGet before it hit version 1.0 and now its time to wrap up the NuGet package for an official first &hellip;">
+  <meta name="description" content="Just released MvcMailer 1.0 as promised in my previous post.&nbsp;Download your copy using the following:Install-Package MvcMailerOf course, you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/03/07/mvcmailer-10-released/">MvcMailer 1.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-07T00:00:00-07:00" pubdate data-updated="true">Mar 7<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+Just released MvcMailer 1.0 as promised in my <a href="http://smsohan.blogspot.com/2011/03/whats-coming-in-mvcmailer-nuget-10.html">previous post</a>.&nbsp;Download your copy using the following:<br /><blockquote>Install-Package MvcMailer</blockquote>Of course, you will find a comprehensive tutorial at: <a href="https://github.com/smsohan/MvcMailer/wiki/MvcMailer-Step-by-Step-Guide">this github wiki</a> page.</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -492,43 +529,6 @@ Thanks for sharing your post and it was superb .I would like to hear more from y
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/11/10/upgrading-to-ruby-on-rails-3-beware/">Upgrading to Ruby on Rails 3 - Beware!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-10T00:00:00-07:00" pubdate data-updated="true">Nov 10<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Ryan Bates had a series of posts (<a href="http://railscasts.com/episodes/225-upgrading-to-rails-3-part-1">1</a>, <a href="http://railscasts.com/episodes/226-upgrading-to-rails-3-part-2">2</a>&nbsp;and&nbsp;<a href="http://railscasts.com/episodes/227-upgrading-to-rails-3-part-3">3</a>) on upgrading your Rails 2.3.x apps to Rails 3.x and sure they are useful. But if you are really doing that, beware of the following changes that you will need to do. It will take a lot of time for sure if you you have a moderate sized app.<br /><br />Upgrading your models:<br /><br /><ol><li>Get rid of all validates_xxx_of with appropriate validates</li><li>Get rid of all def validate &#8230; end methods with custom validator</li><li>Find out all occurrences of :conditions, :limit, :order and use new active record methods instead</li><li>Replace all named_scope with scope</li><li>Make sure your acts_as_xxxx plugins are all updated to use Ruby on Rails 3. I had troubles with Authlogic as it shows Based.named_scope is DEPRICATED. Still looking for a solution.</li><li>Ruby 1.9.2 doesn&#8217;t work with soap42 wsdl driver. Haven&#8217;t found a solution yet as it keeps reporting an error regarding &#8220;XML processor module&#8221; missing.</li></ol><div>Upgrading your controllers:</div><div><ol><li>Find out all occurrences of find method and replace with where.</li><li>Find out all calls to Mailer that looks like deliver_xxx and make it xxx.deliver</li></ol><div><div><div>Upgrading your views:</div></div><div><ol><li>All erb blocks must start with a   has to be changed to&nbsp; . Do the same for all such erb blocks with a do.</li><li>All link_to_remote or remote_form_for or other remote form helpers need to be changed to their non-remote counterparts with a param :remote =&gt; true.</li></ol></div></div><div>Upgrading your mailers:</div></div><div><ol><li>body method is gone, instead of the hashed params to this method, just define instance variables.</li><li>All xxx.text.html.erb now becomes xxx.html.erb in the mailer views.</li></ol><div>Upgrading the config files:</div></div><div><ol><li>The best way is to crate a new rails app and then copy the config folder into yours.</li><li>Look at the initializers and clean up any required initializers.</li><li>Make sure you have autoload_paths setup to include the lib folder. It is not included by default, so your code from the lib folder won&#8217;t be accessible.</li><li>Look at deprecation warning and you will see lots of config.action_controller.* need to changed to config.*</li></ol><div>Plugins:</div></div><div><ol><li>All plugin/lib/rails/tasks/*.rake needs to be copied in to plugin/lib/tasks/*.rake</li><li>Make sure your plugins don&#8217;t use named_scope, if you find any, replace with scope.</li><li>Whatever applies to your models should also be applied to your plugins that act on models.</li></ol><div>Testing:</div><div><ol><li>Check you have updated shoulda, rspec or whatever lib you use.</li><li>Update test codes according to your new lib.</li></ol></div><div>Upgrading IDE to use RVM:</div></div><div><ol><li>Your IDE is not smart enough to use RVM. However <a href="http://blendedmusings.blogspot.com/2010/10/getting-rvm-textmate-ruby-187-and-192.html">use this</a> to get TextMate ready.</li></ol></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/14/">&larr; Older</a>
@@ -546,6 +546,10 @@ Ryan Bates had a series of posts (<a href="http://railscasts.com/episodes/225-up
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
       </li>
     
@@ -559,10 +563,6 @@ Ryan Bates had a series of posts (<a href="http://railscasts.com/episodes/225-up
     
       <li class="post">
         <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
       </li>
     
   </ul>

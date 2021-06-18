@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Continuing on this architecture series of posts. Similar to the post on Redis, this time let&#8217;s focus on another hugely popular distributed &hellip;">
+  <meta name="description" content="Most applications have a request-response based single-channel data-flow. In such systems, human or software triggered requests are served by &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2021-06-18T15:23:00-06:00" pubdate data-updated="true">Jun 18<span>th</span>, 2021</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Most applications have a request-response based single-channel data-flow. In such systems, human or software triggered requests are served by software provided responses. For example, when you make your DuckDuckGo search, you initiate a request and their server produces a response back to you. Realtime multiplayer systems are quite different because the pattern of information flow is more complex, often being a two-way or many-to-many data flow, with strict latency constraints. For example, when you chat with a bunch of friends, or join them for a video call, the data-flow is quite different than when you watch a YouTube video.</p>
+
+<p>I found two great talks from the folks at Slack about &#8220;How Slack Works&#8221; and &#8220;Scaling Slack&#8221;. The nice thing about these two talks is they are presented one year apart, and it gives a great view into the challenges with designing a realtime multiplayer system in the first place, and then evolving the design to meet scaling needs. To an aspiring architect, these two talks can provide a real-life example of thinking in terms of evolutionary architecture as a vital tool to strike a balance between upfront and just in time design.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WE9c9AZe-DY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_M-oHxknfnI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<p>I also recommend you to check the architecture of Microsoft Teams. The contrast between Slack and Teams design will show you the stark difference between the two approaches. The key difference between the two is Slack was built from scratch, and Teams was built on top of a whole bunch of existing services such as Skype, OneDrive, Sharepoint, etc. As a result of different organizational dynamics, the two products are quite unique in their architecture even though there&#8217;s a major overlap of features offered by both.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I33pQ9PUHNc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<p>Once you get a chance to watch these talks, I recommend taking some time to think about the main conceptual design elements of realtime multiplayer systems. For example, patterns of many-to-many communication channels, low latency data-flow, security and access control, etc.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -656,58 +709,6 @@ Requirements -> |         |
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2020-11-28T20:33:00-07:00" pubdate data-updated="true">Nov 28<span>th</span>, 2020</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="/images/demo.jpg" alt="Show and Tell" /></p>
-
-<p><small>Image source: <a href="https://flic.kr/p/5kUqG8">Show and tell - explaining the rain game</a></small></p>
-
-<p>I started my developer career 15 years ago at the onset of agile and Scrum. From my early career, I worked on short sprints where we demoed our work to collect feedback towards the end of each sprint. So, after thousands of demos, I’ve seen enough great ones that I developed a taste for it. I can no longer go back to soulless demos. This post is about a few observations I have about great demos.</p>
-
-<p><strong>Presenters of great demos always tell a story.</strong> The presenter herself had a lot of fun and she has to share her excitement with everyone. It’s contagious, we can’t help but listen. She shows what her team had done and why it matters. She fondly shares what was fun and what was a pain the butt. Her passion drives us to pay attention and take part actively.</p>
-
-<p><strong>Great demos have a memorable punchline.</strong> The presenter lays out the demo in a way that neatly converges to her punchline we can’t forget.</p>
-
-<p><strong>Great demos allow everyone to immerse into the demo.</strong> The presenter takes a pause so the audience can focus on the work of art, and shares her narrative when the audience can truly focus on listening.</p>
-
-<p><strong>Great demos are inclusive.</strong> The presenter remains humble, acknowledges her team’s effort, and curiously seeks feedback from everyone.</p>
-
-<p><strong>Great demos feel short.</strong></p>
-
-<p>Now, treat yourself with this captivating <a href="https://www.youtube.com/watch?v=2sIzfGzf_50">storytelling of Nick Means</a> even if you don’t have 40 minutes of free time. You’ll thank me. I know sprint demos are only 5-10 mins, but you can still put your soul into it. We’ll surely care.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -723,6 +724,10 @@ Requirements -> |         |
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
       </li>
     
@@ -736,10 +741,6 @@ Requirements -> |         |
     
       <li class="post">
         <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/01/16/what-drives-me/">What Drives Me?</a>
       </li>
     
   </ul>
