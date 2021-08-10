@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MvcMailer | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/mvcmailer/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[MvcMailer new API]]></title>
     <link href="http://smsohan.com/blog/2012/10/02/mvcmailer-new-api/"/>
-    <updated>2012-10-02T10:23:00-06:00</updated>
+    <updated>2012-10-02T10:23:00-07:00</updated>
     <id>http://smsohan.com/blog/2012/10/02/mvcmailer-new-api</id>
     <content type="html"><![CDATA[<p>With the help of <a href="http://codecuriosity.com/">@TylerMercier</a>, and many active users of MvcMailer, we have just released the new API for MvcMailer. This is a summary post capturing the work and lessons learned in the process.</p>
 

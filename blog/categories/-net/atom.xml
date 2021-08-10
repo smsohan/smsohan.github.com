@@ -4,7 +4,7 @@
   <title><![CDATA[Category: .Net | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/-net/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[MvcMailer and Open Source Happiness]]></title>
     <link href="http://smsohan.com/blog/2013/03/18/mvcmailer-and-open-source-happiness/"/>
-    <updated>2013-03-18T09:17:00-06:00</updated>
+    <updated>2013-03-18T09:17:00-07:00</updated>
     <id>http://smsohan.com/blog/2013/03/18/mvcmailer-and-open-source-happiness</id>
     <content type="html"><![CDATA[<p>MvcMailer makes me happy as a developer.</p>
 
@@ -37,7 +37,7 @@
   <entry>
     <title type="html"><![CDATA[MvcMailer new API]]></title>
     <link href="http://smsohan.com/blog/2012/10/02/mvcmailer-new-api/"/>
-    <updated>2012-10-02T10:23:00-06:00</updated>
+    <updated>2012-10-02T10:23:00-07:00</updated>
     <id>http://smsohan.com/blog/2012/10/02/mvcmailer-new-api</id>
     <content type="html"><![CDATA[<p>With the help of <a href="http://codecuriosity.com/">@TylerMercier</a>, and many active users of MvcMailer, we have just released the new API for MvcMailer. This is a summary post capturing the work and lessons learned in the process.</p>
 
@@ -108,7 +108,7 @@ return mailMessage;
   <entry>
     <title type="html"><![CDATA[NuGet - Why Should You Care?]]></title>
     <link href="http://smsohan.com/blog/2011/03/17/nuget-why-should-you-care/"/>
-    <updated>2011-03-17T00:00:00-06:00</updated>
+    <updated>2011-03-17T00:00:00-07:00</updated>
     <id>http://smsohan.com/blog/2011/03/17/nuget-why-should-you-care</id>
     <content type="html"><![CDATA[<div class='post'>
 Traditionally the .NET community, or more appropriately the users of .NET framework relied on products from Microsoft - so, in a product stack you are likely to see almost everything coming from Microsoft. However, some community contribution made its way into the main stream - for example, NUnit or Log4Net. But you can literally count the number of such main stream non-Microsoft products in your development stacks with your fingers (sparing a few)!<br /><blockquote>NuGet makes it easy to share your reusable library/utility code to the community. So, if you've done something cool that you wanna share, you should utilize the platform.</blockquote>One important difference between your and Microsoft's contribution is, whatever you are contributing is likely to be a piece of software extracted from one of your real world projects. On the other hand, Microsoft attempts to produce something based on public interest and their imagination - often missing the real pain that you or I have. So, this mismatch between the designer and the actual consumer of the product often leaves a lot of opportunity for you. If you did something to solve your own pain on a project, its likely you're not alone. So, share it with us.<br /><blockquote>NuGet official feed and website is a great place to get feedback.</blockquote>Did something cool? Well, you should feel good as people will use and appreciate your work. More importantly, they will provide you with interesting ideas and reviews that you haven't thought about. Does this sound useful to you? People will go even further - they will directly contribute to the project with code!<br /><blockquote>NuGet will challenge you with competition from other contributors.</blockquote>A healthy competition is a great way of learning from others too. You'll see other contributors attacking the same pain you are solving in a different approach, often directly challenging you! You love challenge, don't you?<br /><blockquote>If you need hard numbers to get motivated, here's some data from my MvcMailer project:<ul><li>Downloaded 600+ times in less than 2 months.</li></ul><ul><li>Received 60+ emails from people using MvcMailer, mostly encouraging feedback.</li></ul><ul><li>300%+ increase in my blog traffic.</li></ul></blockquote><br /><div>Bottom line is, you should publish your NuGet package if there's any cool project you have done. Or, look out for what others are doing and possibly contribute with your code/suggestions. If you need an idea, look for StackOverflow questions, you'll see there are solvable problems that people are fighting against time and again.</div></div>
@@ -119,7 +119,7 @@ Traditionally the .NET community, or more appropriately the users of .NET framew
   <entry>
     <title type="html"><![CDATA[My Article at CodeProject: MvcMailer]]></title>
     <link href="http://smsohan.com/blog/2011/01/13/my-article-at-codeproject-mvcmailer/"/>
-    <updated>2011-01-13T00:00:00-07:00</updated>
+    <updated>2011-01-13T00:00:00-08:00</updated>
     <id>http://smsohan.com/blog/2011/01/13/my-article-at-codeproject-mvcmailer</id>
     <content type="html"><![CDATA[<div class='post'>
 I just released a .Net NuGet package called MvcMailer and to get people super easily started, put an article at CodeProject.com. You are most welcome to the article at&nbsp;<a href="http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx">http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx</a><br />I welcome your comments and suggestions!</div>
@@ -192,7 +192,7 @@ Hi!<br /><br />Thirst of all, thank you for a brilliant package! It&#39;s simple
   <entry>
     <title type="html"><![CDATA[A good example of C# Regular Expression: Implementing InitCap or Titleize/TitleCase using C# and Regular Expression]]></title>
     <link href="http://smsohan.com/blog/2009/01/21/good-example-of-c-regular-expression/"/>
-    <updated>2009-01-21T00:00:00-07:00</updated>
+    <updated>2009-01-21T00:00:00-08:00</updated>
     <id>http://smsohan.com/blog/2009/01/21/good-example-of-c-regular-expression</id>
     <content type="html"><![CDATA[<div class='post'>
 <p>Ever since I first learned about the regular expressions, I have always been fascinated by its magical capability. When I first learned about DFA/NFA, I figured out how it is possible to evaluate a regular expression and eventually, during my Undergrad at BUET, I implemented a regular expression evaluator for the Compiler Lab.</p> <p>Now, given this history, here is a simple code that I wrote today. Let me know if you liked it-</p> <div style="background: white none repeat scroll 0% 0%; font-size: 10pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; font-family: courier new;"> <p style="margin: 0px;">        Program()</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(Titleize(<span style="color: rgb(163, 21, 21);">"hello! This is a sample string for titleize!"</span>));</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.Read();</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> Titleize(<span style="color:blue;">string</span> input)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color: rgb(43, 145, 175);">Regex</span>.Replace(input.ToLower(), <span style="color: rgb(163, 21, 21);">@"(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)"</span>, <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MatchEvaluator</span>(OnMatch));</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> OnMatch(<span style="color: rgb(43, 145, 175);">Match</span> match)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">"{0}{1}{2}"</span>, match.Groups[<span style="color: rgb(163, 21, 21);">"space"</span>].Value, match.Groups[<span style="color: rgb(163, 21, 21);">"first"</span>].Value.ToUpper(), match.Groups[<span style="color: rgb(163, 21, 21);">"rest"</span>].Value);</p> <p style="margin: 0px;">        }</p></div> <p style="margin: 0px;">For a little explanation, the pattern <span style="color: rgb(163, 21, 21);">@"(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)"</span> matches to a series of space followed by a word. The word is further divided into two parts, the first one is just the first character and the rest understandably captures the "rest" part of the word.</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Next the OnMatch method takes each occurrence of a match of the above pattern and as shown, simply regroups the word as previous but just takes the Upper case of the first letter!</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Simple? You got another good example of Regular Expression? Share with me.</p></div>

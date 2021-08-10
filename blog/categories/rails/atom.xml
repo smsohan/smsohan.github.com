@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Ruby on Rails: Database Migration and Downtime]]></title>
     <link href="http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime/"/>
-    <updated>2019-03-18T10:20:00-06:00</updated>
+    <updated>2019-03-18T10:20:00-07:00</updated>
     <id>http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime</id>
     <content type="html"><![CDATA[<p>Recently, we had a production outage for a few minutes due a database
 migration on one of our Ruby on Rails apps. The deployment went fine
@@ -68,7 +68,7 @@ data.</li>
   <entry>
     <title type="html"><![CDATA[Introducing Asset Pipeline to Older Apps?]]></title>
     <link href="http://smsohan.com/blog/2013/10/08/how-to-introduce-asset-pipeline-for-older-apps/"/>
-    <updated>2013-10-08T10:12:00-06:00</updated>
+    <updated>2013-10-08T10:12:00-07:00</updated>
     <id>http://smsohan.com/blog/2013/10/08/how-to-introduce-asset-pipeline-for-older-apps</id>
     <content type="html"><![CDATA[<p>Introducing Asset Pipeline to an old project is quite hard. Most pre-asset pipeline projects used small JavaScript/CSS files that are often scoped to a single page or a part of the application. A typical example is as follows:</p>
 
@@ -142,7 +142,7 @@ if(isLoginValid){
   <entry>
     <title type="html"><![CDATA[Released streamy_csv gem]]></title>
     <link href="http://smsohan.com/blog/2013/05/10/released-streamy-csv-gem/"/>
-    <updated>2013-05-10T08:38:00-06:00</updated>
+    <updated>2013-05-10T08:38:00-07:00</updated>
     <id>http://smsohan.com/blog/2013/05/10/released-streamy-csv-gem</id>
     <content type="html"><![CDATA[<p>Following the <a href="/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails/">previous post</a>, I decided to spin off a little ruby gem for you folks. Get streamy_csv, and write only your application code while it'll do the boilerplate work for you.</p>
 
@@ -171,7 +171,7 @@ end
   <entry>
     <title type="html"><![CDATA[Generating and Streaming Potentially Large CSV files using Ruby on Rails]]></title>
     <link href="http://smsohan.com/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails/"/>
-    <updated>2013-05-09T14:38:00-06:00</updated>
+    <updated>2013-05-09T14:38:00-07:00</updated>
     <id>http://smsohan.com/blog/2013/05/09/genereating-and-streaming-potentially-large-csv-files-using-ruby-on-rails</id>
     <content type="html"><![CDATA[<p>Most applications I've worked on at some point required that 'Export' feature so people would be able to play with the data using the familiar Excel interface. I'm sharing some code here from a recent work that did the following:</p>
 
@@ -293,7 +293,7 @@ end
   <entry>
     <title type="html"><![CDATA[On ActiveRecord Query Enhancers]]></title>
     <link href="http://smsohan.com/blog/2013/01/21/on-activerecord-query-enhancers/"/>
-    <updated>2013-01-21T16:43:00-07:00</updated>
+    <updated>2013-01-21T16:43:00-08:00</updated>
     <id>http://smsohan.com/blog/2013/01/21/on-activerecord-query-enhancers</id>
     <content type="html"><![CDATA[<p>The question is, should we use the third-party ActiveRecord Query Enhancers like SearchLogic/Squeel/MetaSearch?</p>
 

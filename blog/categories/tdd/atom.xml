@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/tdd/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Random Data in Tests]]></title>
     <link href="http://smsohan.com/blog/2013/02/27/random-data-in-tests/"/>
-    <updated>2013-02-27T15:24:00-07:00</updated>
+    <updated>2013-02-27T15:24:00-08:00</updated>
     <id>http://smsohan.com/blog/2013/02/27/random-data-in-tests</id>
     <content type="html"><![CDATA[<p>... are evil if you expect the randomizer to give you unique values on each call.</p>
 
@@ -39,7 +39,7 @@ end
   <entry>
     <title type="html"><![CDATA[The Myth of One Assert Per Test]]></title>
     <link href="http://smsohan.com/blog/2012/12/06/the-myth-of-one-assert-per-test/"/>
-    <updated>2012-12-06T09:55:00-07:00</updated>
+    <updated>2012-12-06T09:55:00-08:00</updated>
     <id>http://smsohan.com/blog/2012/12/06/the-myth-of-one-assert-per-test</id>
     <content type="html"><![CDATA[<blockquote><p>TL;DR; It's not one <code>assert</code> per test, rather one logical path per test.</p></blockquote>
 
@@ -100,7 +100,7 @@ end
 ```
 Of course, this can indeed be converted into a single assertion, if you already had <code>equals</code> method overriden for the credit cards. But, I'd probably skip adding that code if its just for the sake of writing tests.</p>
 
-<p><img class="right" src="/images/bowling.jpg" width="300" height="550">
+<p>{% img right /images/bowling.jpg 300 550%}
 <i>Image taken from mchenrybowl</i></p>
 
 <p>The mechnical thought of "one assertion per test" is lame.</p>
@@ -121,7 +121,7 @@ Of course, this can indeed be converted into a single assertion, if you already 
   <entry>
     <title type="html"><![CDATA[Readable Unit Tests]]></title>
     <link href="http://smsohan.com/blog/2012/11/28/readable-unit-tests/"/>
-    <updated>2012-11-28T10:10:00-07:00</updated>
+    <updated>2012-11-28T10:10:00-08:00</updated>
     <id>http://smsohan.com/blog/2012/11/28/readable-unit-tests</id>
     <content type="html"><![CDATA[<p>From my experience with writing/reading unit tests for years, here's a little guideline to keep 'em readable:</p>
 
@@ -141,7 +141,7 @@ Of course, this can indeed be converted into a single assertion, if you already 
   <entry>
     <title type="html"><![CDATA[Unit Testing and Sleep]]></title>
     <link href="http://smsohan.com/blog/2012/11/27/unit-testing-asynchronous-side-effects/"/>
-    <updated>2012-11-27T15:01:00-07:00</updated>
+    <updated>2012-11-27T15:01:00-08:00</updated>
     <id>http://smsohan.com/blog/2012/11/27/unit-testing-asynchronous-side-effects</id>
     <content type="html"><![CDATA[<p>If your unit test code needs a sleep, its time to refactor it. Ideally, you'd only need to stub/mock the asynchronous call instead of introducing arbitrary sleeps in the test code, because they will eventually fail. Moreover, until it fails, it will slow down your test runner.</p>
 ]]></content>
@@ -150,7 +150,7 @@ Of course, this can indeed be converted into a single assertion, if you already 
   <entry>
     <title type="html"><![CDATA[Should You Unit Test Interaction with Static Methods?]]></title>
     <link href="http://smsohan.com/blog/2011/08/15/should-you-unit-test-interaction-with/"/>
-    <updated>2011-08-15T00:00:00-06:00</updated>
+    <updated>2011-08-15T00:00:00-07:00</updated>
     <id>http://smsohan.com/blog/2011/08/15/should-you-unit-test-interaction-with</id>
     <content type="html"><![CDATA[<div class='post'>
 <div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">No. You should not. Here's an example:</div><br /><script src="https://gist.github.com/1147225.js">

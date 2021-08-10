@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby on Rails | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:18-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Are ActiveRecord Callbacks Any Good?]]></title>
     <link href="http://smsohan.com/blog/2013/02/07/activerecord-callbacks/"/>
-    <updated>2013-02-07T09:04:00-07:00</updated>
+    <updated>2013-02-07T09:04:00-08:00</updated>
     <id>http://smsohan.com/blog/2013/02/07/activerecord-callbacks</id>
     <content type="html"><![CDATA[<p>Wanted to share my thoughts on ActiveRecord Callbacks. I'd like to know your thoughts if you disagree. Please use the comments.</p>
 
@@ -123,7 +123,7 @@ sohan.save!</p>
   <entry>
     <title type="html"><![CDATA[Seed Data in a Rails Project]]></title>
     <link href="http://smsohan.com/blog/2012/11/23/seed-data-in-a-rails-project/"/>
-    <updated>2012-11-23T13:18:00-07:00</updated>
+    <updated>2012-11-23T13:18:00-08:00</updated>
     <id>http://smsohan.com/blog/2012/11/23/seed-data-in-a-rails-project</id>
     <content type="html"><![CDATA[<p>Most applications I've worked on required some kind of seed data. For example, I've used seed data to create a super admin user so the site can actually be used upon a fresh install. Some other common cases include things like, list of credit card types, names of countries/states etc. This post is about some ideas to manage thsese seed data in a Ruby on Rails project.</p>
 

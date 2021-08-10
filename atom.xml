@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:18-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -14,9 +14,27 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Onboarding as a New Engineering Manager]]></title>
+    <link href="http://smsohan.com/blog/2021/08/09/onboarding-as-a-new-engineering-manager/"/>
+    <updated>2021-08-09T21:26:00-07:00</updated>
+    <id>http://smsohan.com/blog/2021/08/09/onboarding-as-a-new-engineering-manager</id>
+    <content type="html"><![CDATA[<p><strong>&#8220;I promise to take care of you&#8221;</strong> - believe it or not, I spent hours to come up with this message to make a first impression as a newly hired manager at Microsoft. Everyone in my team had more context than me. I was a complete newbie, yet their manager. While I had been a manager for several years, I had never started a new job as a manager. I felt super vulnerable. In my previous job, I made an impression as a technical leader before transitioning into an engineering manager. But as a new hire and a manager at Microsoft, it was a brand new experience for me. I was worried. I really wanted to start on a positive note from the get go. I had three weeks in-between jobs and I went back to my favorite leadership books, podcasts and talks for ideas. I took many long walks thinking about a heartfelt message to provide psychological safety to my new team. After many iterations, I eventually came up with that sentence, carefully choosing each word.</p>
+
+<p>Based on the feedback I received, I can tell my obsession on making a great first impression has been very effective. I focused on building trust as my number one priority. I proactively reached out and connected to my team members, my peers, and leaders above me. Following <a href="https://www.radicalcandor.com">radical candor</a> suggestion, I shared a bit of my life story to start the conversation. Then, I actively listened to them, asked for suggestions, and made sure I took notes and always followed up if there was an action item for me.</p>
+
+<p>In this post, I am sharing an actual artifact from my first call with my peer and a fellow engineering manager <a href="https://www.linkedin.com/in/peterhess/">Peter Hess</a>. Peter has over 3 decades of industry experience, and he has been at Microsoft for over 15 years, worked in many key Microsoft products in several countries. During my first one:one with Peter, I shared my screen and asked him to talk about what he does as an engineering manager at Microsoft. It helped me to get a great visual of his job, but more importantly, it helped me understand the expectations of my job as a new hire. Click on &#8220;See the board&#8221; button below to see the output of this hour-long conversation between me and Peter. Even if you are not at Microsoft, I think this mind map shows a pretty well-rounded view of the engineering manager&#8217;s job.</p>
+
+<iframe width="100%" height="561" src="https://miro.com/app/embed/o9J_l3Yog3E=/?pres=1&frameId=3074457362331359883" frameBorder="0" scrolling="no" allowFullScreen></iframe>
+
+
+<p>Of course, to succeed in a new job as a manager, you need to do more than just create a first impression. The meta point is, prepare and take leadership in your own onboarding journey. It&#8217;s worth it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 6 - Slack and Microsoft Teams]]></title>
     <link href="http://smsohan.com/blog/2021/06/18/architecture-realtime/"/>
-    <updated>2021-06-18T15:23:00-06:00</updated>
+    <updated>2021-06-18T15:23:00-07:00</updated>
     <id>http://smsohan.com/blog/2021/06/18/architecture-realtime</id>
     <content type="html"><![CDATA[<p>Most applications have a request-response based single-channel data-flow. In such systems, human or software triggered requests are served by software provided responses. For example, when you make your DuckDuckGo search, you initiate a request and their server produces a response back to you. Realtime multiplayer systems are quite different because the pattern of information flow is more complex, often being a two-way or many-to-many data flow, with strict latency constraints. For example, when you chat with a bunch of friends, or join them for a video call, the data-flow is quite different than when you watch a YouTube video.</p>
 
@@ -42,7 +60,7 @@
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 5 - MongoDB]]></title>
     <link href="http://smsohan.com/blog/2021/04/23/architecture-mongodb/"/>
-    <updated>2021-04-23T10:19:00-06:00</updated>
+    <updated>2021-04-23T10:19:00-07:00</updated>
     <id>http://smsohan.com/blog/2021/04/23/architecture-mongodb</id>
     <content type="html"><![CDATA[<p>Continuing on this architecture series of posts. Similar to the <a href="http://smsohan.com/blog/2021/03/04/architecture-redis/">post on Redis</a>, this time let&#8217;s focus on another hugely popular distributed database
 called <a href="https://www.mongodb.com">MongoDB</a>. If you aren&#8217;t familiar with MongoDB, it&#8217;s a distributed database that allows you to store and query humongous amounts of JSON-like data.</p>
@@ -81,7 +99,7 @@ differences?</p>
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 4 - Redis]]></title>
     <link href="http://smsohan.com/blog/2021/03/04/architecture-redis/"/>
-    <updated>2021-03-04T09:39:00-07:00</updated>
+    <updated>2021-03-04T09:39:00-08:00</updated>
     <id>http://smsohan.com/blog/2021/03/04/architecture-redis</id>
     <content type="html"><![CDATA[<p>Welcome back to the Software Architecture series. I know at least a few people from my team are following, and that&#8217;s a great encouragement.</p>
 
@@ -152,7 +170,7 @@ dead simple key-value store with a super simple API as follows:</p>
   <entry>
     <title type="html"><![CDATA[Can I Have a Career as a Frontend Engineer?]]></title>
     <link href="http://smsohan.com/blog/2021/02/19/frontend-engineering/"/>
-    <updated>2021-02-19T08:27:00-07:00</updated>
+    <updated>2021-02-19T08:27:00-08:00</updated>
     <id>http://smsohan.com/blog/2021/02/19/frontend-engineering</id>
     <content type="html"><![CDATA[<p>In my current role at Microsoft, I&#8217;m working on a UI SDK product. I
 hear this concern from some of my team members. More specifically,
@@ -210,7 +228,7 @@ yourself from the masses.</p>
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 3: Writing]]></title>
     <link href="http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing/"/>
-    <updated>2021-01-17T17:36:00-07:00</updated>
+    <updated>2021-01-17T17:36:00-08:00</updated>
     <id>http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing</id>
     <content type="html"><![CDATA[<p>An architect first needs to write for herself, and then for her team. Let me explain a bit.</p>
 
@@ -235,7 +253,7 @@ yourself from the masses.</p>
   <entry>
     <title type="html"><![CDATA[What Drives Me?]]></title>
     <link href="http://smsohan.com/blog/2021/01/16/what-drives-me/"/>
-    <updated>2021-01-16T11:05:00-07:00</updated>
+    <updated>2021-01-16T11:05:00-08:00</updated>
     <id>http://smsohan.com/blog/2021/01/16/what-drives-me</id>
     <content type="html"><![CDATA[<p>First, working with good people for a good purpose. Then, moving fast and delivering incrementally. Then, a good business case. And finally, a reasonably modern tech-stack.</p>
 
@@ -248,7 +266,7 @@ yourself from the masses.</p>
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 2: People]]></title>
     <link href="http://smsohan.com/blog/2020/12/30/software-architecture-part-2-people/"/>
-    <updated>2020-12-30T21:03:00-07:00</updated>
+    <updated>2020-12-30T21:03:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/12/30/software-architecture-part-2-people</id>
     <content type="html"><![CDATA[<p>To be an architect, you&#8217;ll have to be a leader. And, to be a leader, you&#8217;ll have to be able to understand people and create an influence on them. So, focusing on the people involved with a system is a pre-requisite for designing systems that delight them.</p>
 
@@ -265,7 +283,7 @@ yourself from the masses.</p>
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 1: Delightfulness]]></title>
     <link href="http://smsohan.com/blog/2020/12/26/software-artchitecture-part-1/"/>
-    <updated>2020-12-26T15:07:00-07:00</updated>
+    <updated>2020-12-26T15:07:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/12/26/software-artchitecture-part-1</id>
     <content type="html"><![CDATA[<p><em>&#8220;I want to be an architect&#8221;</em> - is a common career goal I hear during one:one meetings and annual reviews with my team members. Honestly, I&#8217;m writing this series of blog posts to bring some clarity and structure into my own thoughts, and hopefully to scale my time. You can even say, I&#8217;m open-sourcing my mentorship on the topic of software archtecture. My sincere hope is, this series helps my team or anyone who wants to systematically learn and improve their software design skills.</p>
 
@@ -296,7 +314,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA["you're unfrogettable"]]></title>
     <link href="http://smsohan.com/blog/2020/12/24/you-are-unfrogettable/"/>
-    <updated>2020-12-24T18:39:00-07:00</updated>
+    <updated>2020-12-24T18:39:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/12/24/you-are-unfrogettable</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/CiscoCard.jpg" alt="card" /></p>
 
@@ -313,7 +331,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[A Tribute to Time Travel APIs in Ruby on Rails]]></title>
     <link href="http://smsohan.com/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/"/>
-    <updated>2020-12-07T10:28:00-07:00</updated>
+    <updated>2020-12-07T10:28:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design</id>
     <content type="html"><![CDATA[<blockquote><p>Good design is obvious. Great design is transparent. — Joe Sparano</p></blockquote>
 
@@ -375,7 +393,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[Tips for Great Developer Demos]]></title>
     <link href="http://smsohan.com/blog/2020/11/28/tips-for-developer-demos/"/>
-    <updated>2020-11-28T20:33:00-07:00</updated>
+    <updated>2020-11-28T20:33:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/11/28/tips-for-developer-demos</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/demo.jpg" alt="Show and Tell" /></p>
 
@@ -400,7 +418,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[Where to Learn: 10 Ways I Do]]></title>
     <link href="http://smsohan.com/blog/2020/11/18/where-to-learn/"/>
-    <updated>2020-11-18T10:51:00-07:00</updated>
+    <updated>2020-11-18T10:51:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/11/18/where-to-learn</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/learning.png" alt="learning" /></p>
 
@@ -425,7 +443,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[Learn to Get and Give Feedback]]></title>
     <link href="http://smsohan.com/blog/2020/11/12/learn-to-get-and-give-feedback/"/>
-    <updated>2020-11-12T11:45:00-07:00</updated>
+    <updated>2020-11-12T11:45:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/11/12/learn-to-get-and-give-feedback</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/feedback.jpg" alt="Feedback" /></p>
 
@@ -455,7 +473,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[My YouTube Playlist for Leadership]]></title>
     <link href="http://smsohan.com/blog/2020/11/04/youtube/"/>
-    <updated>2020-11-04T10:29:00-07:00</updated>
+    <updated>2020-11-04T10:29:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/11/04/youtube</id>
     <content type="html"><![CDATA[<p>This summer I was interviewing for a new job. This was the first time I was interviewing for an engineering manager role. Soon I realized  these interviews were wildly different from interviews for developer roles. During typical developer interviews, I solved coding and system design problems and discussed personal aspirations in behavioral interviews. In contrast, leadership interview qeustions were really open-ended. Honestly, I found it very hard to answer these questions concisely. Often I could form a crisp answer to these questions only after the interview had finished :-( Here are some example questions:</p>
 
@@ -485,7 +503,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[Difference Between Managing One Team Vs. Many]]></title>
     <link href="http://smsohan.com/blog/2020/10/12/managing-one-vs-many-teams/"/>
-    <updated>2020-10-12T10:11:00-06:00</updated>
+    <updated>2020-10-12T10:11:00-07:00</updated>
     <id>http://smsohan.com/blog/2020/10/12/managing-one-vs-many-teams</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/orchestra.jpg" alt="Orchestra" /></p>
 
@@ -512,7 +530,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[Communication Hacks I Learned From Job Interview Feedback]]></title>
     <link href="http://smsohan.com/blog/2020/10/11/communication-hacks-from-interview-feedback/"/>
-    <updated>2020-10-11T17:07:00-06:00</updated>
+    <updated>2020-10-11T17:07:00-07:00</updated>
     <id>http://smsohan.com/blog/2020/10/11/communication-hacks-from-interview-feedback</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/gift.jpg" alt="Gift" /></p>
 
@@ -541,7 +559,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[Context]]></title>
     <link href="http://smsohan.com/blog/2020/09/15/context/"/>
-    <updated>2020-09-15T13:08:00-06:00</updated>
+    <updated>2020-09-15T13:08:00-07:00</updated>
     <id>http://smsohan.com/blog/2020/09/15/context</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/misfit.jpg" alt="Misfit" /></p>
 
@@ -558,7 +576,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[Change]]></title>
     <link href="http://smsohan.com/blog/2020/08/31/change/"/>
-    <updated>2020-08-31T14:02:00-06:00</updated>
+    <updated>2020-08-31T14:02:00-07:00</updated>
     <id>http://smsohan.com/blog/2020/08/31/change</id>
     <content type="html"><![CDATA[<h2>Manager&#8217;s Mind</h2>
 
@@ -606,7 +624,7 @@ Requirements -> |         |
   <entry>
     <title type="html"><![CDATA[When I Applied KonMari to My Calendar]]></title>
     <link href="http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/"/>
-    <updated>2020-07-17T15:26:00-06:00</updated>
+    <updated>2020-07-17T15:26:00-07:00</updated>
     <id>http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/marie_kondo.jpg" alt="Marie Kondo" /></p>
 
@@ -646,41 +664,6 @@ Requirements -> |         |
 <p>The transition from a developer to a manager and then to a manager of managers can be jarring for the “makers” among us. I hope shaping your week in themes like the ones I shared here will help calm things down for you.</p>
 
 <p>Happy leading.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[People Management and Diagnosing Low Performance]]></title>
-    <link href="http://smsohan.com/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/"/>
-    <updated>2020-05-18T18:54:00-06:00</updated>
-    <id>http://smsohan.com/blog/2020/05/18/engineering-management-and-diagnosing-low-performance</id>
-    <content type="html"><![CDATA[<p>Beginning with a story here. Back in 2008, I was a couple of years out of college and working for a software company in Dhaka, Bangladesh. Like many of my classmates from my college, I was studying GRE alongside my job for a PhD admission in a reputable US university. That process being long and uncertain, I also applied for an MBA program at the University of Dhaka as a backup plan. The GRE preparation came in very handy and I qualified for the evening MBA program. I started MBA classes in January 2009 before the universities in USA and Canada made their decision on my application. There, I took a course on Management. I was too naive and still too much an engineer to pay attention.</p>
-
-<p>But this image that our teacher drew on the board got stuck in my head to this day.</p>
-
-<p><img src="http://smsohan.com/images/perf.jpg" alt="Performance" /></p>
-
-<p>Fast forward ten years and I still like how cleanly it captures the essence of high performance of an employee as a combination of the employee&#8217;s ability and motivation in a suitable environment.</p>
-
-<p>Given this is how high-performers are, it&#8217;s possible to plot a similar graph for low performers as a diagnostic report. If such a diagnosis is right, it can provide a valuable strategy for managers and employees to work towards improving employee performance. For example, if an employee lacks skill and motivation but fits very well within the work environment, a manager can focus on skills training and suggesting therapies to increase motivation. Similarly, if an employee is unable to acquire the skills for a particular job, focusing on motivation or changing the environment for that employee may not fix the low performance issue.</p>
-
-<p>Based on the past 14 years of my time in the industry, I&#8217;ve shared some symptoms of low performance that I&#8217;ve seen. You can use this as an exercise sheet to plot your diagnosis of the low performer&#8217;s chart.</p>
-
-<ol>
-<li><p><strong>New hire too slow to ramp up:</strong> You were impressed by a candidate during the interview. The same interview process was used to find many high performers in the past. But this employee is struggling to ramp up.</p></li>
-<li><p><strong>Knowledge vs. application:</strong> You have an employee who&#8217;s always studying job related skills and shows a great deal of interest in training, but can&#8217;t translate the knowledge into application.</p></li>
-<li><p><strong>Complains about the lack of time</strong>: You have an employee struggling to produce the best outcome. In your one:one meeting, the employee always complains about lack of time even after you give him/her the time.</p></li>
-<li><p><strong>Frequently runs into conflicts:</strong> Your dream employee is causing too many conflicts within the team.</p></li>
-<li><p><strong>Can&#8217;t write thoughts down:</strong> You have an employee who&#8217;s unhappy about things. When you want them to write it down, they are unable to produce a crisp writeup about the problems and potential solutions.</p></li>
-<li><p><strong>Doesn&#8217;t make hard decisions timely:</strong> You have a leader that stays away from making hard decisions. In their mind, they want someone else to make them take the hard decision.</p></li>
-<li><p><strong>Isn&#8217;t aware of better ways to solve old problems:</strong> You have an employee who&#8217;s expert in certain ways of delivering work but lacks awareness of newer and more efficient ways.</p></li>
-<li><p><strong>Doesn&#8217;t take initiative:</strong> You encourage and reward employees to take initiatives that help the business. Yet, you see an employee is not taking part.</p></li>
-</ol>
-
-
-<p>The good news is, once a diagnosis is accurate for such symptoms of low performance, you can move ahead and implement a concrete improvement strategy for your employee. The clarity of this simple method helped me in many situations.</p>
-
-<p>I hope this helps you, too.</p>
 ]]></content>
   </entry>
   

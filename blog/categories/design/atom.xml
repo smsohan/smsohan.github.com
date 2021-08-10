@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Design | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/design/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:18-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Micro Design Critic: Microsoft Word vs. Apple Pages]]></title>
     <link href="http://smsohan.com/blog/2019/05/29/microsoft-word-vs-apple-pages/"/>
-    <updated>2019-05-29T10:44:00-06:00</updated>
+    <updated>2019-05-29T10:44:00-07:00</updated>
     <id>http://smsohan.com/blog/2019/05/29/microsoft-word-vs-apple-pages</id>
     <content type="html"><![CDATA[<p><img src="/images/WordsVsPages.png" alt="MsWordVsApplePages" />
 Showing a Screenshot of Microsoft Word for Mac and Apple Pages</p>
@@ -32,7 +32,7 @@ But, if you can, give Apple Pages a try.</p>
   <entry>
     <title type="html"><![CDATA[Configure Me Not]]></title>
     <link href="http://smsohan.com/blog/2013/11/03/configure-me-not/"/>
-    <updated>2013-11-03T21:29:00-07:00</updated>
+    <updated>2013-11-03T21:29:00-08:00</updated>
     <id>http://smsohan.com/blog/2013/11/03/configure-me-not</id>
     <content type="html"><![CDATA[<p>Configuration in software provides a method to build systems that can
 adapt to different configurations. For example, if a website's language and

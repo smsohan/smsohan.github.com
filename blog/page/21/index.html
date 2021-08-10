@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="This is a simple solution for implementing wildcard replacements in your asp.net pages. You may use this, if you want to replace some tokens / merge &hellip;">
+  <meta name="description" content="The System.Xml.Linq.XDocument.ToString() produces a serialized string version of the XDocument object. But unfortunately, while doing so, it leaves &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +85,66 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2008/08/12/xdocumenttostringwithxmldeclaration-get/">XDocument.ToStringWithXmlDeclaration() - Get the String Representation of XDcoument With Its Xml Declaration</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-12T00:00:00-07:00" pubdate data-updated="true">Aug 12<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>The System.Xml.Linq.XDocument.ToString() produces a serialized string version of the XDocument object. But unfortunately, while doing so, it leaves the xml declaration in the serialized version which may be required in your application.</p>  <p>Again, there is another method called Save that produces the serialized version including xml declaration. So, I think we can write a simple extension method for producing the xml declaration as shown in the following -</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}??\fs20 \cf1 class\cf0  \cf4 Program\par ??\cf0     \{\par ??        \cf1 static\cf0  \cf1 void\cf0  Main(\cf1 string\cf0 [] args)\par ??        \{\par ??\par ??            \cf4 XDocument\cf0  doc = \cf1 new\cf0  \cf4 XDocument\cf0 (\cf1 new\cf0  \cf4 XDeclaration\cf0 (\cf5 "1.0"\cf0 , \cf5 "utf-8"\cf0 , \cf1 null\cf0 ), \cf1 new\cf0  \cf4 XElement\cf0 (\cf5 "root"\cf0 ));\par ??            \cf4 Console\cf0 .WriteLine(doc.ToStringWithXmlDeclaration());\par ??        \}\par ??    \}\par ??\par ??\par ??    \cf1 public\cf0  \cf1 static\cf0  \cf1 class\cf0  \cf4 XDocumentExtensions\par ??\cf0     \{\par ??        \cf1 public\cf0  \cf1 static\cf0  \cf1 string\cf0  ToStringWithXmlDeclaration(\cf1 this\cf0  \cf4 XDocument\cf0  doc)\par ??        \{\par ??            \cf4 StringBuilder\cf0  builder   = \cf1 new\cf0  \cf4 StringBuilder\cf0 ();\par ??            \cf4 StringWriter\cf0  writer     = \cf1 new\cf0  \cf4 StringWriter\cf0 (builder);\par ??            doc.Save(writer);\par ??            writer.Flush();\par ??            \cf1 return\cf0  builder.ToString();\par ??        \}\par ??    \}} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">Program</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>         <span style="color:blue;">static</span> <span style="color:blue;">void</span> Main(<span style="color:blue;">string</span>[] args)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>             <span style="color: rgb(43, 145, 175);">XDocument</span> doc = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XDocument</span>(<span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XDeclaration</span>(<span style="color: rgb(163, 21, 21);">&#8220;1.0&#8221;</span>, <span style="color: rgb(163, 21, 21);">&#8220;utf-8&#8221;</span>, <span style="color:blue;">null</span>), <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XElement</span>(<span style="color: rgb(163, 21, 21);">&#8220;root&#8221;</span>));</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>             <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(doc.ToStringWithXmlDeclaration());</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>     <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">XDocumentExtensions</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">string</span> ToStringWithXmlDeclaration(<span style="color:blue;">this</span> <span style="color: rgb(43, 145, 175);">XDocument</span> doc)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>             <span style="color: rgb(43, 145, 175);">StringBuilder</span> builder   = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StringBuilder</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span>             <span style="color: rgb(43, 145, 175);">StringWriter</span> writer    = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StringWriter</span>(builder);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>             doc.Save(writer);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span>             writer.Flush();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span>             <span style="color:blue;">return</span> builder.ToString();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span>     }</p> </div>  <p>Apart from its purpose, this is also an example use of the Extension Method feature of C# 3.0.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Dan:<br />Didn&#39;t know that. Thanks for sharing.</div>
+</div>
+<div class='comment'>
+<div class='author'>Dan</div>
+<div class='content'>
+You can use also <br /><br />return doc.Declaration.ToString() + doc.ToString();</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Dragon:<br />Thanks for suggesting the improvement.</div>
+</div>
+<div class='comment'>
+<div class='author'>Dragon</div>
+<div class='content'>
+I think better:<br /><br />public static string ToStringWithXmlDeclaration(this XDocument doc)<br />{<br /> StringBuilder builder = new StringBuilder();<br /> using (TextWriter  writer = new  StringWriter(builder))<br /> {<br />  doc.Save(writer);<br /> }<br /> return builder.ToString();<br />}</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2008/08/11/simple-wildcard-replacement-on-rendered/">Simple Wildcard Replacement on the Rendered Html of Asp.Net Page</a></h1>
     
     
@@ -101,7 +161,7 @@
   
 
 
-<time datetime="2008-08-11T00:00:00-06:00" pubdate data-updated="true">Aug 11<span>th</span>, 2008</time>
+<time datetime="2008-08-11T00:00:00-07:00" pubdate data-updated="true">Aug 11<span>th</span>, 2008</time>
         
       </p>
     
@@ -151,7 +211,7 @@ this is very nice blog&#8230;<BR/>this is very helpful and attractive biog.<BR/>
   
 
 
-<time datetime="2008-08-07T00:00:00-06:00" pubdate data-updated="true">Aug 7<span>th</span>, 2008</time>
+<time datetime="2008-08-07T00:00:00-07:00" pubdate data-updated="true">Aug 7<span>th</span>, 2008</time>
         
       </p>
     
@@ -201,7 +261,7 @@ Nice one dewd, worked nicely :-)</div>
   
 
 
-<time datetime="2008-08-05T00:00:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2008</time>
+<time datetime="2008-08-05T00:00:00-07:00" pubdate data-updated="true">Aug 5<span>th</span>, 2008</time>
         
       </p>
     
@@ -251,7 +311,7 @@ Great article. It is very important for developers new to LINQ to understand the
   
 
 
-<time datetime="2008-08-04T00:00:00-06:00" pubdate data-updated="true">Aug 4<span>th</span>, 2008</time>
+<time datetime="2008-08-04T00:00:00-07:00" pubdate data-updated="true">Aug 4<span>th</span>, 2008</time>
         
       </p>
     
@@ -288,7 +348,7 @@ Great article. It is very important for developers new to LINQ to understand the
   
 
 
-<time datetime="2008-08-03T00:00:00-06:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2008</time>
+<time datetime="2008-08-03T00:00:00-07:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2008</time>
         
       </p>
     
@@ -325,7 +385,7 @@ Great article. It is very important for developers new to LINQ to understand the
   
 
 
-<time datetime="2008-06-10T00:00:00-06:00" pubdate data-updated="true">Jun 10<span>th</span>, 2008</time>
+<time datetime="2008-06-10T00:00:00-07:00" pubdate data-updated="true">Jun 10<span>th</span>, 2008</time>
         
       </p>
     
@@ -362,7 +422,7 @@ Great article. It is very important for developers new to LINQ to understand the
   
 
 
-<time datetime="2008-06-08T00:00:00-06:00" pubdate data-updated="true">Jun 8<span>th</span>, 2008</time>
+<time datetime="2008-06-08T00:00:00-07:00" pubdate data-updated="true">Jun 8<span>th</span>, 2008</time>
         
       </p>
     
@@ -399,7 +459,7 @@ Great article. It is very important for developers new to LINQ to understand the
   
 
 
-<time datetime="2008-05-28T00:00:00-06:00" pubdate data-updated="true">May 28<span>th</span>, 2008</time>
+<time datetime="2008-05-28T00:00:00-07:00" pubdate data-updated="true">May 28<span>th</span>, 2008</time>
         
       </p>
     
@@ -436,7 +496,7 @@ Great article. It is very important for developers new to LINQ to understand the
   
 
 
-<time datetime="2008-05-28T00:00:00-06:00" pubdate data-updated="true">May 28<span>th</span>, 2008</time>
+<time datetime="2008-05-28T00:00:00-07:00" pubdate data-updated="true">May 28<span>th</span>, 2008</time>
         
       </p>
     
@@ -445,43 +505,6 @@ Great article. It is very important for developers new to LINQ to understand the
 
   <div class="entry-content"><div class='post'>
 <p>Spring.Net has integration support with VS 2005 and VS 2008 (also supports older versions). To achieve this, just perform a simple copy-paste and define an XML namespace on the objects node. This will enable you to get IntelliSense and validation support while editing the objects node of the xml configuration file.</p>  <p>Two steps:</p>  <p>Step 1: Copy the &lt;Spring.Net Installed location&gt;\doc\schema\spring-objects-1.1.xsd to &lt;Visual Studio installed location&gt;/Xml/Schemas</p>  <p>Step 2: Make sure your objects node looks like this </p>  <p>&lt;objects xmlns=&#8221;http://www.springframework.net&#8221;&gt; <br />&#8230;  <br />&lt;/objects&gt;</p>  <p>With this IntelliSense support you will surely feel happy while editing the xml file!</p></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/05/23/my-article-at-codeproject-on-linq-to/">My Article at CodeProject on LINQ to SQL DataContext CommandTimeout</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-05-23T00:00:00-06:00" pubdate data-updated="true">May 23<span>rd</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p><a href="http://www.codeproject.com" target="_blank">CodeProject</a> has published my article at <a href="http://www.codeproject.com/KB/linq/LINQ2SQLCommandTimeout.aspx" target="_blank">&#8216;Change The Default CommandTimeout of LINQ DataContext&#8217;</a> I have discussed the topic covered in this article on a previous blog post at this <a href="http://smsohan.blogspot.com/2008/04/how-to-set-default-application-wide.html" target="_blank">link</a>.</p> <p>Please read the article and provide me with your feedback.</p>  </div>
 </div>
   
   
@@ -506,6 +529,10 @@ Great article. It is very important for developers new to LINQ to understand the
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
       </li>
     
@@ -519,10 +546,6 @@ Great article. It is very important for developers new to LINQ to understand the
     
       <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
   </ul>

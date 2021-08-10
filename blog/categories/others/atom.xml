@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Others | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/others/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[What Drives Me?]]></title>
     <link href="http://smsohan.com/blog/2021/01/16/what-drives-me/"/>
-    <updated>2021-01-16T11:05:00-07:00</updated>
+    <updated>2021-01-16T11:05:00-08:00</updated>
     <id>http://smsohan.com/blog/2021/01/16/what-drives-me</id>
     <content type="html"><![CDATA[<p>First, working with good people for a good purpose. Then, moving fast and delivering incrementally. Then, a good business case. And finally, a reasonably modern tech-stack.</p>
 
@@ -29,7 +29,7 @@
   <entry>
     <title type="html"><![CDATA[When I Applied KonMari to My Calendar]]></title>
     <link href="http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar/"/>
-    <updated>2020-07-17T15:26:00-06:00</updated>
+    <updated>2020-07-17T15:26:00-07:00</updated>
     <id>http://smsohan.com/blog/2020/07/17/when-i-applied-kon-mari-to-my-calendar</id>
     <content type="html"><![CDATA[<p><img src="/images/marie_kondo.jpg" alt="Marie Kondo" /></p>
 
@@ -75,7 +75,7 @@
   <entry>
     <title type="html"><![CDATA[Rails: Please include a JS test runner]]></title>
     <link href="http://smsohan.com/blog/2015/03/23/rails-please-include-a-js-test-runner/"/>
-    <updated>2015-03-23T15:34:00-06:00</updated>
+    <updated>2015-03-23T15:34:00-07:00</updated>
     <id>http://smsohan.com/blog/2015/03/23/rails-please-include-a-js-test-runner</id>
     <content type="html"><![CDATA[<p>For an opinionated framework like Ruby on Rails, I expect it to come pre-bundled with a CoffeeScript based test framework and test runner. Here's why:</p>
 
@@ -94,7 +94,7 @@
   <entry>
     <title type="html"><![CDATA[2015]]></title>
     <link href="http://smsohan.com/blog/2015/01/02/2015/"/>
-    <updated>2015-01-02T23:36:00-07:00</updated>
+    <updated>2015-01-02T23:36:00-08:00</updated>
     <id>http://smsohan.com/blog/2015/01/02/2015</id>
     <content type="html"><![CDATA[<p>This is a much shorter new year post. 2014 was the year of focusing on health, soft-skills, Haskell, social contribution and PhD in addition to typical everyday stuff. Hoping 2015 will be the year of:</p>
 
@@ -113,7 +113,7 @@
   <entry>
     <title type="html"><![CDATA[What's wrong with the default alert rendered by the browser?]]></title>
     <link href="http://smsohan.com/blog/2014/11/20/whats-wrong-with-the-default-alert-rendered-by-the-browser/"/>
-    <updated>2014-11-20T22:49:00-07:00</updated>
+    <updated>2014-11-20T22:49:00-08:00</updated>
     <id>http://smsohan.com/blog/2014/11/20/whats-wrong-with-the-default-alert-rendered-by-the-browser</id>
     <content type="html"><![CDATA[<p>Browsers have carefully crafted the alert and confirm dialogs for everyone under really simple APIs as follows:</p>
 

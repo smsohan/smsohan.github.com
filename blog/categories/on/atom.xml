@@ -4,7 +4,7 @@
   <title><![CDATA[Category: on | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/on/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:18-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Ruby on Rails: Database Migration and Downtime]]></title>
     <link href="http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime/"/>
-    <updated>2019-03-18T10:20:00-06:00</updated>
+    <updated>2019-03-18T10:20:00-07:00</updated>
     <id>http://smsohan.com/blog/2019/03/18/ruby-on-rails-database-migration-and-downtime</id>
     <content type="html"><![CDATA[<p>Recently, we had a production outage for a few minutes due a database
 migration on one of our Ruby on Rails apps. The deployment went fine

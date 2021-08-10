@@ -9,8 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="
-Here&#8217;s the code: ">
+  <meta name="description" content="No. You should not. Here&#8217;s an example: If you are somehow mocking this static method, you are potentially making it dangerous for other places &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +85,45 @@ Here&#8217;s the code: ">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2011/08/15/should-you-unit-test-interaction-with/">Should You Unit Test Interaction With Static Methods?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-15T00:00:00-07:00" pubdate data-updated="true">Aug 15<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><div dir="ltr" style="text-align: left;" trbidi="on">No. You should not. Here&#8217;s an example:</div><br /><script src="https://gist.github.com/1147225.js">
+  
+ </script></div><br />If you are somehow mocking this static method, you are potentially making it dangerous for other places where this static method is used. Eventually, this will create red test results that are hard to find and make your tests dependent on each other.<br /></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2011/08/12/how-to-list-all-classes-that-include/">How to List All Classes That Include a Module?</a></h1>
     
     
@@ -102,7 +140,7 @@ Here&#8217;s the code: ">
   
 
 
-<time datetime="2011-08-12T00:00:00-06:00" pubdate data-updated="true">Aug 12<span>th</span>, 2011</time>
+<time datetime="2011-08-12T00:00:00-07:00" pubdate data-updated="true">Aug 12<span>th</span>, 2011</time>
         
       </p>
     
@@ -141,7 +179,7 @@ Here&#8217;s the code: ">
   
 
 
-<time datetime="2011-08-09T00:00:00-06:00" pubdate data-updated="true">Aug 9<span>th</span>, 2011</time>
+<time datetime="2011-08-09T00:00:00-07:00" pubdate data-updated="true">Aug 9<span>th</span>, 2011</time>
         
       </p>
     
@@ -190,7 +228,7 @@ The first question actually has two aspects. It has a design part, and an implem
   
 
 
-<time datetime="2011-08-05T00:00:00-06:00" pubdate data-updated="true">Aug 5<span>th</span>, 2011</time>
+<time datetime="2011-08-05T00:00:00-07:00" pubdate data-updated="true">Aug 5<span>th</span>, 2011</time>
         
       </p>
     
@@ -260,7 +298,7 @@ Yes, I often halt at whether I am doing it wright anytime I use &#39;unless&#39;
   
 
 
-<time datetime="2011-07-26T00:00:00-06:00" pubdate data-updated="true">Jul 26<span>th</span>, 2011</time>
+<time datetime="2011-07-26T00:00:00-07:00" pubdate data-updated="true">Jul 26<span>th</span>, 2011</time>
         
       </p>
     
@@ -305,7 +343,7 @@ Sure, the constructors are methods too.. but they should not do anything more ex
   
 
 
-<time datetime="2011-07-22T00:00:00-06:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2011</time>
+<time datetime="2011-07-22T00:00:00-07:00" pubdate data-updated="true">Jul 22<span>nd</span>, 2011</time>
         
       </p>
     
@@ -342,7 +380,7 @@ Sure, the constructors are methods too.. but they should not do anything more ex
   
 
 
-<time datetime="2011-07-11T00:00:00-06:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time>
+<time datetime="2011-07-11T00:00:00-07:00" pubdate data-updated="true">Jul 11<span>th</span>, 2011</time>
         
       </p>
     
@@ -379,7 +417,7 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
   
 
 
-<time datetime="2011-06-25T00:00:00-06:00" pubdate data-updated="true">Jun 25<span>th</span>, 2011</time>
+<time datetime="2011-06-25T00:00:00-07:00" pubdate data-updated="true">Jun 25<span>th</span>, 2011</time>
         
       </p>
     
@@ -416,7 +454,7 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
   
 
 
-<time datetime="2011-06-22T00:00:00-06:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2011</time>
+<time datetime="2011-06-22T00:00:00-07:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2011</time>
         
       </p>
     
@@ -453,7 +491,7 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
   
 
 
-<time datetime="2011-03-17T00:00:00-06:00" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
+<time datetime="2011-03-17T00:00:00-07:00" pubdate data-updated="true">Mar 17<span>th</span>, 2011</time>
         
       </p>
     
@@ -462,56 +500,6 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
 
   <div class="entry-content"><div class='post'>
 Traditionally the .NET community, or more appropriately the users of .NET framework relied on products from Microsoft - so, in a product stack you are likely to see almost everything coming from Microsoft. However, some community contribution made its way into the main stream - for example, NUnit or Log4Net. But you can literally count the number of such main stream non-Microsoft products in your development stacks with your fingers (sparing a few)!<br /><blockquote>NuGet makes it easy to share your reusable library/utility code to the community. So, if you&#8217;ve done something cool that you wanna share, you should utilize the platform.</blockquote>One important difference between your and Microsoft&#8217;s contribution is, whatever you are contributing is likely to be a piece of software extracted from one of your real world projects. On the other hand, Microsoft attempts to produce something based on public interest and their imagination - often missing the real pain that you or I have. So, this mismatch between the designer and the actual consumer of the product often leaves a lot of opportunity for you. If you did something to solve your own pain on a project, its likely you&#8217;re not alone. So, share it with us.<br /><blockquote>NuGet official feed and website is a great place to get feedback.</blockquote>Did something cool? Well, you should feel good as people will use and appreciate your work. More importantly, they will provide you with interesting ideas and reviews that you haven&#8217;t thought about. Does this sound useful to you? People will go even further - they will directly contribute to the project with code!<br /><blockquote>NuGet will challenge you with competition from other contributors.</blockquote>A healthy competition is a great way of learning from others too. You&#8217;ll see other contributors attacking the same pain you are solving in a different approach, often directly challenging you! You love challenge, don&#8217;t you?<br /><blockquote>If you need hard numbers to get motivated, here&#8217;s some data from my MvcMailer project:<ul><li>Downloaded 600+ times in less than 2 months.</li></ul><ul><li>Received 60+ emails from people using MvcMailer, mostly encouraging feedback.</li></ul><ul><li>300%+ increase in my blog traffic.</li></ul></blockquote><br /><div>Bottom line is, you should publish your NuGet package if there&#8217;s any cool project you have done. Or, look out for what others are doing and possibly contribute with your code/suggestions. If you need an idea, look for StackOverflow questions, you&#8217;ll see there are solvable problems that people are fighting against time and again.</div></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/03/14/my-2011-q1-developer-roadmap/">My 2011 Q1 Developer Roadmap</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-14T00:00:00-06:00" pubdate data-updated="true">Mar 14<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-For me, 2011 Q1 has so far been a good exposure to new techniques, tools, articles and books, thanks to ThoughtWorks book allowance! However, if you are interested, here&#8217;s what&#8217;s keeping me busy:<br /><ol><li><span style="color: #38761d; font-size: large;">User Experience:</span> I find a good user experience is THE thing that you want in anything you design, and if you are writing a software, its even more important. After I read a few books, I have a feeling that its not just a common sense approach, it takes some education and a deep care to produce something usable. Check out my reading list at <a href="http://smsohan.com/">http://smsohan.com</a></li><li><span style="color: #274e13; font-size: large;">HTML5</span><span style="color: #274e13;">:</span> HTML5 is so more than just knowing How To Meet Ladies (HTML)! The popular browsers are all way ahead of the official HTML5 release date, so if you are building something on the web, its time you give it a real shot. Again, I shared my reading list on my website.</li><li><span style="color: #38761d; font-size: large;">.NET NuGet</span><span style="color: #38761d;">: </span>Microsoft .NET just got a major component, NuGet package manager, that greatly simplifies the sharing and consuming of reusable libraries. Already there are tens of thousands of downloads for the popular .NET libraries and I believe its just a start. So, if you&#8217;ve done something cool in your project and want that to share with the .NET crowd, you should consider NuGet as a distribution channel and get some traction on it.</li><li><span style="color: #38761d; font-size: large;">MvcMailer</span><span style="color: #38761d;">:</span> MvcMailer has got all my developer attention in the recent past. If you haven&#8217;t checked already, I highly encourage you take a look at its features <a href="https://github.com/smsohan/MvcMailer/wiki/MvcMailer-Step-by-Step-Guide">at this page</a> and you&#8217;ll see its a full stack elegant emailing solution that you need in your ASP.NET MVC projects. However, while working on this, I got familiar with the internals of the ASP.NET MVC source code and I consider this as a good experience.<span style="font-size: large;"><br /></span></li><li><span style="color: #38761d; font-size: large;">Functional Programming</span><span style="color: #38761d;">:</span> Did you learn one? Which one? Please suggest me your favorite functional language. In the remaining of this Q1, I want to spend some time on a functional programming language, probably F#.</li></ol>Its inspiring to see Calgary getting warmer these days - hope we get some outdoor soccer by the end of 2011 Q1, that would be awesome!</div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-Thanks for sharing the link. I started reading the online book at http://www.ctocorner.com/fsharp/book/<br />I like the approach in this book as it goes easy on the functional stuff for someone like me whose brain is prefilled will OO stuff!</div>
-</div>
-<div class='comment'>
-<div class='author'>Alexander Beletsky</div>
-<div class='content'>
-I&#39;m also going to learn F#.. But I would like to start with fundamentals, istead of language itself. <br /><br />I&#39;m considering this book to start:<br /><br />http://mitpress.mit.edu/sicp/full-text/book/book.html<br /><br />Its availble in pdf, as well :)</div>
-</div>
-</div>
 </div>
   
   
@@ -536,6 +524,10 @@ I&#39;m also going to learn F#.. But I would like to start with fundamentals, is
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
       </li>
     
@@ -549,10 +541,6 @@ I&#39;m also going to learn F#.. But I would like to start with fundamentals, is
     
       <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
   </ul>

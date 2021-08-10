@@ -9,11 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Input validation is often required to safe guard against inappropriate use. For example, consider the following API: TransfersController.rb1
-2
-3
-4
-5 &hellip;">
+  <meta name="description" content="Often times the business requirements demand for database features that aren&#8217;t easily achievable using a single type of database. And now we &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,6 +85,104 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/01/08/hybrid-persistence/">Hybrid Persistence</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-08T15:08:00-08:00" pubdate data-updated="true">Jan 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Often times the business requirements demand for database features that aren&#8217;t easily achievable using a single type of database. And now we have quite a few options to choose from, for example Key Value stores, Document databases, Relational databases etc, each providing some mutually exclusive features from the rest. So, it can be tempting to introduce multiple databases to rip the benefits of each.</p>
+
+<p>But, it comes with a few gotchas that are worth knowing. Here&#8217;s a short list from my recent experience on a project:</p>
+
+<ol>
+<li>No simple way to join data from multiple databases without multiple round trips.</li>
+<li>Deployment is tricky as it adds more infrastructure.</li>
+<li>If data is duplicated, migrations need to address multiple sources.</li>
+</ol>
+
+
+<p>Let&#8217;s explain this with an example. Say, we need to store data for an e-commerce site. Document stores seem to be good candidate for storing the product info, since different products have different data associated with it.</p>
+
+<figure class='code'><figcaption><span>products.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="err">id:</span> <span class="err">&#39;4wqrqw4890ipoip&#39;,</span>
+</span><span class='line'>    <span class="err">name:</span> <span class="err">&#39;iPhone</span> <span class="err">5&#39;,</span>
+</span><span class='line'>    <span class="err">color:</span> <span class="err">&#39;Black&#39;,</span>
+</span><span class='line'>    <span class="err">price:</span> <span class="err">&#39;699.99&#39;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="err">id:</span> <span class="err">&#39;4wqrqw4890ipoiq&#39;,</span>
+</span><span class='line'>    <span class="err">name:</span> <span class="err">&#39;Fine</span> <span class="err">Sheet&#39;,</span>
+</span><span class='line'>    <span class="err">thread_count:</span> <span class="err">400,</span>
+</span><span class='line'>    <span class="err">size:</span> <span class="err">&#39;Queen&#39;,</span>
+</span><span class='line'>    <span class="err">price:</span> <span class="err">&#39;699.99&#39;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We also need to store transactional data and Relational databases have been successfully used for transactions. So, a simple schema may look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="no">Sales</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">store_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With a hybrid persistence approach like this, just beware that implementing simple features as follows will need more roundtrips:</p>
+
+<ol>
+<li>Show the invoice for sale with product <b>name</b>, quantity and price.</li>
+<li>Show all &#8216;Fine Sheets&#8217; that are sold in the &#8216;Brentwood&#8217; store.</li>
+<li>List all products sold today, sorted by <b>name</b>.</li>
+</ol>
+
+
+<p>Hybrid persistence works fine for caching. But whenever your data is split into multiple sources in way that you&#8217;d have to combine the parts from each, it&#8217;s not gonna be fun time. Just so you know.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/12/14/how-much-to-validate/">How Much to Validate?</a></h1>
     
     
@@ -105,7 +199,7 @@
   
 
 
-<time datetime="2012-12-14T15:22:00-07:00" pubdate data-updated="true">Dec 14<span>th</span>, 2012</time>
+<time datetime="2012-12-14T15:22:00-08:00" pubdate data-updated="true">Dec 14<span>th</span>, 2012</time>
         
       </p>
     
@@ -234,7 +328,7 @@
   
 
 
-<time datetime="2012-12-12T16:11:00-07:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
+<time datetime="2012-12-12T16:11:00-08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2012</time>
         
       </p>
     
@@ -280,7 +374,7 @@
   
 
 
-<time datetime="2012-12-06T09:55:00-07:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
+<time datetime="2012-12-06T09:55:00-08:00" pubdate data-updated="true">Dec 6<span>th</span>, 2012</time>
         
       </p>
     
@@ -410,7 +504,7 @@
   
 
 
-<time datetime="2012-11-28T10:10:00-07:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+<time datetime="2012-11-28T10:10:00-08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
         
       </p>
     
@@ -457,7 +551,7 @@
   
 
 
-<time datetime="2012-11-27T15:01:00-07:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
+<time datetime="2012-11-27T15:01:00-08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2012</time>
         
       </p>
     
@@ -493,7 +587,7 @@
   
 
 
-<time datetime="2012-11-23T13:18:00-07:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
+<time datetime="2012-11-23T13:18:00-08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2012</time>
         
       </p>
     
@@ -659,7 +753,7 @@
   
 
 
-<time datetime="2012-11-06T09:39:00-07:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+<time datetime="2012-11-06T09:39:00-08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
         
       </p>
     
@@ -709,7 +803,7 @@
   
 
 
-<time datetime="2012-10-25T21:51:00-06:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
+<time datetime="2012-10-25T21:51:00-07:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
         
       </p>
     
@@ -790,7 +884,7 @@
   
 
 
-<time datetime="2012-10-22T20:43:00-06:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2012</time>
+<time datetime="2012-10-22T20:43:00-07:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2012</time>
         
       </p>
     
@@ -806,50 +900,6 @@
 <p>Are you pair programming? Are you doing code reviews only? Why/why not? Would you change?</p>
 
 <p>Comments are welcome.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/10/22/joined-sourcefire/">Joined Sourcefire</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-22T19:16:00-06:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Hello Dear Readers:</p>
-
-<p>I just wanted to inform you that I&#8217;ve joined Sourcefire this morning as a Principal Software Engineer. My primary responsibility will be helping my team with Ruby on Rails and Web technology related expertise. I&#8217;m looking forward to this new role.</p>
-
-<p>ThoughtWorks was a wonderful experience. In the last couple of years with ThoughtWorks, I have worked on 4 different projects, for 4 different clients and business domains from 4 different cities in North America. In a future post I would like to write about the fantastic journey, but for now I just wanted to share the news.</p>
-
-<p>Hopefully, Sourcefire will be an amazing experience as well.</p>
-
-<p>Thank you again for reading my blog.</p>
 </div>
   
   
@@ -874,6 +924,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
       </li>
     
@@ -887,10 +941,6 @@
     
       <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
   </ul>

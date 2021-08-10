@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SpyREST | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/spyrest/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:18-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[You Can Haz Automated REST API Documentation]]></title>
     <link href="http://smsohan.com/blog/2015/01/13/you-can-haz-automated-rest-api-documentation/"/>
-    <updated>2015-01-13T09:29:00-07:00</updated>
+    <updated>2015-01-13T09:29:00-08:00</updated>
     <id>http://smsohan.com/blog/2015/01/13/you-can-haz-automated-rest-api-documentation</id>
     <content type="html"><![CDATA[<p>Let's face it, the manual process of documenting REST APIs sucks big time. The process goes like this:</p>
 

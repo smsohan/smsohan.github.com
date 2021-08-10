@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/software/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 6 - Slack and Microsoft Teams]]></title>
     <link href="http://smsohan.com/blog/2021/06/18/architecture-realtime/"/>
-    <updated>2021-06-18T15:23:00-06:00</updated>
+    <updated>2021-06-18T15:23:00-07:00</updated>
     <id>http://smsohan.com/blog/2021/06/18/architecture-realtime</id>
     <content type="html"><![CDATA[<p>Most applications have a request-response based single-channel data-flow. In such systems, human or software triggered requests are served by software provided responses. For example, when you make your DuckDuckGo search, you initiate a request and their server produces a response back to you. Realtime multiplayer systems are quite different because the pattern of information flow is more complex, often being a two-way or many-to-many data flow, with strict latency constraints. For example, when you chat with a bunch of friends, or join them for a video call, the data-flow is quite different than when you watch a YouTube video.</p>
 
@@ -42,7 +42,7 @@
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 5 - MongoDB]]></title>
     <link href="http://smsohan.com/blog/2021/04/23/architecture-mongodb/"/>
-    <updated>2021-04-23T10:19:00-06:00</updated>
+    <updated>2021-04-23T10:19:00-07:00</updated>
     <id>http://smsohan.com/blog/2021/04/23/architecture-mongodb</id>
     <content type="html"><![CDATA[<p>Continuing on this architecture series of posts. Similar to the <a href="/blog/2021/03/04/architecture-redis/">post on Redis</a>, this time let's focus on another hugely popular distributed database
 called <a href="https://www.mongodb.com">MongoDB</a>. If you aren't familiar with MongoDB, it's a distributed database that allows you to store and query humongous amounts of JSON-like data.</p>
@@ -81,7 +81,7 @@ differences?</p>
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 4 - Redis]]></title>
     <link href="http://smsohan.com/blog/2021/03/04/architecture-redis/"/>
-    <updated>2021-03-04T09:39:00-07:00</updated>
+    <updated>2021-03-04T09:39:00-08:00</updated>
     <id>http://smsohan.com/blog/2021/03/04/architecture-redis</id>
     <content type="html"><![CDATA[<p>Welcome back to the Software Architecture series. I know at least a few people from my team are following, and that's a great encouragement.</p>
 
@@ -136,7 +136,7 @@ OK</p>
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 3: Writing]]></title>
     <link href="http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing/"/>
-    <updated>2021-01-17T17:36:00-07:00</updated>
+    <updated>2021-01-17T17:36:00-08:00</updated>
     <id>http://smsohan.com/blog/2021/01/17/software-architecture-part-3-writing</id>
     <content type="html"><![CDATA[<p>An architect first needs to write for herself, and then for her team. Let me explain a bit.</p>
 
@@ -161,7 +161,7 @@ OK</p>
   <entry>
     <title type="html"><![CDATA[Software Architecture - Topic 2: People]]></title>
     <link href="http://smsohan.com/blog/2020/12/30/software-architecture-part-2-people/"/>
-    <updated>2020-12-30T21:03:00-07:00</updated>
+    <updated>2020-12-30T21:03:00-08:00</updated>
     <id>http://smsohan.com/blog/2020/12/30/software-architecture-part-2-people</id>
     <content type="html"><![CDATA[<p>To be an architect, you'll have to be a leader. And, to be a leader, you'll have to be able to understand people and create an influence on them. So, focusing on the people involved with a system is a pre-requisite for designing systems that delight them.</p>
 

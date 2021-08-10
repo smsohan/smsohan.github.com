@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AngularJS | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/angularjs/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[AngularJS: Refresh or Die]]></title>
     <link href="http://smsohan.com/blog/2014/04/03/angularjs-refresh-or-die/"/>
-    <updated>2014-04-03T08:27:00-06:00</updated>
+    <updated>2014-04-03T08:27:00-07:00</updated>
     <id>http://smsohan.com/blog/2014/04/03/angularjs-refresh-or-die</id>
     <content type="html"><![CDATA[<p>Just worked on my first AngularJS project at <a href="http://loveyyc.info">http://loveyyc.info</a> (<a href="https://github.com/smsohan/analytics">source code</a>) and wanted to share my thoughts about it while the memory is still fresh. My impression in a one-liner:</p>
 
@@ -138,7 +138,7 @@ app.model('myData')
   <entry>
     <title type="html"><![CDATA[AngularJS is Very Productive, and Cool too!]]></title>
     <link href="http://smsohan.com/blog/2013/06/14/angularjs-is-very-productive-and-cool/"/>
-    <updated>2013-06-14T13:10:00-06:00</updated>
+    <updated>2013-06-14T13:10:00-07:00</updated>
     <id>http://smsohan.com/blog/2013/06/14/angularjs-is-very-productive-and-cool</id>
     <content type="html"><![CDATA[<p>It has a very steep learning curve, but yields a superb productivity boost once you've learned it. Check out <a href="http://smsohan.com/angular_wizard/">my demo of the wizard</a> that we'll discuss next.</p>
 

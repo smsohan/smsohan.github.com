@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C# | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/c-/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:33-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[MvcMailer new API]]></title>
     <link href="http://smsohan.com/blog/2012/10/02/mvcmailer-new-api/"/>
-    <updated>2012-10-02T10:23:00-06:00</updated>
+    <updated>2012-10-02T10:23:00-07:00</updated>
     <id>http://smsohan.com/blog/2012/10/02/mvcmailer-new-api</id>
     <content type="html"><![CDATA[<p>With the help of <a href="http://codecuriosity.com/">@TylerMercier</a>, and many active users of MvcMailer, we have just released the new API for MvcMailer. This is a summary post capturing the work and lessons learned in the process.</p>
 
@@ -87,7 +87,7 @@ return mailMessage;
   <entry>
     <title type="html"><![CDATA[Quiz: C# Async and Await. What is the Output of this Code?]]></title>
     <link href="http://smsohan.com/blog/2011/09/16/quiz-c-async-and-await-what-is-output/"/>
-    <updated>2011-09-16T00:00:00-06:00</updated>
+    <updated>2011-09-16T00:00:00-07:00</updated>
     <id>http://smsohan.com/blog/2011/09/16/quiz-c-async-and-await-what-is-output</id>
     <content type="html"><![CDATA[<div class='post'>
 <div dir="ltr" style="text-align: left;" trbidi="on">C# 5.0 (CTP version at this point) has support for async and await to allow clean implementation of non-blocking IO using a task-continuation model. I was just playing with it and here's the sample code to tease your brain. Tell me what is the output of this program?<br /></div><br /><script src="https://gist.github.com/1223284.js"> </script></div>
@@ -98,7 +98,7 @@ return mailMessage;
   <entry>
     <title type="html"><![CDATA[NuGet - Why Should You Care?]]></title>
     <link href="http://smsohan.com/blog/2011/03/17/nuget-why-should-you-care/"/>
-    <updated>2011-03-17T00:00:00-06:00</updated>
+    <updated>2011-03-17T00:00:00-07:00</updated>
     <id>http://smsohan.com/blog/2011/03/17/nuget-why-should-you-care</id>
     <content type="html"><![CDATA[<div class='post'>
 Traditionally the .NET community, or more appropriately the users of .NET framework relied on products from Microsoft - so, in a product stack you are likely to see almost everything coming from Microsoft. However, some community contribution made its way into the main stream - for example, NUnit or Log4Net. But you can literally count the number of such main stream non-Microsoft products in your development stacks with your fingers (sparing a few)!<br /><blockquote>NuGet makes it easy to share your reusable library/utility code to the community. So, if you've done something cool that you wanna share, you should utilize the platform.</blockquote>One important difference between your and Microsoft's contribution is, whatever you are contributing is likely to be a piece of software extracted from one of your real world projects. On the other hand, Microsoft attempts to produce something based on public interest and their imagination - often missing the real pain that you or I have. So, this mismatch between the designer and the actual consumer of the product often leaves a lot of opportunity for you. If you did something to solve your own pain on a project, its likely you're not alone. So, share it with us.<br /><blockquote>NuGet official feed and website is a great place to get feedback.</blockquote>Did something cool? Well, you should feel good as people will use and appreciate your work. More importantly, they will provide you with interesting ideas and reviews that you haven't thought about. Does this sound useful to you? People will go even further - they will directly contribute to the project with code!<br /><blockquote>NuGet will challenge you with competition from other contributors.</blockquote>A healthy competition is a great way of learning from others too. You'll see other contributors attacking the same pain you are solving in a different approach, often directly challenging you! You love challenge, don't you?<br /><blockquote>If you need hard numbers to get motivated, here's some data from my MvcMailer project:<ul><li>Downloaded 600+ times in less than 2 months.</li></ul><ul><li>Received 60+ emails from people using MvcMailer, mostly encouraging feedback.</li></ul><ul><li>300%+ increase in my blog traffic.</li></ul></blockquote><br /><div>Bottom line is, you should publish your NuGet package if there's any cool project you have done. Or, look out for what others are doing and possibly contribute with your code/suggestions. If you need an idea, look for StackOverflow questions, you'll see there are solvable problems that people are fighting against time and again.</div></div>
@@ -109,7 +109,7 @@ Traditionally the .NET community, or more appropriately the users of .NET framew
   <entry>
     <title type="html"><![CDATA[Social Helpers in ASP.Net MVC3 (Facebook, Twitter, Gravatar etc.)]]></title>
     <link href="http://smsohan.com/blog/2011/01/14/social-helpers-in-aspnet-mvc3-facebook/"/>
-    <updated>2011-01-14T00:00:00-07:00</updated>
+    <updated>2011-01-14T00:00:00-08:00</updated>
     <id>http://smsohan.com/blog/2011/01/14/social-helpers-in-aspnet-mvc3-facebook</id>
     <content type="html"><![CDATA[<div class='post'>
 This site shows the examples!<br /><a href="http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site">http://www.asp.net/webmatrix/tutorials/13-adding-social-networking-to-your-web-site</a><br /><br />Now, the social links and buttons are no longer from a third-party source, its straight from Microsoft. I don't know if this is first-party or second-party :p</div>
@@ -120,7 +120,7 @@ This site shows the examples!<br /><a href="http://www.asp.net/webmatrix/tutoria
   <entry>
     <title type="html"><![CDATA[My Article at CodeProject: MvcMailer]]></title>
     <link href="http://smsohan.com/blog/2011/01/13/my-article-at-codeproject-mvcmailer/"/>
-    <updated>2011-01-13T00:00:00-07:00</updated>
+    <updated>2011-01-13T00:00:00-08:00</updated>
     <id>http://smsohan.com/blog/2011/01/13/my-article-at-codeproject-mvcmailer</id>
     <content type="html"><![CDATA[<div class='post'>
 I just released a .Net NuGet package called MvcMailer and to get people super easily started, put an article at CodeProject.com. You are most welcome to the article at&nbsp;<a href="http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx">http://www.codeproject.com/KB/aspnet/MvcMailerNuGet.aspx</a><br />I welcome your comments and suggestions!</div>

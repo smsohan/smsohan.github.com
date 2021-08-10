@@ -4,7 +4,7 @@
   <title><![CDATA[Category: EmberJS | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/emberjs/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:18-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Unconventional Conventions]]></title>
     <link href="http://smsohan.com/blog/2013/04/19/unconventional-conventions/"/>
-    <updated>2013-04-19T09:33:00-06:00</updated>
+    <updated>2013-04-19T09:33:00-07:00</updated>
     <id>http://smsohan.com/blog/2013/04/19/unconventional-conventions</id>
     <content type="html"><![CDATA[<p>JavaScript has been reborn, thanks to <a href="http://jquery.com">jQuery</a> to begin this epic and wonderful march. These days, we have a huge influx of micro to macro frameworks, all providing some well curated set of features. Every now and then I try to get a glimpse of the new and hot stuff so when time comes, I can make an informed decision on what to use and why.</p>
 

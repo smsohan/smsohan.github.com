@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Well, next time on a dev job interview when someone asks you the question, &#8220;Can you give us a brief idea on agile software development &hellip;">
+  <meta name="description" content="In a previous post in this blog, I introduced the nice little acronym IMPACT for agile. To recap, here is what IMPACT stands for - &#8220;Iterative &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +85,56 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2008/11/26/part-1-how-am-i-impacting/">Part 1: How Am I IMPACTing Following Scrum?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-26T00:00:00-08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>In a previous post in this blog, I introduced the nice little acronym <a href="http://smsohan.blogspot.com/2008/11/impact-of-agile-software-development.html">IMPACT for agile</a>. To recap, here is what <strong>IMPACT</strong> stands f<em>or -</em></p>  <blockquote style="background-color: rgb(0, 128, 192);">   <p><span style="color: rgb(253, 253, 253);"><em><strong>&#8220;I</strong>terative and Incremental development of a software by means of <strong>M</strong>erciless refactoring, <strong>P</strong>eer reviews, <strong>A</strong>utomated acceptance testing, <strong>C</strong>ontinuous integration and of course, <strong>T</strong>est driven development&#8221;</em></span></p> </blockquote>  <p>To give you a little background around my story, let me tell you about a project that I am working since June 2006. The project is a micro-finance loan application automation server for the US financial industry. It acts as a mediator between a loan seeking customer and one of over 50 lenders in an attempt to get a loan for the customer. So, the server adds value by taking a single application to 50 odd lenders from a single submission unless no lender is left untried or some lender says &#8216;yes&#8217; to it. This is done in real time, the processing time in average is less than 3 minutes.</p>  <p>Now that you have the background, let me introduce the the challenges associated with this project. The bullet points are-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Since this involves real dollars, there is nearly no margin for an error. </li>    <li>It processes more than a thousand loan applications per hour, so a high availability is a must. </li>    <li>This is done following agile Scrum and each two week one/two new lending partners need to be integrated. </li>    <li>The lending partners change their integration API from time to time and we need to accommodate the changes ASAP. </li> </ul>  <p>To address these challenges this is how we are responding-</p>  <p><strong>Iterative and Incremental development (IID)</strong></p>  <p>We are following Scrum and using <a href="http://www.scrumpad.com/">ScrumPad</a> to manage the IID. Basically, our clients/product owners put new requirements in terms of user stories in the product backlog at ScrumPad. So, with the prioritized product backlog we, the team, pick items to a sprint&#8217;s backlog. Then as usual, we break it down to tasks and do everything that it takes to meet the deadline of two weeks. Within a sprint the following are the milestones-</p>  <table style="color: rgb(255, 255, 255); background-color: rgb(0, 128, 192);" width="612" border="1" cellpadding="2" cellspacing="0"><tbody>     <tr>       <td valign="top" width="66">Day 1</td>        <td valign="top" width="57">Day 2</td>        <td valign="top" width="57">Day 3</td>        <td valign="top" width="57">Day 4</td>        <td valign="top" width="57">Day 5</td>        <td valign="top" width="57">Day 6</td>        <td valign="top" width="57">Day 7</td>        <td valign="top" width="57">Day 8</td>        <td valign="top" width="63">Day 9</td>        <td valign="top" width="82">Day 10</td>     </tr>      <tr>       <td style="font-weight: bold;" valign="top" width="68">Sprint Planning</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="56">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td valign="top" width="57">Dev &amp; Test</td>        <td style="font-weight: bold;" valign="top" width="66">Test Release</td>        <td style="font-weight: bold;" valign="top" width="82">Production Release</td>     </tr>   </tbody></table>  <ul style="background-color: rgb(211, 249, 118);">   <li>8th day - Sprint works are completed. </li>    <li>9th day - Test delivery at a near production environment and feedback gathering from product owner. </li>    <li>10th day - Incorporate feedbacks and release in production. </li> </ul>  <p>Note that, we generally produce a number of test releases within the first 8 days. That gives us an earlier chance to gather client feedbacks.</p>  <p>The beauty if this approach is, with this model in place we can release as early as in 8 working days, if not earlier. So, this helps us meeting the last two challenges as mentioned above.</p>  <p><strong>Merciless refactoring</strong></p>  <p>Developing incrementally offers much challenge in attaining the longevity of the product. Because, naturally as new features come in, we need to make room for that in the existing implementation.To ensure the quality and life of the product, we do merciless refactoring as we go. We have over 90% unit test coverage, which helps us in doing this continuous refactoring. So, the idea is-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Writing unit test and acceptance test. </li>    <li>Refactoring our code/design and validating against automated tests. </li> </ul>  <p><strong>Peer reviews</strong></p>  <p>This is probably the most important practice that I recommend. Because, as we had new members in the team, we found that the quality was somewhat degrading. Once, we started peer reviews, it was very helpful to the new comers as well as the veterans to keep the code quality up to the mark. We review the following things-</p>  <ul style="background-color: rgb(211, 249, 118);">   <li>Naming of variables, methods, classes, files, namespaces etc. </li>    <li>Use of private methods for increased readability. </li>    <li>Hard coded string literals or constants. </li>    <li>Long/nested loops and long running if-else blocks. </li>    <li>Code commenting. </li>    <li>Quality of coding. </li> </ul>  <p>I would suggest you to try Microsoft&#8217;s Stylecop, it will give you a great head start to ensure the first level code quality by enforcing the common rules. This practice is allowing us to continue the good quality over time.</p>  <p>I have always been shy of reading extra large text in the web. So, I thought I could better post this in two parts! I assure, next post will contain more images than texts, So, you better stay tuned for the next one&#8230;</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Hasan,<BR/>Thanks for the complement!<BR/>Yes, I am promoting the acronym. I believe this acronym somehow unites the best practices all in a single word. Just like how we need to unite these to make the most of our efforts!</div>
+</div>
+<div class='comment'>
+<div class='author'>hasan</div>
+<div class='content'>
+nice acronym sohan bhai, lets spread the agile IMPACT!!</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2008/11/18/impact-of-agile-software-development/">IMPACTing for Agile Software Development</a></h1>
     
     
@@ -101,7 +151,7 @@
   
 
 
-<time datetime="2008-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
+<time datetime="2008-11-18T00:00:00-08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
         
       </p>
     
@@ -161,7 +211,7 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
   
 
 
-<time datetime="2008-11-18T00:00:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
+<time datetime="2008-11-18T00:00:00-08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
         
       </p>
     
@@ -198,7 +248,7 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
   
 
 
-<time datetime="2008-11-10T00:00:00-07:00" pubdate data-updated="true">Nov 10<span>th</span>, 2008</time>
+<time datetime="2008-11-10T00:00:00-08:00" pubdate data-updated="true">Nov 10<span>th</span>, 2008</time>
         
       </p>
     
@@ -235,7 +285,7 @@ Good one. I like it. Maybe &#8216;P&#8217; should stand for Peer review of stori
   
 
 
-<time datetime="2008-11-03T00:00:00-07:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2008</time>
+<time datetime="2008-11-03T00:00:00-08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2008</time>
         
       </p>
     
@@ -280,7 +330,7 @@ Agreed, an incremental approach can work well.<br /><br />FYI, we&#39;re offerin
   
 
 
-<time datetime="2008-09-06T00:00:00-06:00" pubdate data-updated="true">Sep 6<span>th</span>, 2008</time>
+<time datetime="2008-09-06T00:00:00-07:00" pubdate data-updated="true">Sep 6<span>th</span>, 2008</time>
         
       </p>
     
@@ -325,7 +375,7 @@ NUnit task in this example does not work.<br /><br />The warning : warning MSB60
   
 
 
-<time datetime="2008-09-01T00:00:00-06:00" pubdate data-updated="true">Sep 1<span>st</span>, 2008</time>
+<time datetime="2008-09-01T00:00:00-07:00" pubdate data-updated="true">Sep 1<span>st</span>, 2008</time>
         
       </p>
     
@@ -370,7 +420,7 @@ The important thing to remember is that if you compile using c# 3.0 features, th
   
 
 
-<time datetime="2008-09-01T00:00:00-06:00" pubdate data-updated="true">Sep 1<span>st</span>, 2008</time>
+<time datetime="2008-09-01T00:00:00-07:00" pubdate data-updated="true">Sep 1<span>st</span>, 2008</time>
         
       </p>
     
@@ -407,7 +457,7 @@ The important thing to remember is that if you compile using c# 3.0 features, th
   
 
 
-<time datetime="2008-08-20T00:00:00-06:00" pubdate data-updated="true">Aug 20<span>th</span>, 2008</time>
+<time datetime="2008-08-20T00:00:00-07:00" pubdate data-updated="true">Aug 20<span>th</span>, 2008</time>
         
       </p>
     
@@ -444,7 +494,7 @@ The important thing to remember is that if you compile using c# 3.0 features, th
   
 
 
-<time datetime="2008-08-13T00:00:00-06:00" pubdate data-updated="true">Aug 13<span>th</span>, 2008</time>
+<time datetime="2008-08-13T00:00:00-07:00" pubdate data-updated="true">Aug 13<span>th</span>, 2008</time>
         
       </p>
     
@@ -453,66 +503,6 @@ The important thing to remember is that if you compile using c# 3.0 features, th
 
   <div class="entry-content"><div class='post'>
 <p>I have been doing TDD for about two years now and using mock testing for interaction based unit testing in my projects. What I have learned over this time is, a unit testable design leads to introduction of interfaces and dependency injection for testing a code in isolation. And when I want to perform tests on my interactions, I need to create mock objects and inject these mock instances to my object under test. Sometimes, a unit test class needs to create quite a few of such mock objects and I feel this can be done using a simple wrapper around the usual mocking frameworks.</p>  <p>I suggest a similar and even more powerful wrapper so that you don&#8217;t need to create instances for each of the mock objects, rather do it in a single call for all your desired mocks. I have shown this method for NMock2, however, its evident that you can write your own method for your favorite mocking framework just using this code as a reference.</p>  <p>This code is written in C# 3.0 and should compile in .Net 3.5. You will need to add a reference to NMock2 to compile this. Also, you need to know a bit about Reflection to understand the following code fragment.</p>  <p><strong>Disclaimer:</strong> This code is just a simple example and it may not suit all your needs.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red128\green128\blue128;\red0\green128\blue0;\red163\green21\blue21;}??\fs20 \cf1 using\cf0  System;\par ??\cf1 using\cf0  System.Collections.Generic;\par ??\cf1 using\cf0  System.Linq;\par ??\cf1 using\cf0  System.Text;\par ??\cf1 using\cf0  System.Reflection;\par ??\par ??\par ??\cf1 namespace\cf0  NMock2.Extensions\par ??\{\par ??    \cf1 public\cf0  \cf1 static\cf0  \cf1 class\cf0  \cf4 MockeryExtensions\par ??\cf0     \{\par ??        \cf5 ///\cf6  \cf5 <summary>\par ??\cf0         \cf5 ///\cf6  This method will fill all properties of the &#8216;target&#8217; of interface type having a setter\par ??\cf0         \cf5 ///\cf6  \cf5 </summary>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="mocks"></param>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="target"></param>\par ??\cf0         \cf1 public\cf0  \cf1 static\cf0  \cf1 void\cf0  FillWithMocks(\cf1 this\cf0  \cf4 Mockery\cf0  mocks, \cf1 object\cf0  target)\par ??        \{\par ??            \cf4 Type\cf0  targetType = target.GetType();\par ??            \cf4 PropertyInfo\cf0  []properties = target.GetType().GetProperties();\par ??            \par ??            \cf1 foreach\cf0  (\cf4 PropertyInfo\cf0  property \cf1 in\cf0  properties)\par ??            \{\par ??                \cf4 Type\cf0  ptype = property.PropertyType;\par ??                \cf1 if\cf0  (ptype.IsInterface)\par ??                \{\par ??                    \cf1 if\cf0 (targetType.GetMethod(\cf1 string\cf0 .Format(\cf7 &#8220;set_\{0\}&#8221;\cf0 , property.Name)) != \cf1 null\cf0 )\par ??                    \{\par ??                        targetType.GetProperty(property.Name).SetValue(target, mocks.NewMock(ptype), \cf1 new\cf0  \cf1 object\cf0 [] \{ \});\par ??                    \}\par ??                \}\par ??            \}\par ??        \}\par ??\par ??        \cf5 ///\cf6  \cf5 <summary>\par ??\cf0         \cf5 ///\cf6  This method will fill the properties with names specified in the propertyNames array having a setter\par ??\cf0         \cf5 ///\cf6  \cf5 </summary>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="mocks"></param>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="target"></param>\par ??\cf0         \cf5 ///\cf6  \cf5 <param name="propertyNames"></param>\par ??\cf0         \cf1 public\cf0  \cf1 static\cf0  \cf1 void\cf0  FillWithMocks(\cf1 this\cf0  \cf4 Mockery\cf0  mocks, \cf1 object\cf0  target, \cf1 params\cf0  \cf1 string\cf0 [] propertyNames)\par ??        \{\par ??            \cf4 Type\cf0  targetType = target.GetType();\par ??            \cf1 foreach\cf0  (\cf1 string\cf0  propertyName \cf1 in\cf0  propertyNames)\par ??            \{\par ??                \cf4 PropertyInfo\cf0  pInfo = targetType.GetProperty(propertyName);\par ??                \cf1 if\cf0  (pInfo != \cf1 null\cf0  &amp;&amp; targetType.GetMethod(\cf1 string\cf0 .Format(\cf7 &#8220;set_\{0\}&#8221;\cf0 , propertyName)) != \cf1 null\cf0 )\par ??                \{\par ??                    pInfo.SetValue(target, mocks.NewMock(pInfo.PropertyType), \cf1 null\cf0 );\par ??                \}\par ??                \cf1 else\par ??\cf0                 \{\par ??                    \cf1 throw\cf0  \cf1 new\cf0  \cf4 ArgumentException\cf0 (\cf1 string\cf0 .Format(\cf7 &#8220;the property \{0\} is not found or does not have a setter&#8221;\cf0 , pInfo.Name));\par ??                \}\par ??            \}\par ??        \}\par ??    \}\par ??\}\par ??} &#8211;>  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    1</span> <span style="color:blue;">using</span> System;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    2</span> <span style="color:blue;">using</span> System.Collections.Generic;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    3</span> <span style="color:blue;">using</span> System.Linq;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    4</span> <span style="color:blue;">using</span> System.Text;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    5</span> <span style="color:blue;">using</span> System.Reflection;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    6</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    7</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    8</span> <span style="color:blue;">namespace</span> NMock2.Extensions</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">    9</span> {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   10</span>     <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">MockeryExtensions</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   11</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   12</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   13</span>         <span style="color:gray;">///</span><span style="color:green;"> This method will fill all properties of the &#8216;target&#8217; of interface type having a setter</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;/summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;mocks&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;target&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">void</span> FillWithMocks(<span style="color:blue;">this</span> <span style="color: rgb(43, 145, 175);">Mockery</span> mocks, <span style="color:blue;">object</span> target)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>             <span style="color: rgb(43, 145, 175);">Type</span> targetType = target.GetType();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>             <span style="color: rgb(43, 145, 175);">PropertyInfo</span> []properties = target.GetType().GetProperties();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span>             <span style="color:blue;">foreach</span> (<span style="color: rgb(43, 145, 175);">PropertyInfo</span> property <span style="color:blue;">in</span> properties)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span>             {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span>                 <span style="color: rgb(43, 145, 175);">Type</span> ptype = property.PropertyType;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>                 <span style="color:blue;">if</span> (ptype.IsInterface)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>                 {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span>                     <span style="color:blue;">if</span>(targetType.GetMethod(<span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;set_{0}&#8221;</span>, property.Name)) != <span style="color:blue;">null</span>)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>                     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>                         targetType.GetProperty(property.Name).SetValue(target, mocks.NewMock(ptype), <span style="color:blue;">new</span> <span style="color:blue;">object</span>[] { });</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span>                     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>                 }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span>             }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   36</span>         <span style="color:gray;">///</span><span style="color:green;"> This method will fill the properties with names specified in the propertyNames array having a setter</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   37</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;/summary&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   38</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;mocks&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   39</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;target&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   40</span>         <span style="color:gray;">///</span><span style="color:green;"> </span><span style="color:gray;">&lt;param name=&#8221;propertyNames&#8221;&gt;&lt;/param&gt;</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   41</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">void</span> FillWithMocks(<span style="color:blue;">this</span> <span style="color: rgb(43, 145, 175);">Mockery</span> mocks, <span style="color:blue;">object</span> target, <span style="color:blue;">params</span> <span style="color:blue;">string</span>[] propertyNames)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   42</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   43</span>             <span style="color: rgb(43, 145, 175);">Type</span> targetType = target.GetType();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   44</span>             <span style="color:blue;">foreach</span> (<span style="color:blue;">string</span> propertyName <span style="color:blue;">in</span> propertyNames)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   45</span>             {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   46</span>                 <span style="color: rgb(43, 145, 175);">PropertyInfo</span> pInfo = targetType.GetProperty(propertyName);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   47</span>                 <span style="color:blue;">if</span> (pInfo != <span style="color:blue;">null</span> &amp;&amp; targetType.GetMethod(<span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;set_{0}&#8221;</span>, propertyName)) != <span style="color:blue;">null</span>)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   48</span>                 {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   49</span>                     pInfo.SetValue(target, mocks.NewMock(pInfo.PropertyType), <span style="color:blue;">null</span>);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   50</span>                 }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   51</span>                 <span style="color:blue;">else</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   52</span>                 {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   53</span>                     <span style="color:blue;">throw</span> <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">ArgumentException</span>(<span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;the property {0} is not found or does not have a setter&#8221;</span>, pInfo.Name));</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   54</span>                 }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   55</span>             }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   56</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   57</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   58</span> }</p> </div>  <p>So, with this extension method in place, you can go and write your test code in a much compact manner. The following is an example showing one possible use of this method in your NUnit test code.</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red0\green128\blue0;\red163\green21\blue21;}??\fs20 \cf1 public\cf0  \cf1 interface\cf0  \cf4 IMyInterface\par ??\cf0     \{\par ??        \cf1 void\cf0  MyMethod(\cf1 string\cf0  name);\par ??    \}\par ??\par ??    \cf1 public\cf0  \cf1 class\cf0  \cf4 MyExampleClass\par ??\cf0     \{\par ??        \cf1 public\cf0  \cf4 IMyInterface\cf0  MyPropertyOne\par ??        \{\par ??            \cf1 get\cf0 ;\par ??            \cf1 set\cf0 ;\par ??        \}\par ??\par ??        \cf1 public\cf0  \cf4 IMyInterface\cf0  MyPropertyTwo\par ??        \{\par ??            \cf1 get\cf0 ;\par ??            \cf1 set\cf0 ;\par ??        \}\par ??\par ??        \cf1 public\cf0  \cf4 IMyInterface\cf0  MyPropertyThree\par ??        \{\par ??            \cf1 get\cf0 ;\par ??            \cf1 set\cf0 ;\par ??        \}\par ??\par ??        \cf1 public\cf0  MyExampleClass()\par ??        \{\par ??\par ??        \}\par ??    \}\par ??\par ??    [\cf4 TestFixture\cf0 ]\par ??    \cf1 public\cf0  \cf1 class\cf0  \cf4 MyExampleClassTest\par ??\cf0     \{\par ??        \cf1 private\cf0  \cf4 MyExampleClass\cf0  _myExampleClass;\par ??        \cf1 private\cf0  \cf4 Mockery\cf0  _mocks;\par ??\par ??        [\cf4 SetUp\cf0 ]\par ??        \cf1 public\cf0  \cf1 void\cf0  Init()\par ??        \{\par ??            _myExampleClass = \cf1 new\cf0  \cf4 MyExampleClass\cf0 ();\par ??            _mocks = \cf1 new\cf0  \cf4 Mockery\cf0 ();\par ??\par ??            \cf5 //This class fills both the properties with mocks\par ??\cf0             _mocks.FillWithMocks(_myExampleClass);\par ??\par ??            \cf5 //This class fills only MyPropertyOne and MyPropertyTwo with mocks\par ??\cf0             _mocks.FillWithMocks(_myExampleClass, \cf6 "MyPropertyOne"\cf0 , \cf6 "MyPropertyTwo"\cf0 );\par ??        \}\par ??    \}} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   83</span>     <span style="color:blue;">public</span> <span style="color:blue;">interface</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   84</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   85</span>         <span style="color:blue;">void</span> MyMethod(<span style="color:blue;">string</span> name);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   86</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   87</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   88</span>     <span style="color:blue;">public</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">MyExampleClass</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   89</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   90</span>         <span style="color:blue;">public</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span> MyPropertyOne</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   91</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   92</span>             <span style="color:blue;">get</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   93</span>             <span style="color:blue;">set</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   94</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   95</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   96</span>         <span style="color:blue;">public</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span> MyPropertyTwo</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   97</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   98</span>             <span style="color:blue;">get</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   99</span>             <span style="color:blue;">set</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  100</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  101</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  102</span>         <span style="color:blue;">public</span> <span style="color: rgb(43, 145, 175);">IMyInterface</span> MyPropertyThree</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  103</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  104</span>             <span style="color:blue;">get</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  105</span>             <span style="color:blue;">set</span>;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  106</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  107</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  108</span>         <span style="color:blue;">public</span> MyExampleClass()</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  109</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  110</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  111</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  112</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  113</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  114</span>     [<span style="color: rgb(43, 145, 175);">TestFixture</span>]</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  115</span>     <span style="color:blue;">public</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">MyExampleClassTest</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  116</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  117</span>         <span style="color:blue;">private</span> <span style="color: rgb(43, 145, 175);">MyExampleClass</span> _myExampleClass;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  118</span>         <span style="color:blue;">private</span> <span style="color: rgb(43, 145, 175);">Mockery</span> _mocks;</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  119</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  120</span>         [<span style="color: rgb(43, 145, 175);">SetUp</span>]</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  121</span>         <span style="color:blue;">public</span> <span style="color:blue;">void</span> Init()</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  122</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  123</span>             _myExampleClass = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MyExampleClass</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  124</span>             _mocks = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">Mockery</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  125</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  126</span>             <span style="color:green;">//This call fills all the three properties with mocks</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  127</span>             _mocks.FillWithMocks(_myExampleClass);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  128</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  129</span>             <span style="color:green;">//This call fills only MyPropertyOne and MyPropertyTwo with mocks</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  130</span>             _mocks.FillWithMocks(_myExampleClass, <span style="color: rgb(163, 21, 21);">&#8220;MyPropertyOne&#8221;</span>, <span style="color: rgb(163, 21, 21);">&#8220;MyPropertyTwo&#8221;</span>);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  131</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">  132</span>     }</p> </div>  <p>Comments are welcome!</p></div>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/08/12/xdocumenttostringwithxmldeclaration-get/">XDocument.ToStringWithXmlDeclaration() - Get the String Representation of XDcoument With Its Xml Declaration</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-12T00:00:00-06:00" pubdate data-updated="true">Aug 12<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>The System.Xml.Linq.XDocument.ToString() produces a serialized string version of the XDocument object. But unfortunately, while doing so, it leaves the xml declaration in the serialized version which may be required in your application.</p>  <p>Again, there is another method called Save that produces the serialized version including xml declaration. So, I think we can write a simple extension method for producing the xml declaration as shown in the following -</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}??\fs20 \cf1 class\cf0  \cf4 Program\par ??\cf0     \{\par ??        \cf1 static\cf0  \cf1 void\cf0  Main(\cf1 string\cf0 [] args)\par ??        \{\par ??\par ??            \cf4 XDocument\cf0  doc = \cf1 new\cf0  \cf4 XDocument\cf0 (\cf1 new\cf0  \cf4 XDeclaration\cf0 (\cf5 "1.0"\cf0 , \cf5 "utf-8"\cf0 , \cf1 null\cf0 ), \cf1 new\cf0  \cf4 XElement\cf0 (\cf5 "root"\cf0 ));\par ??            \cf4 Console\cf0 .WriteLine(doc.ToStringWithXmlDeclaration());\par ??        \}\par ??    \}\par ??\par ??\par ??    \cf1 public\cf0  \cf1 static\cf0  \cf1 class\cf0  \cf4 XDocumentExtensions\par ??\cf0     \{\par ??        \cf1 public\cf0  \cf1 static\cf0  \cf1 string\cf0  ToStringWithXmlDeclaration(\cf1 this\cf0  \cf4 XDocument\cf0  doc)\par ??        \{\par ??            \cf4 StringBuilder\cf0  builder   = \cf1 new\cf0  \cf4 StringBuilder\cf0 ();\par ??            \cf4 StringWriter\cf0  writer     = \cf1 new\cf0  \cf4 StringWriter\cf0 (builder);\par ??            doc.Save(writer);\par ??            writer.Flush();\par ??            \cf1 return\cf0  builder.ToString();\par ??        \}\par ??    \}} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   14</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">Program</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   15</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   16</span>         <span style="color:blue;">static</span> <span style="color:blue;">void</span> Main(<span style="color:blue;">string</span>[] args)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   17</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   18</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   19</span>             <span style="color: rgb(43, 145, 175);">XDocument</span> doc = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XDocument</span>(<span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XDeclaration</span>(<span style="color: rgb(163, 21, 21);">&#8220;1.0&#8221;</span>, <span style="color: rgb(163, 21, 21);">&#8220;utf-8&#8221;</span>, <span style="color:blue;">null</span>), <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">XElement</span>(<span style="color: rgb(163, 21, 21);">&#8220;root&#8221;</span>));</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   20</span>             <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(doc.ToStringWithXmlDeclaration());</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   21</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   22</span>     }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   23</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   24</span> </p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   25</span>     <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">class</span> <span style="color: rgb(43, 145, 175);">XDocumentExtensions</span></p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   26</span>     {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   27</span>         <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:blue;">string</span> ToStringWithXmlDeclaration(<span style="color:blue;">this</span> <span style="color: rgb(43, 145, 175);">XDocument</span> doc)</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   28</span>         {</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   29</span>             <span style="color: rgb(43, 145, 175);">StringBuilder</span> builder   = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StringBuilder</span>();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   30</span>             <span style="color: rgb(43, 145, 175);">StringWriter</span> writer    = <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">StringWriter</span>(builder);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   31</span>             doc.Save(writer);</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   32</span>             writer.Flush();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   33</span>             <span style="color:blue;">return</span> builder.ToString();</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   34</span>         }</p>    <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   35</span>     }</p> </div>  <p>Apart from its purpose, this is also an example use of the Extension Method feature of C# 3.0.</p></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-@Dan:<br />Didn&#39;t know that. Thanks for sharing.</div>
-</div>
-<div class='comment'>
-<div class='author'>Dan</div>
-<div class='content'>
-You can use also <br /><br />return doc.Declaration.ToString() + doc.ToString();</div>
-</div>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-@Dragon:<br />Thanks for suggesting the improvement.</div>
-</div>
-<div class='comment'>
-<div class='author'>Dragon</div>
-<div class='content'>
-I think better:<br /><br />public static string ToStringWithXmlDeclaration(this XDocument doc)<br />{<br /> StringBuilder builder = new StringBuilder();<br /> using (TextWriter  writer = new  StringWriter(builder))<br /> {<br />  doc.Save(writer);<br /> }<br /> return builder.ToString();<br />}</div>
-</div>
-</div>
 </div>
   
   
@@ -537,6 +527,10 @@ I think better:<br /><br />public static string ToStringWithXmlDeclaration(this 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
       </li>
     
@@ -550,10 +544,6 @@ I think better:<br /><br />public static string ToStringWithXmlDeclaration(this 
     
       <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
   </ul>

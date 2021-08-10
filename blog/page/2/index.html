@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Image source: Show and tell - explaining the rain game I started my developer career 15 years ago at the onset of agile and Scrum. From my early &hellip;">
+  <meta name="description" content="Good design is obvious. Great design is transparent. — Joe Sparano Ruby on Rails delighted me all through my career. The community is one with a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +85,95 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2020/12/07/tribute-to-rails-date-time-great-invisible-design/">A Tribute to Time Travel APIs in Ruby on Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2020-12-07T10:28:00-08:00" pubdate data-updated="true">Dec 7<span>th</span>, 2020</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>Good design is obvious. Great design is transparent. — Joe Sparano</p></blockquote>
+
+<p>Ruby on Rails delighted me all through my career. The community is one with a taste for art, thanks to DHH&#8217;s ability to write well. He set a  high bar and the community also lives up to it. One API that absolutely blows my mind is how delightful it is to work with date and time in Ruby on Rails. Here are a few example use cases:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Schedule a report to run at the beginning of next week</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">week</span><span class="o">.</span><span class="n">from_now</span><span class="o">.</span><span class="n">beginning_of_week</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or first Friday of next month</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">run_at</span><span class="o">.</span><span class="n">next_occurring</span><span class="p">(</span><span class="ss">:friday</span><span class="p">)</span> <span class="k">unless</span> <span class="n">report</span><span class="o">.</span><span class="n">run_at</span><span class="o">.</span><span class="n">friday?</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or beginning of next month</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">month</span><span class="o">.</span><span class="n">from_now</span><span class="o">.</span><span class="n">beginning_of_month</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or mid-day tomorrow</span>
+</span><span class='line'><span class="n">report</span><span class="o">.</span><span class="n">run_at</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">from_now</span><span class="o">.</span><span class="n">at_midday</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Is today a weekday?</span>
+</span><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">on_weekday?</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or a weekend?</span>
+</span><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">on_weekend?</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Book a calendar event for a whole day</span>
+</span><span class='line'><span class="n">time_off</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">all_day</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#.. or find sales in the current quarter</span>
+</span><span class='line'><span class="no">Sale</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">created_at</span><span class="p">:</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">all_quarter</span><span class="p">)</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A lot of time related code I&#8217;ve seen in real projects is finding a point in time relative to <code>now</code>. Ruby on Rails makes it an absolute joy traveling time by adding time related methods straight into the <a href="https://api.rubyonrails.org">Integer</a> class, where the code looks just like how we think about time. Sure, Rails uses complex classes such as <code>TimeWithZone</code>, <code>Duration</code>, etc. under the hood, but I&#8217;ve almost never seen those used directly. This is such a stark contrast with many other platforms where you have to use pedantic concepts such as <code>TimeSpan</code>, <code>Calendar</code>, <code>GregorianCalendar</code>, etc. The true elegance of time travel API in Ruby on Rails lies in how invisible it is.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2020/11/28/tips-for-developer-demos/">Tips for Great Developer Demos</a></h1>
     
     
@@ -101,7 +190,7 @@
   
 
 
-<time datetime="2020-11-28T20:33:00-07:00" pubdate data-updated="true">Nov 28<span>th</span>, 2020</time>
+<time datetime="2020-11-28T20:33:00-08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2020</time>
         
       </p>
     
@@ -153,7 +242,7 @@
   
 
 
-<time datetime="2020-11-18T10:51:00-07:00" pubdate data-updated="true">Nov 18<span>th</span>, 2020</time>
+<time datetime="2020-11-18T10:51:00-08:00" pubdate data-updated="true">Nov 18<span>th</span>, 2020</time>
         
       </p>
     
@@ -205,7 +294,7 @@
   
 
 
-<time datetime="2020-11-12T11:45:00-07:00" pubdate data-updated="true">Nov 12<span>th</span>, 2020</time>
+<time datetime="2020-11-12T11:45:00-08:00" pubdate data-updated="true">Nov 12<span>th</span>, 2020</time>
         
       </p>
     
@@ -262,7 +351,7 @@
   
 
 
-<time datetime="2020-11-04T10:29:00-07:00" pubdate data-updated="true">Nov 4<span>th</span>, 2020</time>
+<time datetime="2020-11-04T10:29:00-08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2020</time>
         
       </p>
     
@@ -319,7 +408,7 @@
   
 
 
-<time datetime="2020-10-12T10:11:00-06:00" pubdate data-updated="true">Oct 12<span>th</span>, 2020</time>
+<time datetime="2020-10-12T10:11:00-07:00" pubdate data-updated="true">Oct 12<span>th</span>, 2020</time>
         
       </p>
     
@@ -373,7 +462,7 @@
   
 
 
-<time datetime="2020-10-11T17:07:00-06:00" pubdate data-updated="true">Oct 11<span>th</span>, 2020</time>
+<time datetime="2020-10-11T17:07:00-07:00" pubdate data-updated="true">Oct 11<span>th</span>, 2020</time>
         
       </p>
     
@@ -429,7 +518,7 @@
   
 
 
-<time datetime="2020-09-15T13:08:00-06:00" pubdate data-updated="true">Sep 15<span>th</span>, 2020</time>
+<time datetime="2020-09-15T13:08:00-07:00" pubdate data-updated="true">Sep 15<span>th</span>, 2020</time>
         
       </p>
     
@@ -473,7 +562,7 @@
   
 
 
-<time datetime="2020-08-31T14:02:00-06:00" pubdate data-updated="true">Aug 31<span>st</span>, 2020</time>
+<time datetime="2020-08-31T14:02:00-07:00" pubdate data-updated="true">Aug 31<span>st</span>, 2020</time>
         
       </p>
     
@@ -548,7 +637,7 @@
   
 
 
-<time datetime="2020-07-17T15:26:00-06:00" pubdate data-updated="true">Jul 17<span>th</span>, 2020</time>
+<time datetime="2020-07-17T15:26:00-07:00" pubdate data-updated="true">Jul 17<span>th</span>, 2020</time>
         
       </p>
     
@@ -600,68 +689,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2020/05/18/engineering-management-and-diagnosing-low-performance/">People Management and Diagnosing Low Performance</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2020-05-18T18:54:00-06:00" pubdate data-updated="true">May 18<span>th</span>, 2020</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Beginning with a story here. Back in 2008, I was a couple of years out of college and working for a software company in Dhaka, Bangladesh. Like many of my classmates from my college, I was studying GRE alongside my job for a PhD admission in a reputable US university. That process being long and uncertain, I also applied for an MBA program at the University of Dhaka as a backup plan. The GRE preparation came in very handy and I qualified for the evening MBA program. I started MBA classes in January 2009 before the universities in USA and Canada made their decision on my application. There, I took a course on Management. I was too naive and still too much an engineer to pay attention.</p>
-
-<p>But this image that our teacher drew on the board got stuck in my head to this day.</p>
-
-<p><img src="/images/perf.jpg" alt="Performance" /></p>
-
-<p>Fast forward ten years and I still like how cleanly it captures the essence of high performance of an employee as a combination of the employee&#8217;s ability and motivation in a suitable environment.</p>
-
-<p>Given this is how high-performers are, it&#8217;s possible to plot a similar graph for low performers as a diagnostic report. If such a diagnosis is right, it can provide a valuable strategy for managers and employees to work towards improving employee performance. For example, if an employee lacks skill and motivation but fits very well within the work environment, a manager can focus on skills training and suggesting therapies to increase motivation. Similarly, if an employee is unable to acquire the skills for a particular job, focusing on motivation or changing the environment for that employee may not fix the low performance issue.</p>
-
-<p>Based on the past 14 years of my time in the industry, I&#8217;ve shared some symptoms of low performance that I&#8217;ve seen. You can use this as an exercise sheet to plot your diagnosis of the low performer&#8217;s chart.</p>
-
-<ol>
-<li><p><strong>New hire too slow to ramp up:</strong> You were impressed by a candidate during the interview. The same interview process was used to find many high performers in the past. But this employee is struggling to ramp up.</p></li>
-<li><p><strong>Knowledge vs. application:</strong> You have an employee who&#8217;s always studying job related skills and shows a great deal of interest in training, but can&#8217;t translate the knowledge into application.</p></li>
-<li><p><strong>Complains about the lack of time</strong>: You have an employee struggling to produce the best outcome. In your one:one meeting, the employee always complains about lack of time even after you give him/her the time.</p></li>
-<li><p><strong>Frequently runs into conflicts:</strong> Your dream employee is causing too many conflicts within the team.</p></li>
-<li><p><strong>Can&#8217;t write thoughts down:</strong> You have an employee who&#8217;s unhappy about things. When you want them to write it down, they are unable to produce a crisp writeup about the problems and potential solutions.</p></li>
-<li><p><strong>Doesn&#8217;t make hard decisions timely:</strong> You have a leader that stays away from making hard decisions. In their mind, they want someone else to make them take the hard decision.</p></li>
-<li><p><strong>Isn&#8217;t aware of better ways to solve old problems:</strong> You have an employee who&#8217;s expert in certain ways of delivering work but lacks awareness of newer and more efficient ways.</p></li>
-<li><p><strong>Doesn&#8217;t take initiative:</strong> You encourage and reward employees to take initiatives that help the business. Yet, you see an employee is not taking part.</p></li>
-</ol>
-
-
-<p>The good news is, once a diagnosis is accurate for such symptoms of low performance, you can move ahead and implement a concrete improvement strategy for your employee. The clarity of this simple method helped me in many situations.</p>
-
-<p>I hope this helps you, too.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -679,6 +706,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
       </li>
     
@@ -692,10 +723,6 @@
     
       <li class="post">
         <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/01/17/software-architecture-part-3-writing/">Software Architecture - Topic 3: Writing</a>
       </li>
     
   </ul>

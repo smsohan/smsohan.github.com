@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Database, | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/database-/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-06-18T15:57:50-06:00</updated>
+  <updated>2021-08-09T22:32:18-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Database Design: Sorting by Concepts on Nullable Fields]]></title>
     <link href="http://smsohan.com/blog/2012/10/11/database-design-sorting-by-computed-fields/"/>
-    <updated>2012-10-11T21:05:00-06:00</updated>
+    <updated>2012-10-11T21:05:00-07:00</updated>
     <id>http://smsohan.com/blog/2012/10/11/database-design-sorting-by-computed-fields</id>
     <content type="html"><![CDATA[<p>In a recent project, we had this requirement to sort a list of items by a concept that is absent in the database schema, but can be derived from other fields. To make it easy to understand, let's build an example, simple enough to isolate the topic of interest.</p>
 
