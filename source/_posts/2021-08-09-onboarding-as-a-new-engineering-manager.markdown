@@ -14,4 +14,4 @@ In this post, I am sharing an actual artifact from my first call with my peer an
 
 <iframe width="100%" height="561" src="https://miro.com/app/embed/o9J_l3Yog3E=/?pres=1&frameId=3074457362331359883" frameBorder="0" scrolling="no" allowFullScreen></iframe>
 
-Of course, to succeed in a new job as a manager, you need to do more than just create a first impression. The meta point is, prepare and take leadership in your own onboarding journey. It's worth it.
+Of course, to succeed in a new job as a manager, you need to do more than just creating a first impression. The meta point is, prepare and take leadership in your own onboarding journey. It's worth it.
