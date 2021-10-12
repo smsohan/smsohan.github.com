@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="CodeProject has published my article at &#8216;Change The Default CommandTimeout of LINQ DataContext&#8217; I have discussed the topic covered in &hellip;">
+  <meta name="description" content="Spring.Net has integration support with VS 2005 and VS 2008 (also supports older versions). To achieve this, just perform a simple copy-paste and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/05/28/enable-intellisense-support-for/">Enable IntelliSense Support for Spring.Net Objects Xml Definition</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-28T00:00:00-07:00" pubdate data-updated="true">May 28<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Spring.Net has integration support with VS 2005 and VS 2008 (also supports older versions). To achieve this, just perform a simple copy-paste and define an XML namespace on the objects node. This will enable you to get IntelliSense and validation support while editing the objects node of the xml configuration file.</p>  <p>Two steps:</p>  <p>Step 1: Copy the &lt;Spring.Net Installed location&gt;\doc\schema\spring-objects-1.1.xsd to &lt;Visual Studio installed location&gt;/Xml/Schemas</p>  <p>Step 2: Make sure your objects node looks like this </p>  <p>&lt;objects xmlns=&#8221;http://www.springframework.net&#8221;&gt; <br />&#8230;  <br />&lt;/objects&gt;</p>  <p>With this IntelliSense support you will surely feel happy while editing the xml file!</p></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -446,43 +483,6 @@ Thanks u so much</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/04/12/isnullorempty-handy-extension-method/">IsNullOrEmpty() - a Handy Extension Method for IEnumerable<T></a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-04-12T00:00:00-07:00" pubdate data-updated="true">Apr 12<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>Many a time when you are just about to write a foreach loop on your IEnumerable&lt;T&gt; object you need to check whether the object is null or empty in the following manner</p>  <div><span style="color: rgb(0, 0, 255);">if(myEnumerable != null || myEnumerable.Count() &gt; 0)</span></div>  <div><span style="color: rgb(0, 0, 255);">{</span></div>  <blockquote>   <div><span style="color: rgb(0, 0, 255);">foreach(&lt;type&gt; item in myEnumerable)</span></div>    <div><span style="color: rgb(0, 0, 255);">{</span></div>    <div><span style="color: rgb(0, 0, 255);">&#8230;</span></div>    <div><span style="color: rgb(0, 0, 255);">}</span></div> </blockquote>  <div><span style="color: rgb(0, 0, 255);">}</span></div>  <p>However, with the advent of Extension methods, you can write one custom extension method like the following -</p>  <p><span style="color: rgb(0, 0, 255);">public static class IEnumerableExtensions  <br />  {   <br />      public static bool IsNullOrEmpty&lt;T&gt;(this IEnumerable&lt;T&gt; instance) where T : class   <br />      {   <br />          return instance == null || instance.Count() == 0;   <br />      }   <br />  }</span></p>  <p><span style="color: rgb(0, 0, 255);">So, you may write the following code instead of the code example presented earlier -</span></p>  <div><span style="color: rgb(0, 0, 255);">if(!myEnumerable.IsNullOrEmpty())</span></div>  <div><span style="color: rgb(0, 0, 255);">{</span></div>  <blockquote>   <div><span style="color: rgb(0, 0, 255);">foreach(&lt;type&gt; item in myEnumerable)</span></div>    <div><span style="color: rgb(0, 0, 255);">{</span></div>    <div><span style="color: rgb(0, 0, 255);">&#8230;</span></div>    <div><span style="color: rgb(0, 0, 255);">}</span></div> </blockquote>  <div><span style="color: rgb(0, 0, 255);">}</span></div>  <div><span style="color: rgb(0, 0, 255);"></span></div>  <div><span style="color: rgb(0, 0, 0);">There is simple trick with the Extension Method. That is, extension methods can be invoked even on the objects whose reference is not set to an instance of an object or objects with a null value.</span></div>  <div><span style="color: rgb(0, 0, 0);">So, its perfectly valid to write -</span></div>  <div><span style="color: rgb(0, 0, 255);">List&lt;string&gt; myList = null;</span></div>  <div><span style="color: rgb(0, 0, 255);">Console.WriteLine(&#8220;myList.IsNullOrEmpty = {0}&#8221;, myList.IsNullOrEmpty());</span></div>  <div><span style="color: rgb(0, 0, 0);">because, the IsNullOrEmpty() is an extension method and can be invoked on a null referencing object of its target type.</span></div>  <div><span style="color: rgb(0, 0, 255);"></span></div>  <div><span style="color: rgb(0, 0, 255);"> </span></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/23/">&larr; Older</a>
@@ -500,6 +500,10 @@ Thanks u so much</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
       </li>
     
@@ -513,10 +517,6 @@ Thanks u so much</div>
     
       <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
   </ul>

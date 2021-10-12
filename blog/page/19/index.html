@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Being over-burdened by all the blog posts on MVC from the ASP.Net for the last few months, I am now looking to ASP.Net MVC. Still seeing the &hellip;">
+  <meta name="description" content="In doing rails unit testing, sometime you need to assert the equality between two float objects in the following fashion assert_equal 32.8, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/04/07/assertequalfloat-assertequal-between/">Assert_equal_float : Assert_equal Between Two Float Objects With Precision</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-07T00:00:00-07:00" pubdate data-updated="true">Apr 7<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>In doing rails unit testing, sometime you need to assert the equality between two float objects in the following fashion</p>  <div class="code_div">   <p><strong><span style="font-size:100%;"><span style="font-family:Courier New;"><span style="color:#000080;">assert_equal</span> 32.8, object_under_test.method_returning_float</span></span></strong></p> </div>  <p>The internal storage of float objects sometimes will contain 32.8 with additional lower precision decimal points and hence the assert may fail although the significant digits may be same. For example, the value of <strong>object_under_test.method_returning_float</strong> may be stored as 32.80000001 in memory and the above call may fail.</p>  <p>To solve this problem, you may wish to use the <a href="http://www.ruby-doc.org/core-1.9/classes/Float.html" target="_blank">round method of Float class</a> in the following way</p>  <div class="code_div">   <p><strong><span style="font-size:100%;"><span style="font-family:Courier New;"><span style="color:#000080;">assert_equal</span> 32.8, object_under_test.method_returning_float<span style="color:#008000;">.round(1)</span></span></span></strong></p> </div>  <p>The above line will evaluate true since it will round up to one decimal points. However, be careful about cases where you may have a value greater than 5 in the second decimal place! because (32.86).to_f.round(1) will become 32.9!</p>  <p>However, when you are talking about insignificant digits, this rounding should work fine for you.</p>  <p>Next step is to define a new assert_equal_float method that takes the precision as an argument. Adding this method will save you from code duplication and will improve readability.</p>  <div class="code_div">   <p><span style="font-family:Courier New;"><strong><span style="font-size:100%;"><span style="color:#000080;">def</span> <span style="color:#800080;">assert_equal_float</span>(expected, actual, precision)            <br />    <span style="color:#008080;">assert_equal</span> expected.to_f.round(precision), actual.to_f.round(precision)            <br /><span style="color:#000080;">end</span></span></strong><span style="color:#000080;"> </span>   </span></p>    <p><span style="font-family:Courier New;"></span></p> </div>  <p>Happy float asserting!</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>tommy</div>
+<div class='content'>
+correction: round(precision) is available in ruby 1.9 but not in ruby 1.87 :(</div>
+</div>
+<div class='comment'>
+<div class='author'>Tommy</div>
+<div class='content'>
+note:<br />(32.86).to_f.round(1) only works in Rails test environment because of active support<br /><br />.round(precision) isn&#39;t available in regular ruby code.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -478,43 +528,6 @@ You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Plac
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/12/23/aspnet-membership-how-to-change-user/">Asp.Net Membership: How to Change a User&#8217;s Password From an Admin Account Without Knowing the Current Password?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-12-23T00:00:00-08:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>Like mine, you may also need to change a user&#8217;s password from an admin account. By default, when you are using ASP.Net authentication and storing the password in the hashed format, you will not be able to see the existing password in its decrypted form. Also, to change a password using the Membership API, you will need to know the existing password. However, here is a simple solution to the problem -</p>  <p><a href="http://lh4.ggpht.com/_Gr1ozXzBWpM/SVHO80nP0PI/AAAAAAAAAEg/dwiTndV7ajM/s1600-h/AspNetChangePassword%5B4%5D.png"><img style="border: 0px none ;" alt="AspNetChangePassword" src="http://lh5.ggpht.com/_Gr1ozXzBWpM/SVHO-soxcqI/AAAAAAAAAEk/f7_FTsN04wU/AspNetChangePassword_thumb%5B2%5D.png?imgmax=800" width="692" border="0" height="87" /></a> </p>  <p>The idea is, you can reset the password of a user using the following code-</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red43\green145\blue175;\red163\green21\blue21;}??\fs20 \cf1 string\cf0  tempPass = \cf4 Membership\cf0 .Provider.ResetPassword(\cf5 "username"\cf0 , \cf1 string\cf0 .Empty)} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color:blue;">string</span> tempPass = <span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ResetPassword(<span style="color: rgb(163, 21, 21);">&#8220;username&#8221;</span>, <span style="color:blue;">string</span>.Empty)</p> </div>  <p>Make sure you have the config that allows you to change password without an answer to the security question. Now, you can invoke the ChangePassword method using this tempPass as the existing pass and your custom password as the new password. Refer to the following line for a compact implementation-</p> <!-- {\rtf1\ansi\ansicpg\lang1024\noproof65001\uc1 \deff0{\fonttbl{\f0\fnil\fcharset0\fprq1 Courier New;}}{\colortbl;??\red43\green145\blue175;\red255\green255\blue255;\red0\green0\blue0;\red163\green21\blue21;\red0\green0\blue255;}??\fs20 \cf1 Membership\cf0 .Provider.ChangePassword(\cf4 "username"\cf0 , \cf1 Membership\cf0 .Provider.ResetPassword(\cf4 "username"\cf0 , \cf5 string\cf0 .Empty), \cf4 "custompass"\cf0 )} -->  <div    style="background: white none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;font-family:courier new;font-size:10pt;color:black;">   <p style="margin: 0px;"><span style="color: rgb(43, 145, 175);">   </span><span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ChangePassword(<span style="color: rgb(163, 21, 21);">&#8220;username&#8221;</span>, <span style="color: rgb(43, 145, 175);">Membership</span>.Provider.ResetPassword(<span style="color: rgb(163, 21, 21);">&#8220;username&#8221;</span>, <span style="color:blue;">string</span>.Empty), <span style="color: rgb(163, 21, 21);">&#8220;custompass&#8221;</span>)</p> </div>  <p>I believe this will save your time with a similar need.</p></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -532,6 +545,10 @@ You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Plac
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
       </li>
     
@@ -545,10 +562,6 @@ You may also put a System.Web.UI.HtmlControls.HtmlLink  in the Head Content Plac
     
       <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
   </ul>

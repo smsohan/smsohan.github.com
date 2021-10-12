@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="This 2006 MSDN article points out some key aspects of designing a multi-tenant database for SaaS applications. As you can read in the article, SaaS &hellip;">
+  <meta name="description" content="I have heard this question n times, where n tends to the number of days since June 2006, as I started working with the people from North America: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call Me Sohan and Ask-Me-Not About S M</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-05T09:48:00-07:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I have heard this question n times, where n tends to the number of days since June 2006, as I started working with the people from North America:</p>
+
+<blockquote><p>Should I call you S M?</p></blockquote>
+
+<p>Well, I&#8217;m from Bangladesh and even today, we don&#8217;t really have a first and last name, instead what we have is, a full name and a nick name. My <strong>full name</strong> is, S M Sohan, and my <strong>nick name</strong> is Sohan. So, call me Sohan.</p>
+
+<p>I don&#8217;t have a first or last name like many people in Bangladesh. But since almost everywhere, from the online forms to the call center agents, they ask me about these info, I tell them, my first name is, S M, and last name is, Sohan. At times I get funny reactions to this, for example:</p>
+
+<blockquote><p>S M? Just S M?</p></blockquote>
+
+<p>Better yet, some offer me spelling suggestions:</p>
+
+<blockquote><p>You can spell it ESEM, because SM is hard to pronounce!</p></blockquote>
+
+<p>You people are funny! Well, S M is actually a short form for <strong>Sheikh Mohammed</strong>. But it&#8217;s so common in Bangladesh that, almost nobody uses the full version in their official documents. As a bonus, you save all those inks and bytes required to spell these extra characters. Honestly, of all these years, this is probably just the 4th time I&#8217;ve written the full form, the other 3 times were for US visa applications. Also, it&#8217;d be equally weird to me, had I used Sheikh as my first name and people called me by that!</p>
+
+<p>This first/last name convention also causes funny consequences to my friends. For example, two of my friends have names differing only in their middle names and they were rommies at a shared residence in Calgary. Guess what, their credit reports got all confused about who&#8217;s who and mixed up the scores!</p>
+
+<p>Lot of my muslim friends go by &#8220;Md Xxxx Yyyy&#8221;, where Md is a short form for Mohammed. People that aren&#8217;t too familiar with it, at times think of them as doctors, which can be quite funny, and dangerous!</p>
+
+<p>If you aren&#8217;t convinced yet, take these ones for example. <a href="http://en.wikipedia.org/wiki/AAMS_Arefin_Siddique">AAMS Arefin Siddique</a> current VC of the University of Dhaka, <a href="http://en.wikipedia.org/wiki/A._K._Fazlul_Huq">A. K. Fazlul Huq</a> a renowned leader in the history, <a href="http://en.wikipedia.org/wiki/A._P._J._Abdul_Kalam">A P J Abdul Kalam</a> an ex-president and a nuclear scientist from India.</p>
+
+<p>I hope this makes you comfortable in calling me by the name Sohan :)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -783,78 +841,6 @@ Instead of this Activ eRecord Query:
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/17/abusing-json/">MongoDB Is Abusing JSON!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-17T16:11:00-08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I find the MongoDB API is abusing JSON in a really bad way. JSON is probably a good format for storing the documents in MongoDB, but using JSON for it&#8217;s weird API is simply a terrible idea. Here&#8217;s an example from the <a href="http://docs.mongodb.org/manual/reference/sql-aggregation-comparison/">SQL to Aggregation Framework Mapping Chart</a></p>
-
-<figure class='code'><figcaption><span>MongoDB Example</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'>  <span class="nx">db</span><span class="p">.</span><span class="nx">orders</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span> <span class="p">[</span>
-</span><span class='line'>     <span class="p">{</span> <span class="nx">$group</span><span class="o">:</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="p">{</span> <span class="nx">cust_id</span><span class="o">:</span> <span class="s2">&quot;$cust_id&quot;</span><span class="p">,</span>
-</span><span class='line'>                        <span class="nx">ord_date</span><span class="o">:</span> <span class="s2">&quot;$ord_date&quot;</span> <span class="p">},</span>
-</span><span class='line'>                 <span class="nx">total</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$sum</span><span class="o">:</span> <span class="s2">&quot;$price&quot;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">},</span>
-</span><span class='line'>     <span class="p">{</span> <span class="nx">$match</span><span class="o">:</span> <span class="p">{</span> <span class="nx">total</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$gt</span><span class="o">:</span> <span class="mi">250</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
-</span><span class='line'>  <span class="p">]</span> <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I find the UI of this query to be distasteful at the best. Here&#8217;s an SQL example of the same:</p>
-
-<figure class='code'><figcaption><span>SQL Equivalent</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sql'><span class='line'>  <span class="k">SELECT</span> <span class="n">cust_id</span><span class="p">,</span>
-</span><span class='line'>         <span class="n">ord_date</span><span class="p">,</span>
-</span><span class='line'>         <span class="k">SUM</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total</span>
-</span><span class='line'>  <span class="k">FROM</span> <span class="n">orders</span>
-</span><span class='line'>  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">cust_id</span><span class="p">,</span> <span class="n">ord_date</span>
-</span><span class='line'>  <span class="k">HAVING</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">250</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I find this SQL example to be a few magnitudes more readable than the JSON one. The JSON query in this example, is full of hacks. Every time I see a &#8220;$&#8221; sign, I&#8217;m totally confused about what it means. For example, consider this fragment, total: { $sum: &#8220;$price&#8221; } and compare it to SUM(price) AS total.</p>
-
-<p>I think MongoDB has its strengths. But for haven&#8217;s sake, if they can&#8217;t find any better, they should leave this JSON ugliness in favor of SQL as a query interface to MongoDB. What do you think?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/9/">&larr; Older</a>
@@ -872,6 +858,10 @@ Instead of this Activ eRecord Query:
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
       </li>
     
@@ -885,10 +875,6 @@ Instead of this Activ eRecord Query:
     
       <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
   </ul>

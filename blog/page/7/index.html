@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="I get intimidated by this question, &#8220;Should I take this job?&#8221; Growing up, my dad had a huge influence on my upbringing. He had a &hellip;">
+  <meta name="description" content="Introducing Asset Pipeline to an old project is quite hard. Most pre-asset pipeline projects used small JavaScript/CSS files that are often scoped to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,129 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/08/how-to-introduce-asset-pipeline-for-older-apps/">Introducing Asset Pipeline to Older Apps?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-08T10:12:00-07:00" pubdate data-updated="true">Oct 8<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Introducing Asset Pipeline to an old project is quite hard. Most pre-asset pipeline projects used small JavaScript/CSS files that are often scoped to a single page or a part of the application. A typical example is as follows:</p>
+
+<figure class='code'><figcaption><span>login.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">isLoginValid</span> <span class="o">=</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_name&#39;</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_password&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="nx">isLoginValid</span><span class="p">){</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_form&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, within the scope of the login page this code executes just fine. However, with asset pipeline, if this file is included in the application manifest, then all pages that include the manifest will execute this code on load. This is wasteful and more importantly, may result in unexpected behaviors and conflicts.</p>
+
+<p>To work around this problem, when introducing asset pipeline, the code needs to be wrapped in some method that can be called to initialize it only from the login page. Here&#8217;s an example of the wrapper method:</p>
+
+<figure class='code'><figcaption><span>login.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'>  <span class="nx">App</span><span class="p">.</span><span class="nx">validateLogin</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">isLoginValid</span> <span class="o">=</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_name&#39;</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="nx">hasValue</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#user_password&#39;</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="nx">isLoginValid</span><span class="p">){</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_form&#39;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_errors&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>  <span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that the logic is wrapped inside a method, it can be included in all the pages without causing any wasteful execution and risking unexpected outcomes or conflicts. This method can be called from within the login page as shown in the following example:</p>
+
+<figure class='code'><figcaption><span>login.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'>    <span class="nx">App</span><span class="p">.</span><span class="nx">validateLogin</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is of course only a minimum change approach that&#8217;ll get asset pipelines working for an existing app. I&#8217;d recommend refactoring the code to make it testable and adding unit tests as you go.</p>
+
+<p>We have a 4 year old Ruby on Rails project, and now running 3.2 with asset pipelines. It has only one manifest file. We used this simple approach to convert all existing js code and it worked great. Hope it helps when you start upgrading your assets to use the pipelines.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -983,64 +1106,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/05/call-me-sohan-and-ask-me-not-about-sm/">Call Me Sohan and Ask-Me-Not About S M</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-05T09:48:00-07:00" pubdate data-updated="true">Apr 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I have heard this question n times, where n tends to the number of days since June 2006, as I started working with the people from North America:</p>
-
-<blockquote><p>Should I call you S M?</p></blockquote>
-
-<p>Well, I&#8217;m from Bangladesh and even today, we don&#8217;t really have a first and last name, instead what we have is, a full name and a nick name. My <strong>full name</strong> is, S M Sohan, and my <strong>nick name</strong> is Sohan. So, call me Sohan.</p>
-
-<p>I don&#8217;t have a first or last name like many people in Bangladesh. But since almost everywhere, from the online forms to the call center agents, they ask me about these info, I tell them, my first name is, S M, and last name is, Sohan. At times I get funny reactions to this, for example:</p>
-
-<blockquote><p>S M? Just S M?</p></blockquote>
-
-<p>Better yet, some offer me spelling suggestions:</p>
-
-<blockquote><p>You can spell it ESEM, because SM is hard to pronounce!</p></blockquote>
-
-<p>You people are funny! Well, S M is actually a short form for <strong>Sheikh Mohammed</strong>. But it&#8217;s so common in Bangladesh that, almost nobody uses the full version in their official documents. As a bonus, you save all those inks and bytes required to spell these extra characters. Honestly, of all these years, this is probably just the 4th time I&#8217;ve written the full form, the other 3 times were for US visa applications. Also, it&#8217;d be equally weird to me, had I used Sheikh as my first name and people called me by that!</p>
-
-<p>This first/last name convention also causes funny consequences to my friends. For example, two of my friends have names differing only in their middle names and they were rommies at a shared residence in Calgary. Guess what, their credit reports got all confused about who&#8217;s who and mixed up the scores!</p>
-
-<p>Lot of my muslim friends go by &#8220;Md Xxxx Yyyy&#8221;, where Md is a short form for Mohammed. People that aren&#8217;t too familiar with it, at times think of them as doctors, which can be quite funny, and dangerous!</p>
-
-<p>If you aren&#8217;t convinced yet, take these ones for example. <a href="http://en.wikipedia.org/wiki/AAMS_Arefin_Siddique">AAMS Arefin Siddique</a> current VC of the University of Dhaka, <a href="http://en.wikipedia.org/wiki/A._K._Fazlul_Huq">A. K. Fazlul Huq</a> a renowned leader in the history, <a href="http://en.wikipedia.org/wiki/A._P._J._Abdul_Kalam">A P J Abdul Kalam</a> an ex-president and a nuclear scientist from India.</p>
-
-<p>I hope this makes you comfortable in calling me by the name Sohan :)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/8/">&larr; Older</a>
@@ -1058,6 +1123,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/08/09/onboarding-as-a-new-engineering-manager/">Onboarding as a New Engineering Manager</a>
       </li>
     
@@ -1071,10 +1140,6 @@
     
       <li class="post">
         <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/02/19/frontend-engineering/">Can I Have a Career as a Frontend Engineer?</a>
       </li>
     
   </ul>
