@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-10-12T16:10:43-07:00</updated>
+  <updated>2021-10-12T16:16:34-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -20,9 +20,9 @@
     <id>http://smsohan.com/blog/2021/10/12/ui-sdk-design-principles</id>
     <content type="html"><![CDATA[<p><img src="http://smsohan.com/images/ui_sdk_principles.jpg" alt="UI SDK Design Principles" /></p>
 
-<p>At Microsoft, I’ve been working with my team on a multi-platform UI SDK for <a href="https://docs.microsoft.com/en-us/azure/communication-services/">Azure Communication Services</a>. Our goal is to empower developers to build visually delightful communication experiences (chat, calling, etc.) for everyone. I’ve participated in numerous design discussions on this UI SDK and I realized many of the things I learned here apply to the domain of UI SDKs beyond just the one we are creating. So, this blog post is an attempt to make a list of design principles that developers of UI SDKs can follow to create a bigger impact out of their work.</p>
+<p>At Microsoft, I’ve been working with my team on a multi-platform UI SDK for <a href="https://docs.microsoft.com/en-us/azure/communication-services/">Azure Communication Services</a>. We empower developers to build visually delightful communication experiences (chat, audio-video calling, etc.) for everyone. I’ve participated in numerous design discussions on this UI SDK and I realized many of the things I learned here apply to the domain of UI SDKs beyond just the one we are creating. So, this blog post is an attempt to make a list of design principles that developers of UI SDKs can follow to create a bigger impact out of their work.</p>
 
-<p>Another reason I’m writing this blog post is, writing a UI SDK requires a different mindset than a frontend application. While many of us are quite familiar with writing frontend applications and using UI SDKs, very few of us have had the opportunity to write a UI SDK ourselves. This was the case in our team, too. I hope the following list of design principles will help developers see the differences between developing a UI SDK vs. developing a frontend application. In our team, we discovered these principles over time and could’ve saved a bunch of time if we had the foresight that I shared in this blog post.</p>
+<p>Another reason I’m writing this blog post is, writing a UI SDK requires a different mindset than developing a frontend application. While many of us are quite familiar with writing frontend applications and using UI SDKs, very few of us have had the opportunity to write a UI SDK ourselves. This was the case in our team, too. I hope the following list of design principles will help developers see the differences between developing a UI SDK vs. developing a frontend application. In our team, we discovered these principles over time and could’ve saved a bunch of time if we had the foresight that I shared in this blog post.</p>
 
 <p>Let’s get started.</p>
 
@@ -32,9 +32,9 @@
 
 <p><strong>Composable.</strong> UI SDKs are used within frontend applications where they may have their own design assets and reusable components. Developers often end up with a mix and match of UI elements from various sources. In addition to visual customizations, the UI SDKs must also take care of namespace isolation so that the properties of one UI element doesn’t inadvertently leak into another one.</p>
 
-<p><strong>Customizability of the look and feel.</strong> A frontend application can and should be opinionated about its look and feel. However, the target of a UI SDK is to be usable within many such opinionated applications. As a result, UI SDKs need to allow developers to customize the look and feel in many areas such as - branding, theming, colours, typography, layouts, positioning, sizes, styles, text, etc. UI SDKs that render a nesting of UI elements may also need to allow developers to replace some nested UI elements with their own, to fit their unique needs.</p>
+<p><strong>Customizable look and feel.</strong> A frontend application can and should be opinionated about its look and feel. However, the target of a UI SDK is to be usable within many such opinionated applications. As a result, UI SDKs need to allow developers to customize the look and feel in many areas such as - branding, theming, colours, typography, layouts, positioning, sizes, styles, text, etc. UI SDKs that render a nesting of UI elements may also need to allow developers to replace some nested UI elements with their own, to fit their unique needs.</p>
 
-<p><strong>Customizability of the behaviour.</strong> UI SDKs are often involved with handling user and system events. Even if the UI SDK has default “event handlers” for such events, it should allow developers to hook their custom event handling code, potentially discarding the default event handler if needed.</p>
+<p><strong>Customizable behaviour.</strong> UI SDKs are often involved with handling user and system events. Even if the UI SDK has default “event handlers” for such events, it should allow developers to hook their custom event handling code, potentially discarding the default event handler if needed.</p>
 
 <p><strong>Responsive by default.</strong> Frontend applications run on many different form factors and device capabilities. It’s delightful if the visual output of a UI SDK just works on all devices. That said, it must provide APIs for developers to opt-in or opt-out of default responsive behaviours, e.g. not all applications support landscape orientation, so, even if a UI SDK supports it, the host app may want to opt-out of automated landscape mode for consistency.</p>
 
@@ -48,11 +48,11 @@
 
 <p><strong>Scalable.</strong> UI SDKs can be used within applications that deal with a lot of data or backend systems that operate at different levels of speed. As a result, UI SDKs need to be designed with concepts such as async data loading, progress indicators, and optimizing memory usage with paging and appropriate caching. While intelligent defaults work great, UI SDKs still need to expose APIs that allow developers tune such scale related optimizations based on their unique needs.</p>
 
-<p><strong>Robustness.</strong> UI SDKs, like any other software applications, will eventually run into exceptions. So, it’s important to design the SDKs such that the blast radius is minimized to avoid a total application crash. Additionally, UI SDKs should provide feedback both visually and through the APIs to allow app developers respond to exceptions in a way that best fits the app’s use-case.</p>
+<p><strong>Robust.</strong> UI SDKs, like any other software applications, will eventually run into exceptions. So, it’s important to design the SDKs such that the blast radius is minimized to avoid a total application crash. Additionally, UI SDKs should provide feedback both visually and through the APIs to allow app developers respond to exceptions in a way that best fits the app’s use-case.</p>
 
 <p><strong>Lean and standalone.</strong> Transitive dependencies are awful for any SDKs, not just UI SDKs. At the UI layer, it’s tempting to take a runtime dependency on an existing package and is often the  preferred way to build frontend applications. But a UI SDK that introduces transitive dependencies may not be usable for developers due to conflicts with their app, the potential bloat, or implications on licensing.</p>
 
-<p><strong>Observability.</strong> Developers need to build metrics and monitors for business and technical analytics. They also need to debug edge cases and report issues with sufficient context so that the UI SDK team can quickly identify and potentially fix the issues. To empower these use-cases, UI SDKs may need to trigger its own events, emit complete stack-traces and meaningful messages with exceptions. It also needs produce logs with varying levels of details for development and production use, of course keeping security and privacy in mind.</p>
+<p><strong>Observable.</strong> Developers need to build metrics and monitors for business and technical analytics. They also need to debug edge cases and report issues with sufficient context so that the UI SDK team can quickly identify and potentially fix the issues. To empower these use-cases, UI SDKs may need to trigger its own events, emit complete stack-traces and meaningful messages with exceptions. It also needs produce logs with varying levels of details for development and production use, of course keeping security and privacy in mind.</p>
 
 <p>I admit that these design principles are not exhaustive and not necessarily ordered by their relative importance. While designing our UI SDK, we’ve come across each of these areas and have made conscious decisions on how to best achieve these goals within our constraints. If you’ve read it up to this point, thank you for your time on this long post and I hope you found it useful.</p>
 ]]></content>
