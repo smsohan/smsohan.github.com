@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-10-12T16:16:34-07:00</updated>
+  <updated>2021-10-13T13:44:17-07:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -42,7 +42,7 @@
 
 <p><strong>Backward compatible for both API and UI.</strong> Developers rely on many 3rd-party libraries and SDKs because they want to focus and innovate on their primary business domain. Developers don’t have time to upgrade just because there’s a new version of an SDK is released with improved features. Since we want UI SDK users to use our latest and greatest, we must make it effortless by making both the API and UI backward compatible. In our own experience, we found the UI compatibility to be much harder than API compatibility. Most new API features are non-breaking because existing code works just fine, but even additional changes to the UI can be breaking, for example adding drop-shadow to an element in a UI SDK is a breaking change because it may look out of place in a host app that doesn’t use drop-shadow anywhere else. For this same reason, the change-log for a UI SDK must show both API and visual changes.</p>
 
-<p><strong>Testable.</strong> Testability impacts trustability. Automated testing is specially brittle and costly to maintain at the UI layer. On one hand, UI SDK developers must ensure reliable automated testing across many different devices and screen configurations to be able to maintain developer productivity and high quality releases. On the other hand, app developers must be able to mock / stub any dependencies that the UI SDK has to be able to write tests for their domain specific use-cases.</p>
+<p><strong>Testable.</strong> Testability impacts trustability. Automated testing is specially brittle and costly to maintain at the UI layer. On one hand, UI SDK developers must ensure reliable automated testing across many different devices and screen configurations to be able to maintain developer productivity and high quality releases. On the other hand, app developers that use the UI SDK must be able to write tests for their own use-cases. To enable this, the a UI SDK needs to allow mocking and stubbing its dependencies.</p>
 
 <p><strong>Secure by default.</strong> UI SDKs handle user inputs and outputs, and often produce logs so it must be secure by default. There are well known attack vectors that affect the UI such as XSS, various kinds of script injections, session hijacking, and beyond. Since UI SDKs are used within many applications, the attack surface of a vulnerability in a UI SDK can be very large. It’s important for UI SDKs to prioritize the secure by default agenda. Additionally, there must be a process for developers to report security and vulnerability issues. To mitigate against security vulnerabilities, UI SDK dev teams must have a well-defined process of patching and vulnerability disclosure so that app developers can stay in the loop to protect their systems from being compromised.</p>
 
