@@ -9,7 +9,7 @@ footer: true
 
 ![Cover](/images/cover.jpg)
 
-I'm Sohan, and I work at Microsoft as a Principal Engineering Manager. I live in Calgary with my wife and two children.
+I'm Sohan, and I work at Microsoft as a Principal Engineering Manager. I live with my wife and two children in Coquitlam, BC.
 
 ### Contact Me
 
