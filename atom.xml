@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-12-11T19:29:59-08:00</updated>
+  <updated>2021-12-11T19:39:33-08:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -42,42 +42,42 @@
 <tr>
 <td></td>
 <td>Change existing code / architecture</td>
-<td> Community meetups and conferences|</td>
+<td> Community meetups and conferences</td>
 </tr>
 <tr>
 <td></td>
 <td>Add new features</td>
-<td> <strong>Extensibility API</strong>, Public facing product backlog |</td>
+<td> <strong>Extensibility API</strong>, Public facing product backlog</td>
 </tr>
 <tr>
 <td></td>
 <td>Fix bugs</td>
-<td> CI, contribution guide, coding style guides|</td>
+<td> CI, contribution guide, coding style guides</td>
 </tr>
 <tr>
 <td></td>
 <td>Fork and customize</td>
-<td> Permissive license |</td>
+<td> Permissive license </td>
 </tr>
 <tr>
 <td></td>
 <td>Discuss issues and questions</td>
-<td>  Developer forums |</td>
+<td>  Developer forums</td>
 </tr>
 <tr>
 <td></td>
 <td>Report issues</td>
-<td> Issue reporting tools and triage process |</td>
+<td> Issue reporting tools and triage process</td>
 </tr>
 <tr>
 <td></td>
 <td>Browse code</td>
-<td> Readable code and docs |</td>
+<td> Readable code and docs</td>
 </tr>
 <tr>
 <td></td>
 <td>Download and use</td>
-<td> Product is released as a package |</td>
+<td> Product is released as a package</td>
 </tr>
 </tbody>
 </table>
