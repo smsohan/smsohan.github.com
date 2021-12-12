@@ -16,5 +16,23 @@ body{
   &>nav{
     border-bottom: none;
   }
+}
+
+table { 
+  thead {
+    tr {
+      border-bottom: 1px solid black;
+      th {
+        font-weight: bold;
+      }
+    }
+  }
+
+  tr th, tr td {
+    padding: 0.25rem;
+  }
+
+  margin: 1rem 0;
+
 
 }

@@ -17,18 +17,18 @@ Here's a quick table of the community engagement modes for open-source products.
 
 |Engagement Mode|Key Enabler|
 |----|---|
-|Change existing code / architecture| Community meetups and conferences|
-|Add new features| __Extensibility API__, Public facing product backlog |
-|Fix bugs| CI, contribution guide, coding style guides|
-|Fork and customize| Permissive license |
-|Discuss issues and questions|  Developer forums |
-|Report issues| Issue reporting tools and triage process |
-|Browse code| Readable code and docs |
-|Download and use| Product is released as a package |
+|Change existing code / architecture| Community meetups and conferences
+|Add new features| __Extensibility API__, Public facing product backlog
+|Fix bugs| CI, contribution guide, coding style guides
+|Fork and customize| Permissive license 
+|Discuss issues and questions|  Developer forums
+|Report issues| Issue reporting tools and triage process
+|Browse code| Readable code and docs
+|Download and use| Product is released as a package
 
 I highlighted the topic of __extensibility APIs__ because that was my key observation about making a successful company-owned open-source products. For example, VSCode is a hugely popular product and benefits greatly from the community contribution in the form of extensions. The beauty of this process is, it provides a clear separation of concerns. The core team can focus on their company-mandated work while the community can build and maintain the plugins independently. 
 
-If you want the community to come and contribute to your open-source project, carefully design the core product with extension points in mind. Then, ensure the extension developers' ergonomics are great. Give them well-documented and thoughtfully-designed APIs. Ensure that they have automated testing and publishing tools for the plugins. Make the plugins easily discoverable so that developers can find and use compatible plugins while using the open-source product.
+If you want the community to come and contribute to your open-source project, carefully design the core product with extension points in mind. Then, ensure the ergonomics are great for the extension developers. Give them well-documented and thoughtfully-designed APIs. Ensure that they have automated testing and publishing tools for the plugins. Make the plugins easily discoverable so that developers can find and use compatible plugins while using the open-source product.
 
-I have another recommendation. A company-owned open-source product should publish their community engagement strategy for clarity. For example, it's better to be upfront if the core team isn't ready to accept community code contributions. The core team should choose a pragmatic strategy and evolve it over time as the product matures. 
+I have another recommendation. A company-owned open-source product should publish their community engagement strategy for clarity. For example, it's better to be upfront if the core team isn't ready to accept community code contributions. We should choose a suitable strategy and evolve it over time as the product matures. 
 
