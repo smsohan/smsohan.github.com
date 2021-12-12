@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="This unsolvable maze is a local food from Bangladesh, known as JilapiPhoto credits to&nbsp;udvranto pothikObject Versioning is often required by a &hellip;">
+  <meta name="description" content="To render a list, often times we use repeated HTML elements with a similar template. For example, the search results in ebay.com is a list of divs, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/22/are-you-still-parsing-html-element-ids/">Are You Still Parsing HTML Element Ids?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-22T00:00:00-08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">To render a list, often times we use repeated HTML elements with a similar template. For example, the search results in ebay.com is a list of divs, each containing different data in the same template. In a server side, this rendering code is somewhat similar to this:<br /><div><br /></div><script src="https://gist.github.com/1660430.js"></script><br />If you noticed, a product with it&#8217;s database id = 123 will be rendered inside a div with id=&#8221;product_123&#8221;, and similarly div id=&#8221;product_456&#8221; will contain the product with id = 456.<br /><br />With such ids, we can write JavaScript code that can extract the database id of a selected product to do interesting things, for example:<br /><br /><script src="https://gist.github.com/1660456.js">  </script><br />This is a useful and a common technique. However, in this era of <a href="http://dev.w3.org/html5/spec/Overview.html#embedding-custom-non-visible-data-with-the-data-attributes">HTML5</a>, we can make use of its custom attributes feature to write a clean JavaScript event handler without the help of parsing. Here&#8217;s an example:<br /><br /><script src="https://gist.github.com/1660524.js">  </script><br />I will never parse my HTML element Id again. What about you?</div></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Cronos</div>
+<div class='content'>
+nice!, I didt know this function, tks for sharing!</div>
+</div>
+<div class='comment'>
+<div class='author'>honeyclarck</div>
+<div class='content'>
+In my point of view You sure did put a new twist on something that Ive heard so much about <b><a href="http://www.actualexams.me/" rel="nofollow">ActualExams</a></b>. And How did you manage to make a blog that as smart as it is sleek?</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -426,43 +476,6 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/09/16/quiz-c-async-and-await-what-is-output/">Quiz: C# Async and Await. What Is the Output of This Code?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-16T00:00:00-07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">C# 5.0 (CTP version at this point) has support for async and await to allow clean implementation of non-blocking IO using a task-continuation model. I was just playing with it and here&#8217;s the sample code to tease your brain. Tell me what is the output of this program?<br /></div><br /><script src="https://gist.github.com/1223284.js"> </script></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -480,6 +493,10 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
       </li>
     
@@ -493,10 +510,6 @@ Nice, I too learned about the wonderfulness of parent divs being postion:relativ
     
       <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
   </ul>

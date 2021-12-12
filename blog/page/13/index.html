@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Traditionally the .NET community, or more appropriately the users of .NET framework relied on products from Microsoft - so, in a product stack you &hellip;">
+  <meta name="description" content="Too often I see I am using a REST/SOAP API to talk to a third party system that frustrates me because of poor error messaging. Here&#8217;s an &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/22/service-api-and-exceptions/">Service API and Exceptions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-22T00:00:00-07:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on"><br />Too often I see I am using a REST/SOAP API to talk to a third party system that frustrates me because of poor error messaging. Here&#8217;s an example to illustrate a typical frustration:<br /><br />Call: city_service.update_residence_address(city_dueler, new_address)<br />Response: &lt;status&gt;Failed&lt;/status&gt;&lt;error&gt;Invalid address&lt;/error&gt;<br /><br />But the address just seems right to me. So, I need to know specific reason about why the address is wrong. The error message leaves this critical detail. What happens next is, I look for the log files created by the city_service, conceptually supposed to be a third party hosted service. To do this, I SSH to the server, then cd to the logs folder and get lost in many of the cryptic log files. Then eventually I find a log and if I am lucky, I find something like the following:<br /><br />InvalidAddressException at:&#8230;<br />&#8230;<br />Street number is not listed..<br />&#8230;<br /><br />Now, I know I had an issue with the streer number. But I can see this only after I looked into the log of the thirdparty server. In an ideal case, I don&#8217;t have an access to their server. Even if I have it, I cannot easily understand their logs and stack traces! In most API calls to third party applications I have had this&nbsp;frustration&nbsp;to varying degrees.<br /><br /><b>Here&#8217;s a lesson learned:</b><br />Next time you expose an API for another app, expose error messages as specific as possible - so that, no details is left buried into your log files.</div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -484,43 +521,6 @@ Dear Readers:<br />Happy 2011. 2010 was a great year. Why?<br /><br /><ul><li>De
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/12/13/dry-total-161-duplicate/">DRY - Total 161 Duplicate ArgumentNullException Calls in ASP.Net MVC Source Code</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-13T00:00:00-08:00" pubdate data-updated="true">Dec 13<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-There are 161 occurrences of the following code pattern inside the ASP.Net MVC source code: See details of which class and which line at&nbsp;<a href="https://gist.github.com/739523">https://gist.github.com/739523</a><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">method(type argument)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">{</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp;if(argument == null){</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp; &nbsp;throw new ArgumentNullException(&#8220;argument&#8221;)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp;}</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;"><br /></span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&#8230;</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">}</span></span><br />So, in total this pattern introduces 312 lines of duplicate code without whitespaces and 644 lines of duplicate code including whitespaces. And the pattern is simple, just check a condition and throw exception if its true. Not to mention, there are numerous other duplications where <span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">string.IsNullOrEmpty</span></span> is used to check for string arguments.<br />This observation is interesting to me. Since, I think it adds a lot of noise to the code. In fact, if you randomly look at any of the methods - you have a good chance of seeing the first few lines doing this exactly similar thing. And this adds noise to me. Not to mention that, the developer needs to write the code, write tests for this code and if one needs to use this method, somehow should know this in advance that passing a null will result in an exception. But of course, this is not explicit from the method signature unless the developer also takes the pain to put a documentation styled comment and mention about this ArgumentNullException.<br />To remove this clutter, I think C# can introduce a few language keywords such as the follows:<br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">public void Authenticate(<b>required</b> User user)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">public void AddNewUser(<b>nonblank</b> string userName)</span></span><br />A compiler can very easily compile the code and put the exception throwing logic based on these keywords. Call it a syntactic sugar or a language keyword, this is the kind of translation that seems to be perfect for the compilers. And I can foresee it being used in almost all methods we write, since if the methods require an argument they do it for a purpose and most of the time null is not expected anyway!<br />I don&#8217;t know if this will reach the people responsible for developing C#, but if it does, I think the community will really love this new language feature.<br />I know about workarounds using AOP or other hyped-but-seldom-used tricks to solve this problem. But these tricks often make life harder by introducing a learning curve and then punishing the learning by slowing down the application. So, its best to put in as a core language feature. What do you think?</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/14/">&larr; Older</a>
@@ -538,6 +538,10 @@ There are 161 occurrences of the following code pattern inside the ASP.Net MVC s
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
       </li>
     
@@ -551,10 +555,6 @@ There are 161 occurrences of the following code pattern inside the ASP.Net MVC s
     
       <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
   </ul>

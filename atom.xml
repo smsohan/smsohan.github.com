@@ -4,7 +4,7 @@
   <title><![CDATA[Sohan's Blog]]></title>
   <link href="http://smsohan.com/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-10-18T11:13:15-07:00</updated>
+  <updated>2021-12-11T19:29:59-08:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Open-source: If You Build It Right, They'll Come]]></title>
+    <link href="http://smsohan.com/blog/2021/11/07/open-source-strategy/"/>
+    <updated>2021-11-07T12:51:00-08:00</updated>
+    <id>http://smsohan.com/blog/2021/11/07/open-source-strategy</id>
+    <content type="html"><![CDATA[<p>I find open-source to be a rather loaded term; it means different things to different people. For this blog post, I&#8217;ll imagine there are two kinds of open-source projects:</p>
+
+<ol>
+<li>Company-owned open-source</li>
+<li>Crowd-owned open-source</li>
+</ol>
+
+
+<p>I&#8217;m wiring this blog post specifically about company-owned open-source products. In a typical company-owned open-source product, the company pays us to develop and maintain the product. I&#8217;ve been working on the <a href="https://aka.ms/acsstorybook">Azure Communication Services UI Library</a> that falls into this category. We have full-time developers at Microsoft that work on this product. In the past few weeks, I was researching to come up with an open-source strategy for us. Here I&#8217;m sharing what I learned in the process. These findings can help others who are on the same boat.</p>
+
+<p>Here&#8217;s a quick table of the community engagement modes for open-source products. The higher the layer, the more complex it gets.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Engagement Mode</th>
+<th>Key Enabler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Change existing code / architecture</td>
+<td> Community meetups and conferences|</td>
+</tr>
+<tr>
+<td></td>
+<td>Add new features</td>
+<td> <strong>Extensibility API</strong>, Public facing product backlog |</td>
+</tr>
+<tr>
+<td></td>
+<td>Fix bugs</td>
+<td> CI, contribution guide, coding style guides|</td>
+</tr>
+<tr>
+<td></td>
+<td>Fork and customize</td>
+<td> Permissive license |</td>
+</tr>
+<tr>
+<td></td>
+<td>Discuss issues and questions</td>
+<td>  Developer forums |</td>
+</tr>
+<tr>
+<td></td>
+<td>Report issues</td>
+<td> Issue reporting tools and triage process |</td>
+</tr>
+<tr>
+<td></td>
+<td>Browse code</td>
+<td> Readable code and docs |</td>
+</tr>
+<tr>
+<td></td>
+<td>Download and use</td>
+<td> Product is released as a package |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>I highlighted the topic of <strong>extensibility APIs</strong> because that was my key observation about making a successful company-owned open-source products. For example, VSCode is a hugely popular product and benefits greatly from the community contribution in the form of extensions. The beauty of this process is, it provides a clear separation of concerns. The core team can focus on their company-mandated work while the community can build and maintain the plugins independently.</p>
+
+<p>If you want the community to come and contribute to your open-source project, carefully design the core product with extension points in mind. Then, ensure the ergonomics are great for the extension developers. Give them well-documented and thoughtfully-designed APIs. Ensure that they have automated testing and publishing tools for the plugins. Make the plugins easily discoverable so that developers can find and use compatible plugins while using the open-source product.</p>
+
+<p>I have another recommendation. A company-owned open-source product should publish their community engagement strategy for clarity. For example, it&#8217;s better to be upfront if the core team isn&#8217;t ready to accept community code contributions. We should choose a suitable strategy and evolve it over time as the product matures.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[UI SDK Design Principles]]></title>
@@ -615,54 +693,6 @@ Requirements -> |         |
 <p>Context is formed by <strong>why / what / who / when / where / how</strong>, each of these being a critcial part. Most often it&#8217;s common to focus on the how alone - forgetting the rest of the context while adopting a recipe for success in business. Some get overly <a href="https://en.wikipedia.org/wiki/Simon_Sinek">influenced by speakers</a> and focus on only a subset of the context. Reality is, it&#8217;s almost impossible to find an excact duplicate of any one context. So, while copying solutions from one context, we must adapt to account for the uniqueness of our own context.</p>
 
 <p>A lot of innovation lies in the context gap - where one can find clever ways to adapt solutions from one context into another. I&#8217;ll give you one such example, did you know Uber runs a motorcycle based rideshare in <a href="https://www.uber.com/en-BD/blog/dhaka/dhaka-moto/">many countries</a>?</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Change]]></title>
-    <link href="http://smsohan.com/blog/2020/08/31/change/"/>
-    <updated>2020-08-31T14:02:00-07:00</updated>
-    <id>http://smsohan.com/blog/2020/08/31/change</id>
-    <content type="html"><![CDATA[<h2>Manager&#8217;s Mind</h2>
-
-<p>As managers, we have the benefit of view because we have our eyes on  longer term goals. To achieve those goals, we often have to introduce a change. For example, we may want to change how a team is formed or what product a team works on based on new business needs or opportunities. So, we put a lot of thought into it and propose our plan to the team hoping the following reaction:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nx">team</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="nx">excitement</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before proposing such a change, we&#8217;ve analyzed various options, including the option of keeping everything as-is. We&#8217;re fully convinced that indeed the change we&#8217;re going to propose is the best option. We are excited with this new way that&#8217;ll make our teams more productive. As caring managers, we are thrilled because we believe this will make the team happier.</p>
-
-<h2>Team&#8217;s Mind</h2>
-
-<p>However, most of the team&#8217;s reaction is as follows:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="nx">team</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="nx">panic</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Honestly, the team has a great chemistry going on, they have fun and work well together, they are already so productive shipping products using technology they use today. So, at best a change seems random, but more commonly perceived as a mindless act of &#8220;management BS&#8221;.</p>
-
-<h2>The Deadlock</h2>
-
-<p>At this stage, both the manager and the team are in a deadlock, each party   fairly confident in their judgement, failing to appreciate the concerns of the other. At this point, it&#8217;s the manager&#8217;s job to not only break the deadlock but also to make sure s/he carefully listens to the team and motivates them. Ideally, we can data-drive these conversations while being mindful of individual emotions.</p>
-
-<h2>The Checklist</h2>
-
-<p>Here&#8217;s a checklist I&#8217;m following myself as a manager as I&#8217;m trying to orient my teams from technology driven teams to more full-stack product mission oriented teams:</p>
-
-<ol>
-<li>Motivate the team with a why. <em>e.g. Go from tech-oriented teams to product mission teams so that all of you can deliver products to customers&#8230;</em></li>
-<li>Listen to the team. Multiple one on one sessions if needed. <em>e.g. Let&#8217;s discuss about your concerns regarding tech debt with this change&#8230;</em></li>
-<li>Discuss changes to your plan based on the team&#8217;s feedback. <em>e.g. You&#8217;ll have full ownership of the technology to serve your mission&#8230;</em></li>
-<li>Layout your evidence. <em>e.g. We built an improved search feature that we couldn&#8217;t ship to customers for months because the UI team was busy&#8230;</em></li>
-<li>Discuss pros and cons of alternatives you thought about. <em>e.g. Another option is to keep as-is, but that&#8217;d mean we must improve cross-team project management to reduce hand-off related delays&#8230;</em></li>
-<li>Present your metrics to achieve. <em>e.g. Time from dev to customer, performance metrics,&#8230;</em></li>
-<li>Present an iterative and incremental plan with the option to change course based on metrics. <em>e.g. Let&#8217;s do this with one team for one month&#8230;</em></li>
-</ol>
-
 ]]></content>
   </entry>
   

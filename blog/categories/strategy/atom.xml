@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Strategy | Sohan's Blog]]></title>
+  <link href="http://smsohan.com/blog/categories/strategy/atom.xml" rel="self"/>
+  <link href="http://smsohan.com/"/>
+  <updated>2021-12-11T19:29:59-08:00</updated>
+  <id>http://smsohan.com/</id>
+  <author>
+    <name><![CDATA[SM Sohan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Open-source: If You Build It Right, They'll Come]]></title>
+    <link href="http://smsohan.com/blog/2021/11/07/open-source-strategy/"/>
+    <updated>2021-11-07T12:51:00-08:00</updated>
+    <id>http://smsohan.com/blog/2021/11/07/open-source-strategy</id>
+    <content type="html"><![CDATA[<p>I find open-source to be a rather loaded term; it means different things to different people. For this blog post, I'll imagine there are two kinds of open-source projects:</p>
+
+<ol>
+<li>Company-owned open-source</li>
+<li>Crowd-owned open-source</li>
+</ol>
+
+
+<p>I'm wiring this blog post specifically about company-owned open-source products. In a typical company-owned open-source product, the company pays us to develop and maintain the product. I've been working on the <a href="https://aka.ms/acsstorybook">Azure Communication Services UI Library</a> that falls into this category. We have full-time developers at Microsoft that work on this product. In the past few weeks, I was researching to come up with an open-source strategy for us. Here I'm sharing what I learned in the process. These findings can help others who are on the same boat.</p>
+
+<p>Here's a quick table of the community engagement modes for open-source products. The higher the layer, the more complex it gets.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Engagement Mode</th>
+<th>Key Enabler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Change existing code / architecture</td>
+<td> Community meetups and conferences|</td>
+</tr>
+<tr>
+<td></td>
+<td>Add new features</td>
+<td> <strong>Extensibility API</strong>, Public facing product backlog |</td>
+</tr>
+<tr>
+<td></td>
+<td>Fix bugs</td>
+<td> CI, contribution guide, coding style guides|</td>
+</tr>
+<tr>
+<td></td>
+<td>Fork and customize</td>
+<td> Permissive license |</td>
+</tr>
+<tr>
+<td></td>
+<td>Discuss issues and questions</td>
+<td>  Developer forums |</td>
+</tr>
+<tr>
+<td></td>
+<td>Report issues</td>
+<td> Issue reporting tools and triage process |</td>
+</tr>
+<tr>
+<td></td>
+<td>Browse code</td>
+<td> Readable code and docs |</td>
+</tr>
+<tr>
+<td></td>
+<td>Download and use</td>
+<td> Product is released as a package |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>I highlighted the topic of <strong>extensibility APIs</strong> because that was my key observation about making a successful company-owned open-source products. For example, VSCode is a hugely popular product and benefits greatly from the community contribution in the form of extensions. The beauty of this process is, it provides a clear separation of concerns. The core team can focus on their company-mandated work while the community can build and maintain the plugins independently.</p>
+
+<p>If you want the community to come and contribute to your open-source project, carefully design the core product with extension points in mind. Then, ensure the ergonomics are great for the extension developers. Give them well-documented and thoughtfully-designed APIs. Ensure that they have automated testing and publishing tools for the plugins. Make the plugins easily discoverable so that developers can find and use compatible plugins while using the open-source product.</p>
+
+<p>I have another recommendation. A company-owned open-source product should publish their community engagement strategy for clarity. For example, it's better to be upfront if the core team isn't ready to accept community code contributions. We should choose a suitable strategy and evolve it over time as the product matures.</p>
+]]></content>
+  </entry>
+  
+</feed>

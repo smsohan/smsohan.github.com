@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Have you already read this?The following excerpt &nbsp;by Jose Valim at the end of the book nicely summarizes it:Finally, you understand Rails &hellip;">
+  <meta name="description" content="There are 161 occurrences of the following code pattern inside the ASP.Net MVC source code: See details of which class and which line at&nbsp;https &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/12/13/dry-total-161-duplicate/">DRY - Total 161 Duplicate ArgumentNullException Calls in ASP.Net MVC Source Code</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-13T00:00:00-08:00" pubdate data-updated="true">Dec 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+There are 161 occurrences of the following code pattern inside the ASP.Net MVC source code: See details of which class and which line at&nbsp;<a href="https://gist.github.com/739523">https://gist.github.com/739523</a><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">method(type argument)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">{</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp;if(argument == null){</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp; &nbsp;throw new ArgumentNullException(&#8220;argument&#8221;)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&nbsp;&nbsp;}</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;"><br /></span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">&#8230;</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">}</span></span><br />So, in total this pattern introduces 312 lines of duplicate code without whitespaces and 644 lines of duplicate code including whitespaces. And the pattern is simple, just check a condition and throw exception if its true. Not to mention, there are numerous other duplications where <span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">string.IsNullOrEmpty</span></span> is used to check for string arguments.<br />This observation is interesting to me. Since, I think it adds a lot of noise to the code. In fact, if you randomly look at any of the methods - you have a good chance of seeing the first few lines doing this exactly similar thing. And this adds noise to me. Not to mention that, the developer needs to write the code, write tests for this code and if one needs to use this method, somehow should know this in advance that passing a null will result in an exception. But of course, this is not explicit from the method signature unless the developer also takes the pain to put a documentation styled comment and mention about this ArgumentNullException.<br />To remove this clutter, I think C# can introduce a few language keywords such as the follows:<br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">public void Authenticate(<b>required</b> User user)</span></span><br /><span class="Apple-style-span" style="font-family: 'Courier New', Courier, monospace;"><span class="Apple-style-span" style="color: blue;">public void AddNewUser(<b>nonblank</b> string userName)</span></span><br />A compiler can very easily compile the code and put the exception throwing logic based on these keywords. Call it a syntactic sugar or a language keyword, this is the kind of translation that seems to be perfect for the compilers. And I can foresee it being used in almost all methods we write, since if the methods require an argument they do it for a purpose and most of the time null is not expected anyway!<br />I don&#8217;t know if this will reach the people responsible for developing C#, but if it does, I think the community will really love this new language feature.<br />I know about workarounds using AOP or other hyped-but-seldom-used tricks to solve this problem. But these tricks often make life harder by introducing a learning curve and then punishing the learning by slowing down the application. So, its best to put in as a core language feature. What do you think?</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -455,51 +492,6 @@ Congrats on err&#8230;everything ;)<br />I&#39;d argue there are a few more type
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/04/26/using-authlogic-and-single-access-token/">Using Authlogic and Single Access Token for API Access</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-26T00:00:00-07:00" pubdate data-updated="true">Apr 26<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<a href="http://github.com/binarylogic/authlogic">Bynarylogic&#8217;s authlogic</a> has gained much popularity for its out of the box solution to ruby on rails authentication. Yesterday, I was working on giving API access to my ruby on rails application so that other apps can use my RESTful services. The authenticated API access usually involves the following steps:<br /><ol><li>API_KEY or a token to identify/authenticate an API call.</li><li>Authentication of an API caller using the API_KEY.</li></ol><div>Authlogic comes with in-built support for this. The following steps will do it for you:</div><div><script src="http://gist.github.com/379478.js"></script></div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>jlfenaux</div>
-<div class='content'>
-Thanks the clear explanation about single_access_token, I was looking for.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -517,6 +509,10 @@ Thanks the clear explanation about single_access_token, I was looking for.</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
       </li>
     
@@ -530,10 +526,6 @@ Thanks the clear explanation about single_access_token, I was looking for.</div>
     
       <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="At Microsoft, I’ve been working with my team on a multi-platform UI SDK for Azure Communication Services. We empower developers to build visually &hellip;">
+  <meta name="description" content="I find open-source to be a rather loaded term; it means different things to different people. For this blog post, I&#8217;ll imagine there are two &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,111 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2021-11-07T12:51:00-08:00" pubdate data-updated="true">Nov 7<span>th</span>, 2021</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I find open-source to be a rather loaded term; it means different things to different people. For this blog post, I&#8217;ll imagine there are two kinds of open-source projects:</p>
+
+<ol>
+<li>Company-owned open-source</li>
+<li>Crowd-owned open-source</li>
+</ol>
+
+
+<p>I&#8217;m wiring this blog post specifically about company-owned open-source products. In a typical company-owned open-source product, the company pays us to develop and maintain the product. I&#8217;ve been working on the <a href="https://aka.ms/acsstorybook">Azure Communication Services UI Library</a> that falls into this category. We have full-time developers at Microsoft that work on this product. In the past few weeks, I was researching to come up with an open-source strategy for us. Here I&#8217;m sharing what I learned in the process. These findings can help others who are on the same boat.</p>
+
+<p>Here&#8217;s a quick table of the community engagement modes for open-source products. The higher the layer, the more complex it gets.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Engagement Mode</th>
+<th>Key Enabler</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Change existing code / architecture</td>
+<td> Community meetups and conferences|</td>
+</tr>
+<tr>
+<td></td>
+<td>Add new features</td>
+<td> <strong>Extensibility API</strong>, Public facing product backlog |</td>
+</tr>
+<tr>
+<td></td>
+<td>Fix bugs</td>
+<td> CI, contribution guide, coding style guides|</td>
+</tr>
+<tr>
+<td></td>
+<td>Fork and customize</td>
+<td> Permissive license |</td>
+</tr>
+<tr>
+<td></td>
+<td>Discuss issues and questions</td>
+<td>  Developer forums |</td>
+</tr>
+<tr>
+<td></td>
+<td>Report issues</td>
+<td> Issue reporting tools and triage process |</td>
+</tr>
+<tr>
+<td></td>
+<td>Browse code</td>
+<td> Readable code and docs |</td>
+</tr>
+<tr>
+<td></td>
+<td>Download and use</td>
+<td> Product is released as a package |</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>I highlighted the topic of <strong>extensibility APIs</strong> because that was my key observation about making a successful company-owned open-source products. For example, VSCode is a hugely popular product and benefits greatly from the community contribution in the form of extensions. The beauty of this process is, it provides a clear separation of concerns. The core team can focus on their company-mandated work while the community can build and maintain the plugins independently.</p>
+
+<p>If you want the community to come and contribute to your open-source project, carefully design the core product with extension points in mind. Then, ensure the ergonomics are great for the extension developers. Give them well-documented and thoughtfully-designed APIs. Ensure that they have automated testing and publishing tools for the plugins. Make the plugins easily discoverable so that developers can find and use compatible plugins while using the open-source product.</p>
+
+<p>I have another recommendation. A company-owned open-source product should publish their community engagement strategy for clarity. For example, it&#8217;s better to be upfront if the core team isn&#8217;t ready to accept community code contributions. We should choose a suitable strategy and evolve it over time as the product matures.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -635,64 +740,6 @@ yourself from the masses.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2020/12/26/software-artchitecture-part-1/">Software Architecture - Topic 1: Delightfulness</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2020-12-26T15:07:00-08:00" pubdate data-updated="true">Dec 26<span>th</span>, 2020</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>&#8220;I want to be an architect&#8221;</em> - is a common career goal I hear during one:one meetings and annual reviews with my team members. Honestly, I&#8217;m writing this series of blog posts to bring some clarity and structure into my own thoughts, and hopefully to scale my time. You can even say, I&#8217;m open-sourcing my mentorship on the topic of software archtecture. My sincere hope is, this series helps my team or anyone who wants to systematically learn and improve their software design skills.</p>
-
-<p>My mental model of a software architect as a system is as follows:</p>
-
-<pre>
-                 _________
-                |         |
-Requirements -> |         |
-                |         |
- Environment -> |Architect| -> "Delightful" System Design
-                |         |
-      People -> |         |
-                |_________|
-</pre>
-
-
-<p>That is, they produce the most delightful system design as the output from three inputs: business requirements, the environment that surrounds the system, and the people that are involved with the system. The main phrase to remember is <strong>&#8220;the most delightful&#8221;</strong> - because this is what makes the architect&#8217;s job so much fun and appealing.</p>
-
-<p>First, I recommend reading the book <a href="https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654">The Design of Everyday Things</a> to learn how design impacts us everyday. It&#8217;s a fun and must read for anyone involved in any kind of design.</p>
-
-<p>Next, I recommend reading the book <a href="https://www.amazon.com/Dont-Make-Think-Revisited-Usability/dp/0321965515/ref=sr_1_1?crid=EH17W0BAL06D&amp;dchild=1&amp;keywords=don%27t+make+me+think&amp;qid=1609281299&amp;s=books&amp;sprefix=don%27t+make+%2Cstripbooks-intl-ship%2C200&amp;sr=1-1">Don&#8217;t Make Me Think</a> to learn about how to know if your design is delightful.</p>
-
-<p>I prefer the word delightfulness over usability or customer obsession because the former sets a high bar. I hope you also internalize the goal of designing the most delightful systems and settle for nothing less, why should you?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -708,6 +755,10 @@ Requirements -> |         |
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
       </li>
     
@@ -721,10 +772,6 @@ Requirements -> |         |
     
       <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
   </ul>

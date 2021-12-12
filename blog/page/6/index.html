@@ -9,9 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Browsers have carefully crafted the alert and confirm dialogs for everyone under really simple APIs as follows: 1
-2
-alert('Failed to send the email. &hellip;">
+  <meta name="description" content="This fall semester, I signed for the Entrepreneurship and Innovation course (ENTI 781) at the Haskyne Business School of University of Calgary. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +79,61 @@ alert('Failed to send the email. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/09/lessons-learned-entrepreneurship-and-innovation-course/">Lessons Learned: Entrepreneurship and Innovation Course</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-09T14:32:00-08:00" pubdate data-updated="true">Dec 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This fall semester, I signed for the Entrepreneurship and Innovation course (ENTI 781) at the Haskyne Business School of University of Calgary. Wanted to capture my thoughts on this course for my readers here.</p>
+
+<p>First, the course was unconventional since there are very little academic material to teach entrepreneurship and innovation. The teacher, Olga Petricevic, did a decent job of collecting materials comprising of academic papers, case studies, newspaper articles and YouTube videos as well as bringing in a local entrepreneur for a lecture one day. But none of these were the highlights for me.</p>
+
+<p>The course had a few assignments and I liked a couple to be specific. In one assignment, the students were asked to find a project in Indigogo or Kickstarter to put their own money. This was eyeopening, as I had hard time finding a project that looked to have any potential to become a successful venture. Moreover, even if I liked it, there were almost no incentive to &#8220;donate&#8221; your money since all you got was a token for your money in a way that you bear the risk without any potential for a profit.</p>
+
+<p>The other assignment was about compiling a list of 50 things that bug me in everyday life. This was the most fun assignment of the semester and I had a decent list with bugs such as:</p>
+
+<pre><code>1. Did I leave the stove on while leaving the house?
+2. Vacuum cleaning the stairs.
+3. Finding a plumber NOW.
+4. Waiting at airport.
+...
+</code></pre>
+
+<p>All in all, the worst assignment was the group assignment. The group I worked with was very collaborative and did a great job in keeping everyone in sync with clear messaging around individual expectations. However, the project itself sucked. We were asked to create a stupid business plan for a venture around &#8220;watervate&#8221; - innovative solution to save water that could turn into a profitable business. In an entrepreneurship course, the deliverable was a business plan, with detailed text on the product, marketing, strategy, financial data etc. that were completely fake. The fakeness of the whole assignment made it super boring for me.</p>
+
+<p><strong>After finishing this course, I actually have a better trust in online education.</strong> The course was unplugged, so students had to keep digital devices off. But on one class the rules were lax because it was about presenting. I saw people browsing sports scores, watching memes, playing games and random youtube videos etc. right  in the class. These students are mostly MBA students, holding a good day job, but it hurt my eyes to see them paying so little respect to the fellow students presenting.</p>
+
+<p>Online education on the other hand, is so much so for self driven students that, I expect them to carry much respect for their own time. I suggest people taking online courses to save their money and time and also to learn better than traditional classroom settings.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -795,91 +848,6 @@ alert('Failed to send the email. &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/03/configure-me-not/">Configure Me Not</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-03T21:29:00-08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Configuration in software provides a method to build systems that can
-adapt to different configurations. For example, if a website&#8217;s language and
-date/currency formats are configurable, then it can be configured to
-support multiple languages and regional formats. Configuration makes it
-possible to deliver such features without needing a log of change in the
-application source code.</p>
-
-<p>However, this notion of flexibility that configuration provides can be a trap at times. I&#8217;ve a definition of configurable as follows:</p>
-
-<blockquote><p>A configurable must have at least two configurations.</p></blockquote>
-
-<p>This is another way of saying YAGNI. But I find this to be more specific
-than YAGNI, as it quantifies and makes it apparent.</p>
-
-<p>Here are a few examples to illustrate my definition.</p>
-
-<ol>
-<li><p> <strong>Custom interfaces with a single implementation.</strong></p>
-
-<p> Interfaces are often times thought as a configurable component, as a new
- implementation can be used in place of an old one without changing the
- code that uses it.</p>
-
-<p> Except, if your interface only ever have one implementation, this
- provides a false notion of flexibility. In practice, I&#8217;ve seen for most
- custom interfaces, a new implementation almost always needs a change in
- the original interface which doesn&#8217;t really make it configurable
- anymore.</p></li>
-<li><p><strong>Default arguments in methods that are never passed a non-default
-value.</strong></p>
-
-<p> Default arguments are great, as they often times simplify the common
- case. However, if a method with a default argument is never called
- with a non-default value, it&#8217;s simply not worth using a default argument. Use a local variable instead.</p></li>
-<li><p><strong>Configuration key value pairs where there&#8217;s only one value.</strong></p>
-
-<p> Since magic numbers and hardcoded strings are bad, it&#8217;s tempting to use
- the configuration file to hold such values. However, if there&#8217;s only one
- such value, it&#8217;s probably a constant and not a configurable object.</p></li>
-<li><p><strong>Exhaustively validating method parameters against all possible but unused values.</strong></p>
-
-<p> If you&#8217;re writing a method that&#8217;s only gonna be called from another
- method in your project, you probably know what you&#8217;re passing to the
- method. Validating for different negative inputs to such methods provide
- a sense of robustness without really adding any value to it.</p></li>
-</ol>
-
-
-<p>Hoping, the definition makes sense. Would love to hear your
-opinion and examples of configure me not.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -897,6 +865,10 @@ opinion and examples of configure me not.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
       </li>
     
@@ -910,10 +882,6 @@ opinion and examples of configure me not.</p>
     
       <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
   </ul>

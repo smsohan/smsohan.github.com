@@ -9,7 +9,12 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Photo credits to http://womendiving.blogspot.ca/2012/08/2012-olympic-games-10m-synchronized.html Pair programming is like synchronized swimming. You &hellip;">
+  <meta name="description" content="It used to be pretty straight forward to get up and running with a Rails app. You&#8217;d expect something like the following: 1
+2
+3
+4
+5
+git clone &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +84,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/10/25/development-environments-and-dependencies-hell/">Development Environments and Dependency Hell</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-25T21:51:00-07:00" pubdate data-updated="true">Oct 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It used to be pretty straight forward to get up and running with a Rails app. You&#8217;d expect something like the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git clone git@blah/blah.git
+</span><span class='line'><span class="nb">cd </span>blah
+</span><span class='line'>bundle
+</span><span class='line'>rake db:migrate
+</span><span class='line'>rails s
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If the project is using rvm and bundler, the ruby versions and gem depdendencies are all taken care of. So far life is good this way.</p>
+
+<p>But it starts getting complicated. For example, your project probably uses MySQL and no matter what, I can&#8217;t remeber all the c libraries that are pre-requisites for the mysql2 gem to actually install successfully. If it uses Nokogiri, get another hit of all the who-knows-what libxml2* libraries that need to be there. Another gem quite commonly used is rmagick with similar c depdencies. Every time I hit these road blocks, I feel so helpless for:</p>
+
+<ul>
+<li>I have no idea what is required</li>
+<li>Someone on StackOverflow has a magical solution</li>
+<li>The solution will work on one unix distro but won&#8217;t on others</li>
+</ul>
+
+
+<p>This starts getting even more complicated as you start adding external project depdendencies. For example, your project will probably need some Queueing, Caching, Emailing, SOA integration etc. And even if you have very good tests, it&#8217;s likely that you&#8217;d want to manually test to see if your project holds up when integrated to other projects. It&#8217;s best to have all these third-party products in your dev box for obvious reasons. But its also super hard to keep everything in sync, because</p>
+
+<ul>
+<li>You&#8217;d have to automate the installation of all the third-party products in your dev box</li>
+<li>Find a mechanism to update the third-party projects as they change</li>
+</ul>
+
+
+<p>To tackle these problems, teams often use Chef/Puppet/Powershell/Vagrant etc. infrastructure automation tools. In practice, I&#8217;m yet to find a project where these tools would just work in a single pass. For example, it would miss one package or the other, sometimes it would fail at halfway, sometimes it would get you pretty close but almost never I have seen it to work on a single pass. I find this to be a recurring problem, faced by almost all dev teams.</p>
+
+<h2>One solution I think may work is as follows:</h2>
+
+<pre><code>1. Teams from each project writes their own bootstrap scripts, so others can just use it
+2. The bootstrap script runs on a CI server and fails a commit if it breaks the bootstrap
+3. Nobody runs a manual command ever for bootstrapping the dev machines
+</code></pre>
+
+<p>I&#8217;m yet to try this approach in practice. But too many times I&#8217;ve seen there&#8217;s only one/couple people writing the bootstrapping scripts for all projects. Also, nobody really finds the issues until a new dev box needs bootstrapping. A CI server would be a big push to keep it green all the time. And finally, everytime a one-off command is run for bootstrapping, a little part of automation opportunity is missed.</p>
+
+<p>If you&#8217;ve had success with these problems, please share. I&#8217;d really like to learn from you and hopefully implement some of your proven practices/principles.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -696,56 +782,6 @@ MVC might not be proper wrt javascript. here is a good read http://addyosmani.gi
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/22/are-you-still-parsing-html-element-ids/">Are You Still Parsing HTML Element Ids?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-22T00:00:00-08:00" pubdate data-updated="true">Jan 22<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">To render a list, often times we use repeated HTML elements with a similar template. For example, the search results in ebay.com is a list of divs, each containing different data in the same template. In a server side, this rendering code is somewhat similar to this:<br /><div><br /></div><script src="https://gist.github.com/1660430.js"></script><br />If you noticed, a product with it&#8217;s database id = 123 will be rendered inside a div with id=&#8221;product_123&#8221;, and similarly div id=&#8221;product_456&#8221; will contain the product with id = 456.<br /><br />With such ids, we can write JavaScript code that can extract the database id of a selected product to do interesting things, for example:<br /><br /><script src="https://gist.github.com/1660456.js">  </script><br />This is a useful and a common technique. However, in this era of <a href="http://dev.w3.org/html5/spec/Overview.html#embedding-custom-non-visible-data-with-the-data-attributes">HTML5</a>, we can make use of its custom attributes feature to write a clean JavaScript event handler without the help of parsing. Here&#8217;s an example:<br /><br /><script src="https://gist.github.com/1660524.js">  </script><br />I will never parse my HTML element Id again. What about you?</div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Cronos</div>
-<div class='content'>
-nice!, I didt know this function, tks for sharing!</div>
-</div>
-<div class='comment'>
-<div class='author'>honeyclarck</div>
-<div class='content'>
-In my point of view You sure did put a new twist on something that Ive heard so much about <b><a href="http://www.actualexams.me/" rel="nofollow">ActualExams</a></b>. And How did you manage to make a blog that as smart as it is sleek?</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -763,6 +799,10 @@ In my point of view You sure did put a new twist on something that Ive heard so 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
       </li>
     
@@ -776,10 +816,6 @@ In my point of view You sure did put a new twist on something that Ive heard so 
     
       <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
   </ul>

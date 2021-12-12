@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Modules in Ruby are like classes with a few important differences. One of the differences is, a module cannot inherit from another module using the &hellip;">
+  <meta name="description" content="C# 5.0 (CTP version at this point) has support for async and await to allow clean implementation of non-blocking IO using a task-continuation model &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/16/quiz-c-async-and-await-what-is-output/">Quiz: C# Async and Await. What Is the Output of This Code?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-16T00:00:00-07:00" pubdate data-updated="true">Sep 16<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">C# 5.0 (CTP version at this point) has support for async and await to allow clean implementation of non-blocking IO using a task-continuation model. I was just playing with it and here&#8217;s the sample code to tease your brain. Tell me what is the output of this program?<br /></div><br /><script src="https://gist.github.com/1223284.js"> </script></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -470,43 +507,6 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/22/service-api-and-exceptions/">Service API and Exceptions</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-22T00:00:00-07:00" pubdate data-updated="true">Jun 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on"><br />Too often I see I am using a REST/SOAP API to talk to a third party system that frustrates me because of poor error messaging. Here&#8217;s an example to illustrate a typical frustration:<br /><br />Call: city_service.update_residence_address(city_dueler, new_address)<br />Response: &lt;status&gt;Failed&lt;/status&gt;&lt;error&gt;Invalid address&lt;/error&gt;<br /><br />But the address just seems right to me. So, I need to know specific reason about why the address is wrong. The error message leaves this critical detail. What happens next is, I look for the log files created by the city_service, conceptually supposed to be a third party hosted service. To do this, I SSH to the server, then cd to the logs folder and get lost in many of the cryptic log files. Then eventually I find a log and if I am lucky, I find something like the following:<br /><br />InvalidAddressException at:&#8230;<br />&#8230;<br />Street number is not listed..<br />&#8230;<br /><br />Now, I know I had an issue with the streer number. But I can see this only after I looked into the log of the thirdparty server. In an ideal case, I don&#8217;t have an access to their server. Even if I have it, I cannot easily understand their logs and stack traces! In most API calls to third party applications I have had this&nbsp;frustration&nbsp;to varying degrees.<br /><br /><b>Here&#8217;s a lesson learned:</b><br />Next time you expose an API for another app, expose error messages as specific as possible - so that, no details is left buried into your log files.</div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -524,6 +524,10 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build It Right, They&#8217;ll Come</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/10/12/ui-sdk-design-principles/">UI SDK Design Principles</a>
       </li>
     
@@ -537,10 +541,6 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
     
       <li class="post">
         <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/03/04/architecture-redis/">Software Architecture - Topic 4 - Redis</a>
       </li>
     
   </ul>
