@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Strategy | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/strategy/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-12-12T16:20:06-08:00</updated>
+  <updated>2021-12-12T16:22:08-08:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -26,7 +26,7 @@
 </ol>
 
 
-<p>I'm wiring this blog post specifically about company-owned open-source products. In a typical company-owned open-source product, the company pays us to develop and maintain the product. I've been working on the <a href="https://aka.ms/acsstorybook">Azure Communication Services UI Library</a> that falls into this category. We have full-time developers at Microsoft that work on this product. In the past few weeks, I was researching to come up with an open-source strategy for us. Here I'm sharing what I learned in the process. These findings can help others who are on the same boat.</p>
+<p>I'm writing this blog post specifically about company-owned open-source products. In a typical company-owned open-source product, the company pays us to develop and maintain the product. I've been working on the <a href="https://aka.ms/acsstorybook">Azure Communication Services UI Library</a> that falls into this category. We have full-time developers at Microsoft that work on this product. In the past few weeks, I was researching to come up with an open-source strategy for us. Here I'm sharing what I learned in the process. These findings can help others who are on the same boat.</p>
 
 <p>Here's a quick table of the community engagement modes for open-source products. The higher the layer, the more complex it gets.</p>
 

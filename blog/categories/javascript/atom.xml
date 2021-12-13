@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Sohan's Blog]]></title>
   <link href="http://smsohan.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://smsohan.com/"/>
-  <updated>2021-12-12T16:20:06-08:00</updated>
+  <updated>2021-12-12T16:22:08-08:00</updated>
   <id>http://smsohan.com/</id>
   <author>
     <name><![CDATA[SM Sohan]]></name>
@@ -78,9 +78,7 @@
 
 <p>The app itself uses JSON API calls to render the live data. Each screen is somewhat like a single page app, using multiple AJAX calls to render different parts of the screen, showing different data. The API calls are all funneled through a single Javascript module. The module looks like the following (showing a simplified version for brevity):</p>
 
-<p><div><script src='https://gist.github.com/3194417.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-</p>
+<p>{% gist 3194417 %}</p>
 
 <p>If you have noticed here, there's an extra check inside the success callback. To begin with, the page remembers the server token on reload. So, whenever there's a new token, it refreshes the page. Since all API calls are funneled through this module, this becomes a no-brainer to support new screens/API calls.</p>
 
@@ -94,9 +92,7 @@
 
 <p>However, we still need to make sure the server token indeed ensures these two essential properties. With a little trick, this becomes trivial. For our app, we are using Capistrano to deploy our Ruby on Rails project. For those new to Capistrano, it uses a timestamped directory for each deploy, symlinking it to the current. So, it looks somewhat like the following:</p>
 
-<p><div><script src='https://gist.github.com/3194484.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-</p>
+<p>{% gist 3194484 %}</p>
 
 <p>Every Ruby on Rails app also comes with a little method, Rails.root that returns the full path to the directory of the current deployment. So, in this example scenario, we get the following:</p>
 
@@ -104,9 +100,7 @@
 
 <p>Since every deployment will be a new timestamp, this method ensures a unique token for each deployment. That's all we need for the api module to be aware of new deployments and auto refreshes. Here's an example controller/action (again, simplified for brevity):</p>
 
-<p><div><script src='https://gist.github.com/3194430.js?file='></script>
-<noscript><pre><code></code></pre></noscript></div>
-</p>
+<p>{% gist 3194430 %}</p>
 
 <p>I liked the organic nature of this technique. It is harvesting on the available tools. Although the examples in this post show Ruby/Rails as an example, I am sure the same techniques can be applied to other technologies with the same simplicity.</p>
 
