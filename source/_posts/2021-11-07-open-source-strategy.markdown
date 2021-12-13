@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Open-source: If You Build It Right, They'll Come"
+title: "Open-source: If You Build it Right, They'll Come"
 date: 2021-11-07 12:51
 comments: true
 categories: "Strategy" 
 ---
 
-I find open-source to be a rather loaded term; it means different things to different people. For this blog post, I'll imagine there are two kinds of open-source projects:
+I find open-source to be a rather loaded term; it means different things to different people. For this blog post, I'll imagine there are two kinds of open-source products:
 
 1. Company-owned open-source
 2. Crowd-owned open-source
@@ -26,9 +26,9 @@ Here's a quick table of the community engagement modes for open-source products.
 |Browse code| Readable code and docs
 |Download and use| Product is released as a package
 
-I highlighted the topic of __extensibility APIs__ because that was my key observation about making a successful company-owned open-source products. For example, VSCode is a hugely popular product and benefits greatly from the community contribution in the form of extensions. The beauty of this process is, it provides a clear separation of concerns. The core team can focus on their company-mandated work while the community can build and maintain the plugins independently. 
+I highlighted the topic of __extensibility APIs__ because that was my key observation about making successful company-owned open-source products. For example, VSCode is a hugely popular product and benefits greatly from the community contribution in the form of extensions. The beauty of this process is, it provides a clear separation of concerns. The core team can focus on their company-mandated work while the community can build and maintain the plugins independently. This also allows the community to contribute without having to understand the complex internals of the core. An extensibility API is useful beyond just for the open-source community.
 
-If you want the community to come and contribute to your open-source project, carefully design the core product with extension points in mind. Then, ensure the ergonomics are great for the extension developers. Give them well-documented and thoughtfully-designed APIs. Ensure that they have automated testing and publishing tools for the plugins. Make the plugins easily discoverable so that developers can find and use compatible plugins while using the open-source product.
+If you want the community to come and contribute to your open-source project, carefully design the core product with extension points in mind. Then, ensure the ergonomics are great for the extension developers. Give them well-documented and thoughtfully-designed APIs. Ensure that they have automated testing and publishing tools for the plugins. Make the plugins easily discoverable so that users can find and use compatible plugins while using the open-source product.
 
-I have another recommendation. A company-owned open-source product should publish their community engagement strategy for clarity. For example, it's better to be upfront if the core team isn't ready to accept community code contributions. We should choose a suitable strategy and evolve it over time as the product matures. 
+I have another recommendation. A company-owned open-source product should publish their community engagement strategy for clarity. For example, it's better to be upfront if the core team isn't ready to accept community code contributions. We should choose a suitable strategy and evolve it over time as the product itself matures. 
 
