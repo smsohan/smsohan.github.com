@@ -11,7 +11,7 @@ I find open-source to be a rather loaded term; it means different things to diff
 1. Company-owned open-source
 2. Crowd-owned open-source
 
-I'm wiring this blog post specifically about company-owned open-source products. In a typical company-owned open-source product, the company pays us to develop and maintain the product. I've been working on the [Azure Communication Services UI Library](https://aka.ms/acsstorybook) that falls into this category. We have full-time developers at Microsoft that work on this product. In the past few weeks, I was researching to come up with an open-source strategy for us. Here I'm sharing what I learned in the process. These findings can help others who are on the same boat.
+I'm writing this blog post specifically about company-owned open-source products. In a typical company-owned open-source product, the company pays us to develop and maintain the product. I've been working on the [Azure Communication Services UI Library](https://aka.ms/acsstorybook) that falls into this category. We have full-time developers at Microsoft that work on this product. In the past few weeks, I was researching to come up with an open-source strategy for us. Here I'm sharing what I learned in the process. These findings can help others who are on the same boat.
 
 Here's a quick table of the community engagement modes for open-source products. The higher the layer, the more complex it gets.
 
