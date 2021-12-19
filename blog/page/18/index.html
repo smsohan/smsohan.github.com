@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="Rails models are no exception compared to the super models! You are in the business if and only if you got a good physical structure and can stick &hellip;">
+  <meta name="description" content="Naming conventions play an important role to the software&#8217;s overall architecture. It is not a rocket science, still, it may lead to unhappy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/07/16/rails-modeling-guide2-naming-ruby-on/">Rails Modeling Guide#2: Naming Convention for Ruby on Rails Model Methods</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-16T00:00:00-07:00" pubdate data-updated="true">Jul 16<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>Naming conventions play an important role to the software&#8217;s overall architecture. It is not a rocket science, still, it may lead to unhappy consequences if not taken care of at the early stage of a project. This small best practices can make a code base significantly improved.</p> <p>Rails does a good job by using the dynamic power of ruby and providing with a handful of dynamic methods with the models. ActiveRecord::Base and its included modules follow a consistent naming, which clearly represent the intended purpose of the methods. At <a href="http://www.code71.com/" target="_blank">Code71</a>, we are working on <a href="http://www.scrumpad.com/" target="_blank">ScrumPad</a>, a 2nd generation agile scrum tool using ruby on rails and our model methods are named according to the following rules-</p> <p>1. All boolean returning methods end with &#8216;?&#8217;</p><pre class="brush: rails">company.billable?, sprint.current?, story.in_progress?</pre><p>2. Boolean methods do not start with is_ or has_ or did_ (as you might see in other popular languages)</p><pre class="brush: rails">company.is_billable? -&gt; company.billable?<br />sprint.is_current? -&gt; sprint.current?</pre><p>3. find_ and find_all are used only for class (self.find or self.find_all) methods and should return a single/array of object of the class respectively.</p><p>find_* methods may return a single object of the class/nil</p><p>find_all_* methods return an array of objects of the class or [], but never a nil</p><p>4. No methods start with a get_ as other languages.</p><p>5. A method ends with ! if it alters the object itself.</p><pre class="brush: rails">sprint.close!()<br />story.progress!()</pre><p>6. Methods that persists an object/may throw exception, should always end with ! (implied from rule 5)</p><pre class="brush: rails">invoice.update_status!(:paid)</pre><p>7. Always use parentheses &#8216;()&#8217; in method names. Future versions of ruby is deprecating the support for method names without parentheses.</p><p>Following these 7 simple rules we have consistent and intuitive model method names across the whole <a href="http://www.scrumpad.com/" target="_blank">ScrumPad</a>. Let me know if you have any suggestion to these names to make it even better.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Ashif, thanks!</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Thanks for these great tips. Sometimes only following the naming convention can save us a lot of time and effort to understand codes written by others. Keep posting such tips and tricks of beautiful coding.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -532,71 +582,6 @@ good post.</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/04/11/testing-syntaxhighlighter-scripts/">Testing the SyntaxHighlighter Scripts</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-11T00:00:00-07:00" pubdate data-updated="true">Apr 11<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>For the last few months, I am on the lookout for a really good syntax highlighter that helps me to post blogs on all the programming languages in a pretty html with syntax coloring/highlighting. This one is taken from <a title="http://alexgorbatchev.com/wiki/SyntaxHighlighter" href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">http://alexgorbatchev.com/wiki/SyntaxHighlighter</a></p> <strong><span style="color:#008000;">Ruby/Rails</span></strong>   <pre class="brush: rails;">class TestHighlighter<br />def my_highlighter<br />  return "SyntaxHighlighter"<br />end<br />end</pre><br /><strong><span style="color:#008000;">CSharp</span></strong><br /><br /><pre class="brush: csharp;">public class TestHighlighter<br />{<br />public string MyHighlighter<br />{<br />  get {return "SyntaxHighlighter";}<br />}<br />}</pre><br /><br /><p><strong><span style="color:#008000;">W</span></strong><strong><span style="color:#008000;">hat did I add to my blog?</span></strong> </p><br /><br /><p>Open Edit Html and add this just before in the blog&#8217;s template </p><br /><br /><pre class="brush :html;">&lt;link href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" type="text/css" rel="stylesheet" /&gt;<br />&lt;link href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css" type="text/css" rel="stylesheet" /&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushRuby.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushSql.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCSharp.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js' type='text/javascript'/&gt;<br />&lt;script type='text/javascript'&gt;<br />    SyntaxHighlighter.config.bloggerMode = true;<br />    SyntaxHighlighter.all();<br />&lt;/script&gt;</pre><br /><br /><p>Thanks to <a href="http://jitu-blog.blogspot.com/" target="_blank">Ashraf</a> for informing me about the <a href="http://www.codeplex.com/wlwSyntaxHighlighter" target="_blank">Windows Live Writer Plugin</a>! It will be useful for sure.</p></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Ashif Manjur</div>
-<div class='content'>
-Thank you for posting such a helpful post. The code snippet posting has been much easier with this.</div>
-</div>
-<div class='comment'>
-<div class='author'>Ashrafuzzaman</div>
-<div class='content'>
-This is a nice plugin too<br />http://sourcecodeplugin.codeplex.com/</div>
-</div>
-<div class='comment'>
-<div class='author'>Ashrafuzzaman</div>
-<div class='content'>
-Here is an alternate plugin for live writer.<br />http://precode.codeplex.com/<br />Hope you like it :)</div>
-</div>
-<div class='comment'>
-<div class='author'>Sohan</div>
-<div class='content'>
-@Ashraf, thanks! Good to know that it helps you.</div>
-</div>
-<div class='comment'>
-<div class='author'>Ashrafuzzaman</div>
-<div class='content'>
-This is really a nice post. I was finding difficulties implementing it in blogger. But the post helped a lot. Thanks.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -614,6 +599,10 @@ This is really a nice post. I was finding difficulties implementing it in blogge
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/12/19/2021-to-2022/">2021 → 2022</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build it Right, They&#8217;ll Come</a>
       </li>
     
@@ -627,10 +616,6 @@ This is really a nice post. I was finding difficulties implementing it in blogge
     
       <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
       </li>
     
   </ul>

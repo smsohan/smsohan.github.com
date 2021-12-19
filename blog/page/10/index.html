@@ -9,12 +9,8 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="It used to be pretty straight forward to get up and running with a Rails app. You&#8217;d expect something like the following: 1
-2
-3
-4
-5
-git clone &hellip;">
+  <meta name="description" content="Yes to ORM, No to custom queries. Here&#8217;s a bullet list: You&#8217;d probably end up writing your own ORM anyway.
+Doing so, you&#8217;d spend a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +80,56 @@ git clone &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/06/orm-or-not/">ORM or Not?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T09:39:00-08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yes to ORM, No to custom queries. Here&#8217;s a bullet list:</p>
+
+<ol>
+<li>You&#8217;d probably end up writing your own ORM anyway.</li>
+<li>Doing so, you&#8217;d spend <strong>a lot of money</strong> writing library level code instead of your business logic.</li>
+<li>The time tested ones are likely to be <strong>better than yours</strong>.</li>
+<li>Beware, you&#8217;d have to figure out some <strong>complex issues</strong>: connection pooling, concurrency/locking, caching, transactions, updates, versioning, documentation etc.</li>
+</ol>
+
+
+<p>If you find yourself ORM is falling short of what you need, you&#8217;re either presenting information overload or using a transactional database as a reporting store.</p>
+
+<p>In this article, I mean ORM to be an object database mapping, so it applies to both SQL/NoSQL databases.</p>
+
+<p>Disagree? I&#8217;d like to find your opinion in the comments.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -737,51 +783,6 @@ metric: {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/30/my-take-on-client-side-mvc/">My Take on Client-Side MVC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-30T00:00:00-07:00" pubdate data-updated="true">Mar 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">I just rolled off my last project this Wednesday. It was a great team, worked on some cutting edge technologies, mobile web, HTML5, mongo and some other fun stuff. Now that I got two &#8220;beach&#8221; days before jumping on to the next gig, I spent some time trying out Backbonejs to knockout one item from the long list of to-dos. This post is about my initial take on client side MVC, solely based on these two days with <a href="http://documentcloud.github.com/backbone/">Backbonejs</a>.<br /><br /><h2 style="text-align: left;">Summary</h2><blockquote class="tr_bq">Client-side MVC is in its infancy, but promises a bright future</blockquote><div><br /></div><div><h2 style="text-align: left;">The Good</h2></div><div>Writing &#8220;clean code&#8221; while doing Javascript can be quite a challenge. Doing MVC gets you a step closer to that by splitting responsibility among models, views and controllers. So, your Javascript code will be domain driven, instead of just a bunch of monolithic methods.</div><div><br /></div><div>Your client-side MVC application can be very responsive, or even a &#8221;<a href="http://en.wikipedia.org/wiki/Single-page_application">single page app</a>&#8221;. This is an advantage if your app needs some data from the server, but can leverage Javascript for most of its visual needs. For example, a real-time analytics dashboard can use client-side MVC to do most of the processing on the client side after fetching the data from the server.</div><div><br /></div><div>Backbonejs offers event wiring API between your models and views. For example, say you have a model called Vehicle and a view called VehicleView, you can put the following code to wire up the &#8220;change&#8221; event on the model so that the view renders whenever the model is updated.<br /><br /></div><script src="https://gist.github.com/2252292.js">  </script> <br />Using such events, it becomes a trivial process to keep all the views in sync with the models as they change across different actions.<br /><br />Another advantage of client-side MVC is, it forces &#8221;<a href="http://en.wikipedia.org/wiki/Eating_your_own_dog_food">eat your own dog food</a>&#8221; as you are essentially creating an API on your server and using it first hand on the client side. So, if you are building multiple clients, for example, native mobile clients and browser web apps, you can leverage the same API.<br /><br /><h2 style="text-align: left;">The Bad</h2>Ever since Ruby on Rails came into the game, we all became keen on having conventions. Can&#8217;t speak for the rest of the client-side MVC projects, but Backbonejs definitely lacks in this regard. It doesn&#8217;t default to any view template. Also, it doesn&#8217;t have a default project structure. And even worse, no in-built testing recipe either. This means, you are left on your own to choose and debate about each of these, and more that just these, to find a standard set of tools for your project.<br /><br /><blockquote class="tr_bq">Having no in-built test framework reduces the emphasis on testing, this is a Big Big lacking.</blockquote><br />I find the backbonejs MVC to be a little&nbsp;weird, they have Model and View, but no Controller. Instead they have a Router and a confused concept of Collection. So, for example, if you wanted to work on a resource called Vehicle, you will probably end up with the following &#8220;classes&#8221;:<br /><br />Vehicle model, Vehicles collection, Vehicle view, Vehicles view and Vehicle router<br /><br />But as you can see here, there is no Vehicle controller. I know you can always write a controller on your own, but thats the whole point about having strong opinionated conventions.<br /><br />The relation between a Collection and its Model can be confusing, specially when wiring up events. For example, a change in a model can trigger the view for the model and/or the view for its collection. The logic for handling/bubbling such events can get quite messy at times.<br /><br /><h2 style="text-align: left;">The Future</h2>It took several years for server side MVC to find a good common set of conventions and tools. Then, it took a few more years for people to get used to the goodness of it. I think client-side MVC frameworks will hit a similar sweet spot, but only after we give it some time to settle on the conventions and build intelligent tools around those.<br /><br /><br /><br /></div></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-MVC might not be proper wrt javascript. here is a good read http://addyosmani.github.com/backbone-fundamentals/</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -799,6 +800,10 @@ MVC might not be proper wrt javascript. here is a good read http://addyosmani.gi
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/12/19/2021-to-2022/">2021 → 2022</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build it Right, They&#8217;ll Come</a>
       </li>
     
@@ -812,10 +817,6 @@ MVC might not be proper wrt javascript. here is a good read http://addyosmani.gi
     
       <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
       </li>
     
   </ul>

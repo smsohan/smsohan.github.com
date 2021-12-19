@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="C# 5.0 (CTP version at this point) has support for async and await to allow clean implementation of non-blocking IO using a task-continuation model &hellip;">
+  <meta name="description" content="Private methods, when used meaningfully, are a great tool for writing beautiful object oriented code. But as many other things in life, excess of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/09/20/code-smell-private-vs-public-method/">Excess of Private Methods Is a Code Smell</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-20T00:00:00-07:00" pubdate data-updated="true">Sep 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<div dir="ltr" style="text-align: left;" trbidi="on">Private methods, when used meaningfully, are a great tool for writing beautiful object oriented code. But as many other things in life, excess of private methods is bad, too!<br /><br />In my opinion, we use private methods to:<br /><br />1. &nbsp;isolate a block of code to be reused inside the class.<br />2. &nbsp;extract code from another method for code readability.<br /><br />Now, taking these two use cases in mind, here&#8217;s an easy conclusion:<br /><blockquote>The lower the ratio of public to private methods, the harder it is to write unit tests since the &#8220;units&#8221; are potentially larger.</blockquote>I don&#8217;t know if there is any rule of thumb, but you will smell it when you see your unit tests require a lot of setup and assertions. Here&#8217;s a code example from the Play! framework, an MVC franework for Java developers.<br /><br /><a href="https://github.com/playframework/play/blob/925a0676148f6cb149350f899a60d934544ab61a/framework/src/play/mvc/ActionInvoker.java">ActionInvoker.java </a><br /><br />You will see there are public methods with 100+ lines. I hope you agree with me:<br /><blockquote>&#8220;The ActionInvoker.java code is not readable&#8221;</blockquote>For the sake of readability, introducing private methods with good names would help. However, that doesn&#8217;t eliminate any of&nbsp;the possible code paths from the public methods. So, if you are lucky, you will see really long unit tests with complex setup conditions and mock expectations. Otherwise, there will be no tests at all! Without any tests for such long and complex methods, use them at your own risk. I won&#8217;t :(<br /><br /><span class="Apple-style-span" style="color: #666666;">Disclaimer: I like the play! framework a lot. However, if you take a look at their code and if you think unit testing is important, you&#8217;ll see they have a lot of rooms for improvement with simple</span> <a href="http://books.google.ca/books?id=1MsETFPD3I0C&amp;pg=PA110&amp;lpg=PA110&amp;dq=extract+method+martin+fowler&amp;source=bl&amp;ots=pLM4p0UCef&amp;sig=5nCPhEPwBkNULvuHiOF1jiW1qqk&amp;hl=en&amp;ei=Jrt4TqjZCoK80AG4nbDlDA&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=6&amp;ved=0CEUQ6AEwBQ#v=onepage&amp;q=extract%20method%20martin%20fowler&amp;f=false">extract method</a> <span class="Apple-style-span" style="color: #666666;">refactoring.</span></div></div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -470,43 +507,6 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/25/how-not-to-provide-feedback-when-doing/">How Not to Provide Feedback When Doing Code Review</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-25T00:00:00-07:00" pubdate data-updated="true">Jun 25<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<div dir="ltr" style="text-align: left;" trbidi="on">Code review, as any other review process, can often be an attack on someone&#8217;s ego and incite anger and frustration. Being both on sending and receiving end of such code reviews for years, I have learned a few how-not-to-do-it, or as one might say, anti-patterns of providing code review feedback. Let me know if you agree/disagree with me on the following:<br /><ul style="text-align: left;"><li>You are always reviewing Adam&#8217;s code while Adam is never reviewing yours.</li><li>Your feedback is like &#8220;Adam, <b>you should</b> break down part of this method into a private method&#8221; instead of &#8221;<b>we can probably</b> extract a part of&#8230;&#8221;</li><li>You are always suggesting, for example &#8221;<b>we should do</b> x and y and z&#8221;, instead of asking interesting questions &#8221;<b>can we</b> do x? <b>what if</b> we did y?&#8221; </li></ul></div></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -524,6 +524,10 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/12/19/2021-to-2022/">2021 → 2022</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build it Right, They&#8217;ll Come</a>
       </li>
     
@@ -537,10 +541,6 @@ Any kind of configuration file, be it an ugly xml file or a prettier yml or prop
     
       <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
       </li>
     
   </ul>

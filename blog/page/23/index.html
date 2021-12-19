@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="1. Well, we have a CI in place and we are also very excited to see a new notification message coming to our email inbox on a commit from our team &hellip;">
+  <meta name="description" content="1. If using LINQ gives you a great feeling, then I suggest you to read this post (to make it feel even better) where you learn about a less used &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/14/best-of-today-rss-from-my-daily-feeds/">Best of Today&#8217;s RSS From My Daily Feeds</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-14T00:00:00-07:00" pubdate data-updated="true">Apr 14<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>1. If using LINQ gives you a great feeling, then I suggest you to read this post (to make it feel even better) where you learn about a less used keyword called &#8216;let&#8217; to make your LINQ queries more readable and human friendly.</p>  <p><a title="http://www.codethinked.com/post/2008/04/The-Linq-quot3bletquot3b-keyword.aspx" href="http://www.codethinked.com/post/2008/04/The-Linq-quot3bletquot3b-keyword.aspx">http://www.codethinked.com/post/2008/04/The-Linq-quot3bletquot3b-keyword.aspx</a></p>  </div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -413,43 +450,6 @@ I was so happy with NMock to see how it can dynamically generate mocks of interf
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/03/18/verify-correct-datetime-data-in-method/">Verify Correct DateTime Data in Method Call Using NMock</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-03-18T00:00:00-07:00" pubdate data-updated="true">Mar 18<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-Recently I was writing unit test for a method of the following signature<br /><br /><span style="color: rgb(0, 0, 255);font-family:Courier New;">interface <span style="color: rgb(61, 133, 198);">ICache</span><br /><span style="color: rgb(0, 0, 0);">{</span><br /> void </span><span style="font-family:Courier New;">Insert(</span><span style="color: rgb(0, 0, 255);font-family:Courier New;">string </span><span style="font-family:Courier New;">key, </span><span style="color: rgb(0, 0, 255);font-family:Courier New;">object </span><span style="font-family:Courier New;">value, </span><span style="color: rgb(61, 133, 198);font-family:Courier New;">DateTime</span><span style="font-family:Courier New;"> absoluteExpiration, </span><span style="color: rgb(111, 168, 220);font-family:Courier New;">TimeSpan</span><span style="font-family:Courier New;"> slidingExpiration);<br />}<br /><br /><span style="font-family:Verdana;">and I wanted to verify the following call -</span><br /><br />Insert(<span style="color: rgb(102, 0, 0);">&#8220;key&#8221;</span>, <span style="color: rgb(102, 0, 0);">&#8220;value&#8221;</span>, <span style="color: rgb(61, 133, 198);">DateTime</span>.Now.AddMinutes(30), <span style="color: rgb(111, 168, 220);">TimeSpan</span>.Zero);<br /><br /><br /><span style="font-family:Verdana;">However, you readily see the problem in verifying with the above call for the presence of </span></span><span style="font-family:Courier New;"><span style="color: rgb(61, 133, 198);font-family:Verdana;">DateTime</span><span style="font-family:Verdana;">.Now.AddMinutes(30) in the argument. So, a test method like the following won&#8217;t work for obvious reason.</span><br /><span style="color: rgb(61, 133, 198);">ICache </span>cache = _mocks.NewMock&lt;<span style="color: rgb(61, 133, 198);">ICache</span>&gt;();<br /><span style="color: rgb(61, 133, 198);">Expect</span>.Once.On(cache).Method(&#8220;Insert&#8221;).With(<span style="color: rgb(204, 0, 0);">&#8220;key&#8221;</span>, <span style="color: rgb(204, 0, 0);">&#8220;value&#8221;</span>, DateTime.Now.AddMinutes(30), TimeSpan.Zero);<br /></span><br /><br /><span style="font-family:Verdana;">The reason that the above sample code wont work is, my test code called DateTime.Now.AddMinutes(30) before the production code actually did it. So, it is highly probable that the two version of DateTime.Now.AddMinutes(30) in the test code and production code are not same.<br /><br />To find a work around to this problem, I changed my assumption a little. I set my assumption that the value for the &#8217;</span><span style="font-family:Courier New;"><span style="font-family:Verdana;">absoluteExpiration&#8217; parameter must lie in between 29 and 31 minutes from now. So, I modified my test method like the following call-</span><br /><br /><span style="color: rgb(11, 83, 148);">Expect</span>.Once.On(cache).Method(<span style="color: rgb(204, 0, 0);">&#8220;Insert&#8221;</span>).With(<span style="color: rgb(204, 0, 0);">&#8220;key&#8221;</span>, <span style="color: rgb(204, 0, 0);">&#8220;value&#8221;</span>, Is.NotNull &amp; Is.AtLeast(DateTime.Now.AddMinutes(29)) &amp; Is.AtMost(DateTime.Now.AddMinutes(31)), TimeSpan.Zero);<br /><br /><span style="font-family:Verdana;">This advanced level of NMock usage may show you a way in similar needs. For more insight to this solution, you may wish to visit </span><a style="font-family: Verdana;" title="http://nmock.org/advanced.html" target="_blank" href="http://nmock.org/advanced.html" id="bo.8">http://nmock.org/advanced.html</a><br /><br /><br /></span><span style="font-family:Courier New;"><br /></span></div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/24/">&larr; Older</a>
@@ -467,6 +467,10 @@ Recently I was writing unit test for a method of the following signature<br /><b
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/12/19/2021-to-2022/">2021 → 2022</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build it Right, They&#8217;ll Come</a>
       </li>
     
@@ -480,10 +484,6 @@ Recently I was writing unit test for a method of the following signature<br /><b
     
       <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
       </li>
     
   </ul>

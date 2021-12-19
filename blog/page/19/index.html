@@ -9,7 +9,7 @@
   <meta name="author" content="SM Sohan">
 
   
-  <meta name="description" content="For an explanation of Pair Programming, please visit this wiki entry. Good I am pair programming on the ScrumPad project now and the feeling in &hellip;">
+  <meta name="description" content="For the last few months, I am on the lookout for a really good syntax highlighter that helps me to post blogs on all the programming languages in a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2009/04/11/testing-syntaxhighlighter-scripts/">Testing the SyntaxHighlighter Scripts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-11T00:00:00-07:00" pubdate data-updated="true">Apr 11<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class='post'>
+<p>For the last few months, I am on the lookout for a really good syntax highlighter that helps me to post blogs on all the programming languages in a pretty html with syntax coloring/highlighting. This one is taken from <a title="http://alexgorbatchev.com/wiki/SyntaxHighlighter" href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">http://alexgorbatchev.com/wiki/SyntaxHighlighter</a></p> <strong><span style="color:#008000;">Ruby/Rails</span></strong>   <pre class="brush: rails;">class TestHighlighter<br />def my_highlighter<br />  return "SyntaxHighlighter"<br />end<br />end</pre><br /><strong><span style="color:#008000;">CSharp</span></strong><br /><br /><pre class="brush: csharp;">public class TestHighlighter<br />{<br />public string MyHighlighter<br />{<br />  get {return "SyntaxHighlighter";}<br />}<br />}</pre><br /><br /><p><strong><span style="color:#008000;">W</span></strong><strong><span style="color:#008000;">hat did I add to my blog?</span></strong> </p><br /><br /><p>Open Edit Html and add this just before in the blog&#8217;s template </p><br /><br /><pre class="brush :html;">&lt;link href="http://alexgorbatchev.com/pub/sh/current/styles/shCore.css" type="text/css" rel="stylesheet" /&gt;<br />&lt;link href="http://alexgorbatchev.com/pub/sh/current/styles/shThemeDefault.css" type="text/css" rel="stylesheet" /&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shCore.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushJScript.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushRuby.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushSql.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushXml.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCSharp.js' type='text/javascript'/&gt;<br />&lt;script src='http://alexgorbatchev.com/pub/sh/current/scripts/shBrushCss.js' type='text/javascript'/&gt;<br />&lt;script type='text/javascript'&gt;<br />    SyntaxHighlighter.config.bloggerMode = true;<br />    SyntaxHighlighter.all();<br />&lt;/script&gt;</pre><br /><br /><p>Thanks to <a href="http://jitu-blog.blogspot.com/" target="_blank">Ashraf</a> for informing me about the <a href="http://www.codeplex.com/wlwSyntaxHighlighter" target="_blank">Windows Live Writer Plugin</a>! It will be useful for sure.</p></div>
+<h2>Comments</h2>
+<div class='comments'>
+<div class='comment'>
+<div class='author'>Ashif Manjur</div>
+<div class='content'>
+Thank you for posting such a helpful post. The code snippet posting has been much easier with this.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+This is a nice plugin too<br />http://sourcecodeplugin.codeplex.com/</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+Here is an alternate plugin for live writer.<br />http://precode.codeplex.com/<br />Hope you like it :)</div>
+</div>
+<div class='comment'>
+<div class='author'>Sohan</div>
+<div class='content'>
+@Ashraf, thanks! Good to know that it helps you.</div>
+</div>
+<div class='comment'>
+<div class='author'>Ashrafuzzaman</div>
+<div class='content'>
+This is really a nice post. I was finding difficulties implementing it in blogger. But the post helped a lot. Thanks.</div>
+</div>
+</div>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -478,56 +543,6 @@ good post.keep it up.</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/01/21/good-example-of-c-regular-expression/">A Good Example of C# Regular Expression: Implementing InitCap or Titleize/TitleCase Using C# and Regular Expression</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-01-21T00:00:00-08:00" pubdate data-updated="true">Jan 21<span>st</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div class='post'>
-<p>Ever since I first learned about the regular expressions, I have always been fascinated by its magical capability. When I first learned about DFA/NFA, I figured out how it is possible to evaluate a regular expression and eventually, during my Undergrad at BUET, I implemented a regular expression evaluator for the Compiler Lab.</p> <p>Now, given this history, here is a simple code that I wrote today. Let me know if you liked it-</p> <div style="background: white none repeat scroll 0% 0%; font-size: 10pt; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; color: black; font-family: courier new;"> <p style="margin: 0px;">        Program()</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.WriteLine(Titleize(<span style="color: rgb(163, 21, 21);">&#8220;hello! This is a sample string for titleize!&#8221;</span>));</p> <p style="margin: 0px;">            <span style="color: rgb(43, 145, 175);">Console</span>.Read();</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> Titleize(<span style="color:blue;">string</span> input)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color: rgb(43, 145, 175);">Regex</span>.Replace(input.ToLower(), <span style="color: rgb(163, 21, 21);">@&#8221;(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)&#8221;</span>, <span style="color:blue;">new</span> <span style="color: rgb(43, 145, 175);">MatchEvaluator</span>(OnMatch));</p> <p style="margin: 0px;">        }</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">        <span style="color:blue;">public</span> <span style="color:blue;">string</span> OnMatch(<span style="color: rgb(43, 145, 175);">Match</span> match)</p> <p style="margin: 0px;">        {</p> <p style="margin: 0px;">            <span style="color:blue;">return</span> <span style="color:blue;">string</span>.Format(<span style="color: rgb(163, 21, 21);">&#8220;{0}{1}{2}&#8221;</span>, match.Groups[<span style="color: rgb(163, 21, 21);">&#8220;space&#8221;</span>].Value, match.Groups[<span style="color: rgb(163, 21, 21);">&#8220;first&#8221;</span>].Value.ToUpper(), match.Groups[<span style="color: rgb(163, 21, 21);">&#8220;rest&#8221;</span>].Value);</p> <p style="margin: 0px;">        }</p></div> <p style="margin: 0px;">For a little explanation, the pattern <span style="color: rgb(163, 21, 21);">@&#8221;(?&lt;space&gt;\s*)(?&lt;first&gt;.)(?&lt;rest&gt;\S*)&#8221;</span> matches to a series of space followed by a word. The word is further divided into two parts, the first one is just the first character and the rest understandably captures the &#8220;rest&#8221; part of the word.</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Next the OnMatch method takes each occurrence of a match of the above pattern and as shown, simply regroups the word as previous but just takes the Upper case of the first letter!</p> <p style="margin: 0px;"> </p> <p style="margin: 0px;">Simple? You got another good example of Regular Expression? Share with me.</p></div>
-<h2>Comments</h2>
-<div class='comments'>
-<div class='comment'>
-<div class='author'>Anonymous</div>
-<div class='content'>
-The pattern could be much easier:<br />=======================================<br />public string Titleize(string input)<br />{ return Regex.Replace(input.ToLower(), <br />@&quot;(?&lt;first&gt;\b\w),new MatchEvaluator(OnMatch));<br />}<br />public string OnMatch(Match match)<br />{ return match.Groups[&quot;first&quot;].Value.ToUpper(); }</div>
-</div>
-<div class='comment'>
-<div class='author'>Sadique</div>
-<div class='content'>
-Yes, this is a nice example of power of regular expression. <A HREF="http://support.microsoft.com/kb/308252" REL="nofollow">Here</A> is a nice article to learn quickly the grouping of match &amp; several useful links of regular expression.</div>
-</div>
-</div>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -545,6 +560,10 @@ Yes, this is a nice example of power of regular expression. <A HREF="http://supp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2021/12/19/2021-to-2022/">2021 → 2022</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2021/11/07/open-source-strategy/">Open-source: If You Build it Right, They&#8217;ll Come</a>
       </li>
     
@@ -558,10 +577,6 @@ Yes, this is a nice example of power of regular expression. <A HREF="http://supp
     
       <li class="post">
         <a href="/blog/2021/06/18/architecture-realtime/">Software Architecture - Topic 6 - Slack and Microsoft Teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2021/04/23/architecture-mongodb/">Software Architecture - Topic 5 - MongoDB</a>
       </li>
     
   </ul>
